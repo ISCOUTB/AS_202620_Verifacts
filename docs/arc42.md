@@ -200,9 +200,46 @@ React
 FastAPI
    |
    +-- Content Extractor
+
    +-- Rule Engine
    +-- NLP Analyzer
    +-- Scoring Engine
    |
    v
 SQLite
+
+# 4. Estrategia de solución
+
+## 4.1 Estilo arquitectónico seleccionado
+
+VeriFacts utilizará un **monolito modular** como estilo arquitectónico principal.
+
+La aplicación se ejecutará como una única unidad desplegable y mantendrá sus
+funcionalidades organizadas en módulos con responsabilidades claramente
+definidas.
+
+Los módulos iniciales serán:
+
+- API.
+- Content.
+- Analysis.
+- Scoring.
+
+La decisión busca equilibrar la necesidad de evolución del sistema con las
+restricciones del proyecto académico, especialmente el desarrollo durante un
+semestre, la ejecución local y el trabajo con un equipo pequeño.
+
+---
+
+## 4.2 Organización propuesta
+
+```text
+VeriFacts
+│
+├── API
+│
+├── Content
+│
+├── Analysis
+│
+└── Scoring
