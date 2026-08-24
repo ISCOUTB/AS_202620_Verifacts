@@ -12,7 +12,7 @@ que pueden ayudarle a determinar si necesita realizar una revisión adicional.
 
 ## 3.2 Actores
 
-| Actor | Interacción con VeriFacts |
+| Actor | Interacción |
 |---|---|
 | Usuario final | Introduce texto o URL y consulta el resultado |
 | Estudiante | Utiliza el sistema como apoyo para evaluar contenidos |
@@ -23,11 +23,11 @@ que pueden ayudarle a determinar si necesita realizar una revisión adicional.
 
 ## 3.3 Sistemas externos
 
-| Sistema externo | Relación |
+| Sistema | Interacción |
 |---|---|
-| Sitio web externo | Puede proporcionar contenido cuando el usuario introduce una URL |
-| GitHub | Gestiona el código y la colaboración del equipo |
-| SonarCloud | Analiza la calidad del código durante el desarrollo |
+| Sitio web externo | Proporciona contenido cuando se analiza una URL |
+| GitHub | Gestiona código fuente y colaboración |
+| SonarCloud | Analiza la calidad del código |
 
 ---
 
@@ -38,29 +38,27 @@ que pueden ayudarle a determinar si necesita realizar una revisión adicional.
 - Interfaz.
 - API.
 - Recepción de contenido.
-- Extracción de contenido.
+- Extracción.
 - Análisis.
 - Puntuación.
 - Persistencia.
 
 ### Fuera de VeriFacts
 
-- Sitios web consultados.
+- Sitios web externos.
 - GitHub.
 - SonarCloud.
-- Procesos humanos de verificación de hechos.
+- Verificación humana de hechos.
 
 ---
 
 ## 3.5 Contexto técnico
 
-El usuario interactúa con VeriFacts mediante la interfaz web.
+El usuario interactúa con VeriFacts mediante la interfaz.
 
-La aplicación recibe directamente el texto o utiliza una URL para obtener
-contenido externo.
+El contenido puede introducirse directamente o mediante una URL.
 
-Posteriormente el contenido es procesado por los mecanismos de análisis y se
-genera un resultado.
+El sistema procesa el contenido y genera el resultado.
 
 ```text
 Usuario
