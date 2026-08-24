@@ -1,11 +1,13 @@
 # C4 — Contexto de VeriFacts
+
 ## Descripción
 
-El diagrama de contexto identifica a VeriFacts como sistema principal y
-muestra los actores y sistemas externos que interactúan con él.
+El diagrama presenta VeriFacts dentro de su entorno y muestra las personas y
+sistemas externos que interactúan con el sistema.
 
 ## Diagrama
 
+```mermaid
 flowchart LR
 
     U[Usuario]
@@ -18,6 +20,4 @@ flowchart LR
     V -->|Solicita contenido| W
     W -->|Devuelve contenido| V
 
-    G -->|Almacena código y cambios| V
-    G -->|Envía código para análisis| S
-    S -->|Devuelve resultados de calidad| G
+    G -->|Almacena código y cambios| S
