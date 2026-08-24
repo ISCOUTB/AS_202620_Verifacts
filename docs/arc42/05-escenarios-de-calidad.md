@@ -122,3 +122,43 @@ regresiones en las pruebas existentes.
 
 La táctica correspondiente está documentada en
 [arc42 sección 4](arc42/04-estrategia-de-solucion.md#45-q-03--mantenibilidad).
+---
+
+# Q-04 — Comprensión del resultado
+
+**Atributo:** Usabilidad
+
+### Fuente
+
+Usuario sin conocimientos técnicos.
+
+### Estímulo
+
+El usuario utiliza VeriFacts por primera vez.
+
+### Artefacto
+
+Interfaz y resultado del análisis.
+
+### Entorno
+
+Prototipo local.
+
+### Respuesta
+
+El usuario introduce el contenido, ejecuta el análisis y comprende la
+clasificación obtenida.
+
+### Medida
+
+Al menos 4 de 5 usuarios de prueba deberán completar el flujo sin asistencia
+y explicar correctamente el significado básico del resultado.
+
+**Impacto:** Alto  
+**Riesgo técnico:** Medio  
+**Prioridad:** Alta
+
+### Decisión relacionada
+
+La táctica correspondiente está documentada en
+[arc42 sección 4](arc42/04-estrategia-de-solucion.md#46-q-04--usabilidad).
