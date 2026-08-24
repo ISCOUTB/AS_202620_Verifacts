@@ -70,3 +70,18 @@ La solución se plantea como una arquitectura modular:
                      v
               Scoring Engine
                      |
+# Ejecución del proyecto
+
+## Requisitos
+
+- Python 3.11 o superior.
+
+## Instalación inicial
+
+Crear y activar un entorno virtual:
+
+### Windows
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
