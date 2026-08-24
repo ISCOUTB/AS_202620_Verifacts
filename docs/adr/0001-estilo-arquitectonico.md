@@ -1,128 +1,113 @@
-# ADR-0001: Selección del estilo arquitectónico
+# ADR-0001: Usar monolito modular
 
-- Estado: Propuesto
-- Fecha: 2026-08-18
-- Decisor: Pedro Jose Castro Blanquicett
+- Estado: Aceptado
+- Fecha: 2026-08-24
+- Decisor: Equipo VeriFacts
 
 ## Contexto
 
-VeriFacts es una aplicación web para analizar contenidos digitales e
-identificar indicadores asociados a posibles casos de desinformación.
+VeriFacts requiere una arquitectura capaz de soportar la evolución de sus
+mecanismos de análisis sin introducir una complejidad de infraestructura que
+no sea adecuada para el alcance académico.
 
-El sistema debe recibir texto o URL, procesar el contenido, aplicar diferentes
-mecanismos de análisis y generar una puntuación explicable.
+Los escenarios prioritarios son:
 
-Los principales atributos priorizados son:
+- Q-01 — Tiempo de respuesta del análisis.
+- Q-02 — Incorporación de un nuevo analizador.
+- Q-03 — Modificación de una regla.
+- Q-04 — Comprensión del resultado.
+- Q-05 — Repetibilidad del resultado.
 
-- Escalabilidad.
-- Mantenibilidad.
-- Rendimiento.
-- Usabilidad.
-- Confiabilidad.
-
-Los escenarios relacionados con escalabilidad y mantenibilidad requieren que
-sea posible incorporar nuevos mecanismos de análisis sin modificar
-significativamente el resto del sistema.
-
-Al mismo tiempo, el proyecto debe ser realizable durante un semestre, se
-ejecutará localmente y no requiere infraestructura distribuida.
+La decisión está relacionada principalmente con Q-02 y Q-03.
 
 ## Decisión
 
-Se utilizará un **monolito modular** como estilo arquitectónico principal
-para VeriFacts.
+VeriFacts utilizará un **monolito modular**.
 
-La aplicación se ejecutará como una única unidad, pero organizará sus
-responsabilidades en módulos independientes:
+La aplicación será una única unidad ejecutable, organizada internamente en
+los módulos:
 
 - API.
 - Content.
 - Analysis.
 - Scoring.
 
-Los módulos tendrán responsabilidades delimitadas y se evitarán dependencias
-innecesarias entre ellos.
+Los límites entre módulos deberán mantenerse para evitar dependencias
+innecesarias.
 
 ## Alternativas consideradas
 
-### Alternativa 1 — Arquitectura por capas
+### Arquitectura por capas
 
-La arquitectura por capas ofrece una estructura sencilla y fácil de comprender.
+**Ventaja:**
 
-Se descartó porque la evolución del motor de análisis puede generar cambios
-transversales entre presentación, lógica y persistencia.
+Simplicidad inicial y facilidad de comprensión.
 
-Aunque presenta un menor costo inicial, no favorece tanto el escenario de
-incorporación frecuente de nuevos mecanismos de análisis.
+**Motivo del descarte:**
 
-### Alternativa 2 — Arquitectura hexagonal
+Puede producir cambios transversales cuando el motor de análisis evoluciona,
+lo que afecta especialmente al escenario Q-02.
 
-La arquitectura hexagonal favorece la testabilidad y la sustitución de
-adaptadores, manteniendo el dominio independiente de la infraestructura.
+---
 
-Se descartó porque introduce mayor indirección y estructura para un proyecto
-académico pequeño que no necesita múltiples adaptadores o infraestructura
-intercambiable en esta etapa.
+### Arquitectura hexagonal
 
-### Alternativa 3 — Monolito modular
+**Ventaja:**
 
-El monolito modular mantiene una única aplicación y un único proceso, pero
-establece límites internos entre las funcionalidades.
+Alta testabilidad y sustitución de infraestructura.
 
-Fue seleccionado porque proporciona un equilibrio entre simplicidad inicial,
-mantenibilidad y evolución gradual.
+**Motivo del descarte:**
+
+Introduce mayor indirección y complejidad estructural de la necesaria para el
+alcance actual.
+
+---
+
+### Monolito modular
+
+**Ventaja:**
+
+Combina una ejecución sencilla con límites internos que facilitan la
+evolución de los módulos.
+
+**Decisión:**
+
+Seleccionado.
 
 ## Consecuencias positivas
 
-- El sistema es sencillo de ejecutar localmente.
-- Los módulos tienen responsabilidades claras.
-- Se puede incorporar nuevo análisis sin modificar directamente otros módulos.
-- No existe comunicación de red entre módulos internos.
-- La solución es adecuada para un equipo pequeño.
-- La arquitectura permite evolucionar posteriormente si aparece una necesidad
-  real de separación.
+- Ejecución sencilla.
+- Baja complejidad operativa.
+- No requiere comunicación de red entre módulos.
+- Facilita la evolución del motor de análisis.
+- Facilita pruebas localizadas.
+- Adecuado para el tamaño del equipo.
 
 ## Consecuencias negativas
 
-- Todos los módulos comparten el mismo proceso.
-- Un fallo grave puede afectar a toda la aplicación.
-- Los módulos no pueden escalarse independientemente.
-- Se necesita disciplina para evitar dependencias indebidas entre módulos.
-- La aplicación seguirá siendo un único artefacto de ejecución.
+- Los módulos no escalan independientemente.
+- Un fallo grave puede afectar toda la aplicación.
+- Se necesita disciplina para mantener las fronteras.
+- Podría ser necesario separar un módulo en el futuro.
 
 ## Deuda aceptada
 
-Se acepta que el sistema no tendrá escalabilidad independiente por módulo en la
-versión inicial.
+Se acepta mantener todos los módulos dentro del mismo proceso mientras los
+escenarios no demuestren una necesidad de distribución.
 
-También se acepta mantener SQLite y ejecución local mientras los escenarios
-del proyecto no justifiquen una infraestructura más compleja.
+También se acepta mantener ejecución local durante el prototipo.
 
-## Relación con los escenarios de calidad
+## Escenarios relacionados
 
-### Escenario de escalabilidad
-
-La incorporación de nuevos analizadores deberá poder realizarse dentro del
-Analysis Engine sin modificar la interfaz ni la persistencia.
-
-### Escenario de mantenibilidad
-
-La modificación de una regla deberá quedar limitada al módulo correspondiente
-y sus pruebas.
-
-### Escenario de rendimiento
-
-Las llamadas entre módulos serán locales, evitando latencia de red interna.
-
-### Escenario de confiabilidad
-
-Las responsabilidades separadas permitirán probar los componentes de manera
-independiente.
+- [Q-01 — Tiempo de respuesta](../escenarios-de-calidad.md#q-01-tiempo-de-respuesta-del-análisis)
+- [Q-02 — Incorporación de un nuevo analizador](../escenarios-de-calidad.md#q-02-incorporación-de-un-nuevo-analizador)
+- [Q-03 — Modificación de una regla](../escenarios-de-calidad.md#q-03-modificación-de-una-regla)
+- [Q-04 — Comprensión del resultado](../escenarios-de-calidad.md#q-04-comprensión-del-resultado)
+- [Q-05 — Repetibilidad del resultado](../escenarios-de-calidad.md#q-05-repetibilidad-del-resultado)
 
 ## Estado
 
-Propuesto.
+Aceptado.
 
-Este ADR deberá considerarse una decisión de arquitectura y no deberá
-modificarse después de ser aceptado. Si una decisión futura reemplaza esta
-arquitectura, deberá registrarse un nuevo ADR.
+Si en el futuro se requiere reemplazar esta decisión, deberá crearse un nuevo
+ADR en lugar de modificar este documento.
