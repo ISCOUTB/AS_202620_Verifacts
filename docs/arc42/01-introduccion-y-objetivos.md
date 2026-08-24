@@ -56,19 +56,19 @@ más detallada.
 
 ### Equipo de desarrollo
 
-Responsable de evolucionar y mantener la solución durante el proyecto.
+Responsable de evolucionar, probar y mantener la solución durante el proyecto.
 
 ---
 
-## 1.4 Objetivos de negocio y relación con los interesados
+## 1.4 Objetivos de negocio
 
-| ID | Objetivo | Interesado relacionado | Resultado esperado |
+| ID | Objetivo | Interesado | Resultado esperado |
 |---|---|---|---|
-| OBJ-01 | Facilitar una evaluación inicial de contenidos digitales antes de utilizarlos o compartirlos | Usuario final | El usuario obtiene indicadores comprensibles sobre el contenido |
-| OBJ-02 | Apoyar el desarrollo de pensamiento crítico frente a información digital | Estudiante | El estudiante puede identificar señales asociadas a posibles contenidos engañosos |
-| OBJ-03 | Proporcionar una herramienta de apoyo para actividades educativas de alfabetización digital | Docente | El docente puede utilizar el sistema como recurso educativo |
-| OBJ-04 | Proporcionar señales que permitan priorizar una revisión posterior | Analista | El analista identifica contenidos que requieren mayor atención |
-| OBJ-05 | Mantener una arquitectura que pueda evolucionar durante el semestre | Equipo de desarrollo | Nuevos mecanismos de análisis pueden incorporarse con cambios controlados |
+| OBJ-01 | Facilitar una evaluación inicial de contenidos digitales antes de utilizarlos o compartirlos | Usuario final | Obtiene indicadores comprensibles sobre el contenido |
+| OBJ-02 | Apoyar el desarrollo del pensamiento crítico frente a información digital | Estudiante | Identifica señales asociadas a posibles contenidos engañosos |
+| OBJ-03 | Proporcionar una herramienta de apoyo para actividades de alfabetización digital | Docente | Puede utilizar VeriFacts como recurso educativo |
+| OBJ-04 | Proporcionar señales que permitan priorizar una revisión posterior | Analista | Puede identificar contenidos que requieren mayor atención |
+| OBJ-05 | Mantener una arquitectura que pueda evolucionar durante el semestre | Equipo de desarrollo | Puede incorporar nuevos mecanismos de análisis con cambios controlados |
 
 ---
 
@@ -101,8 +101,30 @@ Responsable de evolucionar y mantener la solución durante el proyecto.
 
 | ID | Objetivo arquitectónico | Interesado | Atributo relacionado |
 |---|---|---|---|
-| AO-01 | Permitir incorporar nuevos mecanismos de análisis sin modificar significativamente los existentes | Equipo de desarrollo | Escalabilidad / Mantenibilidad |
+| AO-01 | Incorporar nuevos mecanismos de análisis sin modificar significativamente los existentes | Equipo de desarrollo | Escalabilidad / Mantenibilidad |
 | AO-02 | Mantener tiempos de respuesta adecuados durante el análisis | Usuario final | Rendimiento |
 | AO-03 | Permitir modificar reglas de análisis de forma localizada | Equipo de desarrollo | Mantenibilidad |
 | AO-04 | Presentar resultados comprensibles para usuarios no técnicos | Usuario / Docente | Usabilidad |
 | AO-05 | Producir resultados repetibles bajo las mismas condiciones | Usuario / Analista | Confiabilidad |
+
+---
+
+## 1.7 Tensiones de calidad
+
+### Tensión 1 — Precisión vs. rendimiento
+
+Un análisis más completo puede utilizar más reglas, procesamiento lingüístico o
+modelos de aprendizaje automático. Esto puede mejorar la capacidad de detectar
+indicadores, pero también puede aumentar el tiempo y los recursos necesarios.
+
+VeriFacts debe equilibrar la cantidad de análisis realizados con el tiempo de
+respuesta esperado.
+
+### Tensión 2 — Modificabilidad vs. simplicidad
+
+La separación de los mecanismos de análisis facilita la incorporación y
+modificación de funcionalidades, pero una mayor modularidad introduce más
+abstracciones y estructura.
+
+La arquitectura debe proporcionar suficiente modularidad para evolucionar sin
+introducir complejidad innecesaria para un prototipo académico.
