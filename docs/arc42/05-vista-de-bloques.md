@@ -73,7 +73,7 @@ desinformación sobre el contenido normalizado.
 **Diseño previsto:** los analizadores compartirán un contrato común
 (`Analyzer`) para permitir incorporar nuevos mecanismos sin modificar los
 demás bloques — ver [Sección 4](04-estrategia-de-solucion.md#44-q-02--escalabilidad)
-y el escenario [Q-02](10-requisitos-de-calidad.md).
+y el escenario [Q-02](../escenarios-de-calidad.md#q-02--incorporación-de-un-nuevo-analizador).
 
 **Analizadores previstos:**
 
