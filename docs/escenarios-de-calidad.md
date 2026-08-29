@@ -198,6 +198,4 @@ El sistema produce el mismo resultado (puntuación y clasificación) para la mis
 
 ### Decisión relacionada
 
-[ADR-0001 — Usar monolito modular](adr/0001-estilo-arquitectonico.md).### Decisión relacionada
-
 [ADR-0001 — Usar monolito modular](adr/0001-estilo-arquitectonico.md).
