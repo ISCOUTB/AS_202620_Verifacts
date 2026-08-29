@@ -34,21 +34,28 @@ La decisión responde principalmente a los escenarios de:
 
 ## 4.3 Tácticas
 
-### Mantenibilidad
-
-Se utilizarán responsabilidades separadas, alta cohesión y bajo acoplamiento.
-
-### Escalabilidad
-
-Los mecanismos de análisis se mantendrán separados para permitir incorporar
-nuevas reglas y futuros analizadores.
-
-### Rendimiento
+### Q-01 — Rendimiento
 
 Los módulos compartirán el mismo proceso, evitando inicialmente llamadas de
 red entre componentes internos.
 
-### Confiabilidad
+### Q-02 — Escalabilidad
+
+Los mecanismos de análisis se mantendrán separados para permitir incorporar
+nuevas reglas y futuros analizadores.
+
+### Q-03 — Mantenibilidad
+
+Se utilizarán responsabilidades separadas, alta cohesión y bajo acoplamiento.
+
+
+### Q-04 — Usabilidad
+
+Se priorizará una salida estructurada (puntuación, clasificación, factores) en
+lenguaje simple, evitando terminología técnica de NLP/ML en la respuesta al
+usuario final.
+
+### Q-05 — Confiabilidad
 
 Se utilizarán pruebas automatizadas para verificar las rutas y componentes
 principales.
