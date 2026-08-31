@@ -51,14 +51,15 @@ delega en `Content`.
 
 ## 5.3 Bloque: Content
 
-**Responsabilidad:** representar y procesar el contenido recibido, ya sea
-como texto directo o como una URL de la cual extraer el contenido.
+**Responsabilidad:** normalizar y validar el contenido recibido antes de
+entregarlo al módulo `Analysis`.
 
-**Estado en este incremento:** definido arquitectónicamente
-(`app/modules/content/`), sin lógica implementada todavía.
+**Estado en este incremento:** implementado.
 
-**Colabora con:** `API` (recibe la solicitud) y `Analysis` (entrega el
-contenido normalizado).
+**Ubicación:** `app/modules/content/service.py`
+
+La función `normalize_content()` elimina espacios redundantes y rechaza
+contenidos vacíos.
 
 ---
 
