@@ -1,10 +1,16 @@
-import uvicorn
+from fastapi import FastAPI
+
+from app.api.routes import router
+from app.persistence.repository import initialize_database
 
 
-if __name__ == "__main__":
-    uvicorn.run(
-        "app.main:app",
-        host="127.0.0.1",
-        port=8000,
-        reload=True,
-    )
+app = FastAPI(
+    title="VeriFacts",
+    description="Sistema de análisis de información digital",
+    version="0.2.0",
+)
+
+
+initialize_database()
+
+app.include_router(router)
