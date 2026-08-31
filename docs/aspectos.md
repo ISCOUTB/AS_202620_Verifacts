@@ -13,7 +13,7 @@ modificar significativamente los demás componentes.
 
 | ID | Aspecto | Atributo | Preocupación | Escenario | Medida | Impacto | Riesgo | Pruebas |
 |---|---|---|---|---|---|---|---|---|
-| A-00 | Disponibilidad del esqueleto | Confiabilidad | Verificar que el servicio arranca y responde | [Q-05](escenarios-de-calidad.md#q-05--repetibilidad-del-resultado) | El servicio responde `200 {"status":"ok"}` en `/health` de forma repetible | Alto | Bajo | `tests/test_health.py` — **1 passed** (ejecutado localmente con `pytest -q` y en cada push vía `.github/workflows/tests.yml`) |
+| A-00 | Disponibilidad del esqueleto | Confiabilidad | Verificar que el servicio arranca y responde | [Q-05](escenarios-de-calidad.md#q-05--repetibilidad-del-resultado) | El servicio responde `200 {"status":"ok"}` en `/health` de forma repetible | Alto | Bajo | `tests/test_health.py` — **1 passed** (ejecutado localmente con `pytest -q` y en cada push vía `.github/workflows/tests.yml`("https://github.com/ISCOUTB/AS_202620_Verifacts/actions/runs/33235835069") |
 | A-01 | Escalabilidad | Escalabilidad | Incorporar nuevos mecanismos de análisis | [Q-02](escenarios-de-calidad.md#q-02--incorporación-de-un-nuevo-analizador) | Cambio limitado al módulo `Analysis` y sus pruebas | Alto | Alto | Pendiente — requiere que `Analysis` tenga al menos un `Analyzer` implementado |
 | A-02 | Escalabilidad | Mantenibilidad | Modificar reglas existentes | [Q-03](escenarios-de-calidad.md#q-03--modificación-de-una-regla) | Cambio localizado sin regresiones | Alto | Medio-alto | Pendiente — requiere que exista al menos una regla implementada en `Analysis` |
 

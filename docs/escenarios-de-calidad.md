@@ -162,3 +162,40 @@ y explicar correctamente el significado básico del resultado.
 
 La táctica correspondiente está documentada en
 [arc42 sección 4](arc42/04-estrategia-de-solucion.md#46-q-04--usabilidad).
+---
+
+# Q-05 — Repetibilidad del resultado
+
+**Atributo:** Confiabilidad
+
+### Fuente
+
+Usuario o analista.
+
+### Estímulo
+
+Se envía el mismo contenido dos o más veces bajo la misma configuración.
+
+### Artefacto
+
+Pipeline de análisis de VeriFacts.
+
+### Entorno
+
+Aplicación ejecutándose localmente, sin cambios de configuración entre ejecuciones.
+
+### Respuesta
+
+El sistema produce el mismo resultado (puntuación y clasificación) para la misma entrada.
+
+### Medida
+
+100% de coincidencia en el resultado ante entradas idénticas y configuración idéntica.
+
+**Impacto:** Alto  
+**Riesgo técnico:** Bajo  
+**Prioridad:** Alta
+
+### Decisión relacionada
+
+[ADR-0001 — Usar monolito modular](adr/0001-estilo-arquitectonico.md).

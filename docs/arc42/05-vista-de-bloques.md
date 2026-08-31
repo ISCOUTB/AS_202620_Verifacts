@@ -51,30 +51,35 @@ delega en `Content`.
 
 ## 5.3 Bloque: Content
 
-**Responsabilidad:** representar y procesar el contenido recibido, ya sea
-como texto directo o como una URL de la cual extraer el contenido.
+**Responsabilidad:** normalizar y validar el contenido recibido antes de
+entregarlo al módulo `Analysis`.
 
-**Estado en este incremento:** definido arquitectónicamente
-(`app/modules/content/`), sin lógica implementada todavía.
+**Estado en este incremento:** implementado.
 
-**Colabora con:** `API` (recibe la solicitud) y `Analysis` (entrega el
-contenido normalizado).
+**Ubicación:** `app/modules/content/service.py`
+
+La función `normalize_content()` elimina espacios redundantes y rechaza
+contenidos vacíos.
 
 ---
 
 ## 5.4 Bloque: Analysis
 
-**Responsabilidad:** aplicar los mecanismos de detección de indicadores de
-desinformación sobre el contenido normalizado.
+**Responsabilidad:** detectar indicadores asociados a posibles señales de
+desinformación mediante analizadores basados en reglas.
 
-**Estado en este incremento:** definido arquitectónicamente
-(`app/modules/analysis/`), sin analizadores implementados todavía.
+**Estado en este incremento:** implementado.
 
-**Diseño previsto:** los analizadores compartirán un contrato común
-(`Analyzer`) para permitir incorporar nuevos mecanismos sin modificar los
-demás bloques — ver [Sección 4](04-estrategia-de-solucion.md#44-q-02--escalabilidad)
-y el escenario [Q-02](../escenarios-de-calidad.md#q-02--incorporación-de-un-nuevo-analizador).
+**Ubicación:**
 
+- `app/modules/analysis/analyzer.py`
+- `app/modules/analysis/service.py`
+
+El primer analizador implementado es `RuleAnalyzer`, que detecta:
+
+- lenguaje sensacionalista;
+- uso excesivo de mayúsculas;
+- afirmaciones absolutas.
 **Analizadores previstos:**
 
 - `RuleAnalyzer` — reglas (sensacionalismo, mayúsculas, afirmaciones
@@ -89,26 +94,39 @@ y el escenario [Q-02](../escenarios-de-calidad.md#q-02--incorporación-de-un-nue
 
 ## 5.5 Bloque: Scoring
 
-**Responsabilidad:** transformar los hallazgos del análisis en una
-puntuación de riesgo, una clasificación y una explicación de los factores
-detectados.
+**Responsabilidad:** transformar los hallazgos producidos por `Analysis` en
+una puntuación de riesgo y una clasificación.
 
-**Estado en este incremento:** definido arquitectónicamente
-(`app/modules/scoring/`), sin lógica implementada todavía.
+**Estado en este incremento:** implementado.
 
-**Colabora con:** `Analysis` (recibe hallazgos) y `API` (entrega el
-resultado final).
+**Ubicación:** `app/modules/scoring/service.py`
+
+La puntuación se limita a un máximo de 100 puntos y se clasifica como:
+
+- Riesgo bajo: menos de 30.
+- Riesgo medio: entre 30 y 59.
+- Riesgo alto: 60 o más.
 
 ---
 
-## 5.6 Trazabilidad con el código
+## 5.6 Bloque: Persistencia
 
-| Bloque arquitectónico | Carpeta en el repositorio |
-|---|---|
-| API | `app/api/` |
-| Content | `app/modules/content/` |
-| Analysis | `app/modules/analysis/` |
-| Scoring | `app/modules/scoring/` |
+**Responsabilidad:** almacenar los resultados de los análisis para permitir
+su recuperación posterior.
+
+**Estado en este incremento:** implementado.
+
+**Ubicación:** `app/persistence/repository.py`
+
+**Tecnología:** SQLite.
+
+La persistencia almacena:
+
+- identificador;
+- contenido normalizado;
+- puntuación;
+- clasificación;
+- factores detectados.
 
 ## 5.7 Pendiente para próximos incrementos
 
