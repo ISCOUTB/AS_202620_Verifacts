@@ -13,7 +13,7 @@ def _get_connection() -> sqlite3.Connection:
 
 
 def initialize_database() -> None:
-    """Crea las tablas necesarias si no existen."""
+    """Crea la tabla de análisis si no existe."""
     connection = _get_connection()
     connection.execute(
         """
@@ -36,8 +36,8 @@ def save_analysis(
     classification: str,
     factors: list[str],
 ) -> int:
-    """Guarda un análisis en la base de datos SQLite y retorna su ID."""
-    initialize_database()  # Asegura que la tabla exista antes de insertar
+    """Guarda un análisis en la base de datos y retorna su ID."""
+    initialize_database()
     connection = _get_connection()
 
     cursor = connection.execute(
@@ -90,7 +90,6 @@ def get_analysis(analysis_id: int) -> dict[str, Any] | None:
         return None
 
     result = dict(row)
-    # Convertir los factores de vuelta a lista si están almacenados como string
     if isinstance(result.get("factors"), str):
         result["factors"] = [f.strip() for f in result["factors"].split(",") if f.strip()]
 
