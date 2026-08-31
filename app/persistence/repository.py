@@ -92,3 +92,18 @@ def get_analysis(analysis_id: int) -> dict[str, Any] | None:
         return None
 
     return dict(row)
+def save_analysis(data):
+    """
+    Guarda un análisis (espera un diccionario con 'id', 'text', 'status', etc.)
+    Sobrescribe si ya existe el mismo 'id'.
+    """
+    analyses = _load_data()
+    analysis_id = str(data.get("id"))
+    if not analysis_id:
+        # Si no tiene id, generar uno nuevo
+        next_id = str(len(analyses) + 1)
+        data["id"] = next_id
+        analysis_id = next_id
+    analyses[analysis_id] = data
+    _save_data(analyses)
+    return data
