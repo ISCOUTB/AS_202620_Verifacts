@@ -7,22 +7,33 @@ DATA_DIR = BASE_DIR / "data"
 DATABASE_PATH = DATA_DIR / "verifacts.db"
 
 
-def initialize_database() -> None:
+def _get_connection() -> sqlite3.Connection:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
 
-    with sqlite3.connect(DATABASE_PATH) as connection:
-        connection.execute(
-            """
-            CREATE TABLE IF NOT EXISTS analyses (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                content TEXT NOT NULL,
-                score INTEGER NOT NULL,
-                classification TEXT NOT NULL,
-                factors TEXT NOT NULL
-            )
-            """
+    connection = sqlite3.connect(DATABASE_PATH)
+    connection.row_factory = sqlite3.Row
+
+    return connection
+
+
+def initialize_database() -> None:
+    """Crea la tabla de análisis si no existe."""
+    connection = _get_connection()
+
+    connection.execute(
+        """
+        CREATE TABLE IF NOT EXISTS analyses (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            content TEXT NOT NULL,
+            score INTEGER NOT NULL,
+            classification TEXT NOT NULL,
+            factors TEXT NOT NULL
         )
-        connection.commit()
+        """
+    )
+
+    connection.commit()
+    connection.close()
 
 
 def save_analysis(
@@ -31,54 +42,72 @@ def save_analysis(
     classification: str,
     factors: list[str],
 ) -> int:
+    """Guarda un análisis y retorna su ID."""
     initialize_database()
 
     factors_text = " | ".join(factors)
 
-    with sqlite3.connect(DATABASE_PATH) as connection:
-        cursor = connection.execute(
-            """
-            INSERT INTO analyses (
-                content,
-                score,
-                classification,
-                factors
-            )
-            VALUES (?, ?, ?, ?)
-            """,
-            (
-                content,
-                score,
-                classification,
-                factors_text,
-            ),
-        )
-        connection.commit()
+    connection = _get_connection()
 
-        return int(cursor.lastrowid)
+    cursor = connection.execute(
+        """
+        INSERT INTO analyses (
+            content,
+            score,
+            classification,
+            factors
+        )
+        VALUES (?, ?, ?, ?)
+        """,
+        (
+            content,
+            score,
+            classification,
+            factors_text,
+        ),
+    )
+
+    connection.commit()
+
+    analysis_id = cursor.lastrowid
+
+    connection.close()
+
+    return int(analysis_id)
 
 
 def get_analysis(analysis_id: int) -> dict | None:
+    """Obtiene un análisis por su ID."""
     initialize_database()
 
-    with sqlite3.connect(DATABASE_PATH) as connection:
-        connection.row_factory = sqlite3.Row
+    connection = _get_connection()
 
-        row = connection.execute(
-            """
-            SELECT
-                id,
-                content,
-                score,
-                classification,
-                factors
-            FROM analyses
-            WHERE id = ?
-            """,
-            (analysis_id,),
-        ).fetchone()
+    row = connection.execute(
+        """
+        SELECT
+            id,
+            content,
+            score,
+            classification,
+            factors
+        FROM analyses
+        WHERE id = ?
+        """,
+        (analysis_id,),
+    ).fetchone()
+
+    connection.close()
 
     if row is None:
         return None
 
-    return dict(row)
+    result = dict(row)
+
+    if isinstance(result.get("factors"), str):
+        result["factors"] = [
+            factor.strip()
+            for factor in result["factors"].split(" | ")
+            if factor.strip()
+        ]
+
+    return result
