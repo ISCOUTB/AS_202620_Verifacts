@@ -1,1 +1,3 @@
-.venv/ echo __pycache__/ echo *.pyc ) 
+.venv/
+__pycache__/
+*.pyc
