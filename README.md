@@ -68,7 +68,7 @@ La decisión está registrada en:
 
 Explicación extendida, con comparación detallada frente a las alternativas y
 trazabilidad hasta cada escenario de calidad, en:
-[Decisiones arquitectónicas explicadas](docs/decisiones-arquitectonicas-explicadas.md)
+[Decisiones arquitectónicas explicadas](docs/decisiones-arquitectonicas.md)
 
 ## Módulos
 
@@ -112,7 +112,7 @@ Detalle completo de responsabilidades y trazabilidad con el código en la [Secci
 - [Sección 8 — Conceptos transversales](docs/arc42/08-conceptos-transversales.md)
 - [Sección 9 — Decisiones arquitectónicas](docs/arc42/09-decisiones-arquitectonicas.md)
 - [Sección 10 — Requisitos de calidad](docs/arc42/10-requisitos-de-calidad.md)
-- [Sección 12 — Glosario](docs/arc42/12-glosario.md)
+- [Sección 11 — Glosario](docs/arc42/11-glosario.md)
 
 ## Calidad
 
@@ -464,8 +464,6 @@ La implementación sigue los siguientes criterios:
 
 ## Pendiente
 
-- [ ] Confirmar (`git ls-files`) que no queden `__pycache__/`, `*.pyc`, archivos duplicados `(1).py` ni PDFs en la raíz.
-- [ ] Publicar un run de CI verde y verificable, enlazado en `docs/aspectos.md`.
 - [ ] Medición formal de P95 para el escenario Q-01.
 - [ ] Prueba de modificación de una regla existente para el escenario Q-03.
 - [ ] Implementar análisis mediante URL.
