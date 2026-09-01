@@ -10,7 +10,10 @@ Sistema inteligente para análisis de información digital
 ## Integrantes
 
 - Pedro Jose Castro Blanquicett
-- Cristian Cardeno
+- Cristian David Cardeno Gulloso
+
+
+Usuarios de GitHub y detalle de roles en [Equipo.md](Equipo.md).
 
 # 1. Descripción del proyecto
 
@@ -36,18 +39,18 @@ Diseñar e implementar una aplicación web modular capaz de analizar contenidos 
 
 # 4. Estado actual
 
-El proyecto se encuentra actualmente en la etapa de diseño y validación de la arquitectura.
+El proyecto se encuentra actualmente en la etapa de desarrollo del prototipo, sobre una arquitectura ya validada.
 
 La arquitectura seleccionada es un monolito modular.
 
-El repositorio contiene un esqueleto ejecutable de la aplicación, pero todavía no contiene la lógica completa del análisis de desinformación.
+El repositorio contiene un corte vertical completo y ejecutable: recepción de una solicitud HTTP, normalización de contenido, análisis basado en reglas, cálculo de puntuación/clasificación y persistencia del resultado.
 
 Actualmente se puede:
 
 - iniciar la aplicación;
-- comprobar que la API está disponible;
-- ejecutar una prueba automatizada (local y en GitHub Actions);
-- validar la estructura inicial de los módulos.
+- comprobar que la API está disponible (`GET /health`);
+- enviar un texto para análisis y recibir puntuación, clasificación y factores (`POST /analysis`), con el resultado persistido en SQLite;
+- ejecutar las pruebas automatizadas (local y en GitHub Actions).
 
 # 5. Arquitectura
 
@@ -63,7 +66,11 @@ La decisión está registrada en:
 
 [ADR-0001 — Usar monolito modular](docs/adr/0001-estilo-arquitectonico.md)
 
-## Módulos iniciales
+Explicación extendida, con comparación detallada frente a las alternativas y
+trazabilidad hasta cada escenario de calidad, en:
+[Decisiones arquitectónicas explicadas](docs/decisiones-arquitectonicas-explicadas.md)
+
+## Módulos
 
 ```text
 VeriFacts
@@ -74,16 +81,20 @@ VeriFacts
 │
 ├── Analysis
 │
-└── Scoring
+├── Scoring
+│
+└── Persistencia
 ```
 
 **API** — Recibe y coordina las solicitudes externas.
 
-**Content** — Se encargará de representar y procesar el contenido recibido mediante texto o URL.
+**Content** — Normaliza y valida el contenido recibido mediante texto o URL.
 
-**Analysis** — Contendrá los mecanismos de análisis, inicialmente basados en reglas y posteriormente ampliables con técnicas de procesamiento de lenguaje natural o Machine Learning.
+**Analysis** — Contiene los mecanismos de análisis; hoy `RuleAnalyzer` (reglas), ampliable con NLP o Machine Learning (ver [Registro de uso de IA](docs/ia.md)).
 
-**Scoring** — Se encargará de transformar los resultados del análisis en una puntuación y clasificación.
+**Scoring** — Transforma los hallazgos del análisis en una puntuación y clasificación.
+
+**Persistencia** — Guarda y recupera los resultados de cada análisis (SQLite).
 
 Detalle completo de responsabilidades y trazabilidad con el código en la [Sección 5 — Vista de bloques](docs/arc42/05-vista-de-bloques.md).
 
@@ -97,9 +108,11 @@ Detalle completo de responsabilidades y trazabilidad con el código en la [Secci
 - [Sección 4 — Estrategia de solución](docs/arc42/04-estrategia-de-solucion.md)
 - [Sección 5 — Vista de bloques](docs/arc42/05-vista-de-bloques.md)
 - [Sección 6 — Vista de ejecución](docs/arc42/06-vista-de-ejecucion.md)
+- [Sección 7 — Despliegue](docs/arc42/07-despliegue.md)
+- [Sección 8 — Conceptos transversales](docs/arc42/08-conceptos-transversales.md)
 - [Sección 9 — Decisiones arquitectónicas](docs/arc42/09-decisiones-arquitectonicas.md)
 - [Sección 10 — Requisitos de calidad](docs/arc42/10-requisitos-de-calidad.md)
-- [Glosario inicial](docs/arc42/11-glosario.md)
+- [Sección 12 — Glosario](docs/arc42/12-glosario.md)
 
 ## Calidad
 
@@ -107,6 +120,7 @@ Detalle completo de responsabilidades y trazabilidad con el código en la [Secci
 - [Árbol de utilidad](docs/arbol-utilidad.md)
 - [Aspectos arquitectónicos](docs/aspectos.md)
 - [Matriz comparativa de estilos](docs/matriz-estilos.md)
+- [Decisiones arquitectónicas explicadas](docs/decisiones-arquitectonicas-explicadas.md)
 
 ## Modelo C4
 
@@ -148,15 +162,27 @@ AS_202620_Verifacts/
 │   │   ├── __init__.py
 │   │   └── routes.py
 │   │
-│   └── modules/
+│   ├── modules/
+│   │   ├── __init__.py
+│   │   ├── analysis/
+│   │   │   ├── __init__.py
+│   │   │   ├── analyzer.py
+│   │   │   └── service.py
+│   │   ├── content/
+│   │   │   ├── __init__.py
+│   │   │   └── service.py
+│   │   └── scoring/
+│   │       ├── __init__.py
+│   │       └── service.py
+│   │
+│   └── persistence/
 │       ├── __init__.py
-│       ├── analysis/
-│       ├── content/
-│       └── scoring/
+│       └── repository.py
 │
 ├── tests/
 │   ├── __init__.py
-│   └── test_health.py
+│   ├── test_health.py
+│   └── test_analysis.py
 │
 └── docs/
     ├── arc42/
@@ -166,9 +192,11 @@ AS_202620_Verifacts/
     │   ├── 04-estrategia-de-solucion.md
     │   ├── 05-vista-de-bloques.md
     │   ├── 06-vista-de-ejecucion.md
+    │   ├── 07-despliegue.md
+    │   ├── 08-conceptos-transversales.md
     │   ├── 09-decisiones-arquitectonicas.md
     │   ├── 10-requisitos-de-calidad.md
-    │   └── 11-glosario.md
+    │   └── 12-glosario.md
     ├── c4/
     │   ├── 01-contexto.md
     │   └── 02-contenedores.md
@@ -178,21 +206,27 @@ AS_202620_Verifacts/
     ├── arbol-utilidad.md
     ├── aspectos.md
     ├── matriz-estilos.md
+    ├── decisiones-arquitectonicas-explicadas.md
     └── ia.md
 ```
 
+No debe haber en el repositorio: carpetas `__pycache__/`, archivos `*.pyc`,
+archivos duplicados con sufijos tipo `(1).py`, ni PDFs sueltos en la raíz.
+Verificar con `git ls-files` antes de cada entrega.
+
 # 8. Tecnologías actuales
 
-## Backend y esqueleto ejecutable
+## Backend
 
 - Python 3.11+
 - FastAPI
 - Uvicorn
+- SQLite (vía `sqlite3`, módulo estándar)
 
 ## Pruebas
 
 - Pytest
-- HTTPX
+- HTTPX (usado internamente por `TestClient`)
 
 ## Calidad y colaboración
 
@@ -205,12 +239,11 @@ AS_202620_Verifacts/
 
 - React
 - TypeScript
-- SQLite
-- SQLAlchemy
+- SQLAlchemy (si se migra de `sqlite3` puro a un ORM)
 - spaCy
 - scikit-learn
 
-Estas últimas se incorporarán progresivamente cuando se implemente la lógica funcional.
+Estas últimas se incorporarán progresivamente conforme avance el proyecto.
 
 # 9. Requisitos para ejecutar el proyecto
 
@@ -224,46 +257,60 @@ Se necesita:
 
 Desde una terminal:
 
+```cmd
+git clone https://github.com/ISCOUTB/AS_202620_Verifacts.git
+cd AS_202620_Verifacts
+```
+
 # 11. Crear el entorno virtual
 
 ## Windows
 
+```cmd
 python -m venv .venv
 .venv\Scripts\activate
+```
 
 # 12. Instalar dependencias
 
 Con el entorno virtual activado:
-pip install -r requirements.txt
 
+```cmd
+pip install -r requirements.txt
+```
 
 # Corte vertical ejecutable
 
-Las secciones 13 a 16 documentan, paso a paso, el único recorrido de extremo a extremo que hoy es ejecutable en VeriFacts: arrancar el servicio, confirmar que responde y verificarlo con una prueba automatizada (local y en CI). Este es el corte vertical de este incremento — ver también su descripción arquitectónica en [Sección 6 — Vista de ejecución](docs/arc42/06-vista-de-ejecucion.md) y su trazabilidad hasta la evidencia de prueba en la fila **A-00** de la [tabla de aspectos](docs/aspectos.md).
+Las secciones 13 a 17 documentan, paso a paso, los recorridos de extremo a extremo que hoy son ejecutables en VeriFacts: arrancar el servicio, confirmar que responde, enviar un contenido para análisis con persistencia real, y verificar todo con pruebas automatizadas (local y en CI). Ver también su descripción arquitectónica en [Sección 6 — Vista de ejecución](docs/arc42/06-vista-de-ejecucion.md) y su trazabilidad hasta la evidencia de prueba en las filas **A-00** a **A-03** de la [tabla de aspectos](docs/aspectos.md).
 
 # 13. Arranque del proyecto
 
 El proyecto se inicia con un único comando:
-python run.py
 
-Esta es la instrucción oficial de arranque del esqueleto ejecutable.
+```cmd
+python run.py
+```
+
+Esta es la instrucción oficial de arranque. Al iniciar, también se
+inicializa automáticamente la base de datos SQLite (`data/verifacts.db`) si
+no existe.
 
 Una vez iniciado, la aplicación estará disponible en:
 http://127.0.0.1:8000
 
-
 La documentación automática de FastAPI estará disponible en:
 http://127.0.0.1:8000/docs
 
-
-# 14. Comprobación de funcionamiento
+# 14. Comprobación de disponibilidad
 
 La aplicación incluye un endpoint técnico de comprobación:
+
+```
 GET /health
+```
 
 Con el servidor ejecutándose, abrir:
 http://127.0.0.1:8000/health
-
 
 La respuesta esperada es:
 
@@ -273,34 +320,72 @@ La respuesta esperada es:
 }
 ```
 
-Esta ruta solamente verifica que el esqueleto ejecutable está funcionando.
+Esta ruta solamente verifica que el servicio está funcionando; no representa
+todavía una funcionalidad de negocio de VeriFacts.
 
-No representa todavía una funcionalidad de negocio de VeriFacts.
+# 15. Análisis de contenido (corte vertical completo)
 
-# 15. Ejecutar las pruebas
+El endpoint de negocio principal es:
+
+```
+POST /analysis
+```
+
+Ejemplo de solicitud (desde `http://127.0.0.1:8000/docs`, o con `curl`):
+
+```json
+{
+  "text": "ESTA NOTICIA ES TOTALMENTE CIERTA!!! Todos deben compartirla!!!"
+}
+```
+
+Respuesta esperada:
+
+```json
+{
+  "id": 1,
+  "score": 50,
+  "classification": "Riesgo medio",
+  "factors": [
+    "Lenguaje sensacionalista",
+    "Uso excesivo de mayúsculas",
+    "Afirmación absoluta"
+  ]
+}
+```
+
+Internamente, la solicitud atraviesa `Content` (normalización) →
+`Analysis` (`RuleAnalyzer`) → `Scoring` (puntuación y clasificación) →
+`Persistencia` (guardado en SQLite). El detalle paso a paso está en la
+[Sección 6.2 — Vista de ejecución](docs/arc42/06-vista-de-ejecucion.md#62-escenario-análisis-de-contenido-post-analysis).
+
+# 16. Ejecutar las pruebas
 
 Con el entorno virtual activado, desde la raíz del repositorio (no dentro de `tests/`), ejecutar:
+
+```cmd
 python -m pytest -q
+```
 
 **Nota:** usa siempre `python -m pytest -q` y no solo `pytest -q`. En algunos entornos de Windows, el comando corto `pytest -q` no agrega automáticamente la carpeta actual a la ruta de búsqueda de Python, lo que produce `ModuleNotFoundError: No module named 'app'`. La forma `python -m pytest -q` evita ese problema.
 
-La prueba actual comprueba que:
+Las pruebas actuales comprueban:
 
-- La aplicación puede inicializarse.
-- La ruta `/health` existe.
-- La respuesta HTTP es correcta.
-- El contenido de la respuesta coincide con el esperado.
+- que la aplicación puede inicializarse;
+- que la ruta `/health` existe y responde correctamente (`tests/test_health.py`);
+- que `POST /analysis` normaliza, analiza, puntúa, clasifica y persiste correctamente un contenido de extremo a extremo (`tests/test_analysis.py`).
 
-El resultado esperado es similar a: 1 passed
+El resultado esperado es similar a: `2 passed`
 
+# 17. Integración continua
 
-# 16. Integración continua
-
-El repositorio incluye: .github/workflows/tests.yml
+El repositorio incluye: `.github/workflows/tests.yml`
 
 GitHub Actions ejecutará automáticamente las pruebas cuando se realice un `push` o un `pull request`.
 
 El flujo es:
+
+```
 Push
 ↓
 GitHub Actions
@@ -310,87 +395,91 @@ Instalar dependencias
 Ejecutar python -m pytest -q
 ↓
 ✓ Tests
+```
 
+El resultado puede consultarse desde la pestaña **Actions** del repositorio;
+el enlace al run más reciente en verde se cita en la
+[tabla de aspectos](docs/aspectos.md).
 
-El resultado puede consultarse desde la pestaña **Actions** del repositorio.
+# 18. Desarrollo actual y próximos pasos
 
-# 17. Desarrollo actual
+Ya implementado dentro de las fronteras arquitectónicas definidas (ver
+[Sección 5 — Vista de bloques](docs/arc42/05-vista-de-bloques.md)):
 
-El esqueleto actual contiene únicamente la estructura necesaria para comenzar el desarrollo de la arquitectura.
+- análisis de contenido basado en reglas;
+- normalización de contenido de texto;
+- cálculo de puntuación y clasificación;
+- persistencia de resultados (SQLite);
+- corte vertical completo con prueba automatizada.
 
-No se ha implementado todavía la lógica completa de:
+Pendiente para próximos incrementos:
 
-- análisis de contenido;
-- extracción de URL;
-- reglas de detección;
-- puntuación;
-- NLP;
-- Machine Learning;
-- persistencia de resultados;
-- interfaz final.
+- extracción de contenido a partir de una URL;
+- procesamiento NLP (spaCy);
+- evaluación de Machine Learning (scikit-learn), condicionada a disponer de un dataset adecuado;
+- interfaz final (React).
 
-Estas funcionalidades se implementarán posteriormente dentro de las fronteras arquitectónicas ya definidas (ver [Sección 5 — Vista de bloques](docs/arc42/05-vista-de-bloques.md)).
+# 19. Principios arquitectónicos
 
-# 18. Principios arquitectónicos
+La implementación sigue los siguientes criterios:
 
-La implementación seguirá los siguientes criterios:
+**Modularidad** — Cada módulo tiene responsabilidades claramente delimitadas.
 
-**Modularidad** — Cada módulo tendrá responsabilidades claramente delimitadas.
+**Bajo acoplamiento** — Se evitan dependencias innecesarias entre módulos.
 
-**Bajo acoplamiento** — Se evitarán dependencias innecesarias entre módulos.
+**Alta cohesión** — Las responsabilidades relacionadas se mantienen juntas.
 
-**Alta cohesión** — Las responsabilidades relacionadas se mantendrán juntas.
+**Encapsulación de la variación** — Los mecanismos que pueden cambiar, como las reglas de análisis, se mantienen aislados.
 
-**Encapsulación de la variación** — Los mecanismos que puedan cambiar, como las reglas de análisis, se mantendrán aislados.
+**Evolución gradual** — La arquitectura permite incorporar nuevos mecanismos de análisis sin modificar innecesariamente los demás componentes.
 
-**Evolución gradual** — La arquitectura debe permitir incorporar nuevos mecanismos de análisis sin modificar innecesariamente los demás componentes.
-
-# 19. Estado de la línea base
+# 20. Estado de la línea base
 
 ## Arquitectura
 
 - [x] Comparación de estilos.
 - [x] Monolito modular seleccionado.
 - [x] ADR-0001.
-- [x] arc42 secciones 1–6, 9 y 10.
-- [x] Glosario inicial.
+- [x] arc42 secciones 1–10 y 12.
+- [x] Glosario (sección 12, con secciones 7 y 8 agregadas).
 - [x] Árbol de utilidad.
-- [x] Escenarios de calidad (Q-01 a Q-05).
+- [x] Escenarios de calidad (Q-01 a Q-05), con anchors verificados y evidencia enlazada.
 - [x] Matriz comparativa.
-- [x] C4 Nivel 1 — Contexto.
-- [x] C4 Nivel 2 — Contenedores.
+- [x] C4 Nivel 1 — Contexto, con leyenda.
+- [x] C4 Nivel 2 — Contenedores, con leyenda y estado real (SQLite implementado).
 - [x] Restricciones arquitectónicas.
 - [x] Registro de uso de IA.
-- [x] Tabla de aspectos con columna "Pruebas" y una fila completa (A-00).
+- [x] Tabla de aspectos con las 8 columnas del curso y trazabilidad completa hasta Pruebas.
 
-## Esqueleto
+## Esqueleto y corte vertical
 
 - [x] Aplicación FastAPI.
 - [x] Estructura modular.
-- [x] Endpoint `/health`.
-- [x] Prueba automatizada.
+- [x] Endpoint `GET /health`.
+- [x] Endpoint `POST /analysis` con validación (Pydantic).
+- [x] Persistencia SQLite integrada.
+- [x] Pruebas automatizadas del corte vertical completo.
 - [x] Comando único de arranque.
-- [x] GitHub Actions.
-- [x] Control de versiones limpio (`.gitignore`, sin `__pycache__` ni archivos duplicados).
+- [x] GitHub Actions configurado.
 
 ## Pendiente
 
-- [ ] Implementar análisis de texto.
+- [ ] Confirmar (`git ls-files`) que no queden `__pycache__/`, `*.pyc`, archivos duplicados `(1).py` ni PDFs en la raíz.
+- [ ] Publicar un run de CI verde y verificable, enlazado en `docs/aspectos.md`.
+- [ ] Medición formal de P95 para el escenario Q-01.
+- [ ] Prueba de modificación de una regla existente para el escenario Q-03.
 - [ ] Implementar análisis mediante URL.
-- [ ] Implementar Rule Engine.
-- [ ] Implementar Scoring Engine.
 - [ ] Integrar procesamiento NLP.
 - [ ] Evaluar Machine Learning.
-- [ ] Implementar persistencia.
 - [ ] Desarrollar frontend.
 - [ ] Integrar el prototipo completo.
-- [ ] Verificar que todos los integrantes del equipo tengan commits atribuidos correctamente en el historial.
+- [ ] Verificar que los tres integrantes del equipo tengan commits atribuidos correctamente en el historial.
 
-# 20. Repositorio
+# 21. Repositorio
 
 Repositorio oficial:
 
 https://github.com/ISCOUTB/AS_202620_Verifacts
 
 **Proyecto:** VeriFacts
-**Equipo:** Pedro Jose Castro Blanquicett, Cristian Cardeno
+**Equipo:** Pedro Jose Castro Blanquicett, Cristian David Cardeno Gulloso
