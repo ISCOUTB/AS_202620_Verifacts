@@ -1,15 +1,15 @@
 # arc42 — Sección 6: Vista de ejecución
 
 Esta sección describe cómo colaboran los bloques en tiempo de ejecución para
-escenarios concretos. En este incremento solo existe un escenario ejecutable
-de extremo a extremo: la comprobación de disponibilidad.
+escenarios concretos. En este incremento existen **dos** escenarios
+ejecutables de extremo a extremo.
 
 ---
 
 ## 6.1 Escenario: Comprobación de disponibilidad (`GET /health`)
 
-Este es el **corte vertical ejecutable** de este incremento — ver también la
-guía de ejecución en el [README](../../README.md#corte-vertical-ejecutable).
+Ver también la guía de ejecución en el
+[README](../../README.md#corte-vertical-ejecutable).
 
 ### Precondición
 
@@ -39,45 +39,85 @@ Usuario/Cliente          API (app/api/routes.py)
 ### Verificación automatizada
 
 Este flujo está cubierto por `tests/test_health.py`, ejecutado localmente
-con `pytest -q` y automáticamente en cada `push` mediante GitHub Actions
-(`.github/workflows/tests.yml`). Ver la fila **A-00** en la
+con `python -m pytest -q` y automáticamente en cada `push` mediante GitHub
+Actions (`.github/workflows/tests.yml`). Ver la fila **A-00** en la
 [tabla de aspectos](../aspectos.md) para la trazabilidad completa hasta la
 evidencia de prueba.
 
 ### Nota de alcance
 
 Este escenario **no** atraviesa los bloques `Content`, `Analysis` ni
-`Scoring` — únicamente valida que el bloque `API` está operativo. Es
-intencionalmente el corte más delgado posible: demuestra que el esqueleto
-arranca, responde y está verificado por una prueba automatizada antes de
-construir la lógica de negocio sobre él.
+`Scoring` — únicamente valida que el bloque `API` está operativo. Es el
+corte más delgado posible, y sigue siendo útil como comprobación mínima de
+que el servicio arranca, incluso ahora que existe el escenario 6.2.
 
 ---
 
-## 6.2 Escenario previsto: Análisis de contenido (pendiente de implementación)
+## 6.2 Escenario: Análisis de contenido (`POST /analysis`)
 
-Se documenta aquí como referencia para el siguiente incremento, una vez que
-`Content`, `Analysis` y `Scoring` tengan lógica implementada.
+Este es el **corte vertical completo** de este incremento: atraviesa
+interfaz, lógica de negocio y persistencia.
+
+### Precondición
+
+El servidor se inició con `python run.py` (lo cual también inicializa la
+base de datos SQLite mediante `initialize_database()`).
+
+### Secuencia
 
 ```text
-Usuario      API      Content      Analysis      Scoring
-  |           |           |            |             |
-  | POST      |           |            |             |
-  | /analysis |           |            |             |
-  |──────────▶|           |            |             |
-  |           | normaliza |            |             |
-  |           |──────────▶|            |             |
-  |           |           | contenido  |             |
-  |           |           |───────────▶|             |
-  |           |           |            | hallazgos   |
-  |           |           |            |────────────▶|
-  |           |           |            |             | puntuación +
-  |           |           |            |             | clasificación
-  |           |◀──────────────────────────────────────|
-  |◀──────────|           |            |             |
-  | resultado |           |            |             |
+Usuario      API          Content      Analysis      Scoring      Persistencia
+  |           |               |            |             |              |
+  | POST      |               |            |             |              |
+  | /analysis |               |            |             |              |
+  |──────────▶|               |            |             |              |
+  |           | normalize_    |            |             |              |
+  |           | content(text) |            |             |              |
+  |           |──────────────▶|            |             |              |
+  |           |  contenido    |            |             |              |
+  |           | normalizado   |            |             |              |
+  |           |◀──────────────|            |             |              |
+  |           | analyze_content(contenido) |             |              |
+  |           |───────────────────────────▶|             |              |
+  |           |            findings (List[Finding])      |              |
+  |           |◀───────────────────────────|             |              |
+  |           | calculate_score(findings) /              |              |
+  |           | classify_score(score)                    |              |
+  |           |──────────────────────────────────────────▶|              |
+  |           |          score + classification           |              |
+  |           |◀──────────────────────────────────────────|              |
+  |           | save_analysis(content, score, classification, factors)  |
+  |           |─────────────────────────────────────────────────────────▶|
+  |           |                          id                              |
+  |           |◀─────────────────────────────────────────────────────────|
+  |◀──────────|                                                          |
+  | 200 {id, score, classification, factors}                            |
 ```
 
-Este escenario corresponde a los objetivos arquitectónicos descritos en la
-[Sección 1](01-introduccion-y-objetivos.md#16-objetivos-arquitectónicos) y no
-forma parte del corte vertical actual.
+1. El cliente envía `POST /analysis` con `{"text": "..."}`.
+2. `create_analysis()` en `app/api/routes.py` recibe la solicitud, ya
+   validada por el esquema `AnalysisRequest` (Pydantic).
+3. Delega en `normalize_content()` (`app/modules/content/service.py`); si el
+   texto queda vacío tras normalizar, se responde `400`.
+4. Delega en `analyze_content()` (`app/modules/analysis/service.py`), que
+   usa `RuleAnalyzer` para producir una lista de `Finding`.
+5. Delega en `calculate_score()` y `classify_score()`
+   (`app/modules/scoring/service.py`) para obtener la puntuación y la
+   clasificación.
+6. Delega en `save_analysis()` (`app/persistence/repository.py`), que
+   inserta el registro en SQLite y devuelve su `id`.
+7. `API` construye y retorna `AnalysisResponse` con `id`, `score`,
+   `classification` y `factors`.
+
+### Verificación automatizada
+
+Este flujo está cubierto por `tests/test_analysis.py`, que valida tanto la
+respuesta HTTP como que el registro quedó correctamente persistido (vía
+`get_analysis()`). Ver la fila **A-03** en la
+[tabla de aspectos](../aspectos.md).
+
+### Nota de alcance
+
+Este escenario todavía no cubre: extracción de contenido desde una URL,
+analizadores NLP/ML, ni interfaz web — ver
+[Sección 3.6 — Alcance de este incremento](03-contexto-y-alcance.md#36-alcance-de-este-incremento).
