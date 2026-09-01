@@ -40,7 +40,13 @@ El P95 del tiempo total de análisis deberá ser menor o igual a 3 segundos.
 ### Decisión relacionada
 
 La táctica aplicada se encuentra en
-[arc42 sección 4](arc42/04-estrategia-de-solucion.md#43-q-01--rendimiento).
+[arc42 sección 4](arc42/04-estrategia-de-solucion.md#q-01--rendimiento).
+
+### Evidencia
+
+Pendiente — el pipeline `POST /analysis` ya existe (ver
+[tests/test_analysis.py](../tests/test_analysis.py)), pero todavía no hay
+una medición formal de P95. Próximo paso natural para cerrar este escenario.
 
 ---
 
@@ -83,6 +89,13 @@ Este escenario motiva directamente la selección del monolito modular.
 
 [ADR-0001 — Usar monolito modular](adr/0001-estilo-arquitectonico.md).
 
+### Evidencia
+
+`RuleAnalyzer` (`app/modules/analysis/analyzer.py`) se incorporó sin tocar
+`API`, `Content` ni `Scoring`; verificado end-to-end en
+[tests/test_analysis.py](../tests/test_analysis.py). Ver fila **A-01** en la
+[tabla de aspectos](aspectos.md).
+
 ---
 
 # Q-03 — Modificación de una regla
@@ -121,7 +134,15 @@ regresiones en las pruebas existentes.
 ### Decisión relacionada
 
 La táctica correspondiente está documentada en
-[arc42 sección 4](arc42/04-estrategia-de-solucion.md#45-q-03--mantenibilidad).
+[arc42 sección 4](arc42/04-estrategia-de-solucion.md#q-03--mantenibilidad).
+
+### Evidencia
+
+Pendiente — falta una prueba que module una regla existente de
+`RuleAnalyzer` (por ejemplo, el umbral de mayúsculas) y confirme que
+`tests/test_health.py` y `tests/test_analysis.py` siguen en verde. Ver fila
+**A-02** en la [tabla de aspectos](aspectos.md).
+
 ---
 
 # Q-04 — Comprensión del resultado
@@ -161,7 +182,14 @@ y explicar correctamente el significado básico del resultado.
 ### Decisión relacionada
 
 La táctica correspondiente está documentada en
-[arc42 sección 4](arc42/04-estrategia-de-solucion.md#46-q-04--usabilidad).
+[arc42 sección 4](arc42/04-estrategia-de-solucion.md#q-04--usabilidad).
+
+### Evidencia
+
+Pendiente — depende de la interfaz web (todavía no implementada, ver
+[C4 — Contenedores](c4/02-contenedores.md)) y de una prueba de usuario, no
+solo de una prueba automatizada.
+
 ---
 
 # Q-05 — Repetibilidad del resultado
@@ -199,3 +227,10 @@ El sistema produce el mismo resultado (puntuación y clasificación) para la mis
 ### Decisión relacionada
 
 [ADR-0001 — Usar monolito modular](adr/0001-estilo-arquitectonico.md).
+
+### Evidencia
+
+`GET /health` verificado en [tests/test_health.py](../tests/test_health.py)
+(fila **A-00**); `POST /analysis` con persistencia verificado en
+[tests/test_analysis.py](../tests/test_analysis.py) (fila **A-03**). Ver
+[tabla de aspectos](aspectos.md).
