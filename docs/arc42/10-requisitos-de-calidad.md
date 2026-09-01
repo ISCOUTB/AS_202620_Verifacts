@@ -35,10 +35,21 @@ decisión arquitectónica resultante está registrada en
 
 ## 10.4 Verificación
 
-Actualmente solo Q-05 (confiabilidad) tiene evidencia de prueba automatizada
-sobre código real, a través de `tests/test_health.py` (ver
-[Sección 6 — Vista de ejecución](06-vista-de-ejecucion.md#61-escenario-comprobación-de-disponibilidad-get-health)).
-Los escenarios Q-01 a Q-04 dependen de los módulos `Content`, `Analysis` y
-`Scoring`, todavía no implementados, y quedan pendientes de verificación en
-próximos incrementos — ver la [tabla de aspectos](../aspectos.md) para el
-estado fila por fila.
+Estado actual, fila por fila (ver la [tabla de aspectos](../aspectos.md)
+para la trazabilidad completa hasta el código):
+
+| Escenario | Estado de verificación |
+|---|---|
+| Q-01 | Pendiente — el pipeline `POST /analysis` ya existe y se ejecuta localmente, pero no hay una medición formal de P95 todavía |
+| Q-02 | **Con evidencia** — `RuleAnalyzer` se incorporó sin tocar `API`, `Content` ni `Scoring`; verificado en `tests/test_analysis.py` (fila A-01) |
+| Q-03 | Pendiente — falta una prueba que module una regla existente y confirme ausencia de regresiones (fila A-02) |
+| Q-04 | Pendiente — depende de la interfaz web, todavía no implementada |
+| Q-05 | **Con evidencia** — `GET /health` (`tests/test_health.py`, fila A-00) y `POST /analysis` con persistencia (`tests/test_analysis.py`, fila A-03) |
+
+A diferencia del incremento anterior, ya no todos los escenarios dependen de
+módulos sin implementar: `Content`, `Analysis`, `Scoring` y `Persistencia`
+tienen lógica real y un corte vertical completo (`POST /analysis`) que los
+atraviesa — ver [Sección 6 — Vista de ejecución](06-vista-de-ejecucion.md#62-escenario-análisis-de-contenido-post-analysis).
+Lo que falta cerrar es evidencia específica por escenario (medición de P95
+para Q-01, prueba de modificación de regla para Q-03, prueba de usuario para
+Q-04), no la existencia del código.

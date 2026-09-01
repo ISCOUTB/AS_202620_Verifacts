@@ -5,6 +5,15 @@
 El diagrama presenta VeriFacts dentro de su entorno y muestra las personas y
 sistemas externos que interactúan con el sistema.
 
+## Leyenda
+
+| Notación | Significado |
+|---|---|
+| Rectángulo etiquetado "persona" | Un actor humano que interactúa con el sistema |
+| Rectángulo etiquetado "sistema de software" | VeriFacts, el sistema documentado en este proyecto |
+| Rectángulo etiquetado "sistema externo" | Un sistema fuera del control del equipo (GitHub, SonarCloud, sitios web de terceros) |
+| Flecha etiquetada | Una interacción o flujo de datos entre dos elementos, con su propósito indicado sobre la flecha |
+
 ## Diagrama
 
 ```mermaid

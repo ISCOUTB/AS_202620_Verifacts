@@ -79,9 +79,24 @@ El diagrama equivalente en notación C4 (Nivel 1 — Contexto) se encuentra en
 
 ## 3.6 Alcance de este incremento
 
-Este incremento documenta y ejecuta el corte vertical descrito en el
-[README](../../README.md#corte-vertical-ejecutable): recepción de una
-solicitud HTTP a través del módulo `API` y respuesta de disponibilidad
-(`/health`). Los módulos `Content`, `Analysis` y `Scoring` están definidos
-arquitectónicamente (ver [Sección 5 — Vista de bloques](05-vista-de-bloques.md))
-pero aún no contienen lógica de negocio.
+Este incremento documenta y ejecuta **dos** recorridos de extremo a extremo,
+ambos descritos con detalle en la
+[Sección 6 — Vista de ejecución](06-vista-de-ejecucion.md) y guiados paso a
+paso en el [README](../../README.md#corte-vertical-ejecutable):
+
+1. **Comprobación de disponibilidad** (`GET /health`): atraviesa únicamente
+   el módulo `API`.
+2. **Análisis de contenido** (`POST /analysis`): atraviesa `API → Content →
+   Analysis → Scoring → Persistencia`. El texto recibido se normaliza en
+   `Content`, se evalúa con `RuleAnalyzer` en `Analysis`, se transforma en
+   puntuación y clasificación en `Scoring`, y el resultado se guarda y puede
+   recuperarse desde `Persistencia` (SQLite).
+
+Lo que **no** está implementado todavía dentro de este alcance:
+
+- Extracción de contenido a partir de una URL (`Content` solo normaliza
+  texto recibido directamente).
+- Analizadores basados en NLP o Machine Learning (`Analysis` solo tiene
+  `RuleAnalyzer`; ver [Registro de uso de IA](../ia.md)).
+- Interfaz web (React) — el punto de entrada actual es la API HTTP
+  directamente, ver [C4 — Contenedores](../c4/02-contenedores.md).
