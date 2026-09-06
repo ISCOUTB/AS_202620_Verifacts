@@ -17,5 +17,9 @@
 | **arc42** | Plantilla utilizada para documentar la arquitectura de VeriFacts, organizada en 12 secciones estándar. |
 | **C4** | Modelo de diagramación arquitectónica en niveles (Contexto, Contenedores, Componentes, Código) utilizado para representar VeriFacts gráficamente. |
 | **P95** | Percentil 95 de una distribución de mediciones (por ejemplo, tiempo de respuesta); métrica usada en el escenario Q-01. |
-
-*Este glosario se ampliará en incrementos posteriores conforme se incorporen nuevos términos del dominio (por ejemplo, terminología específica de NLP/ML cuando se implemente esa parte del módulo `Analysis`).*
+|**Contenido**|texto o URL que el usuario envía para analizar.|
+|**Análisis**|proceso que evalúa un Contenido en busca de señales de desinformación.|
+|**Factor / Señal**|indicio individual detectado por el motor de reglas o el motor NLP.|
+|**Puntuación (Score)**|valor numérico resultante de combinar las Señales de un Análisis.|
+|**Clasificación**|etiqueta derivada de la Puntuación.|
+|**Historial**|registro persistente de Análisis pasados.|*Este glosario se ampliará en incrementos posteriores conforme se incorporen nuevos términos del dominio (por ejemplo, terminología específica de NLP/ML cuando se implemente esa parte del módulo `Analysis`).*
