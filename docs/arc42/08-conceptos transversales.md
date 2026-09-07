@@ -47,5 +47,32 @@ Todo aspecto arquitectónico relevante debe poder seguirse desde el
 escenario de calidad que lo motiva hasta la evidencia de prueba, pasando por
 la vista C4 y el ADR correspondientes. Esa cadena completa vive en
 [docs/aspectos.md](../aspectos.md) y es, en sí misma, un concepto
+
+
+<!-- DÓNDE VA: docs/arc42/08-conceptos-transversales.md
+     Añade esta subsección al final del archivo existente (no borres lo que ya tenían).
+     Si la sección 8 aún no existe como archivo, créala con este contenido. -->
+
+## Modelo de dominio y contextos delimitados (S6)
+
+### Lenguaje ubicuo
+
+| Término | Significado en el dominio |
+|---|---|
+| Contenido | Texto o URL que el usuario envía para analizar |
+| Análisis | Proceso que evalúa un Contenido en busca de señales de desinformación |
+| Factor / Señal | Indicio individual detectado (sensacionalismo, mayúsculas, afirmación absoluta, ausencia de fuentes, lenguaje emocional) |
+| Puntuación (Score) | Valor numérico resultante de combinar las Señales |
+| Clasificación | Etiqueta derivada de la Puntuación |
+| Historial | Registro persistente de Análisis pasados |
+
+
+### Contextos delimitados
+
+Se identifican tres contextos dentro del monolito modular: **Ingesta y Presentación**, **Análisis de Contenido** (núcleo del dominio) e **Historial de Análisis** (soporte). El detalle del mapa de contextos, las relaciones entre ellos y la tabla de propiedad de datos están en [`docs/mapa-contextos.md`](../mapa-contextos.md).
+
+### Regla transversal de propiedad de datos
+
+Cada tabla de la base de datos tiene un único módulo autorizado a escribir en ella. Los demás módulos que necesiten ese dato lo reciben como resultado de una llamada, nunca escribiendo directamente sobre la tabla ajena. El detalle de qué módulo escribe qué está en [`docs/propiedad-datos.md`](../propiedad-datos.md); las violaciones encontradas frente a esta regla y su plan de corrección están en [`docs/violaciones-modularidad.md`](../violaciones-modularidad.md).
 transversal: cualquier documento nuevo que agregue un aspecto debe respetar
 esas ocho columnas.

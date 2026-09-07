@@ -99,11 +99,11 @@ También se acepta mantener ejecución local durante el prototipo.
 
 ## Escenarios relacionados
 
-- [Q-01 — Tiempo de respuesta](../escenarios-de-calidad.md#q-01-tiempo-de-respuesta-del-análisis)
-- [Q-02 — Incorporación de un nuevo analizador](../escenarios-de-calidad.md#q-02-incorporación-de-un-nuevo-analizador)
-- [Q-03 — Modificación de una regla](../escenarios-de-calidad.md#q-03-modificación-de-una-regla)
-- [Q-04 — Comprensión del resultado](../escenarios-de-calidad.md#q-04-comprensión-del-resultado)
-- [Q-05 — Repetibilidad del resultado](../escenarios-de-calidad.md#q-05-repetibilidad-del-resultado)
+- [Q-01 — Tiempo de respuesta](../escenarios-de-calidad.md#q-01--tiempo-de-respuesta-del-análisis)
+- [Q-02 — Incorporación de un nuevo analizador](../escenarios-de-calidad.md#q-02--incorporación-de-un-nuevo-analizador)
+- [Q-03 — Modificación de una regla](../escenarios-de-calidad.md#q-03--modificación-de-una-regla)
+- [Q-04 — Comprensión del resultado](../escenarios-de-calidad.md#q-04--comprensión-del-resultado)
+- [Q-05 — Repetibilidad del resultado](../escenarios-de-calidad.md#q-05--repetibilidad-del-resultado)
 
 ## Estado
 
