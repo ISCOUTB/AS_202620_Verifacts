@@ -1,3 +1,14 @@
 .venv/
 __pycache__/
 *.pyc
+*.pyo
+.pytest_cache/
+
+# Base de datos local (se genera con initialize_database() en run.py)
+data/
+*.db
+
+# Archivos de descarga duplicados (sufijos tipo "(1).py")
+* (*.py
+* (*.pdf
+* (*.docx
