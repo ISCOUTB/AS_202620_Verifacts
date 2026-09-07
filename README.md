@@ -12,7 +12,6 @@ Sistema inteligente para análisis de información digital
 - Pedro Jose Castro Blanquicett
 - Cristian David Cardeno Gulloso
 
-
 Usuarios de GitHub y detalle de roles en [Equipo.md](Equipo.md).
 
 # 1. Descripción del proyecto
@@ -68,7 +67,7 @@ La decisión está registrada en:
 
 Explicación extendida, con comparación detallada frente a las alternativas y
 trazabilidad hasta cada escenario de calidad, en:
-[Decisiones arquitectónicas explicadas](docs/decisiones-arquitectonicas.md)
+[Decisiones arquitectónicas explicadas](docs/decisiones-arquitectonicas-explicadas.md)
 
 ## Módulos
 
@@ -96,7 +95,7 @@ VeriFacts
 
 **Persistencia** — Guarda y recupera los resultados de cada análisis (SQLite).
 
-Detalle completo de responsabilidades y trazabilidad con el código en la [Sección 5 — Vista de bloques](docs/arc42/05-vista-de-bloques.md).
+Detalle completo de responsabilidades y trazabilidad con el código en la [Sección 5 — Vista de bloques](docs/arc42/05-vista-de-bloques.md). La correspondencia de estos 5 bloques con los 3 contextos delimitados del dominio (Ingesta y Presentación, Análisis de Contenido, Historial de Análisis) está en [C4 — Nivel 3: Componentes](docs/c4/03-componentes.md).
 
 # 6. Documentación arquitectónica
 
@@ -122,10 +121,17 @@ Detalle completo de responsabilidades y trazabilidad con el código en la [Secci
 - [Matriz comparativa de estilos](docs/matriz-estilos.md)
 - [Decisiones arquitectónicas explicadas](docs/decisiones-arquitectonicas-explicadas.md)
 
+## Modelo de dominio (S6)
+
+- [Mapa de contextos delimitados](docs/mapa-contextos.md)
+- [Propiedad de datos por módulo](docs/propiedad-datos.md)
+- [Violaciones de modularidad detectadas](docs/violaciones-modularidad.md)
+
 ## Modelo C4
 
 - [C4 — Nivel 1: Contexto](docs/c4/01-contexto.md)
 - [C4 — Nivel 2: Contenedores](docs/c4/02-contenedores.md)
+- [C4 — Nivel 3: Componentes](docs/c4/03-componentes.md)
 
 ## Decisiones arquitectónicas
 
@@ -196,10 +202,11 @@ AS_202620_Verifacts/
     │   ├── 08-conceptos-transversales.md
     │   ├── 09-decisiones-arquitectonicas.md
     │   ├── 10-requisitos-de-calidad.md
-    │   └── 12-glosario.md
+    │   └── 11-glosario.md
     ├── c4/
     │   ├── 01-contexto.md
-    │   └── 02-contenedores.md
+    │   ├── 02-contenedores.md
+    │   └── 03-componentes.md
     ├── adr/
     │   └── 0001-estilo-arquitectonico.md
     ├── escenarios-de-calidad.md
@@ -207,11 +214,16 @@ AS_202620_Verifacts/
     ├── aspectos.md
     ├── matriz-estilos.md
     ├── decisiones-arquitectonicas-explicadas.md
+    ├── mapa-contextos.md
+    ├── propiedad-datos.md
+    ├── violaciones-modularidad.md
     └── ia.md
 ```
 
 No debe haber en el repositorio: carpetas `__pycache__/`, archivos `*.pyc`,
-archivos duplicados con sufijos tipo `(1).py`, ni PDFs sueltos en la raíz.
+archivos duplicados con sufijos tipo `(1).py`, PDFs sueltos en la raíz, ni la
+carpeta `data/` (contiene `verifacts.db`, generada en tiempo de ejecución por
+`initialize_database()` y excluida por `.gitignore`).
 Verificar con `git ls-files` antes de cada entrega.
 
 # 8. Tecnologías actuales
@@ -410,11 +422,13 @@ Ya implementado dentro de las fronteras arquitectónicas definidas (ver
 - normalización de contenido de texto;
 - cálculo de puntuación y clasificación;
 - persistencia de resultados (SQLite);
-- corte vertical completo con prueba automatizada.
+- corte vertical completo con prueba automatizada;
+- modelo de dominio documentado: lenguaje ubicuo, contextos delimitados y propiedad de datos por módulo (ver [Modelo de dominio (S6)](#modelo-de-dominio-s6)).
 
 Pendiente para próximos incrementos:
 
 - extracción de contenido a partir de una URL;
+- endpoints de lectura del historial (`GET /analysis/{id}`, `GET /analysis`);
 - procesamiento NLP (spaCy);
 - evaluación de Machine Learning (scikit-learn), condicionada a disponer de un dataset adecuado;
 - interfaz final (React).
@@ -440,13 +454,16 @@ La implementación sigue los siguientes criterios:
 - [x] Comparación de estilos.
 - [x] Monolito modular seleccionado.
 - [x] ADR-0001.
-- [x] arc42 secciones 1–10 y 12.
-- [x] Glosario (sección 12, con secciones 7 y 8 agregadas).
-- [x] Árbol de utilidad.
+- [x] arc42 secciones 1–11.
+- [x] Glosario (sección 11), sin entradas duplicadas ni en conflicto.
+- [x] Árbol de utilidad, priorizado por impacto y riesgo.
 - [x] Escenarios de calidad (Q-01 a Q-05), con anchors verificados y evidencia enlazada.
 - [x] Matriz comparativa.
 - [x] C4 Nivel 1 — Contexto, con leyenda.
 - [x] C4 Nivel 2 — Contenedores, con leyenda y estado real (SQLite implementado).
+- [x] C4 Nivel 3 — Componentes, con tabla de correspondencia contra el código real.
+- [x] Modelo de dominio: lenguaje ubicuo, contextos delimitados y mapa de contextos (S6).
+- [x] Propiedad de datos por módulo, verificada contra `app/persistence/repository.py` (sin violaciones detectadas).
 - [x] Restricciones arquitectónicas.
 - [x] Registro de uso de IA.
 - [x] Tabla de aspectos con las 8 columnas del curso y trazabilidad completa hasta Pruebas.
@@ -467,11 +484,15 @@ La implementación sigue los siguientes criterios:
 - [ ] Medición formal de P95 para el escenario Q-01.
 - [ ] Prueba de modificación de una regla existente para el escenario Q-03.
 - [ ] Implementar análisis mediante URL.
+- [ ] Implementar endpoints de lectura del historial (`GET /analysis/{id}`, `GET /analysis`).
 - [ ] Integrar procesamiento NLP.
 - [ ] Evaluar Machine Learning.
 - [ ] Desarrollar frontend.
 - [ ] Integrar el prototipo completo.
 - [ ] Verificar que los tres integrantes del equipo tengan commits atribuidos correctamente en el historial.
+- [ ] Confirmar manualmente que el run de CI citado en `docs/aspectos.md` está en verde.
+- [ ] Crear `docs/decisiones-arquitectonicas-explicadas.md` (referenciado desde este README pero aún no existe en el repositorio).
+- [ ] Redactar ADR-0002 con la restricción arquitectónica específica asignada para el Corte 1.
 
 # 21. Repositorio
 
