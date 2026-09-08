@@ -1,25 +1,23 @@
-from pathlib import Path
 import sqlite3
+from typing import Any, Dict, List, Optional
+
+DB_PATH = "verifacts.db"
 
 
-BASE_DIR = Path(__file__).resolve().parents[2]
-DATA_DIR = BASE_DIR / "data"
-DATABASE_PATH = DATA_DIR / "verifacts.db"
-
-
-def _get_connection() -> sqlite3.Connection:
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
-
-    connection = sqlite3.connect(DATABASE_PATH)
+def get_connection() -> sqlite3.Connection:
+    """
+    Crea y retorna una conexión a la base de datos SQLite.
+    Configura el row_factory para acceder a las columnas por nombre.
+    """
+    connection = sqlite3.connect(DB_PATH)
     connection.row_factory = sqlite3.Row
-
     return connection
 
 
 def _migrate_schema(connection: sqlite3.Connection) -> None:
     """
     Agrega columnas nuevas a bases de datos creadas antes de esta
-    ampliacion, sin perder los datos ya guardados. SQLite no soporta
+    ampliación, sin perder los datos ya guardados. SQLite no soporta
     "ADD COLUMN IF NOT EXISTS", por eso se revisa PRAGMA table_info primero.
     """
     existing_columns = {
@@ -33,7 +31,7 @@ def _migrate_schema(connection: sqlite3.Connection) -> None:
 
     if "created_at" not in existing_columns:
         # SQLite no permite DEFAULT CURRENT_TIMESTAMP en ALTER TABLE.
-        # Primero agregamos la columna y luego rellenamos los registros existentes.
+        # Agregamos la columna primero y rellenamos los registros existentes mediante UPDATE.
         connection.execute("ALTER TABLE analyses ADD COLUMN created_at TEXT")
         connection.execute(
             "UPDATE analyses SET created_at = CURRENT_TIMESTAMP WHERE created_at IS NULL"
@@ -43,138 +41,81 @@ def _migrate_schema(connection: sqlite3.Connection) -> None:
 
 
 def initialize_database() -> None:
-    """Crea la tabla de analisis si no existe y migra el esquema si hace falta."""
-    connection = _get_connection()
-
-    connection.execute(
-        """
-        CREATE TABLE IF NOT EXISTS analyses (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            content TEXT NOT NULL,
-            score INTEGER NOT NULL,
-            classification TEXT NOT NULL,
-            factors TEXT NOT NULL,
-            source_type TEXT NOT NULL DEFAULT 'texto',
-            created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    """
+    Crea la tabla principal si no existe y aplica las migraciones necesarias.
+    """
+    with get_connection() as connection:
+        connection.execute(
+            """
+            CREATE TABLE IF NOT EXISTS analyses (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                text TEXT NOT NULL,
+                verdict TEXT NOT NULL,
+                score REAL NOT NULL,
+                explanation TEXT NOT NULL,
+                source_type TEXT NOT NULL DEFAULT 'texto',
+                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )
+            """
         )
-        """
-    )
-    connection.commit()
-
-    _migrate_schema(connection)
-
-    connection.close()
-
-
-def _deserialize_row(row: sqlite3.Row) -> dict:
-    result = dict(row)
-
-    if isinstance(result.get("factors"), str):
-        result["factors"] = [
-            factor.strip()
-            for factor in result["factors"].split(" | ")
-            if factor.strip()
-        ]
-
-    return result
+        _migrate_schema(connection)
 
 
 def save_analysis(
-    content: str,
-    score: int,
-    classification: str,
-    factors: list[str],
+    text: str,
+    verdict: str,
+    score: float,
+    explanation: str,
     source_type: str = "texto",
 ) -> int:
-    """Guarda un analisis y retorna su ID."""
+    """
+    Guarda un nuevo análisis en la base de datos y retorna su ID generado.
+    """
     initialize_database()
-
-    factors_text = " | ".join(factors)
-
-    connection = _get_connection()
-
-    cursor = connection.execute(
-        """
-        INSERT INTO analyses (
-            content,
-            score,
-            classification,
-            factors,
-            source_type
+    with get_connection() as connection:
+        cursor = connection.execute(
+            """
+            INSERT INTO analyses (text, verdict, score, explanation, source_type)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            (text, verdict, score, explanation, source_type),
         )
-        VALUES (?, ?, ?, ?, ?)
-        """,
-        (
-            content,
-            score,
-            classification,
-            factors_text,
-            source_type,
-        ),
-    )
-
-    connection.commit()
-
-    analysis_id = cursor.lastrowid
-
-    connection.close()
-
-    return int(analysis_id)
+        connection.commit()
+        return cursor.lastrowid
 
 
-def get_analysis(analysis_id: int) -> dict | None:
-    """Obtiene un analisis por su ID."""
+def get_analysis(analysis_id: int) -> Optional[Dict[str, Any]]:
+    """
+    Obtiene un análisis específico por su ID. Retorna None si no existe.
+    """
     initialize_database()
-
-    connection = _get_connection()
-
-    row = connection.execute(
-        """
-        SELECT
-            id,
-            content,
-            score,
-            classification,
-            factors,
-            source_type,
-            created_at
-        FROM analyses
-        WHERE id = ?
-        """,
-        (analysis_id,),
-    ).fetchone()
-
-    connection.close()
-
-    if row is None:
-        return None
-
-    return _deserialize_row(row)
+    with get_connection() as connection:
+        cursor = connection.execute(
+            """
+            SELECT id, text, verdict, score, explanation, source_type, created_at
+            FROM analyses
+            WHERE id = ?
+            """,
+            (analysis_id,),
+        )
+        row = cursor.fetchone()
+        if row is None:
+            return None
+        return dict(row)
 
 
-def list_analyses(limit: int = 20, offset: int = 0) -> list[dict]:
-    """Lista los analisis mas recientes primero, con paginacion simple."""
+def list_analyses() -> List[Dict[str, Any]]:
+    """
+    Retorna la lista de todos los análisis ordenados por fecha de creación descendente.
+    """
     initialize_database()
-
-    connection = _get_connection()
-
-    rows = connection.execute(
-        """
-        SELECT
-            id,
-            content,
-            score,
-            classification,
-            factors,
-            source_type,
-            created_at
-        FROM analyses
-        ORDER BY id DESC
-        LIMIT ? OFFSET ?
-        """,
-        (limit, offset),
-    ).fetchall()
-
-    connection.close()
-
-    return [_deserialize_row(row) for row in rows]
+    with get_connection() as connection:
+        cursor = connection.execute(
+            """
+            SELECT id, text, verdict, score, explanation, source_type, created_at
+            FROM analyses
+            ORDER BY id DESC
+            """
+        )
+        rows = cursor.fetchall()
+        return [dict(row) for row in rows]
