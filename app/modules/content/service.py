@@ -16,7 +16,8 @@ def normalize_content(text: str) -> str:
 
 def extract_from_url(url: str) -> str:
     """
-
+    Descarga y extrae el contenido legible de una URL.
+    """
 
     downloaded = trafilatura.fetch_url(url)
 
