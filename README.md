@@ -542,15 +542,10 @@ La implementación sigue los siguientes criterios:
 
 ## Pendiente
 
-- [ ] Medición formal de P95 para el escenario Q-01.
-- [ ] Prueba de modificación de una regla existente para el escenario Q-03.
 - [ ] Integrar procesamiento NLP.
 - [ ] Evaluar Machine Learning (incluye agregar `model_version` al esquema).
 - [ ] Desarrollar frontend.
 - [ ] Integrar el prototipo completo.
-- [ ] Verificar que los tres integrantes del equipo tengan commits atribuidos correctamente en el historial.
-- [ ] Confirmar manualmente que el run de CI citado en `docs/aspectos.md` está en verde.
-- [ ] Crear `docs/decisiones-arquitectonicas-explicadas.md` (referenciado desde este README pero aún no existe en el repositorio).
 - [ ] Redactar ADR-0002 con la restricción arquitectónica específica asignada para el Corte 1.
 
 # 23. Repositorio
