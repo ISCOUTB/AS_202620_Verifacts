@@ -12,6 +12,7 @@ Sistema inteligente para análisis de información digital
 - Pedro Jose Castro Blanquicett
 - Cristian David Cardeno Gulloso
 
+
 Usuarios de GitHub y detalle de roles en [Equipo.md](Equipo.md).
 
 # 1. Descripción del proyecto
@@ -42,13 +43,16 @@ El proyecto se encuentra actualmente en la etapa de desarrollo del prototipo, so
 
 La arquitectura seleccionada es un monolito modular.
 
-El repositorio contiene un corte vertical completo y ejecutable: recepción de una solicitud HTTP, normalización de contenido, análisis basado en reglas, cálculo de puntuación/clasificación y persistencia del resultado.
+El repositorio contiene un corte vertical completo y ejecutable: recepción de una solicitud HTTP, normalización de contenido (texto o URL), análisis basado en reglas, cálculo de puntuación/clasificación y persistencia del resultado.
 
 Actualmente se puede:
 
 - iniciar la aplicación;
 - comprobar que la API está disponible (`GET /health`);
-- enviar un texto para análisis y recibir puntuación, clasificación y factores (`POST /analysis`), con el resultado persistido en SQLite;
+- enviar un texto **o una URL** para análisis y recibir puntuación, clasificación y factores (`POST /analysis`), con el resultado persistido en SQLite;
+- consultar un análisis guardado por su id (`GET /analysis/{id}`);
+- listar el historial de análisis, paginado (`GET /analysis`);
+- llamar la API desde un frontend local (`http://localhost:5173`) gracias a CORS;
 - ejecutar las pruebas automatizadas (local y en GitHub Actions).
 
 # 5. Arquitectura
@@ -87,13 +91,13 @@ VeriFacts
 
 **API** — Recibe y coordina las solicitudes externas.
 
-**Content** — Normaliza y valida el contenido recibido mediante texto o URL.
+**Content** — Normaliza y valida el contenido recibido mediante texto o URL (la extracción de URL usa `trafilatura`).
 
 **Analysis** — Contiene los mecanismos de análisis; hoy `RuleAnalyzer` (reglas), ampliable con NLP o Machine Learning (ver [Registro de uso de IA](docs/ia.md)).
 
 **Scoring** — Transforma los hallazgos del análisis en una puntuación y clasificación.
 
-**Persistencia** — Guarda y recupera los resultados de cada análisis (SQLite).
+**Persistencia** — Guarda y recupera los resultados de cada análisis (SQLite), incluyendo su origen (`source_type`) y fecha de creación (`created_at`).
 
 Detalle completo de responsabilidades y trazabilidad con el código en la [Sección 5 — Vista de bloques](docs/arc42/05-vista-de-bloques.md). La correspondencia de estos 5 bloques con los 3 contextos delimitados del dominio (Ingesta y Presentación, Análisis de Contenido, Historial de Análisis) está en [C4 — Nivel 3: Componentes](docs/c4/03-componentes.md).
 
@@ -136,6 +140,10 @@ Detalle completo de responsabilidades y trazabilidad con el código en la [Secci
 ## Decisiones arquitectónicas
 
 - [ADR-0001 — Usar monolito modular](docs/adr/0001-estilo-arquitectonico.md)
+
+## Notas de implementación
+
+- [Ampliación de backend: historial y URL](docs/implementacion-backend.md)
 
 ## Inteligencia Artificial
 
@@ -188,7 +196,9 @@ AS_202620_Verifacts/
 ├── tests/
 │   ├── __init__.py
 │   ├── test_health.py
-│   └── test_analysis.py
+│   ├── test_analysis.py
+│   ├── test_analysis_history.py
+│   └── test_url_ingestion.py
 │
 └── docs/
     ├── arc42/
@@ -217,6 +227,7 @@ AS_202620_Verifacts/
     ├── mapa-contextos.md
     ├── propiedad-datos.md
     ├── violaciones-modularidad.md
+    ├── implementacion-backend.md
     └── ia.md
 ```
 
@@ -234,11 +245,13 @@ Verificar con `git ls-files` antes de cada entrega.
 - FastAPI
 - Uvicorn
 - SQLite (vía `sqlite3`, módulo estándar)
+- `trafilatura` (extracción de contenido desde URL)
 
 ## Pruebas
 
 - Pytest
 - HTTPX (usado internamente por `TestClient`)
+- `monkeypatch` de Pytest para aislar las pruebas de `trafilatura` de la red real
 
 ## Calidad y colaboración
 
@@ -293,7 +306,7 @@ pip install -r requirements.txt
 
 # Corte vertical ejecutable
 
-Las secciones 13 a 17 documentan, paso a paso, los recorridos de extremo a extremo que hoy son ejecutables en VeriFacts: arrancar el servicio, confirmar que responde, enviar un contenido para análisis con persistencia real, y verificar todo con pruebas automatizadas (local y en CI). Ver también su descripción arquitectónica en [Sección 6 — Vista de ejecución](docs/arc42/06-vista-de-ejecucion.md) y su trazabilidad hasta la evidencia de prueba en las filas **A-00** a **A-03** de la [tabla de aspectos](docs/aspectos.md).
+Las secciones 13 a 19 documentan, paso a paso, los recorridos de extremo a extremo que hoy son ejecutables en VeriFacts: arrancar el servicio, confirmar que responde, enviar un contenido para análisis con persistencia real (por texto o por URL), consultar y listar el historial, y verificar todo con pruebas automatizadas (local y en CI). Ver también su descripción arquitectónica en [Sección 6 — Vista de ejecución](docs/arc42/06-vista-de-ejecucion.md) y su trazabilidad hasta la evidencia de prueba en las filas **A-00** a **A-06** de la [tabla de aspectos](docs/aspectos.md).
 
 # 13. Arranque del proyecto
 
@@ -305,7 +318,8 @@ python run.py
 
 Esta es la instrucción oficial de arranque. Al iniciar, también se
 inicializa automáticamente la base de datos SQLite (`data/verifacts.db`) si
-no existe.
+no existe, y se migra el esquema si la base ya existía con una versión
+anterior de las columnas.
 
 Una vez iniciado, la aplicación estará disponible en:
 http://127.0.0.1:8000
@@ -335,7 +349,7 @@ La respuesta esperada es:
 Esta ruta solamente verifica que el servicio está funcionando; no representa
 todavía una funcionalidad de negocio de VeriFacts.
 
-# 15. Análisis de contenido (corte vertical completo)
+# 15. Análisis de contenido por texto
 
 El endpoint de negocio principal es:
 
@@ -362,7 +376,8 @@ Respuesta esperada:
     "Lenguaje sensacionalista",
     "Uso excesivo de mayúsculas",
     "Afirmación absoluta"
-  ]
+  ],
+  "source_type": "texto"
 }
 ```
 
@@ -371,7 +386,49 @@ Internamente, la solicitud atraviesa `Content` (normalización) →
 `Persistencia` (guardado en SQLite). El detalle paso a paso está en la
 [Sección 6.2 — Vista de ejecución](docs/arc42/06-vista-de-ejecucion.md#62-escenario-análisis-de-contenido-post-analysis).
 
-# 16. Ejecutar las pruebas
+# 16. Análisis de contenido por URL
+
+El mismo endpoint `POST /analysis` acepta una URL en vez de texto:
+
+```json
+{
+  "url": "https://ejemplo.com/una-noticia"
+}
+```
+
+`Content` descarga la página y extrae su contenido principal con
+`trafilatura` antes de normalizarlo y analizarlo — el resto del recorrido
+(`Analysis → Scoring → Persistencia`) es idéntico al de texto. La respuesta
+incluye `"source_type": "url"`.
+
+`text` y `url` son mutuamente excluyentes: enviar ambos, o ninguno de los
+dos, devuelve `422`. Si la URL no se puede descargar o no tiene contenido
+legible, la API responde `400`.
+
+Detalle en [`docs/implementacion-backend.md`](docs/implementacion-backend.md)
+y fila **A-06** de [`docs/aspectos.md`](docs/aspectos.md).
+
+# 17. Consultar y listar el historial de análisis
+
+```
+GET /analysis/{id}
+```
+
+Devuelve el análisis completo (incluyendo `content`, `source_type` y
+`created_at`) o `404` si el `id` no existe.
+
+```
+GET /analysis?limit=20&offset=0
+```
+
+Devuelve los análisis más recientes primero. `limit` debe estar entre 1 y
+100; `offset` no puede ser negativo — fuera de esos rangos, la API responde
+`400`.
+
+Detalle en [`docs/implementacion-backend.md`](docs/implementacion-backend.md)
+y filas **A-04**/**A-05** de [`docs/aspectos.md`](docs/aspectos.md).
+
+# 18. Ejecutar las pruebas
 
 Con el entorno virtual activado, desde la raíz del repositorio (no dentro de `tests/`), ejecutar:
 
@@ -385,11 +442,13 @@ Las pruebas actuales comprueban:
 
 - que la aplicación puede inicializarse;
 - que la ruta `/health` existe y responde correctamente (`tests/test_health.py`);
-- que `POST /analysis` normaliza, analiza, puntúa, clasifica y persiste correctamente un contenido de extremo a extremo (`tests/test_analysis.py`).
+- que `POST /analysis` normaliza, analiza, puntúa, clasifica y persiste correctamente un contenido de extremo a extremo (`tests/test_analysis.py`);
+- que `GET /analysis/{id}` y `GET /analysis` devuelven el historial correctamente, incluyendo casos de error (`tests/test_analysis_history.py`);
+- que `POST /analysis` con `url` extrae contenido con `trafilatura` (mockeado, sin red real) y maneja errores de descarga/extracción (`tests/test_url_ingestion.py`).
 
-El resultado esperado es similar a: `2 passed`
+El resultado esperado es: `12 passed`
 
-# 17. Integración continua
+# 19. Integración continua
 
 El repositorio incluye: `.github/workflows/tests.yml`
 
@@ -413,27 +472,27 @@ El resultado puede consultarse desde la pestaña **Actions** del repositorio;
 el enlace al run más reciente en verde se cita en la
 [tabla de aspectos](docs/aspectos.md).
 
-# 18. Desarrollo actual y próximos pasos
+# 20. Desarrollo actual y próximos pasos
 
 Ya implementado dentro de las fronteras arquitectónicas definidas (ver
 [Sección 5 — Vista de bloques](docs/arc42/05-vista-de-bloques.md)):
 
 - análisis de contenido basado en reglas;
-- normalización de contenido de texto;
+- normalización de contenido de texto **y extracción de contenido desde URL**;
 - cálculo de puntuación y clasificación;
-- persistencia de resultados (SQLite);
+- persistencia de resultados (SQLite), con origen (`source_type`) y fecha (`created_at`);
+- consulta y listado del historial de análisis (`GET /analysis/{id}`, `GET /analysis`);
+- CORS habilitado para el futuro frontend local;
 - corte vertical completo con prueba automatizada;
 - modelo de dominio documentado: lenguaje ubicuo, contextos delimitados y propiedad de datos por módulo (ver [Modelo de dominio (S6)](#modelo-de-dominio-s6)).
 
 Pendiente para próximos incrementos:
 
-- extracción de contenido a partir de una URL;
-- endpoints de lectura del historial (`GET /analysis/{id}`, `GET /analysis`);
 - procesamiento NLP (spaCy);
-- evaluación de Machine Learning (scikit-learn), condicionada a disponer de un dataset adecuado;
-- interfaz final (React).
+- evaluación de Machine Learning (scikit-learn), condicionada a disponer de un dataset adecuado — junto con esto, agregar la columna `model_version` (ver [Sección 5.7](docs/arc42/05-vista-de-bloques.md#57-pendiente-para-próximos-incrementos));
+- interfaz final (React), consumiendo el contrato ya definido por `AnalysisResponse`/`AnalysisSummary`.
 
-# 19. Principios arquitectónicos
+# 21. Principios arquitectónicos
 
 La implementación sigue los siguientes criterios:
 
@@ -443,11 +502,11 @@ La implementación sigue los siguientes criterios:
 
 **Alta cohesión** — Las responsabilidades relacionadas se mantienen juntas.
 
-**Encapsulación de la variación** — Los mecanismos que pueden cambiar, como las reglas de análisis, se mantienen aislados.
+**Encapsulación de la variación** — Los mecanismos que pueden cambiar, como las reglas de análisis o la fuente del contenido (texto/URL), se mantienen aislados.
 
 **Evolución gradual** — La arquitectura permite incorporar nuevos mecanismos de análisis sin modificar innecesariamente los demás componentes.
 
-# 20. Estado de la línea base
+# 22. Estado de la línea base
 
 ## Arquitectura
 
@@ -466,16 +525,18 @@ La implementación sigue los siguientes criterios:
 - [x] Propiedad de datos por módulo, verificada contra `app/persistence/repository.py` (sin violaciones detectadas).
 - [x] Restricciones arquitectónicas.
 - [x] Registro de uso de IA.
-- [x] Tabla de aspectos con las 8 columnas del curso y trazabilidad completa hasta Pruebas.
+- [x] Tabla de aspectos con las 8 columnas del curso y trazabilidad completa hasta Pruebas (A-00 a A-06).
 
 ## Esqueleto y corte vertical
 
 - [x] Aplicación FastAPI.
 - [x] Estructura modular.
 - [x] Endpoint `GET /health`.
-- [x] Endpoint `POST /analysis` con validación (Pydantic).
-- [x] Persistencia SQLite integrada.
-- [x] Pruebas automatizadas del corte vertical completo.
+- [x] Endpoint `POST /analysis` con validación (Pydantic), texto o URL.
+- [x] Endpoints `GET /analysis/{id}` y `GET /analysis`.
+- [x] CORS habilitado para desarrollo local del frontend.
+- [x] Persistencia SQLite integrada, con migración automática de esquema.
+- [x] Pruebas automatizadas del corte vertical completo (12 passed).
 - [x] Comando único de arranque.
 - [x] GitHub Actions configurado.
 
@@ -483,10 +544,8 @@ La implementación sigue los siguientes criterios:
 
 - [ ] Medición formal de P95 para el escenario Q-01.
 - [ ] Prueba de modificación de una regla existente para el escenario Q-03.
-- [ ] Implementar análisis mediante URL.
-- [ ] Implementar endpoints de lectura del historial (`GET /analysis/{id}`, `GET /analysis`).
 - [ ] Integrar procesamiento NLP.
-- [ ] Evaluar Machine Learning.
+- [ ] Evaluar Machine Learning (incluye agregar `model_version` al esquema).
 - [ ] Desarrollar frontend.
 - [ ] Integrar el prototipo completo.
 - [ ] Verificar que los tres integrantes del equipo tengan commits atribuidos correctamente en el historial.
@@ -494,7 +553,7 @@ La implementación sigue los siguientes criterios:
 - [ ] Crear `docs/decisiones-arquitectonicas-explicadas.md` (referenciado desde este README pero aún no existe en el repositorio).
 - [ ] Redactar ADR-0002 con la restricción arquitectónica específica asignada para el Corte 1.
 
-# 21. Repositorio
+# 23. Repositorio
 
 Repositorio oficial:
 
