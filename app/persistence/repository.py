@@ -32,8 +32,11 @@ def _migrate_schema(connection: sqlite3.Connection) -> None:
         )
 
     if "created_at" not in existing_columns:
+        # SQLite no permite DEFAULT CURRENT_TIMESTAMP en ALTER TABLE.
+        # Primero agregamos la columna y luego rellenamos los registros existentes.
+        connection.execute("ALTER TABLE analyses ADD COLUMN created_at TEXT")
         connection.execute(
-            "ALTER TABLE analyses ADD COLUMN created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP"
+            "UPDATE analyses SET created_at = CURRENT_TIMESTAMP WHERE created_at IS NULL"
         )
 
     connection.commit()
