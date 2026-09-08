@@ -1,3 +1,4 @@
+import json
 import sqlite3
 from typing import Any, Dict, List, Optional
 
@@ -17,8 +18,7 @@ def get_connection() -> sqlite3.Connection:
 def _migrate_schema(connection: sqlite3.Connection) -> None:
     """
     Agrega columnas nuevas a bases de datos creadas antes de esta
-    ampliación, sin perder los datos ya guardados. SQLite no soporta
-    "ADD COLUMN IF NOT EXISTS", por eso se revisa PRAGMA table_info primero.
+    ampliación, sin perder los datos ya guardados.
     """
     existing_columns = {
         row["name"] for row in connection.execute("PRAGMA table_info(analyses)")
@@ -30,8 +30,6 @@ def _migrate_schema(connection: sqlite3.Connection) -> None:
         )
 
     if "created_at" not in existing_columns:
-        # SQLite no permite DEFAULT CURRENT_TIMESTAMP en ALTER TABLE.
-        # Agregamos la columna primero y rellenamos los registros existentes mediante UPDATE.
         connection.execute("ALTER TABLE analyses ADD COLUMN created_at TEXT")
         connection.execute(
             "UPDATE analyses SET created_at = CURRENT_TIMESTAMP WHERE created_at IS NULL"
@@ -61,24 +59,56 @@ def initialize_database() -> None:
         _migrate_schema(connection)
 
 
+def _map_row_to_api(row: sqlite3.Row) -> Dict[str, Any]:
+    """
+    Traduce los nombres de columnas de la base de datos a los nombres 
+    que espera FastAPI en AnalysisSummary.
+    """
+    data = dict(row)
+    
+    # Intentar recuperar la lista de factores desde el JSON guardado
+    try:
+        factors = json.loads(data["explanation"])
+        if not isinstance(factors, list):
+            factors = [str(factors)]
+    except (json.JSONDecodeError, TypeError):
+        # Fallback por si hay datos viejos guardados como texto normal
+        factors = [data["explanation"]] if data["explanation"] else []
+
+    return {
+        "id": data["id"],
+        "content": data["text"],           # text -> content
+        "classification": data["verdict"], # verdict -> classification
+        "score": data["score"],
+        "factors": factors,                # explanation (JSON string) -> factors (list)
+        "source_type": data["source_type"],
+        "created_at": data["created_at"],
+    }
+
+
 def save_analysis(
     text: str,
-    verdict: str,
+    classification: str,
     score: float,
-    explanation: str,
+    factors: list,
     source_type: str = "texto",
 ) -> int:
     """
     Guarda un nuevo análisis en la base de datos y retorna su ID generado.
+    Recibe la nomenclatura nueva de la API y la adapta a la BD.
     """
     initialize_database()
+    
+    # Convertimos la lista de factores a un string JSON para guardarla en SQLite
+    factors_json = json.dumps(factors)
+    
     with get_connection() as connection:
         cursor = connection.execute(
             """
             INSERT INTO analyses (text, verdict, score, explanation, source_type)
             VALUES (?, ?, ?, ?, ?)
             """,
-            (text, verdict, score, explanation, source_type),
+            (text, classification, score, factors_json, source_type),
         )
         connection.commit()
         return cursor.lastrowid
@@ -101,12 +131,13 @@ def get_analysis(analysis_id: int) -> Optional[Dict[str, Any]]:
         row = cursor.fetchone()
         if row is None:
             return None
-        return dict(row)
+        return _map_row_to_api(row)
 
 
-def list_analyses() -> List[Dict[str, Any]]:
+def list_analyses(limit: int = 20, offset: int = 0) -> List[Dict[str, Any]]:
     """
-    Retorna la lista de todos los análisis ordenados por fecha de creación descendente.
+    Retorna la lista de todos los análisis ordenados por fecha de creación descendente,
+    aplicando paginación.
     """
     initialize_database()
     with get_connection() as connection:
@@ -115,7 +146,9 @@ def list_analyses() -> List[Dict[str, Any]]:
             SELECT id, text, verdict, score, explanation, source_type, created_at
             FROM analyses
             ORDER BY id DESC
-            """
+            LIMIT ? OFFSET ?
+            """,
+            (limit, offset)
         )
         rows = cursor.fetchall()
-        return [dict(row) for row in rows]
+        return [_map_row_to_api(row) for row in rows]
