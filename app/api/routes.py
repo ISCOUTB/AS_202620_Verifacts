@@ -90,8 +90,11 @@ def create_analysis(request: AnalysisRequest) -> AnalysisResponse:
         for finding in findings
     ]
 
+    # CORRECCIÓN: Se cambió content=content a text=content.
+    # Asegúrate de que este nombre coincida exactamente con
+    # la definición de la función en tu archivo repository.py
     analysis_id = save_analysis(
-        content=content,
+        text=content,
         score=score,
         classification=classification,
         factors=factors,
