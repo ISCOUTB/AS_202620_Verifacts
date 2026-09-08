@@ -71,7 +71,7 @@ La decisión está registrada en:
 
 Explicación extendida, con comparación detallada frente a las alternativas y
 trazabilidad hasta cada escenario de calidad, en:
-[Decisiones arquitectónicas explicadas](docs/decisiones-arquitectonicas-explicadas.md)
+[Decisiones arquitectónicas explicadas](docs/arc42/09-decisiones-arquitectonicas.md)
 
 ## Módulos
 
