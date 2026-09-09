@@ -28,7 +28,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run tests
-        run: pytest
+        run: PYTHONPATH=. pytest
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
