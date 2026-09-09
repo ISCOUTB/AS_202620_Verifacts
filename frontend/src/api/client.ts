@@ -1,5 +1,5 @@
 import type {
-  AnalysisListResponse,
+  AnalysisListResult,
   AnalysisResult,
   AnalysisSummary,
   ApiErrorBody,
@@ -24,7 +24,7 @@ class ApiError extends Error {
   }
 }
 
-async function request<T>(path: string, options?: RequestInit): Promise<T> {
+async function rawRequest(path: string, options?: RequestInit): Promise<Response> {
   let response: Response;
 
   try {
@@ -45,6 +45,11 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
     throw new ApiError(message, response.status);
   }
 
+  return response;
+}
+
+async function request<T>(path: string, options?: RequestInit): Promise<T> {
+  const response = await rawRequest(path, options);
   return response.json() as Promise<T>;
 }
 
@@ -52,20 +57,29 @@ export function checkHealth(): Promise<HealthStatus> {
   return request<HealthStatus>("/health");
 }
 
-export function createAnalysis(text: string): Promise<AnalysisResult> {
+/** Envía texto O una URL (nunca ambos) — la API los trata como excluyentes. */
+export type AnalysisPayload = { text: string } | { url: string };
+
+export function createAnalysis(payload: AnalysisPayload): Promise<AnalysisResult> {
   return request<AnalysisResult>("/analysis", {
     method: "POST",
-    body: JSON.stringify({ text }),
+    body: JSON.stringify(payload),
   });
 }
 
-export function fetchAnalysisList(
+export async function fetchAnalysisList(
   limit = 8,
   offset = 0,
-): Promise<AnalysisListResponse> {
-  return request<AnalysisListResponse>(
-    `/analysis?limit=${limit}&offset=${offset}`,
-  );
+): Promise<AnalysisListResult> {
+  const response = await rawRequest(`/analysis?limit=${limit}&offset=${offset}`);
+  const items = (await response.json()) as AnalysisSummary[];
+
+  // El cuerpo es una lista plana (así lo exige el contrato/tests del
+  // backend); el total para paginar viaja en una cabecera aparte.
+  const totalHeader = response.headers.get("X-Total-Count");
+  const total = totalHeader ? Number.parseInt(totalHeader, 10) : offset + items.length;
+
+  return { items, total };
 }
 
 export function fetchAnalysisDetail(id: number): Promise<AnalysisSummary> {
