@@ -1,9 +1,4 @@
-/* ---------------------------------------------------------------------
-   Tokens
-   VeriFacts se piensa como un escritorio de verificación: papel neutro,
-   tinta oscura, un único acento editorial (índigo) para acciones, y
-   colores de riesgo que son información funcional, no decoración.
------------------------------------------------------------------------- */
+
 :root {
   --paper: #ece9e2;
   --paper-raised: #f7f5f0;
@@ -247,9 +242,44 @@ button:disabled {
   padding: var(--space-3);
 }
 
+.analysis-form__mode {
+  display: inline-flex;
+  gap: 0.3rem;
+  align-self: flex-start;
+  border: 1px solid var(--line);
+  padding: 2px;
+}
+
+.analysis-form__mode-btn {
+  background: none;
+  border: none;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  transition: background 120ms ease, color 120ms ease;
+}
+
+.analysis-form__mode-btn--active {
+  background: var(--ink);
+  color: var(--paper-raised);
+}
+
 .analysis-form__label {
   font-size: 0.85rem;
   color: var(--ink-soft);
+}
+
+.analysis-form__url-input {
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 0.6rem var(--space-2);
+}
+
+.analysis-form__url-input:disabled {
+  opacity: 0.6;
 }
 
 .analysis-form__textarea {
@@ -442,6 +472,20 @@ button:disabled {
 
 .result-panel__title {
   font-size: 1.15rem;
+}
+
+.result-panel__meta {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.result-panel__source {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  padding: 0.15rem 0.5rem;
 }
 
 .result-panel__id {
