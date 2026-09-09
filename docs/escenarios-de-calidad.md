@@ -94,7 +94,9 @@ Este escenario motiva directamente la selección del monolito modular.
 `RuleAnalyzer` (`app/modules/analysis/analyzer.py`) se incorporó sin tocar
 `API`, `Content` ni `Scoring`; verificado end-to-end en
 [tests/test_analysis.py](../tests/test_analysis.py). Ver fila **A-01** en la
-[tabla de aspectos](aspectos.md).
+[tabla de aspectos](aspectos.md). El mismo principio de bajo acoplamiento se
+verificó de nuevo al incorporar el frontend como cliente HTTP independiente,
+sin modificar `Content`, `Analysis` ni `Scoring` — ver fila **A-04**.
 
 ---
 
@@ -140,8 +142,8 @@ La táctica correspondiente está documentada en
 
 Pendiente — falta una prueba que module una regla existente de
 `RuleAnalyzer` (por ejemplo, el umbral de mayúsculas) y confirme que
-`tests/test_health.py` y `tests/test_analysis.py` siguen en verde. Ver fila
-**A-02** en la [tabla de aspectos](aspectos.md).
+`tests/test_health.py`, `tests/test_analysis.py` y `tests/test_history.py`
+siguen en verde. Ver fila **A-02** en la [tabla de aspectos](aspectos.md).
 
 ---
 
@@ -186,9 +188,12 @@ La táctica correspondiente está documentada en
 
 ### Evidencia
 
-Pendiente — depende de la interfaz web (todavía no implementada, ver
-[C4 — Contenedores](c4/02-contenedores.md)) y de una prueba de usuario, no
-solo de una prueba automatizada.
+Pendiente — la interfaz web (`frontend/`) ya existe y presenta el resultado
+en lenguaje simple (puntuación, clasificación y factores, sin terminología
+técnica de NLP/ML), pero la medida definida requiere una prueba de usuario
+real (4 de 5 completando el flujo sin asistencia), que todavía no se ha
+ejecutado. La existencia de la interfaz es condición necesaria, no evidencia
+suficiente por sí sola.
 
 ---
 

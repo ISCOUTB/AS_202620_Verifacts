@@ -36,13 +36,14 @@ que pueden ayudarle a determinar si necesita realizar una revisión adicional.
 
 ### Dentro de VeriFacts
 
-- Interfaz.
+- Interfaz web.
 - API.
 - Recepción de contenido.
 - Extracción.
 - Análisis.
 - Puntuación.
 - Persistencia.
+- Historial.
 
 ### Fuera de VeriFacts
 
@@ -55,7 +56,8 @@ que pueden ayudarle a determinar si necesita realizar una revisión adicional.
 
 ## 3.5 Contexto técnico
 
-El usuario interactúa con VeriFacts mediante la interfaz.
+El usuario interactúa con VeriFacts mediante la interfaz web, que a su vez
+llama a la API HTTP.
 
 El contenido puede introducirse directamente o mediante una URL. El sistema
 procesa el contenido y genera el resultado.
@@ -65,7 +67,11 @@ Usuario
    |
    | Introduce texto o URL
    v
-VeriFacts
+Interfaz web (React)
+   |
+   | HTTP/JSON
+   v
+API (VeriFacts)
    |
    | Solicita contenido (si es una URL)
    v
@@ -73,14 +79,16 @@ Sitio web externo
 ```
 
 El diagrama equivalente en notación C4 (Nivel 1 — Contexto) se encuentra en
-[C4 — Contexto](../c4/01-contexto.md).
+[C4 — Contexto](../c4/01-contexto.md), y el de contenedores (interfaz web,
+API y base de datos) en [C4 — Contenedores](../c4/02-contenedores.md).
 
 ---
 
 ## 3.6 Alcance de este incremento
 
-Este incremento documenta y ejecuta **dos** recorridos de extremo a extremo,
-ambos descritos con detalle en la
+Este incremento documenta y ejecuta **tres** recorridos de extremo a
+extremo sobre el backend, más una interfaz web que los consume a todos.
+Todos están descritos con detalle en la
 [Sección 6 — Vista de ejecución](06-vista-de-ejecucion.md) y guiados paso a
 paso en el [README](../../README.md#corte-vertical-ejecutable):
 
@@ -91,6 +99,15 @@ paso en el [README](../../README.md#corte-vertical-ejecutable):
    `Content`, se evalúa con `RuleAnalyzer` en `Analysis`, se transforma en
    puntuación y clasificación en `Scoring`, y el resultado se guarda y puede
    recuperarse desde `Persistencia` (SQLite).
+3. **Historial de análisis** (`GET /analysis`, `GET /analysis/{id}`):
+   atraviesa `API → Persistencia`, paginado por fecha de creación
+   descendente.
+
+La **interfaz web** (React + TypeScript + Vite, `frontend/`) es un cliente
+HTTP de estos tres flujos — ver
+[Sección 6.4](06-vista-de-ejecucion.md#64-la-interfaz-web-como-cliente-de-los-tres-escenarios).
+No contiene lógica de negocio propia ni accede directamente a la base de
+datos.
 
 Lo que **no** está implementado todavía dentro de este alcance:
 
@@ -98,5 +115,4 @@ Lo que **no** está implementado todavía dentro de este alcance:
   texto recibido directamente).
 - Analizadores basados en NLP o Machine Learning (`Analysis` solo tiene
   `RuleAnalyzer`; ver [Registro de uso de IA](../ia.md)).
-- Interfaz web (React) — el punto de entrada actual es la API HTTP
-  directamente, ver [C4 — Contenedores](../c4/02-contenedores.md).
+- Filtro o búsqueda dentro del historial (solo pagina por fecha).

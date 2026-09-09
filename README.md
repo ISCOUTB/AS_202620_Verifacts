@@ -41,19 +41,21 @@ Diseñar e implementar una aplicación web modular capaz de analizar contenidos 
 
 El proyecto se encuentra actualmente en la etapa de desarrollo del prototipo, sobre una arquitectura ya validada.
 
-La arquitectura seleccionada es un monolito modular.
+La arquitectura seleccionada es un monolito modular, con una interfaz web (React) como cliente HTTP separado.
 
-El repositorio contiene un corte vertical completo y ejecutable: recepción de una solicitud HTTP, normalización de contenido (texto o URL), análisis basado en reglas, cálculo de puntuación/clasificación y persistencia del resultado.
+El repositorio contiene tres cortes verticales completos y ejecutables, más una interfaz web que los consume:
+
+- recepción de una solicitud HTTP, normalización de contenido, análisis basado en reglas, cálculo de puntuación/clasificación y persistencia del resultado;
+- consulta del historial de análisis previos, paginado;
+- consulta de un análisis puntual por su identificador.
 
 Actualmente se puede:
 
-- iniciar la aplicación;
-- comprobar que la API está disponible (`GET /health`);
-- enviar un texto **o una URL** para análisis y recibir puntuación, clasificación y factores (`POST /analysis`), con el resultado persistido en SQLite;
-- consultar un análisis guardado por su id (`GET /analysis/{id}`);
-- listar el historial de análisis, paginado (`GET /analysis`);
-- llamar la API desde un frontend local (`http://localhost:5173`) gracias a CORS;
-- ejecutar las pruebas automatizadas (local y en GitHub Actions).
+- iniciar el backend (`python run.py`) y el frontend (`npm run dev`);
+- comprobar que la API está disponible (`GET /health`), incluyendo un indicador visual de conexión en la interfaz;
+- enviar un texto para análisis desde la interfaz web y recibir puntuación, clasificación y factores (`POST /analysis`), con el resultado persistido en SQLite;
+- consultar el historial de análisis pasados desde la interfaz (`GET /analysis`, paginado) y ver el detalle de uno (`GET /analysis/{id}`);
+- ejecutar las pruebas automatizadas del backend (local y en GitHub Actions).
 
 # 5. Arquitectura
 
@@ -71,12 +73,16 @@ La decisión está registrada en:
 
 Explicación extendida, con comparación detallada frente a las alternativas y
 trazabilidad hasta cada escenario de calidad, en:
-[Decisiones arquitectónicas explicadas](docs/arc42/09-decisiones-arquitectonicas.md)
+[Decisiones arquitectónicas explicadas](docs/decisiones-arquitectonicas.md)
 
-## Módulos
+La interfaz web (React) es un **contenedor separado** del monolito modular:
+consume la API HTTP como cliente externo y no forma parte de los módulos
+internos descritos abajo. Ver [C4 — Contenedores](docs/c4/02-contenedores.md).
+
+## Módulos (backend)
 
 ```text
-VeriFacts
+VeriFacts (backend)
 │
 ├── API
 │
@@ -91,15 +97,30 @@ VeriFacts
 
 **API** — Recibe y coordina las solicitudes externas.
 
-**Content** — Normaliza y valida el contenido recibido mediante texto o URL (la extracción de URL usa `trafilatura`).
+**Content** — Normaliza y valida el contenido recibido mediante texto o URL.
 
 **Analysis** — Contiene los mecanismos de análisis; hoy `RuleAnalyzer` (reglas), ampliable con NLP o Machine Learning (ver [Registro de uso de IA](docs/ia.md)).
 
 **Scoring** — Transforma los hallazgos del análisis en una puntuación y clasificación.
 
-**Persistencia** — Guarda y recupera los resultados de cada análisis (SQLite), incluyendo su origen (`source_type`) y fecha de creación (`created_at`).
+**Persistencia** — Guarda y recupera los resultados de cada análisis (SQLite).
 
-Detalle completo de responsabilidades y trazabilidad con el código en la [Sección 5 — Vista de bloques](docs/arc42/05-vista-de-bloques.md). La correspondencia de estos 5 bloques con los 3 contextos delimitados del dominio (Ingesta y Presentación, Análisis de Contenido, Historial de Análisis) está en [C4 — Nivel 3: Componentes](docs/c4/03-componentes.md).
+Detalle completo de responsabilidades y trazabilidad con el código en la [Sección 5 — Vista de bloques](docs/arc42/05-vista-de-bloques.md).
+
+## Frontend
+
+```text
+frontend/
+├── src/api/          → cliente HTTP hacia el backend
+├── src/components/    → formulario, resultado, historial, indicador de salud
+├── src/hooks/         → estado del historial paginado
+└── src/styles/        → hoja de estilos única
+```
+
+El frontend es un cliente de la API, no tiene lógica de negocio propia:
+normaliza nada, no calcula puntuaciones, solo envía la solicitud y presenta
+la respuesta. Toda la lógica sigue viviendo en el backend, preservando el
+monolito modular como estilo arquitectónico (ver [ADR-0001](docs/adr/0001-estilo-arquitectonico.md)).
 
 # 6. Documentación arquitectónica
 
@@ -125,12 +146,6 @@ Detalle completo de responsabilidades y trazabilidad con el código en la [Secci
 - [Matriz comparativa de estilos](docs/matriz-estilos.md)
 - [Decisiones arquitectónicas explicadas](docs/decisiones-arquitectonicas-explicadas.md)
 
-## Modelo de dominio (S6)
-
-- [Mapa de contextos delimitados](docs/mapa-contextos.md)
-- [Propiedad de datos por módulo](docs/propiedad-datos.md)
-- [Violaciones de modularidad detectadas](docs/violaciones-modularidad.md)
-
 ## Modelo C4
 
 - [C4 — Nivel 1: Contexto](docs/c4/01-contexto.md)
@@ -140,10 +155,6 @@ Detalle completo de responsabilidades y trazabilidad con el código en la [Secci
 ## Decisiones arquitectónicas
 
 - [ADR-0001 — Usar monolito modular](docs/adr/0001-estilo-arquitectonico.md)
-
-## Notas de implementación
-
-- [Ampliación de backend: historial y URL](docs/implementacion-backend.md)
 
 ## Inteligencia Artificial
 
@@ -197,8 +208,33 @@ AS_202620_Verifacts/
 │   ├── __init__.py
 │   ├── test_health.py
 │   ├── test_analysis.py
-│   ├── test_analysis_history.py
-│   └── test_url_ingestion.py
+│   └── test_history.py
+│
+├── frontend/
+│   ├── index.html
+│   ├── package.json
+│   ├── vite.config.ts
+│   ├── tsconfig.json
+│   ├── .env.example
+│   ├── public/
+│   │   └── favicon.svg
+│   └── src/
+│       ├── main.tsx
+│       ├── App.tsx
+│       ├── types.ts
+│       ├── api/
+│       │   └── client.ts
+│       ├── components/
+│       │   ├── HealthBadge.tsx
+│       │   ├── AnalysisForm.tsx
+│       │   ├── ResultPanel.tsx
+│       │   ├── ScoreGauge.tsx
+│       │   ├── ScanLine.tsx
+│       │   └── HistoryLedger.tsx
+│       ├── hooks/
+│       │   └── useAnalysisHistory.ts
+│       └── styles/
+│           └── global.css
 │
 └── docs/
     ├── arc42/
@@ -212,7 +248,7 @@ AS_202620_Verifacts/
     │   ├── 08-conceptos-transversales.md
     │   ├── 09-decisiones-arquitectonicas.md
     │   ├── 10-requisitos-de-calidad.md
-    │   └── 11-glosario.md
+    │   └── 12-glosario.md
     ├── c4/
     │   ├── 01-contexto.md
     │   ├── 02-contenedores.md
@@ -223,35 +259,35 @@ AS_202620_Verifacts/
     ├── arbol-utilidad.md
     ├── aspectos.md
     ├── matriz-estilos.md
-    ├── decisiones-arquitectonicas-explicadas.md
     ├── mapa-contextos.md
     ├── propiedad-datos.md
-    ├── violaciones-modularidad.md
-    ├── implementacion-backend.md
+    ├── decisiones-arquitectonicas-explicadas.md
     └── ia.md
 ```
 
-No debe haber en el repositorio: carpetas `__pycache__/`, archivos `*.pyc`,
-archivos duplicados con sufijos tipo `(1).py`, PDFs sueltos en la raíz, ni la
-carpeta `data/` (contiene `verifacts.db`, generada en tiempo de ejecución por
-`initialize_database()` y excluida por `.gitignore`).
-Verificar con `git ls-files` antes de cada entrega.
+No debe haber en el repositorio: carpetas `__pycache__/` o `node_modules/`,
+archivos `*.pyc`, archivos duplicados con sufijos tipo `(1).py`, ni PDFs
+sueltos en la raíz. Verificar con `git ls-files` antes de cada entrega.
 
 # 8. Tecnologías actuales
 
 ## Backend
 
 - Python 3.11+
-- FastAPI
+- FastAPI (con `CORSMiddleware` habilitado para el frontend)
 - Uvicorn
 - SQLite (vía `sqlite3`, módulo estándar)
-- `trafilatura` (extracción de contenido desde URL)
+
+## Frontend
+
+- React 18
+- TypeScript
+- Vite
 
 ## Pruebas
 
 - Pytest
 - HTTPX (usado internamente por `TestClient`)
-- `monkeypatch` de Pytest para aislar las pruebas de `trafilatura` de la red real
 
 ## Calidad y colaboración
 
@@ -262,8 +298,6 @@ Verificar con `git ls-files` antes de cada entrega.
 
 ## Tecnologías previstas para etapas posteriores
 
-- React
-- TypeScript
 - SQLAlchemy (si se migra de `sqlite3` puro a un ORM)
 - spaCy
 - scikit-learn
@@ -275,6 +309,7 @@ Estas últimas se incorporarán progresivamente conforme avance el proyecto.
 Se necesita:
 
 - Python 3.11 o superior.
+- Node.js 18 o superior (incluye `npm`), para el frontend.
 - Git.
 - Acceso al repositorio.
 
@@ -287,7 +322,7 @@ git clone https://github.com/ISCOUTB/AS_202620_Verifacts.git
 cd AS_202620_Verifacts
 ```
 
-# 11. Crear el entorno virtual
+# 11. Crear el entorno virtual (backend)
 
 ## Windows
 
@@ -296,7 +331,7 @@ python -m venv .venv
 .venv\Scripts\activate
 ```
 
-# 12. Instalar dependencias
+# 12. Instalar dependencias (backend)
 
 Con el entorno virtual activado:
 
@@ -306,11 +341,11 @@ pip install -r requirements.txt
 
 # Corte vertical ejecutable
 
-Las secciones 13 a 19 documentan, paso a paso, los recorridos de extremo a extremo que hoy son ejecutables en VeriFacts: arrancar el servicio, confirmar que responde, enviar un contenido para análisis con persistencia real (por texto o por URL), consultar y listar el historial, y verificar todo con pruebas automatizadas (local y en CI). Ver también su descripción arquitectónica en [Sección 6 — Vista de ejecución](docs/arc42/06-vista-de-ejecucion.md) y su trazabilidad hasta la evidencia de prueba en las filas **A-00** a **A-06** de la [tabla de aspectos](docs/aspectos.md).
+Las secciones 13 a 19 documentan, paso a paso, los recorridos de extremo a extremo que hoy son ejecutables en VeriFacts: arrancar el backend, arrancar el frontend, y verificar los tres flujos (disponibilidad, análisis con persistencia, historial) tanto desde la interfaz web como con las pruebas automatizadas. Ver también su descripción arquitectónica en [Sección 6 — Vista de ejecución](docs/arc42/06-vista-de-ejecucion.md) y su trazabilidad hasta la evidencia de prueba en las filas **A-00** a **A-04** de la [tabla de aspectos](docs/aspectos.md).
 
-# 13. Arranque del proyecto
+# 13. Arranque del backend
 
-El proyecto se inicia con un único comando:
+El backend se inicia con un único comando:
 
 ```cmd
 python run.py
@@ -318,10 +353,10 @@ python run.py
 
 Esta es la instrucción oficial de arranque. Al iniciar, también se
 inicializa automáticamente la base de datos SQLite (`data/verifacts.db`) si
-no existe, y se migra el esquema si la base ya existía con una versión
-anterior de las columnas.
+no existe, y se aplican migraciones de esquema si faltan columnas nuevas
+(ver `app/persistence/repository.py`).
 
-Una vez iniciado, la aplicación estará disponible en:
+Una vez iniciado, el backend estará disponible en:
 http://127.0.0.1:8000
 
 La documentación automática de FastAPI estará disponible en:
@@ -349,7 +384,7 @@ La respuesta esperada es:
 Esta ruta solamente verifica que el servicio está funcionando; no representa
 todavía una funcionalidad de negocio de VeriFacts.
 
-# 15. Análisis de contenido por texto
+# 15. Análisis de contenido (corte vertical completo)
 
 El endpoint de negocio principal es:
 
@@ -357,7 +392,8 @@ El endpoint de negocio principal es:
 POST /analysis
 ```
 
-Ejemplo de solicitud (desde `http://127.0.0.1:8000/docs`, o con `curl`):
+Ejemplo de solicitud (desde `http://127.0.0.1:8000/docs`, `curl`, o la
+interfaz web):
 
 ```json
 {
@@ -377,7 +413,7 @@ Respuesta esperada:
     "Uso excesivo de mayúsculas",
     "Afirmación absoluta"
   ],
-  "source_type": "texto"
+  "created_at": "2026-09-08 20:10:00"
 }
 ```
 
@@ -386,49 +422,47 @@ Internamente, la solicitud atraviesa `Content` (normalización) →
 `Persistencia` (guardado en SQLite). El detalle paso a paso está en la
 [Sección 6.2 — Vista de ejecución](docs/arc42/06-vista-de-ejecucion.md#62-escenario-análisis-de-contenido-post-analysis).
 
-# 16. Análisis de contenido por URL
+# 16. Historial de análisis
 
-El mismo endpoint `POST /analysis` acepta una URL en vez de texto:
-
-```json
-{
-  "url": "https://ejemplo.com/una-noticia"
-}
-```
-
-`Content` descarga la página y extrae su contenido principal con
-`trafilatura` antes de normalizarlo y analizarlo — el resto del recorrido
-(`Analysis → Scoring → Persistencia`) es idéntico al de texto. La respuesta
-incluye `"source_type": "url"`.
-
-`text` y `url` son mutuamente excluyentes: enviar ambos, o ninguno de los
-dos, devuelve `422`. Si la URL no se puede descargar o no tiene contenido
-legible, la API responde `400`.
-
-Detalle en [`docs/implementacion-backend.md`](docs/implementacion-backend.md)
-y fila **A-06** de [`docs/aspectos.md`](docs/aspectos.md).
-
-# 17. Consultar y listar el historial de análisis
-
-```
-GET /analysis/{id}
-```
-
-Devuelve el análisis completo (incluyendo `content`, `source_type` y
-`created_at`) o `404` si el `id` no existe.
+Dos endpoints adicionales permiten consultar análisis pasados, usados por la
+pestaña "Historial" del frontend:
 
 ```
 GET /analysis?limit=20&offset=0
+GET /analysis/{id}
 ```
 
-Devuelve los análisis más recientes primero. `limit` debe estar entre 1 y
-100; `offset` no puede ser negativo — fuera de esos rangos, la API responde
-`400`.
+El primero devuelve una página de resultados (más recientes primero) y el
+total disponible, para paginar. El segundo devuelve un análisis puntual, o
+`404` si el `id` no existe. Ver
+[Sección 6.3 — Vista de ejecución](docs/arc42/06-vista-de-ejecucion.md#63-escenario-consulta-de-historial-get-analysis-get-analysisid).
 
-Detalle en [`docs/implementacion-backend.md`](docs/implementacion-backend.md)
-y filas **A-04**/**A-05** de [`docs/aspectos.md`](docs/aspectos.md).
+# 17. Arranque del frontend
 
-# 18. Ejecutar las pruebas
+En una segunda terminal, con el backend ya corriendo (paso 13):
+
+```cmd
+cd frontend
+npm install
+npm run dev
+```
+
+El frontend estará disponible en:
+http://localhost:5173
+
+Por defecto se conecta al backend en `http://127.0.0.1:8000` (ver
+`frontend/src/api/client.ts`). El backend permite esa conexión mediante
+`CORSMiddleware`, configurado en `app/main.py` para el origen
+`http://localhost:5173`. Si el backend corriera en otra URL, copiar
+`frontend/.env.example` a `frontend/.env.local` y ajustar
+`VITE_API_BASE_URL`.
+
+Con ambos servidores corriendo, la pestaña **Analizar** envía texto a
+`POST /analysis` y anima la puntuación resultante; la pestaña **Historial**
+consulta `GET /analysis` y permite expandir cada fila para ver sus factores
+(`GET /analysis/{id}` se usa igual, para un caso puntual).
+
+# 18. Ejecutar las pruebas del backend
 
 Con el entorno virtual activado, desde la raíz del repositorio (no dentro de `tests/`), ejecutar:
 
@@ -443,16 +477,19 @@ Las pruebas actuales comprueban:
 - que la aplicación puede inicializarse;
 - que la ruta `/health` existe y responde correctamente (`tests/test_health.py`);
 - que `POST /analysis` normaliza, analiza, puntúa, clasifica y persiste correctamente un contenido de extremo a extremo (`tests/test_analysis.py`);
-- que `GET /analysis/{id}` y `GET /analysis` devuelven el historial correctamente, incluyendo casos de error (`tests/test_analysis_history.py`);
-- que `POST /analysis` con `url` extrae contenido con `trafilatura` (mockeado, sin red real) y maneja errores de descarga/extracción (`tests/test_url_ingestion.py`).
+- que `GET /analysis` pagina correctamente y que `GET /analysis/{id}` devuelve el análisis correcto o `404` si no existe (`tests/test_history.py`).
 
-El resultado esperado es: `12 passed`
+El resultado esperado es similar a: `5 passed`
+
+El frontend no tiene pruebas automatizadas todavía; se verifica manualmente
+siguiendo el paso 17 y comprobando visualmente los tres flujos. Queda como
+trabajo pendiente incorporar una prueba de componente (ver sección 20).
 
 # 19. Integración continua
 
 El repositorio incluye: `.github/workflows/tests.yml`
 
-GitHub Actions ejecutará automáticamente las pruebas cuando se realice un `push` o un `pull request`.
+GitHub Actions ejecutará automáticamente las pruebas del backend cuando se realice un `push` o un `pull request`. El frontend no forma parte todavía del pipeline de CI (ver sección 20, pendientes).
 
 El flujo es:
 
@@ -478,19 +515,21 @@ Ya implementado dentro de las fronteras arquitectónicas definidas (ver
 [Sección 5 — Vista de bloques](docs/arc42/05-vista-de-bloques.md)):
 
 - análisis de contenido basado en reglas;
-- normalización de contenido de texto **y extracción de contenido desde URL**;
+- normalización de contenido de texto;
 - cálculo de puntuación y clasificación;
-- persistencia de resultados (SQLite), con origen (`source_type`) y fecha (`created_at`);
-- consulta y listado del historial de análisis (`GET /analysis/{id}`, `GET /analysis`);
-- CORS habilitado para el futuro frontend local;
-- corte vertical completo con prueba automatizada;
-- modelo de dominio documentado: lenguaje ubicuo, contextos delimitados y propiedad de datos por módulo (ver [Modelo de dominio (S6)](#modelo-de-dominio-s6)).
+- persistencia de resultados (SQLite), con migración de esquema segura;
+- historial de análisis paginado y consulta individual;
+- interfaz web (React) que consume los tres flujos anteriores;
+- corte vertical completo con pruebas automatizadas (backend).
 
 Pendiente para próximos incrementos:
 
+- extracción de contenido a partir de una URL;
 - procesamiento NLP (spaCy);
-- evaluación de Machine Learning (scikit-learn), condicionada a disponer de un dataset adecuado — junto con esto, agregar la columna `model_version` (ver [Sección 5.7](docs/arc42/05-vista-de-bloques.md#57-pendiente-para-próximos-incrementos));
-- interfaz final (React), consumiendo el contrato ya definido por `AnalysisResponse`/`AnalysisSummary`.
+- evaluación de Machine Learning (scikit-learn), condicionada a disponer de un dataset adecuado;
+- prueba automatizada de componente para el frontend;
+- incorporar el frontend al pipeline de CI (`npm run build` en GitHub Actions);
+- medición formal de usabilidad para Q-04, ahora que existe una interfaz sobre la cual ejecutarla.
 
 # 21. Principios arquitectónicos
 
@@ -498,13 +537,13 @@ La implementación sigue los siguientes criterios:
 
 **Modularidad** — Cada módulo tiene responsabilidades claramente delimitadas.
 
-**Bajo acoplamiento** — Se evitan dependencias innecesarias entre módulos.
+**Bajo acoplamiento** — Se evitan dependencias innecesarias entre módulos. El frontend depende únicamente del contrato HTTP público, nunca de detalles internos del backend.
 
 **Alta cohesión** — Las responsabilidades relacionadas se mantienen juntas.
 
-**Encapsulación de la variación** — Los mecanismos que pueden cambiar, como las reglas de análisis o la fuente del contenido (texto/URL), se mantienen aislados.
+**Encapsulación de la variación** — Los mecanismos que pueden cambiar, como las reglas de análisis, se mantienen aislados.
 
-**Evolución gradual** — La arquitectura permite incorporar nuevos mecanismos de análisis sin modificar innecesariamente los demás componentes.
+**Evolución gradual** — La arquitectura permite incorporar nuevos mecanismos de análisis, o un nuevo cliente como el frontend, sin modificar innecesariamente los demás componentes.
 
 # 22. Estado de la línea base
 
@@ -513,40 +552,41 @@ La implementación sigue los siguientes criterios:
 - [x] Comparación de estilos.
 - [x] Monolito modular seleccionado.
 - [x] ADR-0001.
-- [x] arc42 secciones 1–11.
-- [x] Glosario (sección 11), sin entradas duplicadas ni en conflicto.
-- [x] Árbol de utilidad, priorizado por impacto y riesgo.
+- [x] arc42 secciones 1–10 y 12.
+- [x] Glosario (sección 12, con secciones 7 y 8 agregadas).
+- [x] Árbol de utilidad.
 - [x] Escenarios de calidad (Q-01 a Q-05), con anchors verificados y evidencia enlazada.
 - [x] Matriz comparativa.
 - [x] C4 Nivel 1 — Contexto, con leyenda.
-- [x] C4 Nivel 2 — Contenedores, con leyenda y estado real (SQLite implementado).
-- [x] C4 Nivel 3 — Componentes, con tabla de correspondencia contra el código real.
-- [x] Modelo de dominio: lenguaje ubicuo, contextos delimitados y mapa de contextos (S6).
-- [x] Propiedad de datos por módulo, verificada contra `app/persistence/repository.py` (sin violaciones detectadas).
+- [x] C4 Nivel 2 — Contenedores, con leyenda y estado real (SQLite y frontend implementados).
+- [x] C4 Nivel 3 — Componentes.
 - [x] Restricciones arquitectónicas.
 - [x] Registro de uso de IA.
-- [x] Tabla de aspectos con las 8 columnas del curso y trazabilidad completa hasta Pruebas (A-00 a A-06).
+- [x] Tabla de aspectos con las 8 columnas del curso y trazabilidad completa hasta Pruebas.
 
-## Esqueleto y corte vertical
+## Esqueleto y cortes verticales
 
 - [x] Aplicación FastAPI.
 - [x] Estructura modular.
 - [x] Endpoint `GET /health`.
-- [x] Endpoint `POST /analysis` con validación (Pydantic), texto o URL.
-- [x] Endpoints `GET /analysis/{id}` y `GET /analysis`.
-- [x] CORS habilitado para desarrollo local del frontend.
-- [x] Persistencia SQLite integrada, con migración automática de esquema.
-- [x] Pruebas automatizadas del corte vertical completo (12 passed).
-- [x] Comando único de arranque.
-- [x] GitHub Actions configurado.
+- [x] Endpoint `POST /analysis` con validación (Pydantic).
+- [x] Endpoints `GET /analysis` y `GET /analysis/{id}` (historial).
+- [x] Persistencia SQLite integrada, con migración de esquema segura.
+- [x] Pruebas automatizadas del backend (5 casos).
+- [x] Interfaz web (React + Vite) conectada a los tres flujos.
+- [x] Comando único de arranque por servicio (`python run.py`, `npm run dev`).
+- [x] GitHub Actions configurado (backend).
 
 ## Pendiente
 
+- [ ] Prueba de modificación de una regla existente para el escenario Q-03.
+- [ ] Medición formal de usabilidad (Q-04) usando la interfaz ya disponible.
+- [ ] Implementar análisis mediante URL.
 - [ ] Integrar procesamiento NLP.
-- [ ] Evaluar Machine Learning (incluye agregar `model_version` al esquema).
-- [ ] Desarrollar frontend.
-- [ ] Integrar el prototipo completo.
-- [ ] Redactar ADR-0002 con la restricción arquitectónica específica asignada para el Corte 1.
+- [ ] Evaluar Machine Learning.
+- [ ] Prueba automatizada de componente para el frontend.
+- [ ] Incorporar el build del frontend a GitHub Actions.
+- [ ] Verificar que los tres integrantes del equipo tengan commits atribuidos correctamente en el historial.
 
 # 23. Repositorio
 

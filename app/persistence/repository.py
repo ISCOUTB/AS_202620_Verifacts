@@ -1,154 +1,186 @@
-import json
+from pathlib import Path
 import sqlite3
-from typing import Any, Dict, List, Optional
-
-DB_PATH = "verifacts.db"
 
 
-def get_connection() -> sqlite3.Connection:
-    """
-    Crea y retorna una conexión a la base de datos SQLite.
-    Configura el row_factory para acceder a las columnas por nombre.
-    """
-    connection = sqlite3.connect(DB_PATH)
+BASE_DIR = Path(__file__).resolve().parents[2]
+DATA_DIR = BASE_DIR / "data"
+DATABASE_PATH = DATA_DIR / "verifacts.db"
+
+
+def _get_connection() -> sqlite3.Connection:
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+    connection = sqlite3.connect(DATABASE_PATH)
     connection.row_factory = sqlite3.Row
+
     return connection
 
 
-def _migrate_schema(connection: sqlite3.Connection) -> None:
-    """
-    Agrega columnas nuevas a bases de datos creadas antes de esta
-    ampliación, sin perder los datos ya guardados.
+def _ensure_schema(connection: sqlite3.Connection) -> None:
+    """Agrega columnas nuevas a una tabla existente sin borrar datos.
+
+    Usa PRAGMA table_info + ALTER TABLE en lugar de recrear la tabla, para
+    no perder análisis ya guardados por ejecuciones anteriores.
     """
     existing_columns = {
-        row["name"] for row in connection.execute("PRAGMA table_info(analyses)")
+        row["name"]
+        for row in connection.execute("PRAGMA table_info(analyses)").fetchall()
     }
-
-    if "source_type" not in existing_columns:
-        connection.execute(
-            "ALTER TABLE analyses ADD COLUMN source_type TEXT NOT NULL DEFAULT 'texto'"
-        )
 
     if "created_at" not in existing_columns:
         connection.execute("ALTER TABLE analyses ADD COLUMN created_at TEXT")
         connection.execute(
-            "UPDATE analyses SET created_at = CURRENT_TIMESTAMP WHERE created_at IS NULL"
+            """
+            UPDATE analyses
+            SET created_at = CURRENT_TIMESTAMP
+            WHERE created_at IS NULL
+            """
         )
-
-    connection.commit()
+        connection.commit()
 
 
 def initialize_database() -> None:
-    """
-    Crea la tabla principal si no existe y aplica las migraciones necesarias.
-    """
-    with get_connection() as connection:
-        connection.execute(
-            """
-            CREATE TABLE IF NOT EXISTS analyses (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                text TEXT NOT NULL,
-                verdict TEXT NOT NULL,
-                score REAL NOT NULL,
-                explanation TEXT NOT NULL,
-                source_type TEXT NOT NULL DEFAULT 'texto',
-                created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-            )
-            """
+    """Crea la tabla de análisis si no existe y aplica migraciones."""
+    connection = _get_connection()
+
+    connection.execute(
+        """
+        CREATE TABLE IF NOT EXISTS analyses (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            content TEXT NOT NULL,
+            score INTEGER NOT NULL,
+            classification TEXT NOT NULL,
+            factors TEXT NOT NULL
         )
-        _migrate_schema(connection)
+        """
+    )
+    connection.commit()
+
+    _ensure_schema(connection)
+
+    connection.close()
 
 
-def _map_row_to_api(row: sqlite3.Row) -> Dict[str, Any]:
-    """
-    Traduce los nombres de columnas de la base de datos a los nombres 
-    que espera FastAPI en AnalysisSummary.
-    """
-    data = dict(row)
-    
-    # Intentar recuperar la lista de factores desde el JSON guardado
-    try:
-        factors = json.loads(data["explanation"])
-        if not isinstance(factors, list):
-            factors = [str(factors)]
-    except (json.JSONDecodeError, TypeError):
-        # Fallback por si hay datos viejos guardados como texto normal
-        factors = [data["explanation"]] if data["explanation"] else []
+def _row_to_dict(row: sqlite3.Row) -> dict:
+    result = dict(row)
 
-    return {
-        "id": data["id"],
-        "content": data["text"],           # text -> content
-        "classification": data["verdict"], # verdict -> classification
-        "score": data["score"],
-        "factors": factors,                # explanation (JSON string) -> factors (list)
-        "source_type": data["source_type"],
-        "created_at": data["created_at"],
-    }
+    if isinstance(result.get("factors"), str):
+        result["factors"] = [
+            factor.strip()
+            for factor in result["factors"].split(" | ")
+            if factor.strip()
+        ]
+
+    return result
 
 
 def save_analysis(
-    text: str,
+    content: str,
+    score: int,
     classification: str,
-    score: float,
-    factors: list,
-    source_type: str = "texto",
+    factors: list[str],
 ) -> int:
-    """
-    Guarda un nuevo análisis en la base de datos y retorna su ID generado.
-    Recibe la nomenclatura nueva de la API y la adapta a la BD.
-    """
+    """Guarda un análisis y retorna su ID."""
     initialize_database()
-    
-    # Convertimos la lista de factores a un string JSON para guardarla en SQLite
-    factors_json = json.dumps(factors)
-    
-    with get_connection() as connection:
-        cursor = connection.execute(
-            """
-            INSERT INTO analyses (text, verdict, score, explanation, source_type)
-            VALUES (?, ?, ?, ?, ?)
-            """,
-            (text, classification, score, factors_json, source_type),
+
+    factors_text = " | ".join(factors)
+
+    connection = _get_connection()
+
+    cursor = connection.execute(
+        """
+        INSERT INTO analyses (
+            content,
+            score,
+            classification,
+            factors,
+            created_at
         )
-        connection.commit()
-        return cursor.lastrowid
+        VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)
+        """,
+        (
+            content,
+            score,
+            classification,
+            factors_text,
+        ),
+    )
+
+    connection.commit()
+
+    analysis_id = cursor.lastrowid
+
+    connection.close()
+
+    return int(analysis_id)
 
 
-def get_analysis(analysis_id: int) -> Optional[Dict[str, Any]]:
-    """
-    Obtiene un análisis específico por su ID. Retorna None si no existe.
-    """
+def get_analysis(analysis_id: int) -> dict | None:
+    """Obtiene un análisis por su ID."""
     initialize_database()
-    with get_connection() as connection:
-        cursor = connection.execute(
-            """
-            SELECT id, text, verdict, score, explanation, source_type, created_at
-            FROM analyses
-            WHERE id = ?
-            """,
-            (analysis_id,),
-        )
-        row = cursor.fetchone()
-        if row is None:
-            return None
-        return _map_row_to_api(row)
+
+    connection = _get_connection()
+
+    row = connection.execute(
+        """
+        SELECT
+            id,
+            content,
+            score,
+            classification,
+            factors,
+            created_at
+        FROM analyses
+        WHERE id = ?
+        """,
+        (analysis_id,),
+    ).fetchone()
+
+    connection.close()
+
+    if row is None:
+        return None
+
+    return _row_to_dict(row)
 
 
-def list_analyses(limit: int = 20, offset: int = 0) -> List[Dict[str, Any]]:
-    """
-    Retorna la lista de todos los análisis ordenados por fecha de creación descendente,
-    aplicando paginación.
-    """
+def list_analyses(limit: int = 20, offset: int = 0) -> list[dict]:
+    """Obtiene los análisis más recientes primero, paginados."""
     initialize_database()
-    with get_connection() as connection:
-        cursor = connection.execute(
-            """
-            SELECT id, text, verdict, score, explanation, source_type, created_at
-            FROM analyses
-            ORDER BY id DESC
-            LIMIT ? OFFSET ?
-            """,
-            (limit, offset)
-        )
-        rows = cursor.fetchall()
-        return [_map_row_to_api(row) for row in rows]
+
+    connection = _get_connection()
+
+    rows = connection.execute(
+        """
+        SELECT
+            id,
+            content,
+            score,
+            classification,
+            factors,
+            created_at
+        FROM analyses
+        ORDER BY id DESC
+        LIMIT ? OFFSET ?
+        """,
+        (limit, offset),
+    ).fetchall()
+
+    connection.close()
+
+    return [_row_to_dict(row) for row in rows]
+
+
+def count_analyses() -> int:
+    """Cuenta el total de análisis almacenados, para la paginación."""
+    initialize_database()
+
+    connection = _get_connection()
+
+    row = connection.execute(
+        "SELECT COUNT(*) AS total FROM analyses"
+    ).fetchone()
+
+    connection.close()
+
+    return int(row["total"])
