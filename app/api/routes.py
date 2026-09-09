@@ -1,8 +1,8 @@
-from fastapi import APIRouter, HTTPException, Query
-from pydantic import BaseModel
+from fastapi import APIRouter, HTTPException, Response
+from pydantic import BaseModel, model_validator
 
 from app.modules.analysis.service import analyze_content
-from app.modules.content.service import normalize_content
+from app.modules.content.service import extract_from_url, normalize_content
 from app.modules.scoring.service import calculate_score, classify_score
 from app.persistence.repository import (
     count_analyses,
@@ -14,9 +14,25 @@ from app.persistence.repository import (
 
 router = APIRouter()
 
+MIN_LIMIT = 1
+MAX_LIMIT = 100
+
 
 class AnalysisRequest(BaseModel):
-    text: str
+    text: str | None = None
+    url: str | None = None
+
+    @model_validator(mode="after")
+    def check_exactly_one_source(self) -> "AnalysisRequest":
+        has_text = bool(self.text and self.text.strip())
+        has_url = bool(self.url and self.url.strip())
+
+        if has_text and has_url:
+            raise ValueError("Envía solo 'text' o solo 'url', no ambos.")
+        if not has_text and not has_url:
+            raise ValueError("Debes enviar 'text' o 'url'.")
+
+        return self
 
 
 class AnalysisResponse(BaseModel):
@@ -24,6 +40,7 @@ class AnalysisResponse(BaseModel):
     score: int
     classification: str
     factors: list[str]
+    source_type: str
     created_at: str | None = None
 
 
@@ -33,14 +50,8 @@ class AnalysisSummary(BaseModel):
     score: int
     classification: str
     factors: list[str]
+    source_type: str
     created_at: str | None = None
-
-
-class AnalysisListResponse(BaseModel):
-    total: int
-    limit: int
-    offset: int
-    items: list[AnalysisSummary]
 
 
 @router.get("/health")
@@ -50,8 +61,21 @@ def health_check() -> dict[str, str]:
 
 @router.post("/analysis", response_model=AnalysisResponse)
 def create_analysis(request: AnalysisRequest) -> AnalysisResponse:
+    if request.url:
+        source_type = "url"
+        try:
+            raw_content = extract_from_url(request.url)
+        except ValueError as error:
+            raise HTTPException(
+                status_code=400,
+                detail=str(error),
+            ) from error
+    else:
+        source_type = "texto"
+        raw_content = request.text or ""
+
     try:
-        content = normalize_content(request.text)
+        content = normalize_content(raw_content)
     except ValueError as error:
         raise HTTPException(
             status_code=400,
@@ -73,6 +97,7 @@ def create_analysis(request: AnalysisRequest) -> AnalysisResponse:
         score=score,
         classification=classification,
         factors=factors,
+        source_type=source_type,
     )
 
     stored = get_analysis(analysis_id)
@@ -83,6 +108,7 @@ def create_analysis(request: AnalysisRequest) -> AnalysisResponse:
         score=score,
         classification=classification,
         factors=factors,
+        source_type=source_type,
         created_at=created_at,
     )
 
@@ -100,17 +126,28 @@ def read_analysis(analysis_id: int) -> AnalysisSummary:
     return AnalysisSummary(**result)
 
 
-@router.get("/analysis", response_model=AnalysisListResponse)
+@router.get("/analysis", response_model=list[AnalysisSummary])
 def read_analyses(
-    limit: int = Query(default=20, ge=1, le=100),
-    offset: int = Query(default=0, ge=0),
-) -> AnalysisListResponse:
-    items = list_analyses(limit=limit, offset=offset)
-    total = count_analyses()
+    response: Response,
+    limit: int = 20,
+    offset: int = 0,
+) -> list[AnalysisSummary]:
+    if limit < MIN_LIMIT or limit > MAX_LIMIT:
+        raise HTTPException(
+            status_code=400,
+            detail=f"El límite debe estar entre {MIN_LIMIT} y {MAX_LIMIT}.",
+        )
+    if offset < 0:
+        raise HTTPException(
+            status_code=400,
+            detail="El desplazamiento debe ser mayor o igual a 0.",
+        )
 
-    return AnalysisListResponse(
-        total=total,
-        limit=limit,
-        offset=offset,
-        items=[AnalysisSummary(**item) for item in items],
-    )
+    items = list_analyses(limit=limit, offset=offset)
+
+    # Cabecera adicional (no forma parte del cuerpo, que debe ser una lista
+    # plana por contrato) para que un cliente pueda paginar mostrando
+    # totales, sin romper la forma de la respuesta que esperan los tests.
+    response.headers["X-Total-Count"] = str(count_analyses())
+
+    return [AnalysisSummary(**item) for item in items]
