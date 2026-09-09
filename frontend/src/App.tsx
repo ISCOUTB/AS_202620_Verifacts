@@ -4,7 +4,7 @@ import { HealthBadge } from "./components/HealthBadge";
 import { HistoryLedger } from "./components/HistoryLedger";
 import { ResultPanel } from "./components/ResultPanel";
 import { ScanLine } from "./components/ScanLine";
-import { ApiError, createAnalysis } from "./api/client";
+import { ApiError, createAnalysis, type AnalysisPayload } from "./api/client";
 import { useAnalysisHistory } from "./hooks/useAnalysisHistory";
 import type { AnalysisResult } from "./types";
 
@@ -17,12 +17,12 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const history = useAnalysisHistory();
 
-  async function handleSubmit(text: string) {
+  async function handleSubmit(payload: AnalysisPayload) {
     setSubmitting(true);
     setError(null);
 
     try {
-      const created = await createAnalysis(text);
+      const created = await createAnalysis(payload);
       setResult(created);
       history.refresh();
     } catch (err) {
