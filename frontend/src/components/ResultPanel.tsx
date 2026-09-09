@@ -24,7 +24,12 @@ export function ResultPanel({ result }: ResultPanelProps) {
     <section className="result-panel" aria-live="polite">
       <div className="result-panel__header">
         <h2 className="result-panel__title">Resultado del análisis</h2>
-        <span className="result-panel__id">Caso #{result.id}</span>
+        <div className="result-panel__meta">
+          <span className="result-panel__source" data-source={result.source_type}>
+            {result.source_type === "url" ? "Origen: URL" : "Origen: texto"}
+          </span>
+          <span className="result-panel__id">Caso #{result.id}</span>
+        </div>
       </div>
 
       <ScoreGauge score={result.score} classification={result.classification} />
