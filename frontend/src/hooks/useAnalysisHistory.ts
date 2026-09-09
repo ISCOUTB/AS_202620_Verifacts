@@ -25,10 +25,10 @@ export function useAnalysisHistory() {
     setState((previous) => ({ ...previous, loading: true, error: null }));
 
     try {
-      const response = await fetchAnalysisList(PAGE_SIZE, offset);
+      const { items, total } = await fetchAnalysisList(PAGE_SIZE, offset);
       setState({
-        items: response.items,
-        total: response.total,
+        items,
+        total,
         offset,
         loading: false,
         error: null,
