@@ -62,7 +62,8 @@ function HistoryRow({ item }: { item: AnalysisSummary }) {
           )}
           {item.created_at && (
             <p className="history-row__timestamp">
-              Registrado {formatTimestamp(item.created_at)} · Caso #{item.id}
+              Registrado {formatTimestamp(item.created_at)} · Origen:{" "}
+              {item.source_type === "url" ? "URL" : "texto"} · Caso #{item.id}
             </p>
           )}
         </div>
