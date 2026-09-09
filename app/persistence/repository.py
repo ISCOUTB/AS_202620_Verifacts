@@ -6,6 +6,8 @@ BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = BASE_DIR / "data"
 DATABASE_PATH = DATA_DIR / "verifacts.db"
 
+DEFAULT_SOURCE_TYPE = "texto"
+
 
 def _get_connection() -> sqlite3.Connection:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -16,7 +18,7 @@ def _get_connection() -> sqlite3.Connection:
     return connection
 
 
-def _ensure_schema(connection: sqlite3.Connection) -> None:
+def _migrate_schema(connection: sqlite3.Connection) -> None:
     """Agrega columnas nuevas a una tabla existente sin borrar datos.
 
     Usa PRAGMA table_info + ALTER TABLE en lugar de recrear la tabla, para
@@ -36,7 +38,19 @@ def _ensure_schema(connection: sqlite3.Connection) -> None:
             WHERE created_at IS NULL
             """
         )
-        connection.commit()
+
+    if "source_type" not in existing_columns:
+        connection.execute("ALTER TABLE analyses ADD COLUMN source_type TEXT")
+        connection.execute(
+            """
+            UPDATE analyses
+            SET source_type = ?
+            WHERE source_type IS NULL
+            """,
+            (DEFAULT_SOURCE_TYPE,),
+        )
+
+    connection.commit()
 
 
 def initialize_database() -> None:
@@ -56,7 +70,7 @@ def initialize_database() -> None:
     )
     connection.commit()
 
-    _ensure_schema(connection)
+    _migrate_schema(connection)
 
     connection.close()
 
@@ -71,6 +85,9 @@ def _row_to_dict(row: sqlite3.Row) -> dict:
             if factor.strip()
         ]
 
+    if not result.get("source_type"):
+        result["source_type"] = DEFAULT_SOURCE_TYPE
+
     return result
 
 
@@ -79,6 +96,7 @@ def save_analysis(
     score: int,
     classification: str,
     factors: list[str],
+    source_type: str = DEFAULT_SOURCE_TYPE,
 ) -> int:
     """Guarda un análisis y retorna su ID."""
     initialize_database()
@@ -94,15 +112,17 @@ def save_analysis(
             score,
             classification,
             factors,
+            source_type,
             created_at
         )
-        VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)
+        VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
         """,
         (
             content,
             score,
             classification,
             factors_text,
+            source_type,
         ),
     )
 
@@ -129,6 +149,7 @@ def get_analysis(analysis_id: int) -> dict | None:
             score,
             classification,
             factors,
+            source_type,
             created_at
         FROM analyses
         WHERE id = ?
@@ -158,6 +179,7 @@ def list_analyses(limit: int = 20, offset: int = 0) -> list[dict]:
             score,
             classification,
             factors,
+            source_type,
             created_at
         FROM analyses
         ORDER BY id DESC
