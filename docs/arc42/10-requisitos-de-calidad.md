@@ -42,8 +42,7 @@ para la trazabilidad completa hasta el código):
 |---|---|
 | Q-01 | Pendiente — el pipeline `POST /analysis` ya existe y se ejecuta localmente, pero no hay una medición formal de P95 todavía |
 | Q-02 | **Con evidencia** — `RuleAnalyzer` se incorporó sin tocar `API`, `Content` ni `Scoring`; verificado en `tests/test_analysis.py` (fila A-01) |
-| Q-03 | Pendiente — falta una prueba que module una regla existente y confirme ausencia de regresiones (fila A-02) |
-| Q-04 | Pendiente — depende de la interfaz web, todavía no implementada |
+| Q-03 | **Con evidencia** — `tests/test_rule_modification.py` modifica una regla existente y confirma que no hay regresiones (fila A-02) || Q-04 | Pendiente — depende de la interfaz web, todavía no implementada |
 | Q-05 | **Con evidencia** — `GET /health` (`tests/test_health.py`, fila A-00) y `POST /analysis` con persistencia (`tests/test_analysis.py`, fila A-03) |
 
 A diferencia del incremento anterior, ya no todos los escenarios dependen de
