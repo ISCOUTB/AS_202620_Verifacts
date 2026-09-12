@@ -235,7 +235,9 @@ El sistema produce el mismo resultado (puntuación y clasificación) para la mis
 
 ### Evidencia
 
-`GET /health` verificado en [tests/test_health.py](../tests/test_health.py)
-(fila **A-00**); `POST /analysis` con persistencia verificado en
-[tests/test_analysis.py](../tests/test_analysis.py) (fila **A-03**). Ver
-[tabla de aspectos](aspectos.md).
+`RuleAnalyzer` (`app/modules/analysis/analyzer.py`) se modificó ampliando el
+conjunto `absolute_words`; el cambio se limitó a ese archivo y no afectó
+`API`, `Content` ni `Scoring`. Verificado en
+[tests/test_rule_modification.py](../tests/test_rule_modification.py), que
+además confirma que `tests/test_health.py` y `tests/test_analysis.py` siguen
+en verde. Ver fila **A-02** en la [tabla de aspectos](aspectos.md).
