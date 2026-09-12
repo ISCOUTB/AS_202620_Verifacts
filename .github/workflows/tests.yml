@@ -8,8 +8,8 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  sonarqube:
-    name: Tests and SonarCloud
+  tests:
+    name: Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -30,7 +30,19 @@ jobs:
       - name: Run tests
         run: PYTHONPATH=. pytest
 
+  sonarcloud:
+    name: SonarCloud
+    needs: tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
