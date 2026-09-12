@@ -39,12 +39,13 @@ class RuleAnalyzer:
                 )
             )
 
-        absolute_words = {
+               absolute_words = {
             "siempre",
             "nunca",
             "todos",
             "nadie",
             "100%",
+            "jamás",
         }
 
         content_words = {
