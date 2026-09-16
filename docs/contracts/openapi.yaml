@@ -1,0 +1,219 @@
+openapi: 3.1.0
+info:
+  title: VeriFacts API
+  version: "1.0.0"
+  description: >
+    Contrato de la API HTTP de VeriFacts. Es la fuente única de verdad sobre
+    la forma de las solicitudes y respuestas; el código en app/api/routes.py
+    debe cumplirlo y tests/test_contract.py lo verifica en cada push.
+  contact:
+    name: Equipo VeriFacts
+    url: https://github.com/ISCOUTB/AS_202620_Verifacts
+
+servers:
+  - url: http://127.0.0.1:8000
+    description: Servidor local (python run.py)
+
+paths:
+  /health:
+    get:
+      operationId: healthCheck
+      summary: Comprobación de disponibilidad del servicio
+      responses:
+        "200":
+          description: El servicio está disponible
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /analysis:
+    post:
+      operationId: createAnalysis
+      summary: Analiza un texto o una URL y persiste el resultado
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AnalysisRequest"
+      responses:
+        "200":
+          description: Análisis calculado y persistido correctamente
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalysisResult"
+        "400":
+          description: >
+            Contenido vacío tras normalizar, o URL no descargable /
+            sin contenido legible
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorBody"
+        "422":
+          description: >
+            Solicitud inválida: faltan 'text' y 'url', o se enviaron
+            ambos a la vez
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrorBody"
+    get:
+      operationId: listAnalyses
+      summary: Lista los análisis guardados, paginados
+      description: >
+        El cuerpo de la respuesta es un arreglo plano (NO un objeto envoltorio
+        con "items"/"total"). El total disponible para paginar viaja en la
+        cabecera HTTP `X-Total-Count`, no en el cuerpo.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            default: 0
+      responses:
+        "200":
+          description: Página de análisis, más recientes primero
+          headers:
+            X-Total-Count:
+              description: Total de análisis almacenados (para paginar)
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AnalysisSummary"
+        "400":
+          description: "limit fuera de [1,100] u offset negativo"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorBody"
+
+  /analysis/{analysis_id}:
+    get:
+      operationId: getAnalysisById
+      summary: Obtiene un análisis puntual por su id
+      parameters:
+        - name: analysis_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Análisis encontrado
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalysisSummary"
+        "404":
+          description: No existe un análisis con ese id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorBody"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      additionalProperties: false
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: ["ok"]
+
+    AnalysisRequest:
+      type: object
+      description: >
+        Exactamente uno de 'text' o 'url' debe estar presente; enviar ambos
+        o ninguno produce 422 (validado por AnalysisRequest.check_exactly_one_source
+        en app/api/routes.py).
+      properties:
+        text:
+          type: [string, "null"]
+        url:
+          type: [string, "null"]
+
+    AnalysisResult:
+      type: object
+      additionalProperties: false
+      required: [id, score, classification, factors, source_type]
+      properties:
+        id:
+          type: integer
+        score:
+          type: integer
+          minimum: 0
+          maximum: 100
+        classification:
+          type: string
+          enum: ["Riesgo bajo", "Riesgo medio", "Riesgo alto"]
+        factors:
+          type: array
+          items:
+            type: string
+        source_type:
+          type: string
+          enum: ["texto", "url"]
+        created_at:
+          type: [string, "null"]
+
+    AnalysisSummary:
+      type: object
+      additionalProperties: false
+      required: [id, content, score, classification, factors, source_type]
+      properties:
+        id:
+          type: integer
+        content:
+          type: string
+        score:
+          type: integer
+          minimum: 0
+          maximum: 100
+        classification:
+          type: string
+          enum: ["Riesgo bajo", "Riesgo medio", "Riesgo alto"]
+        factors:
+          type: array
+          items:
+            type: string
+        source_type:
+          type: string
+          enum: ["texto", "url"]
+        created_at:
+          type: [string, "null"]
+
+    ErrorBody:
+      type: object
+      required: [detail]
+      properties:
+        detail:
+          type: string
+
+    ValidationErrorBody:
+      type: object
+      required: [detail]
+      description: Forma estándar de error de validación de FastAPI/Pydantic
+      properties:
+        detail:
+          type: array
+          items:
+            type: object
