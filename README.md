@@ -40,7 +40,7 @@ La arquitectura seleccionada es un monolito modular, con una interfaz web (React
 
 El repositorio contiene tres cortes verticales completos y ejecutables, más una interfaz web que los consume:
 
-- recepción de una solicitud HTTP, normalización de contenido, análisis basado en reglas, cálculo de puntuación/clasificación y persistencia del resultado;
+- recepción de una solicitud HTTP (texto o URL), normalización/extracción de contenido, análisis basado en reglas, cálculo de puntuación/clasificación y persistencia del resultado;
 - consulta del historial de análisis previos, paginado;
 - consulta de un análisis puntual por su identificador.
 
@@ -48,9 +48,9 @@ Actualmente se puede:
 
 - iniciar el backend (`python run.py`) y el frontend (`npm run dev`);
 - comprobar que la API está disponible (`GET /health`), incluyendo un indicador visual de conexión en la interfaz;
-- enviar un texto para análisis desde la interfaz web y recibir puntuación, clasificación y factores (`POST /analysis`), con el resultado persistido en SQLite;
+- enviar un texto **o una URL** para análisis desde la interfaz web y recibir puntuación, clasificación y factores (`POST /analysis`), con el resultado persistido en SQLite;
 - consultar el historial de análisis pasados desde la interfaz (`GET /analysis`, paginado) y ver el detalle de uno (`GET /analysis/{id}`);
-- ejecutar las pruebas automatizadas del backend, incluyendo una prueba de modificación localizada de una regla (Q-03), local y en GitHub Actions.
+- ejecutar las pruebas automatizadas del backend, incluyendo una prueba de modificación localizada de una regla (Q-03) y una prueba de contrato de la API (S7), local y en GitHub Actions.
 
 # 5. Arquitectura
 
@@ -74,9 +74,14 @@ el corte 1, pese a la incorporación del frontend y la ampliación de
 
 [ADR-0002 — Contextos sin cambios tras el corte 1](docs/adr/0002-contextos-sin-cambios.md)
 
+Ambas fronteras de integración (Frontend↔API y API↔sitio externo) se
+mantienen síncronas; la justificación está en:
+
+[ADR-0003 — Mantener integración síncrona en las dos fronteras actuales](docs/adr/0003-integracion-sincrona.md)
+
 Explicación extendida, con comparación detallada frente a las alternativas y
 trazabilidad hasta cada escenario de calidad, en:
-[Decisiones arquitectónicas explicadas](docs/09-decisiones-arquitectonicas.md)
+[Sección 9 — Decisiones arquitectónicas](docs/arc42/09-decisiones-arquitectonicas.md)
 
 La interfaz web (React) es un **contenedor separado** del monolito modular:
 consume la API HTTP como cliente externo y no forma parte de los módulos
@@ -100,7 +105,7 @@ VeriFacts (backend)
 
 **API** — Recibe y coordina las solicitudes externas.
 
-**Content** — Normaliza y valida el contenido recibido mediante texto o URL.
+**Content** — Normaliza el texto recibido, o lo extrae desde una URL (vía `trafilatura`).
 
 **Analysis** — Contiene los mecanismos de análisis; hoy `RuleAnalyzer` (reglas), ampliable con NLP o Machine Learning (ver [Registro de uso de IA](docs/ia.md)).
 
@@ -159,7 +164,12 @@ monolito modular como estilo arquitectónico (ver [ADR-0001](docs/adr/0001-estil
 - [Árbol de utilidad](docs/arbol-utilidad.md)
 - [Aspectos arquitectónicos](docs/aspectos.md)
 - [Matriz comparativa de estilos](docs/matriz-estilos.md)
-- [Decisiones arquitectónicas explicadas](docs/decisiones-arquitectonicas-explicadas.md)
+
+## Contrato de la API (S7)
+
+- [OpenAPI 3.1 — docs/contracts/openapi.yaml](docs/contracts/openapi.yaml)
+- Prueba de contrato: [tests/test_contract.py](tests/test_contract.py)
+- Decisión de integración: [ADR-0003](docs/adr/0003-integracion-sincrona.md)
 
 ## Modelo C4
 
@@ -171,6 +181,7 @@ monolito modular como estilo arquitectónico (ver [ADR-0001](docs/adr/0001-estil
 
 - [ADR-0001 — Usar monolito modular](docs/adr/0001-estilo-arquitectonico.md)
 - [ADR-0002 — Contextos sin cambios tras el corte 1](docs/adr/0002-contextos-sin-cambios.md)
+- [ADR-0003 — Integración síncrona en las dos fronteras actuales](docs/adr/0003-integracion-sincrona.md)
 
 ## Inteligencia Artificial
 
@@ -225,8 +236,9 @@ AS_202620_Verifacts/
 │   ├── __init__.py
 │   ├── test_health.py
 │   ├── test_analysis.py
-│   ├── test_history.py
-│   └── test_rule_modification.py
+│   ├── test_analysis_history.py
+│   ├── test_rule_modification.py
+│   └── test_contract.py
 │
 ├── frontend/
 │   ├── index.html
@@ -273,7 +285,10 @@ AS_202620_Verifacts/
     │   └── 03-componentes.md
     ├── adr/
     │   ├── 0001-estilo-arquitectonico.md
-    │   └── 0002-contextos-sin-cambios.md
+    │   ├── 0002-contextos-sin-cambios.md
+    │   └── 0003-integracion-sincrona.md
+    ├── contracts/
+    │   └── openapi.yaml
     ├── escenarios-de-calidad.md
     ├── arbol-utilidad.md
     ├── aspectos.md
@@ -281,7 +296,6 @@ AS_202620_Verifacts/
     ├── mapa-contextos.md
     ├── propiedad-datos.md
     ├── violaciones-modularidad.md
-    ├── decisiones-arquitectonicas-explicadas.md
     └── ia.md
 ```
 
@@ -297,6 +311,7 @@ sueltos en la raíz. Verificar con `git ls-files` antes de cada entrega.
 - FastAPI (con `CORSMiddleware` habilitado para el frontend)
 - Uvicorn
 - SQLite (vía `sqlite3`, módulo estándar)
+- trafilatura (extracción de contenido desde una URL)
 
 ## Frontend
 
@@ -308,6 +323,8 @@ sueltos en la raíz. Verificar con `git ls-files` antes de cada entrega.
 
 - Pytest
 - HTTPX (usado internamente por `TestClient`)
+- PyYAML y jsonschema (cargan `docs/contracts/openapi.yaml` y validan las
+  respuestas reales contra ese contrato en `tests/test_contract.py`)
 
 ## Calidad y colaboración
 
@@ -359,9 +376,14 @@ Con el entorno virtual activado:
 pip install -r requirements.txt
 ```
 
+Desde S7, esto incluye `pyyaml` y `jsonschema`, usadas solo por
+`tests/test_contract.py` para validar respuestas contra
+`docs/contracts/openapi.yaml`; no son necesarias para correr el servidor,
+solo para las pruebas.
+
 # Corte vertical ejecutable
 
-Las secciones 13 a 19 documentan, paso a paso, los recorridos de extremo a extremo que hoy son ejecutables en VeriFacts: arrancar el backend, arrancar el frontend, y verificar los tres flujos (disponibilidad, análisis con persistencia, historial) tanto desde la interfaz web como con las pruebas automatizadas. Ver también su descripción arquitectónica en [Sección 6 — Vista de ejecución](docs/arc42/06-vista-de-ejecucion.md) y su trazabilidad hasta la evidencia de prueba en las filas **A-00** a **A-04** de la [tabla de aspectos](docs/aspectos.md).
+Las secciones 13 a 20 documentan, paso a paso, los recorridos de extremo a extremo que hoy son ejecutables en VeriFacts: arrancar el backend, arrancar el frontend, verificar los tres flujos (disponibilidad, análisis con persistencia, historial) tanto desde la interfaz web como con las pruebas automatizadas, y el contrato formal que los describe. Ver también su descripción arquitectónica en [Sección 6 — Vista de ejecución](docs/arc42/06-vista-de-ejecucion.md) y su trazabilidad hasta la evidencia de prueba en las filas **A-00** a **A-05** de la [tabla de aspectos](docs/aspectos.md).
 
 # 13. Arranque del backend
 
@@ -385,237 +407,3 @@ http://127.0.0.1:8000/docs
 # 14. Comprobación de disponibilidad
 
 La aplicación incluye un endpoint técnico de comprobación:
-
-GET /health
-
-
-Con el servidor ejecutándose, abrir:
-http://127.0.0.1:8000/health
-
-La respuesta esperada es:
-
-```json
-{
-  "status": "ok"
-}
-```
-
-Esta ruta solamente verifica que el servicio está funcionando; no representa
-todavía una funcionalidad de negocio de VeriFacts.
-
-# 15. Análisis de contenido (corte vertical completo)
-
-El endpoint de negocio principal es:
-
-POST /analysis
-
-
-Ejemplo de solicitud (desde `http://127.0.0.1:8000/docs`, `curl`, o la
-interfaz web):
-
-```json
-{
-  "text": "ESTA NOTICIA ES TOTALMENTE CIERTA!!! Todos deben compartirla!!!"
-}
-```
-
-Respuesta esperada:
-
-```json
-{
-  "id": 1,
-  "score": 50,
-  "classification": "Riesgo medio",
-  "factors": [
-    "Lenguaje sensacionalista",
-    "Uso excesivo de mayúsculas",
-    "Afirmación absoluta"
-  ],
-  "created_at": "2026-09-08 20:10:00"
-}
-```
-
-Internamente, la solicitud atraviesa `Content` (normalización) →
-`Analysis` (`RuleAnalyzer`) → `Scoring` (puntuación y clasificación) →
-`Persistencia` (guardado en SQLite). El detalle paso a paso está en la
-[Sección 6.2 — Vista de ejecución](docs/arc42/06-vista-de-ejecucion.md#62-escenario-análisis-de-contenido-post-analysis).
-
-# 16. Historial de análisis
-
-Dos endpoints adicionales permiten consultar análisis pasados, usados por la
-pestaña "Historial" del frontend:
-
-GET /analysis?limit=20&offset=0
-GET /analysis/{id}
-
-
-El primero devuelve una página de resultados (más recientes primero) y el
-total disponible, para paginar. El segundo devuelve un análisis puntual, o
-`404` si el `id` no existe. Ver
-[Sección 6.3 — Vista de ejecución](docs/arc42/06-vista-de-ejecucion.md#63-escenario-consulta-de-historial-get-analysis-get-analysisid).
-
-# 17. Arranque del frontend
-
-En una segunda terminal, con el backend ya corriendo (paso 13):
-
-```cmd
-cd frontend
-npm install
-npm run dev
-```
-
-El frontend estará disponible en:
-http://localhost:5173
-
-Por defecto se conecta al backend en `http://127.0.0.1:8000` (ver
-`frontend/src/api/client.ts`). El backend permite esa conexión mediante
-`CORSMiddleware`, configurado en `app/main.py` para el origen
-`http://localhost:5173`. Si el backend corriera en otra URL, copiar
-`frontend/.env.example` a `frontend/.env.local` y ajustar
-`VITE_API_BASE_URL`.
-
-Con ambos servidores corriendo, la pestaña **Analizar** envía texto a
-`POST /analysis` y anima la puntuación resultante; la pestaña **Historial**
-consulta `GET /analysis` y permite expandir cada fila para ver sus factores
-(`GET /analysis/{id}` se usa igual, para un caso puntual).
-
-# 18. Ejecutar las pruebas del backend
-
-Con el entorno virtual activado, desde la raíz del repositorio (no dentro de `tests/`), ejecutar:
-
-```cmd
-python -m pytest -q
-```
-
-**Nota:** usa siempre `python -m pytest -q` y no solo `pytest -q`. En algunos entornos de Windows, el comando corto `pytest -q` no agrega automáticamente la carpeta actual a la ruta de búsqueda de Python, lo que produce `ModuleNotFoundError: No module named 'app'`. La forma `python -m pytest -q` evita ese problema.
-
-Las pruebas actuales comprueban:
-
-- que la aplicación puede inicializarse;
-- que la ruta `/health` existe y responde correctamente (`tests/test_health.py`);
-- que `POST /analysis` normaliza, analiza, puntúa, clasifica y persiste correctamente un contenido de extremo a extremo (`tests/test_analysis.py`);
-- que `GET /analysis` pagina correctamente y que `GET /analysis/{id}` devuelve el análisis correcto o `404` si no existe (`tests/test_history.py`);
-- que modificar una regla existente de `RuleAnalyzer` (ampliar el conjunto de palabras absolutas) es un cambio localizado que no rompe las demás pruebas (`tests/test_rule_modification.py`, evidencia de Q-03).
-
-El resultado esperado es similar a: `6 passed`
-
-El frontend no tiene pruebas automatizadas todavía; se verifica manualmente
-siguiendo el paso 17 y comprobando visualmente los tres flujos. Queda como
-trabajo pendiente incorporar una prueba de componente (ver sección 20).
-
-# 19. Integración continua
-
-El repositorio incluye dos workflows independientes en `.github/workflows/`:
-
-- `tests.yml` — instala dependencias y ejecuta `python -m pytest -q` en cada `push` o `pull request`. Es el que se cita como evidencia de CI en verde en la [tabla de aspectos](docs/aspectos.md).
-- `sonarcloud.yml` — ejecuta el análisis de calidad de código con SonarCloud, de forma independiente para no bloquear la evidencia de pruebas si el análisis de Sonar falla por configuración externa.
-
-El frontend no forma parte todavía del pipeline de CI (ver sección 20, pendientes).
-
-El flujo del workflow de pruebas es:
-
-Push
-↓
-GitHub Actions (tests.yml)
-↓
-Instalar dependencias
-↓
-Ejecutar python -m pytest -q
-↓
-✓ Tests
-
-
-El resultado puede consultarse desde la pestaña **Actions** del repositorio;
-el enlace al run más reciente en verde del workflow **Tests** se cita en la
-[tabla de aspectos](docs/aspectos.md).
-
-# 20. Desarrollo actual y próximos pasos
-
-Ya implementado dentro de las fronteras arquitectónicas definidas (ver
-[Sección 5 — Vista de bloques](docs/arc42/05-vista-de-bloques.md)):
-
-- análisis de contenido basado en reglas;
-- normalización de contenido de texto;
-- cálculo de puntuación y clasificación;
-- persistencia de resultados (SQLite), con migración de esquema segura;
-- historial de análisis paginado y consulta individual;
-- interfaz web (React) que consume los tres flujos anteriores;
-- corte vertical completo con pruebas automatizadas (backend), incluyendo evidencia de modificación localizada de una regla (Q-03);
-- mapa de contextos, propiedad de datos por módulo y aspectos enlazados a esos contextos (S6).
-
-Pendiente para próximos incrementos:
-
-- extracción de contenido a partir de una URL;
-- procesamiento NLP (spaCy);
-- evaluación de Machine Learning (scikit-learn), condicionada a disponer de un dataset adecuado;
-- prueba automatizada de componente para el frontend;
-- incorporar el build del frontend a GitHub Actions;
-- medición formal de usabilidad para Q-04, ahora que existe una interfaz sobre la cual ejecutarla;
-- confirmar en sonarcloud.io que el token es válido y que "Automatic Analysis" está apagado, para que el workflow `sonarcloud.yml` quede en verde.
-
-# 21. Principios arquitectónicos
-
-La implementación sigue los siguientes criterios:
-
-**Modularidad** — Cada módulo tiene responsabilidades claramente delimitadas.
-
-**Bajo acoplamiento** — Se evitan dependencias innecesarias entre módulos. El frontend depende únicamente del contrato HTTP público, nunca de detalles internos del backend.
-
-**Alta cohesión** — Las responsabilidades relacionadas se mantienen juntas.
-
-**Encapsulación de la variación** — Los mecanismos que pueden cambiar, como las reglas de análisis, se mantienen aislados.
-
-**Evolución gradual** — La arquitectura permite incorporar nuevos mecanismos de análisis, o un nuevo cliente como el frontend, sin modificar innecesariamente los demás componentes.
-
-# 22. Estado de la línea base
-
-## Arquitectura
-
-- [x] Comparación de estilos.
-- [x] Monolito modular seleccionado.
-- [x] ADR-0001.
-- [x] ADR-0002 — contextos sin cambios tras el corte 1.
-- [x] arc42 secciones 1–10 y 12.
-- [x] Glosario (sección 12, con secciones 7 y 8 agregadas).
-- [x] Árbol de utilidad.
-- [x] Escenarios de calidad (Q-01 a Q-05), con anchors verificados y evidencia enlazada.
-- [x] Matriz comparativa.
-- [x] C4 Nivel 1 — Contexto, con leyenda.
-- [x] C4 Nivel 2 — Contenedores, con leyenda y estado real (SQLite y frontend implementados).
-- [x] C4 Nivel 3 — Componentes, con correspondencia real al código.
-- [x] Restricciones arquitectónicas.
-- [x] Registro de uso de IA.
-- [x] Mapa de contextos y propiedad de datos por módulo.
-- [x] Tabla de aspectos con las 8 columnas del curso, trazabilidad completa hasta Pruebas, y enlace explícito a los contextos del mapa de dominio.
-
-## Esqueleto y cortes verticales
-
-- [x] Aplicación FastAPI.
-- [x] Estructura modular.
-- [x] Endpoint `GET /health`.
-- [x] Endpoint `POST /analysis` con validación (Pydantic).
-- [x] Endpoints `GET /analysis` y `GET /analysis/{id}` (historial).
-- [x] Persistencia SQLite integrada, con migración de esquema segura.
-- [x] Pruebas automatizadas del backend (6 casos, incluyendo evidencia de Q-03).
-- [x] Interfaz web (React + Vite) conectada a los tres flujos.
-- [x] Comando único de arranque por servicio (`python run.py`, `npm run dev`).
-- [x] GitHub Actions configurado, con workflows independientes para pruebas y SonarCloud.
-
-## Pendiente
-
-- [ ] Confirmar el workflow `sonarcloud.yml` en verde (token y configuración de "Automatic Analysis" en sonarcloud.io).
-- [ ] Medición formal de usabilidad (Q-04) usando la interfaz ya disponible.
-- [ ] Implementar análisis mediante URL.
-- [ ] Integrar procesamiento NLP.
-- [ ] Evaluar Machine Learning.
-- [ ] Prueba automatizada de componente para el frontend.
-- [ ] Incorporar el build del frontend a GitHub Actions.
-
-# 23. Repositorio
-
-Repositorio oficial:
-
-https://github.com/ISCOUTB/AS_202620_Verifacts
-
-**Proyecto:** VeriFacts
-**Equipo:** Pedro Jose Castro Blanquicett, Cristian David Cardeno Gulloso
