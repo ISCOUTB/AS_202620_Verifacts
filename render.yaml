@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: verifacts-api
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    autoDeploy: false
+    envVars:
+      - key: LOG_LEVEL
+        value: INFO
+      - key: VERIFACTS_DATA_DIR
+        value: /data
+      - key: ALLOWED_ORIGINS
+        value: https://verifacts-web.onrender.com
+
+  - type: web
+    name: verifacts-web
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    autoDeploy: false
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: https://verifacts-api.onrender.com
