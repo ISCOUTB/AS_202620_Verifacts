@@ -1,9 +1,10 @@
+import os
 from pathlib import Path
 import sqlite3
 
 
 BASE_DIR = Path(__file__).resolve().parents[2]
-DATA_DIR = BASE_DIR / "data"
+DATA_DIR = Path(os.environ.get("VERIFACTS_DATA_DIR", BASE_DIR / "data"))
 DATABASE_PATH = DATA_DIR / "verifacts.db"
 
 DEFAULT_SOURCE_TYPE = "texto"

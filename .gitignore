@@ -12,3 +12,9 @@ data/
 * (*.py
 * (*.pdf
 * (*.docx
+# Secretos: nunca versionar
+.env
+.env.*
+!.env.example
+*.pem
+*.key
