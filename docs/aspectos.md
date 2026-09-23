@@ -33,9 +33,7 @@ prueba de modificación de regla ya existe, pero no hay una segunda
 verificación independiente); **A-04** tiene evidencia manual, no
 automatizada, y queda como trabajo pendiente incorporarle una prueba de
 componente. El resto (A-00, A-01, A-03, A-05) tiene código y prueba
-automatizada real y citable. La columna CI de A-00 requiere reemplazar el
-marcador `[PENDIENTE]` por la URL real de un run en verde tomada de la
-pestaña **Actions** del repositorio.
+automatizada real y citable, incluida la columna CI de A-00.
 
 ## Decisión relacionada
 

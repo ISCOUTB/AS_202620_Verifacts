@@ -118,3 +118,11 @@ Aceptado.
 Si en el futuro se introduce procesamiento asíncrono para alguna
 frontera, deberá crearse un nuevo ADR en lugar de modificar este
 documento.
+
+## Commit de implementación
+
+La integración síncrona descrita corresponde a
+`frontend/src/api/client.ts` (frontera Frontend↔API) y
+`app/modules/content/service.py` (frontera API↔sitio externo), verificado
+en cada push por `tests/test_contract.py` — ver
+[github.com/ISCOUTB/AS_202620_Verifacts/commits/master](https://github.com/ISCOUTB/AS_202620_Verifacts/commits/master).

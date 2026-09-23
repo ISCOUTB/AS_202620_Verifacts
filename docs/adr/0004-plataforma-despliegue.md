@@ -82,3 +82,10 @@ semana trata específicamente arquitecturas serverless. Se descartó porque:
   demora en la primera petición; si el proyecto necesitara multi-nube o
   múltiples entornos coordinados, Terraform sería la opción más adecuada a
   reconsiderar.
+
+  ## Commit de implementación
+
+`render.yaml`, `Dockerfile` y `.dockerignore` fueron introducidos en el
+commit
+[`fa86606`](https://github.com/ISCOUTB/AS_202620_Verifacts/commit/fa866061cb8ba654a3685fab1c5b884e71afa77b)
+("infra: render.yaml como IaC del despliegue, sin disco persistente").

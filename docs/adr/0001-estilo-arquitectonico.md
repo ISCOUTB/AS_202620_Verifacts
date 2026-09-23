@@ -111,3 +111,10 @@ Aceptado.
 
 Si en el futuro se requiere reemplazar esta decisión, deberá crearse un nuevo
 ADR en lugar de modificar este documento.
+
+## Commit de implementación
+
+La estructura de módulos (`API`, `Content`, `Analysis`, `Scoring`) descrita
+en esta decisión corresponde al código actual del repositorio, verificable
+desde el historial de commits en
+[github.com/ISCOUTB/AS_202620_Verifacts/commits/master](https://github.com/ISCOUTB/AS_202620_Verifacts/commits/master).
