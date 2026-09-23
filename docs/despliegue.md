@@ -1,5 +1,3 @@
-# Despliegue — evidencia de la entrega incremental
-
 **URL del sistema (API):** https://verifacts-api.onrender.com
 **URL del sistema (interfaz web):** https://verifacts-web.onrender.com
 
@@ -26,3 +24,13 @@
 | `VITE_API_BASE_URL` | URL del backend usada por el frontend | `https://verifacts-api.onrender.com` |
 
 Ninguna de estas variables es un secreto.
+
+## Comprobaciones con evidencia verificable
+
+| Comprobación | Comando | Resultado |
+|---|---|---|
+| URL raíz accesible | `curl -sS -o NUL -w "http=%{http_code} tiempo=%{time_total}s"` `https://verifacts-api.onrender.com` | `http=404 tiempo=0.93s` (esperado: no hay ruta definida en `/`, solo en `/health`, `/analysis`, `/metrics`) |
+| Health check | `curl -sS -o NUL -w "health=%{http_code}"` `https://verifacts-api.onrender.com/health` | `health=200` |
+| Logs estructurados (línea real) | `docker logs verifacts-demo` | `{"timestamp": "2026-09-23T21:14:27.641798+00:00", "level": "INFO", "logger": "verifacts", "message": "request", "request_id": "02f9862aee584b729e482237efec2c10", "method": "GET", "path": "/health", "route": "/health", "status": 200, "duration_ms": 15.18}` |
+| Secretos tomados del entorno/almacén | `git grep -n "secrets\." .github/workflows/` | `sonarcloud.yml:24: SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}` — único secreto referenciado, tomado de GitHub Secrets, no hardcodeado en el repositorio |
+| Pipeline en verde (verificado vía API) | `curl -s "https://api.github.com/repos/ISCOUTB/AS_202620_Verifacts/actions/runs?per_page=10"` | Run #141 (Tests, commit `d303673`): `"conclusion": "success"`. Run #140 (Tests y SonarCloud, commit `fa86606`): ambos `"conclusion": "success"` |

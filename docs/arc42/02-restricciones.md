@@ -5,15 +5,19 @@ VeriFacts.
 
 ## 2.1 Restricciones organizativas
 
-### R-ORG-01 — Desarrollo durante un semestre
+### R-TEC-01 — Ejecución local y despliegue accesible
 
-El sistema debe desarrollarse durante el periodo académico.
+El prototipo debe poder ejecutarse localmente y, a partir de este incremento,
+también debe estar desplegado en un entorno accesible desde internet para su
+evaluación.
 
-**Justificación:** el tiempo disponible limita la cantidad de infraestructura y
-funcionalidad que puede implementarse.
+**Justificación:** el incremento de despliegue exige una URL pública,
+verificable desde fuera de la red de la universidad.
 
-**Impacto:** se prioriza una arquitectura modular sencilla frente a una solución
-distribuida.
+**Impacto:** el sistema se empaqueta con Docker (`Dockerfile`) y se despliega
+como infraestructura como código (`render.yaml`) en Render, sin dejar de
+poder ejecutarse localmente con `python run.py`. Ver
+[docs/despliegue.md](../despliegue.md).
 
 ---
 
@@ -83,6 +87,20 @@ base de datos productiva.
 **Impacto:** se utilizará SQLite inicialmente.
 
 ---
+
+### R-TEC-05 — Límite de costo y sin tarjeta de crédito
+
+El despliegue debe realizarse sin incurrir en costos monetarios y sin requerir
+una tarjeta de crédito o método de pago.
+
+**Justificación:** el proyecto es académico y no cuenta con presupuesto ni
+método de pago institucional asignado para infraestructura cloud.
+
+**Impacto:** se eligió el plan gratuito (Free) de Render, que no exige tarjeta
+de crédito para registrarse ni para desplegar. Esto implica renunciar a disco
+persistente y aceptar que el servicio "duerme" tras inactividad. Ver
+[docs/costos.md](../costos.md) para el detalle de supuestos y límites de la
+capa gratuita.
 
 ## 2.3 Restricciones de alcance y datos
 

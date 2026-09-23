@@ -44,9 +44,16 @@ La táctica aplicada se encuentra en
 
 ### Evidencia
 
-Pendiente — el pipeline `POST /analysis` ya existe (ver
-[tests/test_analysis.py](../tests/test_analysis.py)), pero todavía no hay
-una medición formal de P95. Próximo paso natural para cerrar este escenario.
+Parcial — el pipeline `POST /analysis` existe y está probado (ver
+[tests/test_analysis.py](../tests/test_analysis.py)). El incremento de
+despliegue añadió instrumentación real de latencia: `GET /metrics`
+(`app/observability.py`) expone un histograma
+`verifacts_http_request_duration_seconds` con buckets y el acumulado
+`_sum`/`_count` por ruta y método, consultable en
+`https://verifacts-api.onrender.com/metrics`. Con eso ya es posible calcular
+el P95 a partir de tráfico real una vez haya suficiente volumen acumulado;
+falta la medición formal con carga simulada (herramienta tipo Artillery o
+Gatling) para cerrar este escenario por completo.
 
 ---
 
