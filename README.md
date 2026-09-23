@@ -404,6 +404,22 @@ http://127.0.0.1:8000
 La documentación automática de FastAPI estará disponible en:
 http://127.0.0.1:8000/docs
 
+## 13.1 Arranque con un único comando (Docker)
+
+Como alternativa a los pasos 11–13, si se tiene Docker instalado y no se
+quiere configurar un entorno virtual de Python localmente, el backend se
+levanta con un único comando, sin requisitos previos más allá de Docker:
+
+```cmd
+docker build -t verifacts . && docker run -p 8000:8000 verifacts
+```
+
+Este comando construye la imagen a partir del [`Dockerfile`](Dockerfile)
+versionado en la raíz del repositorio (el mismo que se usa en el despliegue
+real, ver [docs/despliegue.md](docs/despliegue.md)) y expone el backend en
+`http://localhost:8000`, con el mismo comportamiento que el paso 13 (health
+check en `/health`, documentación en `/docs`).
+
 # 14. Comprobación de disponibilidad
 GET /health
 
