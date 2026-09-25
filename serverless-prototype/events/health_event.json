@@ -1,0 +1,21 @@
+{
+  "resource": "/health",
+  "path": "/health",
+  "httpMethod": "GET",
+  "headers": { "Accept": "application/json" },
+  "multiValueHeaders": {},
+  "queryStringParameters": null,
+  "multiValueQueryStringParameters": null,
+  "pathParameters": null,
+  "stageVariables": null,
+  "requestContext": {
+    "resourcePath": "/health",
+    "httpMethod": "GET",
+    "path": "/Prod/health",
+    "stage": "Prod",
+    "requestId": "cold-start-test",
+    "identity": { "sourceIp": "127.0.0.1" }
+  },
+  "body": null,
+  "isBase64Encoded": false
+}

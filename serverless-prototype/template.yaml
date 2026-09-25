@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Prototipo serverless de VeriFacts para medir cold start con Mangum + AWS
+  Lambda. Uso exclusivo con `sam local invoke` (no se despliega a una cuenta
+  real de AWS, para respetar R-TEC-05). Contexto en
+  docs/adr/0005-comparacion-lambda-render.md.
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 512
+    Runtime: python3.12
+
+Resources:
+  VeriFactsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: lambda_handler.handler
+      Environment:
+        Variables:
+          VERIFACTS_DATA_DIR: /tmp/data
+          ALLOWED_ORIGINS: "*"
+          LOG_LEVEL: INFO
+      Events:
+        HealthApi:
+          Type: Api
+          Properties:
+            Path: /health
+            Method: GET
+        AnalysisApi:
+          Type: Api
+          Properties:
+            Path: /analysis
+            Method: POST

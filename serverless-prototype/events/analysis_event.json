@@ -1,0 +1,21 @@
+{
+  "resource": "/analysis",
+  "path": "/analysis",
+  "httpMethod": "POST",
+  "headers": { "Content-Type": "application/json", "Accept": "application/json" },
+  "multiValueHeaders": {},
+  "queryStringParameters": null,
+  "multiValueQueryStringParameters": null,
+  "pathParameters": null,
+  "stageVariables": null,
+  "requestContext": {
+    "resourcePath": "/analysis",
+    "httpMethod": "POST",
+    "path": "/Prod/analysis",
+    "stage": "Prod",
+    "requestId": "cold-start-test",
+    "identity": { "sourceIp": "127.0.0.1" }
+  },
+  "body": "{\"text\": \"ESTA NOTICIA ES TOTALMENTE CIERTA!!! Todos deben compartirla!!!\"}",
+  "isBase64Encoded": false
+}
