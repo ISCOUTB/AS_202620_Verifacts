@@ -23,6 +23,7 @@ nuevo que lea o escriba historial.
 | Fecha de auditoría | Violación encontrada | Módulo(s) involucrados | Estado |
 |---|---|---|---|
 | 2026-09-07 | Ninguna — `app/api/routes.py` y los `service.py` de `analysis`/`scoring` solo llaman a `save_analysis()`/`get_analysis()`, sin acceso directo a `sqlite3` | — | ✅ Sin violaciones al momento de esta revisión |
+| 2026-09-28 | `app/modules/scoring/service.py` importaba `Finding` desde `app/modules/analysis/analyzer.py` (archivo interno de otro módulo). Sin violación de propiedad de datos: ningún módulo usa `sqlite3` fuera de `repository.py` | Scoring → Analysis | ✅ Corregido (importa desde `analysis.service`); vigilado por `tests/test_boundaries.py`. Detalle en [auditoría S9](auditoria-s9.md) |
 
 ## Nota para el corte 1
 
