@@ -12,6 +12,9 @@ en lugar de modificar el anterior.
 | ADR-0001 | Usar monolito modular como estilo arquitectónico | Aceptado | [docs/adr/0001-estilo-arquitectonico.md](../adr/0001-estilo-arquitectonico.md) |
 | ADR-0002 | Mantener los tres contextos delimitados sin cambios tras el corte 1 | Aceptado | [docs/adr/0002-contextos-sin-cambios.md](../adr/0002-contextos-sin-cambios.md) |
 | ADR-0003 | Mantener integración síncrona en las dos fronteras actuales (Frontend↔API, API↔sitio externo) | Aceptado | [docs/adr/0003-integracion-sincrona.md](../adr/0003-integracion-sincrona.md) |
+| ADR-0004 | Plataforma de despliegue | Aceptado | [docs/adr/0004-plataforma-despliegue.md](../adr/0004-plataforma-despliegue.md) |
+| ADR-0005 | Comparación Lambda vs. Render para la API | Aceptado | [docs/adr/0005-comparacion-lambda-render.md](../adr/0005-comparacion-lambda-render.md) |
+| ADR-0006 | Los pesos, los umbrales y el significado del resultado son decisión del equipo | Aceptado | [docs/adr/0006-semantica-del-resultado.md](../adr/0006-semantica-del-resultado.md) |
 
 ## Relación con los escenarios de calidad
 
