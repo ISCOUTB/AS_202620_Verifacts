@@ -182,10 +182,13 @@ monolito modular como estilo arquitectónico (ver [ADR-0001](docs/adr/0001-estil
 - [ADR-0001 — Usar monolito modular](docs/adr/0001-estilo-arquitectonico.md)
 - [ADR-0002 — Contextos sin cambios tras el corte 1](docs/adr/0002-contextos-sin-cambios.md)
 - [ADR-0003 — Integración síncrona en las dos fronteras actuales](docs/adr/0003-integracion-sincrona.md)
+- [ADR-0006 — Semántica del resultado: pesos y umbrales son decisión del equipo](docs/adr/0006-semantica-del-resultado.md)
 
 ## Inteligencia Artificial
 
 - [Registro de uso de IA](docs/ia.md)
+- [Auditoría S9: erosión, dependencias y secretos](docs/auditoria-s9.md)
+- Evidencia S9: [medición de Q-01 y Q-05](docs/evidencia/medicion-q01-q05.md) · [defectos inducidos](docs/evidencia/mutaciones-s9.md)
 
 ## Información del equipo
 
@@ -569,7 +572,7 @@ Las pruebas actuales comprueban:
 - que modificar una regla existente de `RuleAnalyzer` (ampliar el conjunto de palabras absolutas) es un cambio localizado que no rompe las demás pruebas (`tests/test_rule_modification.py`, evidencia de Q-03);
 - que la API cumple su contrato OpenAPI en cada endpoint y código de estado (`tests/test_contract.py`, evidencia de S7 / A-05).
 
-El resultado esperado es similar a: `20 passed`
+El resultado esperado es similar a: `44 passed`
 
 El frontend no tiene pruebas automatizadas todavía; se verifica manualmente
 siguiendo el paso 18 y comprobando visualmente los tres flujos. Queda como
