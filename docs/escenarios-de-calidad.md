@@ -55,6 +55,13 @@ el P95 a partir de tráfico real una vez haya suficiente volumen acumulado;
 falta la medición formal con carga simulada (herramienta tipo Artillery o
 Gatling) para cerrar este escenario por completo.
 
+- **Medición formal con texto (S9, A-06):** P95 medido con
+  `scripts/medir_q01_q05.py` sobre la API real, 1 cliente concurrente y 10.000
+  caracteres de origen `texto`; ver
+  [docs/evidencia/medicion-q01-q05.md](evidencia/medicion-q01-q05.md). El origen
+  `url` sigue sin medirse de forma formal (depende de un sitio externo, ver
+  [ADR-0003](adr/0003-integracion-sincrona.md)).
+
 ---
 
 # Q-02 — Incorporación de un nuevo analizador
@@ -147,10 +154,12 @@ La táctica correspondiente está documentada en
 
 ### Evidencia
 
-Pendiente — falta una prueba que module una regla existente de
-`RuleAnalyzer` (por ejemplo, el umbral de mayúsculas) y confirme que
-`tests/test_health.py`, `tests/test_analysis.py` y `tests/test_history.py`
-siguen en verde. Ver fila **A-02** en la [tabla de aspectos](aspectos.md).
+`RuleAnalyzer` (`app/modules/analysis/analyzer.py`) se modificó ampliando el
+conjunto `absolute_words` (se agregó `"jamás"`); el cambio se limitó a ese
+archivo y no afectó `API`, `Content` ni `Scoring`. Verificado en
+[tests/test_rule_modification.py](../tests/test_rule_modification.py), y la
+suite completa (`python -m pytest -q`) sigue en verde. Ver fila **A-02** en la
+[tabla de aspectos](aspectos.md).
 
 ---
 
@@ -242,9 +251,13 @@ El sistema produce el mismo resultado (puntuación y clasificación) para la mis
 
 ### Evidencia
 
-`RuleAnalyzer` (`app/modules/analysis/analyzer.py`) se modificó ampliando el
-conjunto `absolute_words`; el cambio se limitó a ese archivo y no afectó
-`API`, `Content` ni `Scoring`. Verificado en
-[tests/test_rule_modification.py](../tests/test_rule_modification.py), que
-además confirma que `tests/test_health.py` y `tests/test_analysis.py` siguen
-en verde. Ver fila **A-02** en la [tabla de aspectos](aspectos.md).
+- **Con persistencia (A-03):** `POST /analysis` guarda y devuelve el mismo
+  `score`, `classification` y `factors`, verificado en
+  [tests/test_analysis.py](../tests/test_analysis.py).
+- **Medición formal (S9, A-06):** 100 solicitudes idénticas contra la API real
+  producen un único resultado (100 % de coincidencia); ver
+  [docs/evidencia/medicion-q01-q05.md](evidencia/medicion-q01-q05.md), generado
+  por `scripts/medir_q01_q05.py`.
+- **Qué significa el resultado (S9, A-06):** pesos y umbrales quedan fijados
+  por [ADR-0006](adr/0006-semantica-del-resultado.md) y
+  [tests/test_scoring_boundaries.py](../tests/test_scoring_boundaries.py).
