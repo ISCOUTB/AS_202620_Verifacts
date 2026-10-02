@@ -1,6 +1,6 @@
-# Auditoría S9 — erosión, dependencias y secretos
+# Auditoría S9 — erosión, dependencias
 
-Fecha: 2026-09-28 · Estado auditado: rama `master`, commit `d2d7b5c` (más los cambios de este incremento).
+Fecha: 2026-09-28 (actualizada el 2026-10-01) · Estado auditado: rama `master`, commit `d2d7b5c` (más los cambios de este incremento).
 
 Cada hallazgo indica cómo se detectó, qué se corrigió y qué queda abierto.
 
@@ -18,10 +18,14 @@ Cada hallazgo indica cómo se detectó, qué se corrigió y qué queda abierto.
 
 | ID | Hallazgo | Cómo se detectó | Corrección | Estado |
 |---|---|---|---|---|
-| D-1 | **`MLAnalyzer` no existe en el repositorio**, pero `docs/ia.md` lo registra como "Aceptado" y `docs/adr/0002-contextos-sin-cambios.md` dice que se incorporó. Mientras tanto `docs/implementacion-backend.md`, `README.md` y arc42 §5 lo declaran pendiente | `git grep -n MLAnalyzer -- app tests requirements.txt` devuelve 0 coincidencias; `git log -S"MLAnalyzer"` solo toca documentos | `docs/ia.md` y ADR-0002 se corrigieron para reflejar el estado real | ⚠️ Corregido en documentos. **Si el código existe en local, debe subirse** y revertir esa corrección |
+| D-1 | **`MLAnalyzer` no existe en el repositorio**, pero `docs/ia.md` lo registra como "Aceptado" y `docs/adr/0002-contextos-sin-cambios.md` dice que se incorporó. Mientras tanto `docs/implementacion-backend.md`, `README.md` y arc42 §5 lo declaran pendiente | `git grep -n MLAnalyzer -- app tests requirements.txt` devuelve 0 coincidencias; `git log -S"MLAnalyzer"` solo toca documentos | `docs/ia.md` y ADR-0002 se corrigieron para reflejar el estado real | ✅ Corregido en `docs/ia.md` (fila del pipeline ML) y en una nota del ADR-0002. `MLAnalyzer` sigue pendiente |
 | D-2 | La evidencia de Q-05 en `docs/escenarios-de-calidad.md` era una copia de la de Q-03, y la de Q-03 decía "Pendiente" con una frase cortada a la mitad, aunque `tests/test_rule_modification.py` existe | Lectura de las tres secciones | Reescritas las evidencias de Q-01, Q-03 y Q-05 | ✅ Corregido |
 | D-3 | El índice de arc42 §9 no listaba ADR-0004, ADR-0005 ni ADR-0006 | Comparación de `docs/adr/` con la tabla | Índice completado | ✅ Corregido |
 | D-4 | `.env.example` termina con una línea suelta `git status` (salida de terminal pegada por error) | `cat .env.example` | Línea eliminada | ✅ Corregido |
+| D-5 | El ADR-0006 se subió como `docs/adr/ADR-0006.md` (fuera de la convención `NNNN-titulo-en-kebab-case.md`) y la auditoría quedó en la raíz, por lo que los enlaces de `aspectos.md`, README y arc42 §9 no resolvían | Revisión externa preliminar y comprobación de enlaces | Renombrado a `0006-semantica-del-resultado.md` y movida a `docs/auditoria-s9.md`; comprobador de enlaces sin errores | ✅ Corregido |
+| D-6 | Las secciones «Commit de implementación» se añadieron a ADR-0001…0004 ya aceptados (commit `9430845`) sin declararlo | Revisión externa preliminar | Tabla «Enmiendas a ADR aceptados» en arc42 §9; regla: solo enmiendas con fecha que no cambien la decisión | ✅ Declarado |
+| D-7 | No había un ADR de la decisión de no incorporar un componente generativo | Revisión externa preliminar | [ADR-0007](adr/0007-no-incorporar-componente-generativo.md) | ✅ Corregido |
+| D-8 | SonarCloud no recibía cobertura de pruebas (el workflow no ejecutaba la suite) y el Quality Gate figuraba en rojo | `docs/despliegue.md` y el workflow `sonarcloud.yml` | El workflow ejecuta `pytest --cov` y envía `coverage.xml` (98 % de líneas en local) | 🟡 Pendiente de confirmar en el panel de SonarCloud |
 
 ## 3. Dependencias que trajo el modelo
 
@@ -53,10 +57,10 @@ Todas las dependencias se comprobaron contra el registro (PyPI / npm) el 2026-09
 | Archivos `.env`, `.pem`, `.key` versionados | Solo `.env.example` y `frontend/.env.example`, sin valores sensibles |
 | `.gitignore` | Ignora `.env`, `.env.*`, `*.pem`, `*.key` |
 
-## 5. Higiene pendiente
+## 5. Higiene
 
-- `VeriFacts-resumen-entrega-final c1.pdf` sigue en la raíz del repositorio (ya observado en la retroalimentación S4). Se retira con `git rm`.
-- `docs/arc42/08-conceptos transversales.md` tiene un espacio en el nombre y el README enlaza `08-conceptos-transversales.md`; el enlace no resuelve. Se renombra con `git mv`.
+- `VeriFacts-resumen-entrega-final c1.pdf` retirado de la raíz del repositorio.
+- `docs/arc42/08-conceptos transversales.md` renombrado a `08-conceptos-transversales.md`; el enlace del README ya resuelve.
 
 ## Cómo repetir esta auditoría
 
