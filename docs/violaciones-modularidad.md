@@ -1,7 +1,7 @@
 # Violaciones de modularidad detectadas · VeriFacts
 
 Este documento registra violaciones a la regla transversal de propiedad de
-datos (ver [arc42 §8.6](arc42/08-conceptos-transversales.md#86-modelo-de-dominio-y-contextos-delimitados-s6)
+datos (ver [arc42 §8.6](arc42/08-conceptos-transversales.md#modelo-de-dominio-y-contextos-delimitados-s6)
 y [`docs/propiedad-datos.md`](propiedad-datos.md)), y su plan de corrección.
 Se referencia desde ambos documentos, así que debe existir aunque esté
 vacío de violaciones reales.
