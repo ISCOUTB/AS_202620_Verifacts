@@ -18,6 +18,19 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: |
+          pip install -r requirements.txt
+          pip install pytest-cov
+
+      - name: Ejecutar pruebas con cobertura
+        run: PYTHONPATH=. pytest --cov --cov-report=xml
+
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
         env:
