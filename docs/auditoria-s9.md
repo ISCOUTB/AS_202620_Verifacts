@@ -25,7 +25,7 @@ Cada hallazgo indica cómo se detectó, qué se corrigió y qué queda abierto.
 | D-5 | El ADR-0006 se subió como `docs/adr/ADR-0006.md` (fuera de la convención `NNNN-titulo-en-kebab-case.md`) y la auditoría quedó en la raíz, por lo que los enlaces de `aspectos.md`, README y arc42 §9 no resolvían | Revisión externa preliminar y comprobación de enlaces | Renombrado a `0006-semantica-del-resultado.md` y movida a `docs/auditoria-s9.md`; comprobador de enlaces sin errores | ✅ Corregido |
 | D-6 | Las secciones «Commit de implementación» se añadieron a ADR-0001…0004 ya aceptados (commit `9430845`) sin declararlo | Revisión externa preliminar | Tabla «Enmiendas a ADR aceptados» en arc42 §9; regla: solo enmiendas con fecha que no cambien la decisión | ✅ Declarado |
 | D-7 | No había un ADR de la decisión de no incorporar un componente generativo | Revisión externa preliminar | [ADR-0007](adr/0007-no-incorporar-componente-generativo.md) | ✅ Corregido |
-| D-8 | SonarCloud no recibía cobertura de pruebas (el workflow no ejecutaba la suite) y el Quality Gate figuraba en rojo | `docs/despliegue.md` y el workflow `sonarcloud.yml` | El workflow ejecuta `pytest --cov` y envía `coverage.xml` (98 % de líneas en local) | 🟡 Pendiente de confirmar en el panel de SonarCloud |
+| D-8 | SonarCloud no recibía cobertura de pruebas (el workflow no ejecutaba la suite) y el Quality Gate figuraba en rojo | `docs/despliegue.md` y el workflow `sonarcloud.yml` | El workflow ejecuta `pytest --cov` y envía `coverage.xml`. Quality Gate confirmado en VERDE (`status: OK`, 99.1 % de cobertura) | ✅ Corregido y confirmado en SonarCloud |
 
 ## 3. Dependencias que trajo el modelo
 
@@ -41,12 +41,14 @@ Todas las dependencias se comprobaron contra el registro (PyPI / npm) el 2026-09
 | pyyaml | `requirements.txt` | pyyaml.org | 2011 | ✅ Legítimo |
 | jsonschema | `requirements.txt` | github.com/python-jsonschema/jsonschema | 2012 | ✅ Legítimo, **ver V-2** |
 | mangum | `serverless-prototype/requirements.txt` | github.com/Kludex/mangum | 2019 | ✅ Legítimo |
+| pytest-cov | `.github/workflows/sonarcloud.yml` | github.com/pytest-dev/pytest-cov | 2010 | ✅ Legítimo |
 | react, react-dom, @types/react, @types/react-dom, @vitejs/plugin-react, typescript, vite | `frontend/package.json` | repositorios oficiales de cada proyecto | 2011–2021 | ✅ Legítimos |
 
 | ID | Hallazgo | Corrección | Estado |
 |---|---|---|---|
 | V-1 | `pip-audit -r requirements.txt` reporta una vulnerabilidad conocida (PYSEC-2026-1845) en `pytest 8.4.2`; la corrige `pytest 9.0.3`, que la restricción `pytest>=8,<9` impedía instalar | `requirements.txt` pasa a `pytest>=9.0.3,<10`. La suite completa pasa con pytest 9 | ✅ Corregido |
 | V-2 | `tests/test_contract.py` usa `jsonschema.RefResolver`, API marcada como obsoleta (pytest lo avisa en cada corrida). Es el tipo de patrón que un modelo reproduce de su entrenamiento | No se corrige en este incremento | 🟡 Abierto (deuda técnica) |
+| V-3 | `pytest-cov` se instala en `.github/workflows/sonarcloud.yml` sin fijar versión | Verificado en PyPI el 2026-10-06 (paquete legítimo de pytest-dev) | ✅ Verificado |
 
 ## 4. Credenciales
 

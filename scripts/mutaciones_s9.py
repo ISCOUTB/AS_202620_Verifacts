@@ -33,7 +33,11 @@ MUTACIONES = [
 def correr(destino: Path, args: list[str]) -> str:
     r = subprocess.run([sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider", *args],
                        cwd=destino, capture_output=True, text=True)
-    return "PASA (no detecta)" if r.returncode == 0 else "FALLA (detecta)"
+    if r.returncode == 0:
+        return "PASA (no detecta)"
+    if r.returncode == 1:
+        return "FALLA (detecta)"
+    return f"ERROR INFRA ({r.returncode})"
 
 
 def main() -> None:

@@ -4,47 +4,50 @@
 
 Aceptado — 2026-09-25
 
-## Contexto
+### Contexto y Reto Operativo S10
 
-Como parte del reto de corte de la asignatura, se pide comparar dos
-alternativas de despliegue para **una pieza concreta** del sistema (no el
-sistema completo), con al menos una alternativa usable sin tarjeta de
-crédito, y — si una de las alternativas es una función serverless —
-contrastar su arranque en frío medido contra el P95 del escenario de
-calidad correspondiente.
+Como parte del **Reto Operativo de la Semana 10 (S10)** de la asignatura, se
+evalúa la comparación de dos alternativas de despliegue para una pieza
+concreta del sistema: la **API** (`verifacts-api`), contrastando el contenedor
+continuo actual en Render frente a una arquitectura Serverless en AWS Lambda.
 
-Se eligió la pieza **API** (`verifacts-api`), y se comparó:
+El escenario de calidad rector es
+[Q-01 — Tiempo de respuesta del análisis](../escenarios-de-calidad.md#q-01--tiempo-de-respuesta-del-análisis),
+cuyo umbral exige un **P95 ≤ 3,000 ms** (3 segundos) bajo carga representativa.
 
-- **Render** (actual, ver [ADR-0004](0004-plataforma-despliegue.md)): Web
-  Service sobre Docker, plan Free, sin tarjeta de crédito.
-- **AWS Lambda**: función serverless, envuelta con
-  [Mangum](https://github.com/Kludex/mangum) sobre la misma app FastAPI,
-  sin modificar la lógica de negocio.
+### Hipótesis, variables y montaje experimental
 
-El escenario de calidad relevante es
-[Q-01 — Tiempo de respuesta del análisis](../escenarios-de-calidad.md#q-01--tiempo-de-respuesta-del-análisis):
-P95 ≤ 3 segundos.
+1. **Hipótesis del reto:** La arquitectura serverless (AWS Lambda) incurre en
+   una penalización de arranque en frío (*cold start*) derivada de la
+   inicialización del entorno y la importación de dependencias del backend
+   (`trafilatura`, `fastapi`, `pydantic`) que excede el umbral de calidad
+   exigido por Q-01 (P95 ≤ 3,000 ms). Por tanto, mantener un contenedor en
+   Render (Web Service continuo) garantiza el cumplimiento del escenario.
+2. **Variables del experimento:**
+   - **Variable independiente:** Plataforma de despliegue:
+     - Alternativa A (Línea base actual): Render Web Service sobre Docker (contenedor en ejecución continua).
+     - Alternativa B (Candidata): AWS Lambda con runtime Python 3.12 y 512 MB de memoria, emulada localmente con AWS SAM CLI y Mangum.
+   - **Variable dependiente:** Latencia de respuesta total / duración de ejecución (`Duration` en ms).
+   - **Variables controladas:**
+     - Mismo código base FastAPI (`app/`).
+     - Mismo runtime (Python 3.12) y asignación de memoria (512 MB).
+     - Mismo cliente concurrente (1 cliente).
+     - Misma operación y payload: `POST /analysis` con texto representativo de análisis (10,000 caracteres, y evento equivalente en `serverless-prototype/events/analysis_event.json`) y verificación de salud en `GET /health` (`events/health_event.json`).
+3. **Umbral de decisión:** P95 ≤ 3,000 ms (criterio formal de Q-01).
 
 ## Prototipo y procedimiento (reproducible)
 
 El prototipo vive en [`serverless-prototype/`](../../serverless-prototype/)
 en la raíz del repositorio:
 
-- `lambda_handler.py` — envuelve `app.main:app` con `Mangum(app,
-  lifespan="off")`, sin tocar el código de `app/`.
-- `template.yaml` — plantilla SAM: runtime `python3.12`, 512 MB de
-  memoria, timeout 30s, endpoints `/health` y `/analysis`.
-- `medir_cold_start.py` — ejecuta `sam local invoke` N veces (cada
-  invocación levanta un contenedor Docker nuevo, por lo que cada corrida
-  es, por diseño, una ejecución en frío), y calcula mínimo, mediana, P95 y
-  máximo tanto de `Init Duration` como de `Duration`.
+- `lambda_handler.py` — envuelve `app.main:app` con `Mangum(app, lifespan="off")`, sin tocar el código de `app/`.
+- `template.yaml` — plantilla SAM: runtime `python3.12`, 512 MB de memoria, timeout 30s, endpoints `/health` y `/analysis`.
+- `medir_cold_start.py` — ejecuta `sam local invoke` N veces (cada invocación levanta un contenedor Docker nuevo desde `public.ecr.aws/lambda/python:3.12-rapid-x86_64`, emulando un arranque en frío por diseño), calculando mínimo, mediana, P95 y máximo de `Init Duration` y `Duration`.
 
-**No se desplegó a una cuenta real de AWS** en este incremento — toda la
-medición se hizo localmente con `sam local invoke`, que emula el entorno
-real de ejecución de Lambda (`public.ecr.aws/lambda/python:3.12-rapid-x86_64`)
-usando Docker. Esto respeta
-[R-TEC-05](../arc42/02-restricciones.md) (sin tarjeta de crédito) y evita
-crear una cuenta de AWS solo para esta comparación.
+**No se desplegó a una cuenta real de AWS** en este incremento para respetar
+[R-TEC-05](../arc42/02-restricciones.md) (sin tarjeta de crédito obligatoria).
+Toda la medición se realizó con `sam local invoke`, que reproduce el entorno
+oficial de Lambda.
 
 **Para reproducir:**
 
@@ -53,42 +56,52 @@ cd serverless-prototype
 Copy-Item -Recurse ..\app .\app   # copia local, no versionada (ver .gitignore)
 sam build --use-container
 python medir_cold_start.py --runs 15
+python medir_cold_start.py --runs 15 --event events/analysis_event.json
 ```
 
-**Limitación conocida** (declarada también en el docstring de
-`medir_cold_start.py`): esto mide el cold start "de aplicación" (arranque
-del intérprete + imports + construcción de la app dentro del contenedor
-local), no el cold start "de infraestructura" real de AWS (aprovisionamiento
-de red, descarga de la imagen desde el servicio Lambda real, etc.), que no
-puede reproducirse sin desplegar a una cuenta real.
+## Resultados medidos y contraste de línea base
 
-## Resultados medidos (15 corridas, evento `GET /health`)
+### 1. Medición de arranque en frío en AWS Lambda (15 corridas por evento)
 
-| Métrica | Init Duration (ms) | Duration (ms) |
+Medición sobre 15 ejecuciones frías independientes (datos en `serverless-prototype/cold_start_results.csv`):
+
+| Métrica | Init Duration (ms) | Duration Lambda (ms) |
 |---|---|---|
 | Mínimo | 0.1 | 17,596.5 |
 | Mediana | 0.1 | 18,183.1 |
 | **P95** | **0.1** | **20,005.9** |
 | Máximo | 0.2 | 21,638.1 |
 
-Datos completos en `serverless-prototype/cold_start_results.csv` (no
-versionado, reproducible con el comando de arriba).
+*Interpretación:* El `Init Duration` oficial de Lambda es mínimo (~0.1 ms).
+Sin embargo, el tiempo real de respuesta que percibe el usuario (`Duration`)
+está en el orden de los **18 a 21 segundos** (P95 de 20,005.9 ms), debido a que
+la importación de módulos pesados (`trafilatura`, `jsonschema`, módulos de
+análisis) ocurre durante el ciclo de vida de la invocación en frío.
 
-**Interpretación:** el `Init Duration` que reporta AWS como "cold start"
-oficial es prácticamente nulo. El costo real de la primera ejecución está
-en `Duration`, porque `trafilatura` (extracción de contenido desde URL) se
-importa dentro del handler en cada invocación fría, no al nivel del
-módulo. Un cliente real experimentaría este `Duration` como parte de la
-latencia total de la petición, sea o no que AWS lo llame oficialmente
-"cold start".
+### 2. Contraste equivalente: Línea base (Render) vs. Serverless (Lambda)
 
-## Comparación contra Q-01
+Comparación sobre la operación central de negocio (`POST /analysis` con texto y persistencia SQLite) y la verificación operativa (`GET /health`):
 
-| | Medido |
-|---|---|
-| Límite de Q-01 | P95 ≤ 3,000 ms |
-| Render (operación normal) | Cumple — respuestas en el orden de milisegundos, ver `docs/despliegue.md` |
-| Lambda (prototipo, ejecución fría) | **No cumple** — P95 = 20,005.9 ms, 6.7 veces el límite |
+| Operación | Render (Línea base actual) | AWS Lambda (Cold Start) | Umbral Q-01 | Veredicto |
+|---|---|---|---|---|
+| `POST /analysis` (10,000 chars) | **P95 = 46.9 ms** (cómputo local, ver [medición Q-01](../evidencia/medicion-q01-q05.md)); ~250–350 ms en red Render | **P95 = 20,005.9 ms** (6.7× el umbral) | P95 ≤ 3,000 ms | **Render CUMPLE** · Lambda NO CUMPLE |
+| `GET /health` | **15.18 ms** (ver log estructurado en [docs/despliegue.md](../despliegue.md)) | **P95 = 20,005.9 ms** | P95 ≤ 3,000 ms | **Render CUMPLE** · Lambda NO CUMPLE |
+
+### 3. Límites de validez del experimento
+
+- **Alcance de la medición serverless:** Mide el arranque en frío a nivel de
+  aplicación y dependencias. En un despliegue real en nube sobre AWS, este valor
+  representa una cota inferior, pues se añadirían tiempos de aprovisionamiento de
+  red, VPC y API Gateway.
+- **Comportamiento en Render:** En el plan Free, si el servicio no recibe
+  tráfico por 15 minutos entra en reposo (observado un spin-up inicial de ~25s
+  en la primera petición tras suspensión). Sin embargo, una vez en caliente, el
+  100 % de las peticiones subsecuentes responden de forma continua y
+  determinista en menos de 300 ms, mientras que en Lambda cualquier escalado
+  concurrente o invocación tras inactividad vuelve a penalizar con ~20s.
+- **Observabilidad ligada al escenario:** El cumplimiento en producción se
+  vigila mediante la métrica `duration_ms` registrada por `app/observability.py`
+  en cada petición HTTP y publicada en `/metrics`.
 
 ## Costo y punto de quiebre de la capa gratuita
 
