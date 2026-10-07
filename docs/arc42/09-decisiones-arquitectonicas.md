@@ -15,6 +15,16 @@ en lugar de modificar el anterior.
 | ADR-0004 | Plataforma de despliegue | Aceptado | [docs/adr/0004-plataforma-despliegue.md](../adr/0004-plataforma-despliegue.md) |
 | ADR-0005 | Comparación Lambda vs. Render para la API | Aceptado | [docs/adr/0005-comparacion-lambda-render.md](../adr/0005-comparacion-lambda-render.md) |
 | ADR-0006 | Los pesos, los umbrales y el significado del resultado son decisión del equipo | Aceptado | [docs/adr/0006-semantica-del-resultado.md](../adr/0006-semantica-del-resultado.md) |
+| ADR-0007 | No incorporar un componente generativo (LLM) al producto en esta etapa | Aceptado | [docs/adr/0007-no-incorporar-componente-generativo.md](../adr/0007-no-incorporar-componente-generativo.md) |
+
+## Enmiendas a ADR aceptados
+
+Regla: un ADR aceptado solo se enmienda con una nota fechada que no cambie la decisión.
+
+| Fecha | ADR | Enmienda |
+|---|---|---|
+| 2026-09-23 | ADR-0001 a ADR-0004 | Se añadieron secciones "Commit de implementación" (commit `9430845`) |
+| 2026-10-07 | ADR-0002 | Nota aclarando que `MLAnalyzer` no está implementado |
 
 ## Relación con los escenarios de calidad
 
@@ -45,8 +55,9 @@ ADR propio cuando se implementen los módulos correspondientes:
   análisis (actualmente es solo una restricción, ver
   [R-TEC-04](02-restricciones.md)).
 - Contrato del módulo `Analysis`: forma concreta de la interfaz `Analyzer`.
-- Incorporación (o no) de Machine Learning al motor de análisis — depende de
-  la evaluación registrada en [Registro de uso de IA](../ia.md).
+- Machine Learning clásico (`MLAnalyzer`): sigue pendiente. La decisión sobre
+  componentes generativos está en
+  [ADR-0007](../adr/0007-no-incorporar-componente-generativo.md).
 - Procesamiento asíncrono para `extract_from_url()` si la medición formal
   de Q-01 muestra que el origen `url` incumple el P95 ≤ 3s (ver
   [ADR-0003 — Deuda aceptada](../adr/0003-integracion-sincrona.md#deuda-aceptada)).
