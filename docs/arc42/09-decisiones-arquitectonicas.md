@@ -16,6 +16,7 @@ en lugar de modificar el anterior.
 | ADR-0005 | Comparación Lambda vs. Render para la API | Aceptado | [docs/adr/0005-comparacion-lambda-render.md](../adr/0005-comparacion-lambda-render.md) |
 | ADR-0006 | Los pesos, los umbrales y el significado del resultado son decisión del equipo | Aceptado | [docs/adr/0006-semantica-del-resultado.md](../adr/0006-semantica-del-resultado.md) |
 | ADR-0007 | No incorporar un componente generativo (LLM) al producto en esta etapa | Aceptado | [docs/adr/0007-no-incorporar-componente-generativo.md](../adr/0007-no-incorporar-componente-generativo.md) |
+| ADR-0008 | Mantener Render y mitigar el arranque en frío | Aceptado | [docs/adr/0008-mantener-render-mitigar-arranque-frio.md](../adr/0008-mantener-render-mitigar-arranque-frio.md) |
 
 ## Enmiendas a ADR aceptados
 
@@ -25,6 +26,7 @@ Regla: un ADR aceptado solo se enmienda con una nota fechada que no cambie la de
 |---|---|---|
 | 2026-09-23 | ADR-0001 a ADR-0004 | Se añadieron secciones "Commit de implementación" (commit `9430845`) |
 | 2026-10-07 | ADR-0002 | Nota aclarando que `MLAnalyzer` no está implementado |
+| 0005 | 2026-10-10 | Reescritura del 7-oct revertida; conclusiones corregidas en ADR-0008 | ADR-0008 |
 
 ## Relación con los escenarios de calidad
 
