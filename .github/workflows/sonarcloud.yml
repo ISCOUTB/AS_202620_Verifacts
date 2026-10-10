@@ -24,9 +24,7 @@ jobs:
           python-version: '3.12'
 
       - name: Instalar dependencias
-        run: |
-          pip install -r requirements.txt
-          pip install pytest-cov
+        run: pip install -r requirements.txt
 
       - name: Ejecutar pruebas con cobertura
         run: PYTHONPATH=. pytest --cov --cov-report=xml
@@ -36,3 +34,6 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
+        with:
+          args: >
+            -Dsonar.qualitygate.wait=true
