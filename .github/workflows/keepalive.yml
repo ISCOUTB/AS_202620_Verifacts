@@ -13,5 +13,8 @@ jobs:
       - name: Despertar/mantener despierto el servicio
         run: |
           curl --fail --silent --show-error \
-               --max-time 90 --retry 2 --retry-delay 5 \
-               https://verifacts-api.onrender.com/health
+            --max-time 180 \
+            --retry 5 \
+            --retry-delay 10 \
+            --retry-connrefused \
+            https://verifacts-api.onrender.com/health
