@@ -17,6 +17,7 @@ en lugar de modificar el anterior.
 | ADR-0006 | Los pesos, los umbrales y el significado del resultado son decisión del equipo | Aceptado | [docs/adr/0006-semantica-del-resultado.md](../adr/0006-semantica-del-resultado.md) |
 | ADR-0007 | No incorporar un componente generativo (LLM) al producto en esta etapa | Aceptado | [docs/adr/0007-no-incorporar-componente-generativo.md](../adr/0007-no-incorporar-componente-generativo.md) |
 | ADR-0008 | Mantener Render y mitigar el arranque en frío | Aceptado | [docs/adr/0008-mantener-render-mitigar-arranque-frio.md](../adr/0008-mantener-render-mitigar-arranque-frio.md) |
+| ADR-0009 | Decisión de no extraer el módulo de Extracción y Análisis | Aceptado | [docs/adr/0009-decision-extraccion-modulo-analisis.md](../adr/0009-decision-extraccion-modulo-analisis.md) |
 
 ## Enmiendas a ADR aceptados
 
