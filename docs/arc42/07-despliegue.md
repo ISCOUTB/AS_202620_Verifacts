@@ -2,7 +2,74 @@
 
 ## 7.1 Infraestructura actual
 
-VeriFacts se despliega en **Render** (render.com), en el plan gratuito, sin
+El despliegue de referencia es el **servidor del laboratorio**, gestionado con Dokploy, sin costo
+y sin tarjeta de crédito (restricciones [R-TEC-01](02-restricciones.md) y
+[R-TEC-05](02-restricciones.md)). Render se conserva como despliegue secundario. La decisión está
+en el [ADR-0010](../adr/0010-despliegue-laboratorio-dokploy.md).
+
+### 7.1.1 Servidor del laboratorio (referencia)
+
+URL: <http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io>
+
+La infraestructura se define como código en [`deploy/compose.lab.yaml`](../../deploy/compose.lab.yaml)
+y se construye desde la rama `master`. Cada pieza es una caja:
+
+```text
+Navegador (internet)
+      │  HTTP
+      ▼
+┌─────────────────── Servidor del laboratorio (Dokploy) ───────────────────┐
+│                                                                          │
+│   ┌────────────────────────────────────────────────────────┐             │
+│   │ Traefik (proxy de Dokploy)                             │             │
+│   │ host *.sslip.io  ->  servicio web, puerto 80           │             │
+│   └────────────────────────────────────────────────────────┘             │
+│         │                                                                │
+│         ▼                                                                │
+│   ┌────────────────────────────────────────────────────────┐             │
+│   │ web: nginx + frontend React (puerto 80)                │             │
+│   │ sirve la SPA y reenvía /analysis, /health, /metrics    │             │
+│   └────────────────────────────────────────────────────────┘             │
+│         │ red interna del compose                                        │
+│         ▼                                                                │
+│   ┌────────────────────────────────────────────────────────┐             │
+│   │ api: uvicorn + FastAPI (puerto 8000)                   │             │
+│   │ logs JSON · GET /health · GET /metrics                 │             │
+│   └────────────────────────────────────────────────────────┘             │
+│         │ lee y escribe /data                                            │
+│         ▼                                                                │
+│   ┌────────────────────────────────────────────────────────┐             │
+│   │ Volumen verifacts_data  ->  /data/verifacts.db         │             │
+│   │ SQLite, persistente entre redespliegues                │             │
+│   └────────────────────────────────────────────────────────┘             │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+GitHub (rama master) ── push ──▶ Dokploy (Autodeploy) ── build y up ──▶ deploy/compose.lab.yaml
+```
+
+| Pieza | Tecnología | Responsabilidad | Definición en el repositorio |
+|---|---|---|---|
+| Proxy | Traefik (gestionado por Dokploy) | Enruta el dominio al servicio `web`, puerto 80 | Configurado en el panel (pestaña Domains) |
+| `web` | nginx + React/Vite compilado | Sirve la interfaz y reenvía `/analysis`, `/health` y `/metrics` a `api` | [`frontend/Dockerfile`](../../frontend/Dockerfile), [`frontend/nginx.conf`](../../frontend/nginx.conf) |
+| `api` | Python + FastAPI + Uvicorn | Lógica de análisis, `/health`, `/metrics`, logs JSON | [`Dockerfile`](../../Dockerfile), [`app/`](../../app) |
+| Volumen `verifacts_data` | SQLite en `/data` | Persistencia del historial entre redespliegues | `volumes` en `deploy/compose.lab.yaml` |
+
+Particularidades:
+
+- **Un solo dominio.** Solo `web` se expone; `api` queda en la red interna del compose. El frontend
+  se compila con `VITE_API_BASE_URL` vacía y llama a rutas relativas.
+- **Solo HTTP.** El dominio `sslip.io` no soporta SSL (ver ADR-0010).
+- **Despliegue automático** en cada `push` a `master` (Autodeploy, trigger On Push).
+- Variables de entorno del panel: `LOG_LEVEL` y `ALLOWED_ORIGINS`, ninguna secreta.
+
+El detalle de cada requisito de despliegue y cómo comprobarlo está en
+[`docs/despliegue.md`](../despliegue.md), y la estimación de costos en
+[`docs/costos.md`](../costos.md).
+
+### 7.1.2 Render (secundario)
+
+VeriFacts también se despliega en **Render** (render.com), en el plan gratuito, sin
 tarjeta de crédito (ver restricción [R-TEC-01](02-restricciones.md) y
 [R-TEC-05](02-restricciones.md)). La infraestructura se define como código
 en [`render.yaml`](../../render.yaml), versionado en la raíz del
@@ -95,7 +162,7 @@ fuera de este alcance, previstos para incrementos posteriores:
   [`docs/costos.md`](../costos.md).
 - Despliegue automático desde el pipeline (actualmente `autoDeploy: false`
   en `render.yaml`; el despliegue se dispara manualmente desde el panel de
-  Render).
+  Render; en el laboratorio sí es automático en cada push a `master`, ver ADR-0010).
 - Medición formal del P95 de latencia con carga simulada (ver escenario
   [Q-01](../escenarios-de-calidad.md)), a partir de la instrumentación ya
   expuesta en `/metrics`.
