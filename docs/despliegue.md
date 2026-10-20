@@ -1,3 +1,62 @@
+# Despliegue de VeriFacts
+
+## Despliegue de referencia: servidor del laboratorio (Dokploy)
+
+**URL del sistema (interfaz y API):** http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io
+
+Decisión y alternativas en el [ADR-0010](adr/0010-despliegue-laboratorio-dokploy.md). Un solo dominio:
+nginx sirve la interfaz y reenvía `/analysis`, `/health` y `/metrics` a la API.
+
+| Requisito | Dónde está en el repositorio | Cómo se comprobó |
+|---|---|---|
+| URL accesible desde fuera de la universidad | http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io | `GET /` devolvió la interfaz el 2026-10-19; desde datos móviles: ⏳ completar |
+| Infraestructura como código versionada | `deploy/compose.lab.yaml`, `Dockerfile`, `frontend/Dockerfile`, `frontend/nginx.conf`, `.dockerignore`, `frontend/.dockerignore` | Servicio Compose `sistema` en Dokploy (proyecto `verifacts`, entorno `production`) construido desde `master`; despliegues `d576276` y `02fc29b` en estado Done |
+| Pipeline en verde | `.github/workflows/tests.yml` (jobs `Tests` y `Build y smoke test de la imagen`) | Runs en verde en GitHub Actions tras cada push a `master` |
+| Health check | `GET /health` en `app/api/routes.py`; `HEALTHCHECK` en `Dockerfile` y `frontend/Dockerfile`; `depends_on: service_healthy` en el compose | ⏳ completar con hora y código HTTP (ver comandos abajo) |
+| Logs estructurados | `app/observability.py` (`JsonFormatter`, middleware `observe_requests`) | Una línea JSON por petición, visible en la pestaña Logs del servicio en Dokploy |
+| Métrica consultable | `GET /metrics` (formato Prometheus) en `app/observability.py` | ⏳ completar con hora y código HTTP |
+| Protección de secretos | `.gitignore` (ignora `.env`, `*.pem`, `*.key`), `.env.example` sin valores reales | Ningún secreto está versionado; las variables del panel (`LOG_LEVEL`, `ALLOWED_ORIGINS`) no son secretas |
+| Persistencia | Volumen `verifacts_data` en `deploy/compose.lab.yaml` | ⏳ completar tras la prueba de redespliegue (ver abajo) |
+| Despliegue automático | Autodeploy, trigger On Push sobre `master` | Cada push a `master` genera un despliegue en la pestaña Deployments |
+| Estimación de costo mensual | `docs/costos.md` | Ver el documento |
+
+### Configuración por variables de entorno (laboratorio)
+
+| Variable | Uso | Valor en despliegue |
+|---|---|---|
+| `LOG_LEVEL` | Nivel de logs | `INFO` |
+| `ALLOWED_ORIGINS` | Orígenes CORS permitidos | `http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io` |
+| `VERIFACTS_DATA_DIR` | Carpeta de `verifacts.db` | `/data` (fijada en el compose, volumen persistente) |
+| `VITE_API_BASE_URL` | URL de la API usada por el frontend | vacía (rutas relativas; la define el compose como argumento de build) |
+
+Ninguna de estas variables es un secreto. `HOST` y `PORT` los fija el `Dockerfile` de la API (`0.0.0.0` y `8000`).
+
+### Comprobaciones con evidencia verificable (laboratorio)
+
+Ejecutar desde CMD (con datos móviles para comprobar el acceso externo) y completar la columna Resultado con la hora y el código reales:
+
+| Comprobación | Comando | Resultado |
+|---|---|---|
+| Raíz accesible | `curl -sS -o NUL -w "http=%{http_code} tiempo=%{time_total}s" http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io/` | Interfaz devuelta el 2026-10-19 (título «VeriFacts — Análisis de contenido»); código y tiempo: ⏳ |
+| Health check | `curl -sS -w " health=%{http_code}" http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io/health` | ⏳ |
+| Análisis a través del proxy | `curl -sS -X POST http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io/analysis -H "Content-Type: application/json" -d "{\"text\":\"ESTA NOTICIA ES TOTALMENTE CIERTA!!! Todos deben compartirla!!!\"}"` | ⏳ (esperado: `score` 50, «Riesgo medio») |
+| Métrica | `curl -sS http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io/metrics` | ⏳ |
+| Persistencia | 1) `POST /analysis` y anotar el `id`; 2) pulsar Deploy en Dokploy; 3) `GET http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io/analysis/<id>` | ⏳ (esperado: el registro sigue existiendo) |
+| Logs estructurados | Pestaña Logs del servicio `sistema` en Dokploy | ⏳ pegar una línea JSON real |
+
+### Limitaciones conocidas
+
+- Solo HTTP: el dominio `sslip.io` no soporta SSL (ver ADR-0010).
+- El nombre de host incluye la IP pública del servidor.
+- Los pushes parciales a `master` generan despliegues intermedios fallidos (ejemplo: `f721a9d`).
+
+---
+
+## Despliegue secundario: Render
+
+Se conserva como respaldo y como evidencia de la comparación de plataformas
+([ADR-0004](adr/0004-plataforma-despliegue.md), [ADR-0008](adr/0008-mantener-render-mitigar-arranque-frio.md)).
+
 **URL del sistema (API):** https://verifacts-api.onrender.com
 **URL del sistema (interfaz web):** https://verifacts-web.onrender.com
 
@@ -12,7 +71,7 @@
 | Protección de secretos | `.gitignore` (ignora `.env`, `*.pem`, `*.key`), `.env.example` sin valores reales | Ningún secreto está versionado en el repositorio; variables sensibles se configuran directamente en el panel de Render |
 | Estimación de costo mensual | `docs/costos.md` | Ver el documento |
 
-## Configuración por variables de entorno
+### Configuración por variables de entorno
 
 | Variable | Uso | Valor en despliegue |
 |---|---|---|
@@ -25,7 +84,7 @@
 
 Ninguna de estas variables es un secreto.
 
-## Comprobaciones con evidencia verificable
+### Comprobaciones con evidencia verificable
 
 | Comprobación | Comando | Resultado |
 |---|---|---|
