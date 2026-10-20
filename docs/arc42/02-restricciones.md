@@ -102,6 +102,11 @@ persistente y aceptar que el servicio "duerme" tras inactividad. Ver
 [docs/costos.md](../costos.md) para el detalle de supuestos y límites de la
 capa gratuita.
 
+El despliegue de referencia usa el servidor del laboratorio (Dokploy), provisto por el
+curso, que tampoco exige tarjeta ni genera costo para el equipo (ver
+[ADR-0010](../adr/0010-despliegue-laboratorio-dokploy.md)). Render se conserva como
+despliegue secundario.
+
 ## 2.3 Restricciones de alcance y datos
 
 ### R-ALC-01 — No verificar la verdad absoluta
