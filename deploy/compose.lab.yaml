@@ -1,0 +1,43 @@
+# VeriFacts — despliegue en el servidor del laboratorio (Dokploy).
+#
+# Dos servicios:
+#   api -> FastAPI (Dockerfile de la raíz). Datos SQLite en un volumen persistente.
+#   web -> React/Vite compilado y servido por nginx. Además hace de proxy
+#          hacia la API, así que el navegador solo habla con UN dominio
+#          (sin CORS y sin depender de una segunda URL).
+#
+# En Dokploy: Domains -> Service Name = web, Port = 80.
+# No se publican puertos ni se fija container_name: Traefik (Dokploy) enruta por dominio.
+
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:5173}
+      VERIFACTS_DATA_DIR: /data
+    volumes:
+      - verifacts_data:/data
+    expose:
+      - "8000"
+
+  web:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+      args:
+        # Vacío = el frontend llama a rutas relativas (/analysis, /health)
+        # y nginx las reenvía a la API.
+        VITE_API_BASE_URL: ""
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    expose:
+      - "80"
+
+volumes:
+  verifacts_data:
