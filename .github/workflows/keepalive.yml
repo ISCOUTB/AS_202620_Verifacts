@@ -1,8 +1,9 @@
-name: Keep-alive Render
+name: Keep-alive Render (manual)
 
+# El schedule (cada 5 minutos) se retiró el 2026-10-20: el despliegue de referencia
+# es el servidor del laboratorio (ADR-0010) y las ejecuciones programadas ocultaban los
+# runs de Tests y SonarCloud en el listado de Actions. Se conserva el disparo manual.
 on:
-  schedule:
-    - cron: '*/5 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -10,7 +11,7 @@ jobs:
     name: GET /health
     runs-on: ubuntu-latest
     steps:
-      - name: Despertar/mantener despierto el servicio
+      - name: Despertar el servicio de Render
         run: |
           curl --fail --silent --show-error \
             --max-time 180 \
