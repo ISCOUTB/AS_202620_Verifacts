@@ -50,39 +50,58 @@ cualquier documento nuevo que agregue un aspecto debe respetar esas columnas.
 
 ## 8.6 Consistencia de datos
 
-**Alcance.** Los datos viven en un único archivo SQLite escrito por un solo proceso
-(`run.py`, un worker de Uvicorn). No hay réplicas ni caché de aplicación, por lo que no existen
-lecturas obsoletas entre nodos; las garantías dependen solo de las transacciones locales. El
-modelo de datos y el costo de revertirlo están en el [ADR-0011](../adr/0011-historial-registro-unico-sin-propietario.md).
+**Principio.** La consistencia se decide **por operación, no por sistema**: cada operación declara la
+garantía que necesita (eventual, *read-your-writes*, causal o fuerte) y qué pasa si el dato llega tarde.
+Las operaciones son las del sistema real (`app/api/routes.py`); no hay otras.
+
+**Alcance.** Los datos viven en un único archivo SQLite escrito por un solo proceso (`run.py`, un worker
+de Uvicorn). No hay réplicas ni caché de aplicación, así que no existen lecturas obsoletas entre nodos. Por
+eso la garantía fuerte no cuesta nada hoy; empezaría a costar si se añadieran réplicas o más procesos (ver
+los disparadores del [ADR-0011](../adr/0011-historial-registro-unico-sin-propietario.md)).
 
 ### Tabla: operación → garantía de consistencia
 
-| Operación | Código | Qué garantiza | Idempotente | Verificación |
-|---|---|---|---|---|
-| `POST /analysis` (crear) | `app/api/routes.py:62` → `save_analysis` (`app/persistence/repository.py:95`) | **Atomicidad y durabilidad:** el `INSERT` se confirma (`commit`) antes de responder; el registro existe completo o no existe. **Lectura propia:** `create_analysis` vuelve a leerlo con `get_analysis` (otra conexión) antes de contestar. | **No.** Cada invocación crea un `id` nuevo, aunque el contenido sea igual (MF-05). El resultado calculado sí es determinista (Q-05). | `tests/test_consistencia.py`: `test_post_deja_el_registro_confirmado_y_legible_desde_otra_conexion`, `test_post_no_es_idempotente_pero_el_calculo_es_determinista` |
-| `GET /analysis/{id}` (consultar) | `app/api/routes.py:116` → `get_analysis` (`app/persistence/repository.py:139`) | **Lectura confirmada:** devuelve solo registros ya confirmados, sin lecturas sucias; un `id` inexistente da 404. Como los registros son de solo adición, dos lecturas del mismo `id` devuelven el mismo cuerpo. | **Sí** (segura y repetible, sin efectos) | `test_get_por_id_es_repetible_y_no_modifica_el_estado`, `test_get_de_id_inexistente_responde_404_sin_crear_registros` |
-| `GET /analysis` (listar) | `app/api/routes.py:129` → `list_analyses` (`:169`) y `count_analyses` (`:197`) | Cada consulta ve un estado confirmado. **Límite:** lista y total son dos consultas en conexiones distintas, sin instantánea común; una inserción entre ambas, o entre dos páginas, puede desajustar el total o repetir un elemento (paginación por `OFFSET`). Es consistencia eventual dentro de una misma carga de pantalla. | **Sí** (sin efectos) | `test_listado_informa_el_total_almacenado_en_la_cabecera`; el límite está caracterizado en `test_limite_conocido_paginacion_por_offset_puede_repetir_un_elemento` |
-| `GET /health` | `app/api/routes.py:57` | No toca datos | **Sí** | `tests/test_health.py` |
+| Operación | Garantía | Si el dato llega tarde… | Cómo se cumple |
+|---|---|---|---|
+| Crear un análisis (`POST /analysis`) | **Fuerte** | No llega tarde: se confirma antes de responder. El riesgo contrario es que se pierda la respuesta y el cliente reintente: se crea un duplicado (MF-05, el POST no es idempotente). | `save_analysis` hace `INSERT` y `commit` en una transacción (`app/persistence/repository.py:95`); la API relee el registro con `get_analysis`, en otra conexión, antes de contestar (`app/api/routes.py:62`). Un solo archivo, sin réplicas. |
+| Ver el análisis recién creado (`GET /analysis/{id}`) | **Read-your-writes** (en la práctica fuerte, por tener un solo nodo) | «Mi análisis desapareció»: un 404 justo después de crearlo. | Se lee del mismo archivo ya confirmado, sin caché ni réplica que pueda ir atrasada (`app/persistence/repository.py:139`, `app/api/routes.py:116`). Los registros son de solo adición: dos lecturas del mismo `id` devuelven lo mismo. |
+| Listado del historial (`GET /analysis`) | **Eventual** (hasta la siguiente recarga de la pantalla) | Un análisis nuevo aparece en la siguiente carga. Entre dos páginas puede repetirse un elemento y el total (`X-Total-Count`) no coincidir con la página (DT-01). | Sin caché en el servidor. El frontend invalida por recarga explícita: `history.refresh()` tras cada `POST` exitoso. Lista y total son dos consultas sin instantánea común (`app/persistence/repository.py:169` y `:197`). |
+| Leer las métricas (`GET /metrics`) | **Eventual y no durable** | Contadores atrasados, o en cero tras reiniciar el proceso. | Contadores en memoria del proceso (`app/observability.py`), solo para observación; ninguna decisión de negocio depende de ellos. |
+
+**Decisión del arquitecto.** Se paga garantía fuerte solo donde un dato atrasado rompe una regla: confirmar
+que un análisis quedó guardado y poder leerlo enseguida. El listado y las métricas toleran retraso porque
+ninguna regla de negocio se rompe (no hay cupos, saldos ni pagos).
+
+### Verificación contra la implementación
+
+Dos de las operaciones, crear y consultar, están verificadas con pruebas ejecutables
+(`tests/test_consistencia.py`, 6 pruebas), no solo descritas:
+
+| Operación | Prueba |
+|---|---|
+| Crear | `test_post_deja_el_registro_confirmado_y_legible_desde_otra_conexion`, `test_post_no_es_idempotente_pero_el_calculo_es_determinista` |
+| Consultar | `test_get_por_id_es_repetible_y_no_modifica_el_estado`, `test_get_de_id_inexistente_responde_404_sin_crear_registros` |
+| Listar | `test_listado_informa_el_total_almacenado_en_la_cabecera`; el límite está caracterizado en `test_limite_conocido_paginacion_por_offset_puede_repetir_un_elemento` |
 
 ### Notas
 
-- **Aislamiento.** SQLite serializa las escrituras con un bloqueo de archivo. Si una escritura espera
-  más de 5 s (valor por defecto de `sqlite3` en Python), falla con `database is locked` (MF-04).
+- **Aislamiento.** SQLite serializa las escrituras con un bloqueo de archivo. Si una escritura espera más
+  de 5 s (valor por defecto de `sqlite3` en Python), falla con `database is locked` (MF-04).
 - **Esquema.** Las migraciones son aditivas (`PRAGMA table_info` + `ALTER TABLE`) y nunca borran datos.
-- **Dos de las filas están verificadas contra la implementación** con pruebas ejecutables
-  (`tests/test_consistencia.py`, 6 pruebas), no solo descritas.
 
 ## 8.7 Política de caché
 
-**Decisión: no hay caché de aplicación en esta etapa.** La respuesta se calcula en cada petición.
+**Decisión: no hay caché de aplicación en esta etapa.** La respuesta se calcula en cada petición. Las
+escrituras van directo a SQLite, así que *write-through* y *write-back* no aplican. Tampoco se justifica una
+caché distribuida (Redis o similar): hay un solo proceso.
 
-| Qué se podría cachear | Dónde | Cuánto | Decisión y justificación |
-|---|---|---|---|
-| Resultado de `POST /analysis` por huella del contenido | En proceso | — | **No.** El cálculo cuesta unos milisegundos (P95 local 46,9 ms; P95 en Render 211,3 ms con 10.000 caracteres, ver [medición](../evidencia/medicion-render-s10.md)), muy por debajo de los 3 s de Q-01. Además, un cambio de pesos o umbrales ([ADR-0006](../adr/0006-semantica-del-resultado.md)) dejaría resultados guardados desactualizados y rompería Q-05. |
-| `GET /analysis/{id}` | Cabeceras HTTP (`Cache-Control`) | Larga (los registros son inmutables) | **No por ahora.** Es cacheable de forma segura, pero hoy no aporta: la consulta por `id` no está en la ruta crítica. |
-| `GET /analysis` (listado) | — | — | **No.** Cambia con cada escritura; una caché obligaría a invalidarla (ver 8.8). |
-| Texto extraído de una URL | En proceso, por URL | **Diseño condicional:** 10 minutos y 128 entradas como máximo | **No implementado.** Es lo único costoso (red). Se implementaría si la telemetría muestra URL repetidas o un P95 de extracción cercano a 3 s. Se cachea el **texto extraído**, no la puntuación, para que un cambio de reglas no lo invalide. |
-| Archivos estáticos del frontend | Navegador, mediante nginx | 1 año (nombres con hash de Vite) | **Sí, implementada:** `location /assets/` con `expires 1y` e `immutable` en [`frontend/nginx.conf`](../../frontend/nginx.conf). Es la única caché del sistema. |
+| Qué | Dónde | Cuánto | Invalidación | Decisión |
+|---|---|---|---|---|
+| Resultado de `POST /analysis` por huella del contenido | Caché local, en proceso | — | — | **No.** El cálculo cuesta milisegundos (P95 local 46,9 ms; P95 en Render 211,3 ms con 10.000 caracteres, ver [medición](../evidencia/medicion-render-s10.md)), muy por debajo de los 3 s de Q-01. Un cambio de pesos o umbrales ([ADR-0006](../adr/0006-semantica-del-resultado.md)) dejaría resultados guardados desactualizados y rompería Q-05. |
+| Listado `GET /analysis` | Caché local, patrón *cache-aside* | TTL de 30 s | Vaciar por completo después del `commit` de cada `POST` exitoso | **No implementada.** Es la caché que el listado necesitaría, pero la consulta es por índice y de 8 filas por página; no aporta. Si se activara, la garantía del listado seguiría siendo eventual, con tope de 30 s. |
+| Texto extraído de una URL | Caché local, clave = URL normalizada | TTL de 10 min y 128 entradas (LRU) | Solo por tiempo: es independiente de las escrituras. Se cachea el **texto extraído**, no la puntuación, para que un cambio de reglas no lo invalide | **Condicional, no implementada.** Es lo único costoso (red). Se activa si la telemetría muestra URL repetidas o un P95 de extracción cercano a 3 s. |
+| `GET /analysis/{id}` | Cabeceras HTTP (`Cache-Control: private`) | Larga: los registros son inmutables | No requiere | **No por ahora.** Es cacheable de forma segura, pero no está en la ruta crítica. |
+| Archivos estáticos del frontend | Navegador, servidos por nginx | 1 año (nombres con hash de Vite) | El hash cambia con cada compilación | **Sí, implementada:** `location /assets/` con `expires 1y` e `immutable` en [`frontend/nginx.conf`](../../frontend/nginx.conf). Es la única caché del sistema. |
 
 ## 8.8 Política de invalidación tras una escritura
 
