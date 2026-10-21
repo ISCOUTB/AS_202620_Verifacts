@@ -2,6 +2,11 @@
 **Proyecto:** VeriFacts
 **Organización:** ISCOUTB
 **Repositorio:** https://github.com/ISCOUTB/AS_202620_Verifacts
+**Despliegue (referencia):** http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io (servidor del laboratorio; abrir con `http://`, ver [despliegue](docs/despliegue.md#acceso-desde-el-celular-conexión-no-privada))
+
+[![Tests](https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/tests.yml/badge.svg)](https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/tests.yml)
+[![SonarCloud](https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/sonarcloud.yml/badge.svg)](https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/sonarcloud.yml)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=ISCOUTB_AS_202620_Verifacts&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ISCOUTB_AS_202620_Verifacts)
 
 ## Integrantes
 
@@ -156,7 +161,8 @@ monolito modular como estilo arquitectónico (ver [ADR-0001](docs/adr/0001-estil
 - [Sección 8 — Conceptos transversales](docs/arc42/08-conceptos-transversales.md)
 - [Sección 9 — Decisiones arquitectónicas](docs/arc42/09-decisiones-arquitectonicas.md)
 - [Sección 10 — Requisitos de calidad](docs/arc42/10-requisitos-de-calidad.md)
-- [Sección 11 — Glosario](docs/arc42/11-glosario.md)
+- [Sección 11 — Riesgos y deuda técnica](docs/arc42/11-riesgos-y-deuda-tecnica.md)
+- [Sección 12 — Glosario](docs/arc42/12-glosario.md)
 
 ## Calidad
 
@@ -164,6 +170,9 @@ monolito modular como estilo arquitectónico (ver [ADR-0001](docs/adr/0001-estil
 - [Árbol de utilidad](docs/arbol-utilidad.md)
 - [Aspectos arquitectónicos](docs/aspectos.md)
 - [Matriz comparativa de estilos](docs/matriz-estilos.md)
+- [Despliegue](docs/despliegue.md) · [Costos](docs/costos.md)
+- [Entrega S11: modos de fallo, idempotencia y extracción](docs/entregas/entrega-modos-fallo-idempotencia-adr.md)
+- Evidencia S12: [revisión de secretos](docs/evidencia/revision-secretos-s12.md) · pruebas de consistencia: [tests/test_consistencia.py](tests/test_consistencia.py)
 
 ## Contrato de la API (S7)
 
@@ -182,7 +191,14 @@ monolito modular como estilo arquitectónico (ver [ADR-0001](docs/adr/0001-estil
 - [ADR-0001 — Usar monolito modular](docs/adr/0001-estilo-arquitectonico.md)
 - [ADR-0002 — Contextos sin cambios tras el corte 1](docs/adr/0002-contextos-sin-cambios.md)
 - [ADR-0003 — Integración síncrona en las dos fronteras actuales](docs/adr/0003-integracion-sincrona.md)
+- [ADR-0004 — Plataforma de despliegue](docs/adr/0004-plataforma-despliegue.md)
+- [ADR-0005 — Comparación Lambda y Render](docs/adr/0005-comparacion-lambda-render.md)
 - [ADR-0006 — Semántica del resultado: pesos y umbrales son decisión del equipo](docs/adr/0006-semantica-del-resultado.md)
+- [ADR-0007 — No incorporar un componente generativo](docs/adr/0007-no-incorporar-componente-generativo.md)
+- [ADR-0008 — Mantener Render y mitigar el arranque en frío](docs/adr/0008-mantener-render-mitigar-arranque-frio.md)
+- [ADR-0009 — Decisión de no extraer el módulo de análisis](docs/adr/0009-decision-extraccion-modulo-analisis.md)
+- [ADR-0010 — Despliegue de referencia en el laboratorio (Dokploy)](docs/adr/0010-despliegue-laboratorio-dokploy.md)
+- [ADR-0011 — Historial como registro único, solo de adición y sin propietario](docs/adr/0011-historial-registro-unico-sin-propietario.md)
 
 ## Inteligencia Artificial
 
@@ -627,7 +643,10 @@ Pendiente para próximos incrementos:
 - incorporar el build del frontend a GitHub Actions;
 - medición formal de P95 para Q-01, diferenciando origen `text` de origen `url` (ver [ADR-0003 — Deuda aceptada](docs/adr/0003-integracion-sincrona.md#deuda-aceptada));
 - medición formal de usabilidad para Q-04, ahora que existe una interfaz sobre la cual ejecutarla;
-- confirmar en sonarcloud.io que el token es válido y que "Automatic Analysis" está apagado, para que el workflow `sonarcloud.yml` quede en verde.
+- confirmar en sonarcloud.io que el token es válido y que "Automatic Analysis" está apagado, para que el workflow `sonarcloud.yml` quede en verde;
+- mitigaciones de resiliencia aún no implementadas (timeout de 4 s, límite de tamaño, idempotencia, WAL), con su estado real en [arc42 §11](docs/arc42/11-riesgos-y-deuda-tecnica.md);
+- seguridad de la ingesta por URL (SSRF, MF-07) y exposición del historial sin propietario (MF-08, ver [ADR-0011](docs/adr/0011-historial-registro-unico-sin-propietario.md));
+- dominio con certificado para el despliegue del laboratorio (hoy solo HTTP).
 
 # 22. Principios arquitectónicos
 
@@ -684,9 +703,7 @@ La implementación sigue los siguientes criterios:
 
 ## Pendiente
 
-- [ ] Confirmar el workflow `sonarcloud.yml` en verde (token y configuración de "Automatic Analysis" en sonarcloud.io).
-- [ ] Medición formal de P95 para Q-01 (diferenciando origen `text` de origen `url`).
-- [ ] Medición formal de usabilidad (Q-04) usando la interfaz ya disponible.
+- [ ] Implementar las mitigaciones pendientes de [arc42 §11](docs/arc42/11-riesgos-y-deuda-tecnica.md): MF-07, MF-08, MF-01, MF-03 y MF-05.
 - [ ] Integrar procesamiento NLP.
 - [ ] Evaluar Machine Learning.
 - [ ] Prueba automatizada de componente para el frontend.
