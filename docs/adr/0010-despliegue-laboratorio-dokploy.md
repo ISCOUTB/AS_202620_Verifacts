@@ -103,3 +103,17 @@ sigue vigente.
 | `GET /health` desde fuera de la universidad (datos móviles) | ⏳ Completar en [despliegue.md](../despliegue.md) |
 | `POST /analysis` a través del proxy nginx | ⏳ Completar en [despliegue.md](../despliegue.md) |
 | Persistencia tras un redespliegue | ⏳ Completar en [despliegue.md](../despliegue.md) |
+
+## Adenda 2026-10-20 — Acceso desde el celular y ejecuciones programadas (no modifica la decisión)
+
+1. **Acceso desde el celular.** El dominio `sslip.io` solo sirve HTTP. Algunos navegadores móviles
+   reintentan con HTTPS y reciben el certificado por defecto del proxy, que no es válido para el
+   dominio: aparece «conexión no privada». Con la URL completa que empieza por `http://` el sitio
+   abre. La solución definitiva es un dominio con certificado asignado por el profesor (ver
+   [despliegue.md](../despliegue.md#acceso-desde-el-celular-conexión-no-privada)).
+2. **Keep-alive de Render.** Se elimina el `schedule` de `.github/workflows/keepalive.yml` (cada 5
+   minutos) y se conserva solo el disparo manual. Con el laboratorio como despliegue de referencia ya
+   no es necesario mantener despierto a Render, y las ejecuciones programadas ocultaban los runs de
+   `Tests` y `SonarCloud` en el listado público de Actions. Consecuencia aceptada: Render, como
+   despliegue secundario, vuelve a tener el arranque en frío medido en el
+   [ADR-0008](0008-mantener-render-mitigar-arranque-frio.md).
