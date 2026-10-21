@@ -46,9 +46,42 @@ Ejecutar desde CMD (con datos móviles para comprobar el acceso externo) y compl
 
 ### Limitaciones conocidas
 
-- Solo HTTP: el dominio `sslip.io` no soporta SSL (ver ADR-0010).
+- Solo HTTP: el dominio `sslip.io` no soporta SSL (ver ADR-0010). En el celular, abrir con `http://` (ver más abajo).
 - El nombre de host incluye la IP pública del servidor.
 - Los pushes parciales a `master` generan despliegues intermedios fallidos (ejemplo: `f721a9d`).
+
+### Acceso desde el celular («conexión no privada»)
+
+**Causa.** El dominio `sslip.io` se sirve solo por HTTP: Dokploy indica que HTTPS no tiene efecto sobre
+él. Al escribir la dirección sin `http://`, o al abrir un enlace reenviado, muchos navegadores móviles
+reintentan con HTTPS. El proxy (Traefik) responde entonces con su certificado por defecto, que no es
+válido para el dominio, y el navegador muestra «Tu conexión no es privada». En el computador funciona
+porque la dirección se abrió con `http://`.
+
+**Solución inmediata.** Abrir siempre la dirección completa, empezando por `http://`:
+
+```text
+http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io
+```
+
+Si el navegador la convierte a HTTPS, desactivar la opción de conexiones seguras o HTTPS automático
+en los ajustes de privacidad del navegador, o abrirla en otro navegador.
+
+**Solución definitiva.** Un dominio con certificado válido: pedir al profesor un subdominio que apunte
+a la IP del servidor y, en Dokploy, pestaña Domains: Host = ese dominio, HTTPS activado y
+Certificate = Let's Encrypt; luego Deploy. No requiere cambios de código: el compose enruta por
+dominio. Registrar el cambio en el [ADR-0010](adr/0010-despliegue-laboratorio-dokploy.md).
+
+### Evidencia de integración continua
+
+| Workflow | Página pública | Último run en verde |
+|---|---|---|
+| `Tests` (incluye `Build y smoke test de la imagen`) | https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/tests.yml | ⏳ pegar el enlace del run |
+| `SonarCloud` | https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/sonarcloud.yml | ⏳ pegar el enlace del run |
+| Quality Gate | https://sonarcloud.io/summary/new_code?id=ISCOUTB_AS_202620_Verifacts | ⏳ anotar el estado y la fecha |
+
+El `schedule` de `keepalive.yml` se retiró para que los runs de estos workflows sean los más recientes
+del listado público.
 
 ---
 
