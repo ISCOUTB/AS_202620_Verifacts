@@ -18,6 +18,8 @@ en lugar de modificar el anterior.
 | ADR-0007 | No incorporar un componente generativo (LLM) al producto en esta etapa | Aceptado | [docs/adr/0007-no-incorporar-componente-generativo.md](../adr/0007-no-incorporar-componente-generativo.md) |
 | ADR-0008 | Mantener Render y mitigar el arranque en frío | Aceptado | [docs/adr/0008-mantener-render-mitigar-arranque-frio.md](../adr/0008-mantener-render-mitigar-arranque-frio.md) |
 | ADR-0009 | Decisión de no extraer el módulo de Extracción y Análisis | Aceptado | [docs/adr/0009-decision-extraccion-modulo-analisis.md](../adr/0009-decision-extraccion-modulo-analisis.md) |
+| ADR-0010 | Desplegar el sistema de referencia en el servidor del laboratorio (Dokploy) con un único dominio | Aceptado | [docs/adr/0010-despliegue-laboratorio-dokploy.md](../adr/0010-despliegue-laboratorio-dokploy.md) |
+| ADR-0011 | Historial como registro único, solo de adición y sin propietario, en SQLite | Aceptado | [docs/adr/0011-historial-registro-unico-sin-propietario.md](../adr/0011-historial-registro-unico-sin-propietario.md) |
 
 ## Enmiendas a ADR aceptados
 
@@ -25,9 +27,11 @@ Regla: un ADR aceptado solo se enmienda con una nota fechada que no cambie la de
 
 | Fecha | ADR | Enmienda |
 |---|---|---|
-| 2026-09-23 | ADR-0001 a ADR-0004 | Se añadieron secciones "Commit de implementación" (commit `9430845`) |
+| 2026-09-23 | ADR-0001 a ADR-0004 | Se añadieron secciones de commit de implementación (commit `9430845`); desde 2026-10-20 se presentan con el encabezado «Adenda 2026-09-23» |
 | 2026-10-07 | ADR-0002 | Nota aclarando que `MLAnalyzer` no está implementado |
-| 0005 | 2026-10-10 | Reescritura del 7-oct revertida; conclusiones corregidas en ADR-0008 | ADR-0008 |
+| 2026-10-10 | ADR-0005 | Reescritura del 7-oct revertida; conclusiones corregidas en ADR-0008 |
+| 2026-10-20 | ADR-0009 | Adenda: las mitigaciones citadas son planeadas, no implementadas; el despliegue de referencia es ADR-0010 |
+| 2026-10-20 | ADR-0010 | Adenda: acceso desde el celular y retiro del schedule de `keepalive.yml` |
 
 ## Relación con los escenarios de calidad
 
