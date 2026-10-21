@@ -83,7 +83,7 @@ semana trata específicamente arquitecturas serverless. Se descartó porque:
   múltiples entornos coordinados, Terraform sería la opción más adecuada a
   reconsiderar.
 
-  ## Commit de implementación
+## Adenda (2026-09-23) — Implementación
 
 `render.yaml`, `Dockerfile` y `.dockerignore` fueron introducidos en el
 commit

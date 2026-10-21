@@ -119,7 +119,7 @@ Si en el futuro se introduce procesamiento asíncrono para alguna
 frontera, deberá crearse un nuevo ADR en lugar de modificar este
 documento.
 
-## Commit de implementación
+## Adenda (2026-09-23) — Implementación
 
 La integración síncrona descrita corresponde a
 `frontend/src/api/client.ts` (frontera Frontend↔API) y

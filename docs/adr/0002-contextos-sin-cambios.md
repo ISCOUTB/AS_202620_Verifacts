@@ -26,7 +26,7 @@ sin requerir un cuarto contexto. Si en el futuro el frontend necesita lógica
 de negocio propia (no solo presentación), este ADR deja de aplicar y debe
 reemplazarse por uno nuevo.
 
-## Commit de implementación
+## Adenda (2026-09-23) — Implementación
 
 Esta decisión documenta el estado del mapa de contextos tras la
 incorporación del frontend (`frontend/`) y del soporte de URL. Ver

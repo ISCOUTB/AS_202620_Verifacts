@@ -112,7 +112,7 @@ Aceptado.
 Si en el futuro se requiere reemplazar esta decisión, deberá crearse un nuevo
 ADR en lugar de modificar este documento.
 
-## Commit de implementación
+## Adenda (2026-09-23) — Implementación
 
 La estructura de módulos (`API`, `Content`, `Analysis`, `Scoring`) descrita
 en esta decisión corresponde al código actual del repositorio, verificable
