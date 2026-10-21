@@ -23,6 +23,24 @@ componente potencial del propio producto VeriFacts.
 | S9 (28 sep 2026) | Claude (Anthropic) | Detección de erosión arquitectónica, pruebas de límites y mutaciones | "Detectar imports indebidos entre módulos; generar pruebas de mutación sobre umbrales y pesos de Scoring; medir Q-01 y Q-05" | Scripts `mutaciones_s9.py` y `medir_q01_q05.py`, pruebas `tests/test_boundaries.py` y `tests/test_scoring_boundaries.py` | Aceptado — integrado en la suite de pruebas automatizadas y documentado en evidencia S9 |
 | S9 (28 sep – 1 oct 2026) | Claude (Anthropic) | Ajuste de umbrales y pesos en Scoring para hacer alcanzable "Riesgo alto" | "Calibrar pesos y umbrales para que 'Riesgo alto' sea alcanzable con las 3 reglas actuales" | Propuesta de bajar el umbral alto a 50 o inflar los pesos de las reglas | Corregido / Rechazado — Rechazado en ADR-0006: los pesos y umbrales son decisión del equipo y no de la IA; cambiar números arbitrariamente sin datos introduce sesgo y sobre-alerta |
 | S9 (7 oct 2026) | Claude (Anthropic) | Evaluación de incorporación de componente generativo (LLM) al producto | "Evaluar integración de OpenAI/Anthropic para clasificación y explicaciones de riesgo" | Análisis de alternativas de LLM en tiempo de ejecución | Rechazado con motivo — Formalizado en ADR-0007: vulnera Q-01 (latencia de red vs P95 de 46,9 ms), vulnera Q-05 (100 % repetibilidad), agrega costos recurrentes y gestión de secretos |
+| 19–20 oct 2026 (S12) | Claude (Anthropic) | Desplegar VeriFacts en el servidor del laboratorio (Dokploy) | "Revisar el repositorio, crear lo que falta del despliegue y darme los archivos" | `deploy/compose.lab.yaml`, `frontend/Dockerfile`, `frontend/nginx.conf`, `frontend/.dockerignore`; ADR-0010; actualización de `docs/despliegue.md`, `docs/costos.md` y arc42 §2, §7 y §9 | Aceptado — el frontend se compiló y el proxy nginx→API se probó con `curl` en un entorno aislado; el despliegue en Dokploy quedó en estado Done. Las comprobaciones externas (`/health`, persistencia) las ejecuta el equipo y se registran en `docs/despliegue.md` |
+| 20 oct 2026 (S12) | Claude (Anthropic) | Contrastar el repositorio con las revisiones S11 y S12 y preparar las correcciones | "Analiza el estado actual del repositorio y dame las correcciones que tengo que hacerle a los archivos" | `tests/test_consistencia.py`, arc42 §8.6–8.9 y §11, ADR-0011, adendas a los ADR, filas A-08 a A-10, `.mailmap`, `keepalive.yml` sin schedule | Aceptado con revisión — la suite completa pasó en un entorno aislado (50 pruebas); el barrido de secretos se ejecutó sobre los 327 commits sin hallazgos. El estado de los runs de Actions y del Quality Gate no se pudo consultar desde fuera y lo verifica el equipo |
+| 20 oct 2026 (S12) | Claude (Anthropic) | Diseño con dos dominios (API y web por separado) | Propuesta inicial de exponer la API con su propio dominio | Descartada | Rechazado con motivo — exige un segundo host, habilitar CORS y fijar la URL de la API al compilar el frontend; se eligió un único dominio con proxy nginx (ADR-0010) |
+| 20 oct 2026 (S12) | Claude (Anthropic) | Implementar de inmediato timeout, 504/422, límite de tamaño, WAL e idempotencia | Posible alcance de la corrección S11 | Aplazado | Rechazado por ahora — S11 acepta planes pendientes bien declarados; cambiar los códigos de respuesta rompería el contrato `openapi.yaml`. Se declararon con su estado real en arc42 §11 |
+
+## Balance de uso de IA en S11 y S12: Aceptado, Corregido y Rechazado
+
+### 1. Aceptado
+- **Despliegue en el laboratorio** (`deploy/compose.lab.yaml`, `frontend/Dockerfile`, `frontend/nginx.conf`): validado con la compilación del frontend y una prueba de proxy; el despliegue real se verifica en `docs/despliegue.md`.
+- **Pruebas de consistencia** (`tests/test_consistencia.py`): verifican contra el código las garantías de la tabla de arc42 §8.6.
+
+### 2. Corregido
+- **Documento de S11 que presentaba mitigaciones como aplicadas:** la revisión S11 señaló que el timeout de 4 s, las respuestas 504 y 422, WAL y la idempotencia no estaban en el código. Se añadió la columna «Estado real» y la sección arc42 §11 con el estado por modo de fallo.
+- **ADR aceptados con secciones añadidas sin fecha:** los encabezados «Commit de implementación» pasaron a «Adenda 2026-09-23» sin cambiar la decisión.
+
+### 3. Rechazado con motivo
+- **Dos dominios para API y web:** motivo en la bitácora anterior; se adoptó un único dominio.
+- **Implementar ya las mitigaciones de S11:** aplazado y declarado como pendiente para no romper el contrato de la API sin versionarlo.
 
 ## Balance de uso de IA en Semana 9 (S9): Aceptado, Corregido y Rechazado
 
