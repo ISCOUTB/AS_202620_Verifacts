@@ -1,15 +1,54 @@
 # Estimación de costo mensual
 
-> Nota: no fue posible ubicar la «Guía de despliegue y costos» mencionada en el enunciado dentro de los materiales del curso. Esta estimación sigue un criterio estándar de costeo en la nube (identificar recursos, tarifa de cada uno, uso esperado y supuestos), aplicado a la infraestructura real desplegada.
 
-## Infraestructura desplegada
+## Despliegue de referencia: servidor del laboratorio (Dokploy)
+
+URL: http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io — decisión en el [ADR-0010](adr/0010-despliegue-laboratorio-dokploy.md).
+
+### Infraestructura desplegada
+
+| Recurso | Plataforma | Costo |
+|---|---|---|
+| Servicio `api` (contenedor, FastAPI) | Servidor del laboratorio (Dokploy) | $0 |
+| Servicio `web` (contenedor, nginx + frontend) | Servidor del laboratorio (Dokploy) | $0 |
+| Volumen `verifacts_data` (SQLite) | Servidor del laboratorio (Dokploy) | $0 |
+| Dominio `*.sslip.io` | Servicio público gratuito, solo HTTP | $0 |
+
+### Supuestos
+
+- El servidor es provisto por el curso: el equipo no contrata ni paga cómputo, almacenamiento ni ancho de banda, y no se registró tarjeta ni método de pago.
+- Tráfico esperado: uso académico, bajo volumen (decenas de peticiones por día durante la evaluación).
+- Los recursos son compartidos con el resto del laboratorio; el equipo no tiene documentado un límite de CPU, memoria o disco asignado. Si el laboratorio impusiera cuotas, se registrarían aquí.
+- El volumen persiste entre redespliegues, pero no hay copias de seguridad configuradas (Dokploy ofrece Volume Backups; no se usó).
+- No hay certificado TLS (el dominio `sslip.io` no lo soporta); no genera costo, pero la comunicación es HTTP.
+
+### Estimación
+
+| Concepto | Costo mensual |
+|---|---|
+| Cómputo (2 contenedores) | $0 |
+| Almacenamiento (volumen SQLite) | $0 |
+| Dominio | $0 |
+| **Total estimado** | **$0/mes** |
+
+### Diferencia frente a Render
+
+En el laboratorio el historial persiste (volumen) y los contenedores no se suspenden por inactividad, sin pasar a un plan de pago. A cambio, el servicio depende de un único servidor del laboratorio y se sirve solo por HTTP.
+
+---
+
+## Despliegue secundario: Render
+
+Lo siguiente describe el despliegue previo en Render, que se conserva como respaldo.
+
+### Infraestructura desplegada
 
 | Recurso | Plataforma | Plan |
 |---|---|---|
 | `verifacts-api` (Web Service, Docker) | Render | Free |
 | `verifacts-web` (Static Site) | Render | Free |
 
-## Supuestos
+### Supuestos
 
 - Tráfico esperado: uso académico, bajo volumen (decenas de peticiones por día durante la evaluación, no tráfico de producción real).
 - Sin disco persistente: se usa SQLite dentro del contenedor efímero (`VERIFACTS_DATA_DIR=/data`), que se reinicia en cada redeploy. Se decidió así para mantener el costo en $0; si se requiriera persistencia real, el costo cambiaría (ver "Escenario con persistencia" más abajo).
@@ -17,7 +56,7 @@
 - No se configuró un dominio propio (se usa el subdominio gratuito `.onrender.com`).
 - No hay despliegue automático desde el pipeline (`autoDeploy: false`); los despliegues se disparan manualmente, sin costo adicional de cómputo por builds automáticos.
 
-## Estimación
+### Estimación
 
 | Concepto | Plan | Costo mensual |
 |---|---|---|
@@ -26,13 +65,14 @@
 | Ancho de banda saliente | Incluido en el plan Free (100 GB/mes) | $0, mientras no se exceda |
 | **Total estimado** | | **$0/mes** |
 
-## Limitación conocida del plan gratuito
+### Limitación conocida del plan gratuito
 
 El plan Free de Render "duerme" el servicio `verifacts-api` tras un período de inactividad. La primera petición después de ese período puede tardar hasta 50 segundos en responder, mientras el servicio despierta. Esto no representa un costo monetario, pero sí una limitación de disponibilidad a tener en cuenta.
 
-## Escenario con persistencia (fuera del alcance actual)
+### Escenario con persistencia (fuera del alcance actual)
 
 Si se necesitara que los datos de `verifacts.db` sobrevivan entre redeploys, la opción más simple es agregar un disco persistente al servicio `verifacts-api`, lo cual requiere pasar del plan Free al plan **Starter** de Render (de pago). El costo exacto depende del tamaño del disco y debe confirmarse en la página de precios de Render al momento de aplicarlo, ya que estas tarifas pueden cambiar.
+
 ## Comparación de despliegue para la pieza "API" (reto de corte)
 
 Se comparó el despliegue actual de `verifacts-api` en Render (Web Service
