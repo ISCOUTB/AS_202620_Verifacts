@@ -4,7 +4,7 @@
 **Equipo:** Pedro Jose Castro Blanquicett, Cristian David Cardeno  
 **Repositorio:** [https://github.com/ISCOUTB/AS_202620_Verifacts](https://github.com/ISCOUTB/AS_202620_Verifacts)  
 **Commit de referencia:** [`65a44af2e0e9fd17f0672f64c6ded3c26f588121`](https://github.com/ISCOUTB/AS_202620_Verifacts/commit/65a44af2e0e9fd17f0672f64c6ded3c26f588121)  
-**Correspondencia con el código verificada el 2026-10-20** sobre el commit `3544894`: la columna «Estado real» de la sección 2 distingue lo implementado de lo pendiente. Estado consolidado en [arc42 §11](../arc42/11-riesgos-y-deuda-tecnica.md).  
+**Correspondencia con el código verificada el 2026-10-21** sobre el commit actual: la columna «Estado real» de la sección 2 distingue lo implementado de lo pendiente. Estado consolidado en [arc42 §11](../arc42/11-riesgos-y-deuda-tecnica.md).  
 
 ---
 
@@ -44,6 +44,27 @@ sequenceDiagram
     DB-->>API: analysis_id (autoincrement)
     API-->>Cliente: 200 OK AnalysisResponse
 ```
+
+---
+
+## 1b. Matriz de Consistencia por Operación
+
+La siguiente tabla mapea cada operación real del sistema a su garantía de consistencia, mecanismo de
+cumplimiento en el código y prueba ejecutable que la verifica. Es la referencia canónica para la revisión
+S12; la versión completa con nivel de aislamiento y notas adicionales está en
+[arc42 §8.6](../arc42/08-conceptos-transversales.md#86-consistencia-de-datos).
+
+| Operación (endpoint) | Garantía | Mecanismo (código) | Idempotente | Prueba ejecutable |
+|---|---|---|---|---|
+| **Crear análisis** `POST /analysis` | **Fuerte (linearizable)** | `save_analysis`: `INSERT` + `commit` atómico en SQLite (`repository.py:95-134`); la API relee con `get_analysis(id)` en otra conexión (`routes.py:103`) | No (MF-05 pendiente) | `test_post_deja_el_registro_confirmado_y_legible_desde_otra_conexion`, `test_post_no_es_idempotente_pero_el_calculo_es_determinista` |
+| **Consultar análisis** `GET /analysis/{id}` | **Read-your-writes** | `get_analysis(id)`: `SELECT` en conexión nueva sobre el archivo ya confirmado (`repository.py:139-166`) | Sí | `test_get_por_id_es_repetible_y_no_modifica_el_estado`, `test_get_de_id_inexistente_responde_404_sin_crear_registros` |
+| **Listar historial** `GET /analysis` | **Eventual** | Dos consultas separadas sin instantánea común (`repository.py:169` y `:197`); frontend invalida con `history.refresh()` | Sí | `test_listado_informa_el_total_almacenado_en_la_cabecera`, `test_limite_conocido_paginacion_por_offset_puede_repetir_un_elemento` |
+| **Métricas** `GET /metrics` | **Eventual y no durable** | Contadores en memoria (`observability.py`), no persistidos | Sí | `tests/test_observability.py` |
+
+**Verificación contra la implementación:** las operaciones Crear y Consultar están verificadas con
+6 pruebas ejecutables en `tests/test_consistencia.py`. Cada prueba contrasta la garantía declarada
+contra el comportamiento real del código. Ver el detalle en
+[arc42 §8.6 — Verificación](../arc42/08-conceptos-transversales.md#verificación-contra-la-implementación).
 
 ---
 
@@ -166,19 +187,26 @@ sequenceDiagram
     end
 ```
 
-- **Acción hacia adelante (Forward Action):** Reservar registro de análisis $\rightarrow$ Extraer texto $\rightarrow$ Calcular indicadores $\rightarrow$ Publicar y confirmar.
+- **Acción hacia adelante (Forward Action):** Reservar registro de análisis → Extraer texto → Calcular indicadores → Publicar y confirmar.
 - **Acción compensatoria (Compensating Transaction):** Si la extracción remota o el cálculo de scoring fallan tras haber reservado el ID, la transacción compensatoria marca el registro como `FALLIDO` o elimina el registro huérfano, garantizando que el historial nunca exhiba estados corruptos.
 
 ---
 
-## 4. ADR Asociado
+## 4. ADR Asociados
 
-La decisión formal sobre la extracción del módulo se encuentra documentada en el registro de decisiones arquitectónicas del repositorio:
+### 4.1 Decisión de extracción del módulo
 
 > 👉 **Documento formal:** [`docs/adr/0009-decision-extraccion-modulo-analisis.md`](../adr/0009-decision-extraccion-modulo-analisis.md)
 > - **Título:** ADR-0009: Decisión de no extraer el módulo de Extracción y Análisis de Contenido
 > - **Estado:** Aceptado
 > - **Decisión clave:** Mantener la arquitectura de monolito modular sin separar microservicios, respaldada por la satisfacción de Q-01 (P95 ≤ 3.000 ms), reducción de fallos parciales de red y cumplimiento de las restricciones de costo y equipo (R-ORG-01, R-ORG-02, R-TEC-05).
+
+### 4.2 Decisión de datos más costosa de revertir
+
+> 👉 **Documento formal:** [`docs/adr/0012-modelo-almacenamiento-sqlite-costo-reversion.md`](../adr/0012-modelo-almacenamiento-sqlite-costo-reversion.md)
+> - **Título:** ADR-0012: Modelo de almacenamiento en SQLite — decisión de datos más costosa de revertir
+> - **Estado:** Aceptado
+> - **Decisión clave:** La combinación de almacenar contenido completo sin propietario (decisiones 4+5) es la más costosa de revertir (40–80 h), porque cada día que pasa sin identidad de usuario aumenta el volumen de datos irrecuperables. Comparación con las 5 decisiones de datos en la tabla de costo.
 
 ---
 
@@ -186,8 +214,13 @@ La decisión formal sobre la extracción del módulo se encuentra documentada en
 
 - **Repositorio:** [https://github.com/ISCOUTB/AS_202620_Verifacts](https://github.com/ISCOUTB/AS_202620_Verifacts)
 - **Commit evaluado:** [`65a44af2e0e9fd17f0672f64c6ded3c26f588121`](https://github.com/ISCOUTB/AS_202620_Verifacts/commit/65a44af2e0e9fd17f0672f64c6ded3c26f588121)
+- **Consistencia de datos:** [arc42 §8.6](../arc42/08-conceptos-transversales.md#86-consistencia-de-datos)
+- **Diseño de caché:** [arc42 §8.7](../arc42/08-conceptos-transversales.md#87-política-de-caché)
+- **Invalidación tras escritura:** [arc42 §8.8](../arc42/08-conceptos-transversales.md#88-política-de-invalidación-tras-una-escritura)
 - **ADR Relacionados:**
   - [ADR-0001: Usar monolito modular](../adr/0001-estilo-arquitectonico.md)
   - [ADR-0003: Mantener integración síncrona](../adr/0003-integracion-sincrona.md)
   - [ADR-0008: Mantener Render y mitigar arranque en frío](../adr/0008-mantener-render-mitigar-arranque-frio.md)
   - [ADR-0009: Decisión de no extraer el módulo de análisis](../adr/0009-decision-extraccion-modulo-analisis.md)
+  - [ADR-0011: Historial como registro único sin propietario](../adr/0011-historial-registro-unico-sin-propietario.md)
+  - [ADR-0012: Modelo de almacenamiento — costo de reversión](../adr/0012-modelo-almacenamiento-sqlite-costo-reversion.md)

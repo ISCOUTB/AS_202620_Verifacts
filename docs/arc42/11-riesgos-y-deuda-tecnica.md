@@ -10,7 +10,8 @@ diseñado:
 
 El análisis detallado de los modos MF-01 a MF-06 está en
 [`docs/entregas/entrega-modos-fallo-idempotencia-adr.md`](../entregas/entrega-modos-fallo-idempotencia-adr.md);
-la decisión de no extraer el módulo, en el [ADR-0009](../adr/0009-decision-extraccion-modulo-analisis.md).
+la decisión de no extraer el módulo, en el [ADR-0009](../adr/0009-decision-extraccion-modulo-analisis.md);
+la decisión de datos más costosa de revertir, en el [ADR-0012](../adr/0012-modelo-almacenamiento-sqlite-costo-reversion.md).
 
 ## 11.1 Modos de fallo y riesgos
 
@@ -23,7 +24,7 @@ la decisión de no extraer el módulo, en el [ADR-0009](../adr/0009-decision-ext
 | MF-05 | Se pierde la confirmación y el cliente reintenta (duplicado) | Media | Medio | `Idempotency-Key` o huella del contenido con tabla de deduplicación | **Pendiente** (diseño) | Hoy cada `POST /analysis` crea un registro nuevo: `tests/test_consistencia.py::test_post_no_es_idempotente_pero_el_calculo_es_determinista`. |
 | MF-06 | Un cambio de pesos o umbrales altera las clasificaciones | Media | Alto (Q-05) | Pruebas de límites en CI | **Implementado** | `tests/test_boundaries.py`, `tests/test_scoring_boundaries.py`, `tests/test_rule_modification.py`; se ejecutan en el job `Tests` de CI. El bloqueo de la fusión depende de la protección de rama, que no está verificada. |
 | MF-07 | SSRF: la API descarga cualquier URL que envíe un cliente | Media | Alto | Aceptar solo `http`/`https`, rechazar IP privadas, loopback y de enlace local, limitar redirecciones | **Pendiente** | `extract_from_url` no valida esquema ni destino. El contenido extraído se guarda en `content` y se devuelve en `GET /analysis/{id}`. Con el despliegue en el laboratorio, la API puede alcanzar la red interna del servidor. |
-| MF-08 | El historial es global: cualquier visitante lee el texto que enviaron otros | Alta | Alto | No exponer `content` en el listado, retención limitada, o identidad por sesión | **Pendiente** | `GET /analysis` y `GET /analysis/{id}` no tienen autenticación y los `id` son enteros consecutivos. Tensión con [R-DAT-01](02-restricciones.md). Decisión y costo de reversión en el [ADR-0011](../adr/0011-historial-registro-unico-sin-propietario.md). |
+| MF-08 | El historial es global: cualquier visitante lee el texto que enviaron otros | Alta | Alto | No exponer `content` en el listado, retención limitada, o identidad por sesión | **Pendiente** | `GET /analysis` y `GET /analysis/{id}` no tienen autenticación y los `id` son enteros consecutivos. Tensión con [R-DAT-01](02-restricciones.md). Decisión y costo de reversión en el [ADR-0011](../adr/0011-historial-registro-unico-sin-propietario.md) y [ADR-0012](../adr/0012-modelo-almacenamiento-sqlite-costo-reversion.md). |
 | MF-09 | Tráfico sin cifrar en el despliegue del laboratorio | Alta | Medio | Dominio con certificado válido | **Pendiente** | El dominio `sslip.io` solo sirve HTTP (ver [ADR-0010](../adr/0010-despliegue-laboratorio-dokploy.md)). En el celular los navegadores que fuerzan HTTPS muestran «conexión no privada»; ver [despliegue.md](../despliegue.md). |
 | MF-10 | Caída del servidor del laboratorio o pérdida del volumen | Baja | Alto | Réplica o copia de seguridad del volumen | **Pendiente** | Un solo servidor; Volume Backups de Dokploy no está configurado. Render queda como despliegue secundario. |
 | MF-11 | Un push parcial a `master` dispara un despliegue fallido | Alta | Bajo | Subir los cambios de despliegue en un solo push, o acotar *Watch Paths* | **Parcial** | Observado el 2026-10-19 con el commit `f721a9d` (ADR-0010). |

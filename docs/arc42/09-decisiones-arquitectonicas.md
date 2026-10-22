@@ -1,4 +1,4 @@
-# arc42 — Sección 9: Decisiones arquitectónicas
+﻿# arc42 — Sección 9: Decisiones arquitectónicas
 
 Las decisiones arquitectónicas significativas de VeriFacts se registran como
 **ADR (Architecture Decision Records)** independientes en `docs/adr/`, para
@@ -20,6 +20,7 @@ en lugar de modificar el anterior.
 | ADR-0009 | Decisión de no extraer el módulo de Extracción y Análisis | Aceptado | [docs/adr/0009-decision-extraccion-modulo-analisis.md](../adr/0009-decision-extraccion-modulo-analisis.md) |
 | ADR-0010 | Desplegar el sistema de referencia en el servidor del laboratorio (Dokploy) con un único dominio | Aceptado | [docs/adr/0010-despliegue-laboratorio-dokploy.md](../adr/0010-despliegue-laboratorio-dokploy.md) |
 | ADR-0011 | Historial como registro único, solo de adición y sin propietario, en SQLite | Aceptado | [docs/adr/0011-historial-registro-unico-sin-propietario.md](../adr/0011-historial-registro-unico-sin-propietario.md) |
+| ADR-0012 | Modelo de almacenamiento en SQLite — decisión de datos más costosa de revertir | Aceptado | [docs/adr/0012-modelo-almacenamiento-sqlite-costo-reversion.md](../adr/0012-modelo-almacenamiento-sqlite-costo-reversion.md) |
 
 ## Enmiendas a ADR aceptados
 
@@ -68,3 +69,5 @@ ADR propio cuando se implementen los módulos correspondientes:
 - Procesamiento asíncrono para `extract_from_url()` si la medición formal
   de Q-01 muestra que el origen `url` incumple el P95 ≤ 3s (ver
   [ADR-0003 — Deuda aceptada](../adr/0003-integracion-sincrona.md#deuda-aceptada)).
+
+
