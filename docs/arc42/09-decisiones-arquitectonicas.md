@@ -21,6 +21,7 @@ en lugar de modificar el anterior.
 | ADR-0010 | Desplegar el sistema de referencia en el servidor del laboratorio (Dokploy) con un único dominio | Aceptado | [docs/adr/0010-despliegue-laboratorio-dokploy.md](../adr/0010-despliegue-laboratorio-dokploy.md) |
 | ADR-0011 | Historial como registro único, solo de adición y sin propietario, en SQLite | Aceptado | [docs/adr/0011-historial-registro-unico-sin-propietario.md](../adr/0011-historial-registro-unico-sin-propietario.md) |
 | ADR-0012 | Modelo de almacenamiento en SQLite — decisión de datos más costosa de revertir | Aceptado | [docs/adr/0012-modelo-almacenamiento-sqlite-costo-reversion.md](../adr/0012-modelo-almacenamiento-sqlite-costo-reversion.md) |
+| ADR-0013 | No incorporar mensajería asíncrona; mantener síncrona la extracción de URL y conservar un prototipo aislado | Aceptado | [docs/adr/0013-no-incorporar-mensajeria-asincrona.md](../adr/0013-no-incorporar-mensajeria-asincrona.md) |
 
 ## Enmiendas a ADR aceptados
 
@@ -69,5 +70,3 @@ ADR propio cuando se implementen los módulos correspondientes:
 - Procesamiento asíncrono para `extract_from_url()` si la medición formal
   de Q-01 muestra que el origen `url` incumple el P95 ≤ 3s (ver
   [ADR-0003 — Deuda aceptada](../adr/0003-integracion-sincrona.md#deuda-aceptada)).
-
-
