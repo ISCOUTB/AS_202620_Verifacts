@@ -2,7 +2,7 @@
 **Proyecto:** VeriFacts
 **Organización:** ISCOUTB
 **Repositorio:** https://github.com/ISCOUTB/AS_202620_Verifacts
-**Despliegue (referencia):** http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io (servidor del laboratorio; abrir con `http://`, ver [despliegue](docs/despliegue.md#acceso-desde-el-celular-conexión-no-privada))
+**Despliegue (referencia externa, solo HTTP):** http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io/ (servidor del laboratorio sobre sslip.io, sin certificado válido; abrir con `http://`, ver [despliegue](docs/despliegue.md#acceso-desde-el-celular-conexión-no-privada)). **URL oficial bajo `iscoutb.dev`:** pendiente de publicar con certificado válido; cuando exista se documentará aquí la URL exacta, distinguiendo la interfaz web (`/`) de la API (`/docs`, `/health`).
 
 [![Tests](https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/tests.yml/badge.svg)](https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/tests.yml)
 [![SonarCloud](https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/sonarcloud.yml/badge.svg)](https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/sonarcloud.yml)
@@ -173,6 +173,7 @@ monolito modular como estilo arquitectónico (ver [ADR-0001](docs/adr/0001-estil
 - [Despliegue](docs/despliegue.md) · [Costos](docs/costos.md)
 - [Entrega S11: modos de fallo, idempotencia y extracción](docs/entregas/entrega-modos-fallo-idempotencia-adr.md)
 - Evidencia S12: [revisión de secretos](docs/evidencia/revision-secretos-s12.md) · pruebas de consistencia: [tests/test_consistencia.py](tests/test_consistencia.py)
+- Taller de mensajería asíncrona (prototipo aislado, no forma parte del producto): [contrato del mensaje](docs/mensajeria/contrato-mensaje.md) · [evidencia de ejecución](docs/mensajeria/evidencia-ejecucion.md) · [límites del experimento](docs/mensajeria/limites-del-experimento.md) · pruebas: [tests/test_messaging.py](tests/test_messaging.py)
 
 ## Contrato de la API (S7)
 
@@ -199,6 +200,8 @@ monolito modular como estilo arquitectónico (ver [ADR-0001](docs/adr/0001-estil
 - [ADR-0009 — Decisión de no extraer el módulo de análisis](docs/adr/0009-decision-extraccion-modulo-analisis.md)
 - [ADR-0010 — Despliegue de referencia en el laboratorio (Dokploy)](docs/adr/0010-despliegue-laboratorio-dokploy.md)
 - [ADR-0011 — Historial como registro único, solo de adición y sin propietario](docs/adr/0011-historial-registro-unico-sin-propietario.md)
+- [ADR-0012 — Modelo de almacenamiento en SQLite: decisión de datos más costosa de revertir](docs/adr/0012-modelo-almacenamiento-sqlite-costo-reversion.md)
+- [ADR-0013 — No incorporar mensajería asíncrona; conservar un prototipo aislado](docs/adr/0013-no-incorporar-mensajeria-asincrona.md)
 
 ## Inteligencia Artificial
 
@@ -257,7 +260,12 @@ AS_202620_Verifacts/
 │   ├── test_analysis.py
 │   ├── test_analysis_history.py
 │   ├── test_rule_modification.py
-│   └── test_contract.py
+│   ├── test_contract.py
+│   ├── test_consistencia.py
+│   └── test_messaging.py
+│
+├── experiments/
+│   └── messaging/        (prototipo aislado; ningún módulo de app/ lo importa)
 │
 ├── frontend/
 │   ├── index.html
@@ -305,9 +313,14 @@ AS_202620_Verifacts/
     ├── adr/
     │   ├── 0001-estilo-arquitectonico.md
     │   ├── 0002-contextos-sin-cambios.md
-    │   └── 0003-integracion-sincrona.md
+    │   ├── 0003-integracion-sincrona.md
+    │   └── ... (ADR-0004 a ADR-0013, ver lista en la sección 6)
     ├── contracts/
     │   └── openapi.yaml
+    ├── mensajeria/
+    │   ├── contrato-mensaje.md
+    │   ├── evidencia-ejecucion.md
+    │   └── limites-del-experimento.md
     ├── escenarios-de-calidad.md
     ├── arbol-utilidad.md
     ├── aspectos.md
@@ -535,7 +548,7 @@ incompatible rompe el `push` antes de llegar a `master`.
 Se verificó manualmente (y no quedó como código permanente) que renombrar
 `score` → `risk_score` en `AnalysisResponse`/`AnalysisSummary`
 (`app/api/routes.py`) hace fallar 4 de las 12 pruebas de contrato; al
-revertir el cambio, las 20 pruebas del proyecto vuelven a pasar. El detalle
+revertir el cambio, las pruebas del proyecto de ese momento (S7) vuelven a pasar. El detalle
 está en
 [Sección 6.5 — Vista de ejecución](docs/arc42/06-vista-de-ejecucion.md#65-contrato-de-la-api-y-prueba-de-contrato-s7).
 
@@ -588,7 +601,9 @@ Las pruebas actuales comprueban:
 - que modificar una regla existente de `RuleAnalyzer` (ampliar el conjunto de palabras absolutas) es un cambio localizado que no rompe las demás pruebas (`tests/test_rule_modification.py`, evidencia de Q-03);
 - que la API cumple su contrato OpenAPI en cada endpoint y código de estado (`tests/test_contract.py`, evidencia de S7 / A-05).
 
-El resultado esperado es similar a: `44 passed`
+El resultado esperado es similar a: `66 passed` (cifra del último run en verde de GitHub Actions).
+
+La cifra corresponde a la **suite completa**: incluye las pruebas del producto y las del prototipo aislado de mensajería (`tests/test_messaging.py`). Las garantías del producto y las del prototipo se documentan por separado (ver «Prototipo de mensajería asíncrona» en la sección 21).
 
 El frontend no tiene pruebas automatizadas todavía; se verifica manualmente
 siguiendo el paso 18 y comprobando visualmente los tres flujos. Queda como
@@ -643,10 +658,25 @@ Pendiente para próximos incrementos:
 - incorporar el build del frontend a GitHub Actions;
 - medición formal de P95 para Q-01, diferenciando origen `text` de origen `url` (ver [ADR-0003 — Deuda aceptada](docs/adr/0003-integracion-sincrona.md#deuda-aceptada));
 - medición formal de usabilidad para Q-04, ahora que existe una interfaz sobre la cual ejecutarla;
-- confirmar en sonarcloud.io que el token es válido y que "Automatic Analysis" está apagado, para que el workflow `sonarcloud.yml` quede en verde;
 - mitigaciones de resiliencia aún no implementadas (timeout de 4 s, límite de tamaño, idempotencia, WAL), con su estado real en [arc42 §11](docs/arc42/11-riesgos-y-deuda-tecnica.md);
 - seguridad de la ingesta por URL (SSRF, MF-07) y exposición del historial sin propietario (MF-08, ver [ADR-0011](docs/adr/0011-historial-registro-unico-sin-propietario.md));
-- dominio con certificado para el despliegue del laboratorio (hoy solo HTTP).
+- publicar la URL oficial exacta bajo `iscoutb.dev` con certificado válido (hoy solo HTTP sobre sslip.io), distinguiendo la interfaz web de la API.
+
+## Prototipo de mensajería asíncrona (taller, aislado del producto)
+
+Para el taller de mensajería se evaluó la única operación con red externa, la extracción y análisis de una URL (`POST /analysis` con `url`). La decisión, registrada en [ADR-0013](docs/adr/0013-no-incorporar-mensajeria-asincrona.md), es **no incorporar** broker, cola ni worker al sistema: `extract_from_url()` sigue síncrono. Para verificar las propiedades sin comprometer el producto se construyó un prototipo en `experiments/messaging/`.
+
+Qué incluye: contrato versionado del mensaje con criterio de compatibilidad, entrega al menos una vez, consumidor idempotente, reintentos con backoff exponencial, cola de mensajes fallidos (DLQ) y seguimiento por `message_id` y `correlation_id`.
+
+Límites (detalle en [límites del experimento](docs/mensajeria/limites-del-experimento.md)):
+
+- el broker vive en memoria, en un solo proceso y un solo hilo: sin red, sin durabilidad y sin reinicios del broker;
+- el reloj y el proveedor de contenido son simulados; no se midió latencia ni rendimiento reales;
+- la carrera entre consumidores se prueba **forzando** el chequeo previo, no con concurrencia real;
+- no está conectado el `extract_from_url()` real, y no se midió el origen `url` del sistema real;
+- el prototipo no modifica `app/` ni la base de datos del producto.
+
+Este prototipo no es una nueva arquitectura productiva, y sus garantías no deben confundirse con las del producto (ver [arc42 §8.6](docs/arc42/08-conceptos-transversales.md)).
 
 # 22. Principios arquitectónicos
 
@@ -695,10 +725,10 @@ La implementación sigue los siguientes criterios:
 - [x] Endpoint `POST /analysis` con validación (Pydantic), origen `text` o `url`.
 - [x] Endpoints `GET /analysis` y `GET /analysis/{id}` (historial).
 - [x] Persistencia SQLite integrada, con migración de esquema segura.
-- [x] Pruebas automatizadas del backend (20 casos, incluyendo evidencia de Q-03 y del contrato de API).
+- [x] Pruebas automatizadas del backend (suite completa de 66 pruebas en el último run, ver sección 19 para qué cubre cada archivo).
 - [x] Interfaz web (React + Vite) conectada a los tres flujos.
 - [x] Comando único de arranque por servicio (`python run.py`, `npm run dev`).
-- [x] GitHub Actions configurado, con workflows independientes para pruebas y SonarCloud.
+- [x] GitHub Actions configurado, con workflows independientes para pruebas y SonarCloud; Quality Gate de SonarCloud en PASSED en el último run.
 - [x] Prueba de contrato en el pipeline, con comprobación manual de que falla ante un cambio incompatible (S7).
 
 ## Pendiente
