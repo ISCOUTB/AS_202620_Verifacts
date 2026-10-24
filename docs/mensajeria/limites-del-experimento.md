@@ -20,5 +20,5 @@ Lo que el prototipo **demuestra** y lo que **no**. Lectura recomendada junto con
 5. **La clave de idempotencia identifica el pedido, no el contenido.** Si una página cambia, reenviar la misma URL devuelve el resultado ya guardado. En un sistema real haría falta una caducidad o incluir un hash del contenido.
 6. **Sin orden, sin límite de tamaño de mensaje, sin autenticación entre productor y broker, sin política de retención de la DLQ.**
 7. **No se midió el origen `url` del sistema real.** La decisión del ADR-0013 de no incorporar se apoya en esa ausencia de medición y define cuándo debe revisarse; no prueba que el origen `url` cumpla Q-01.
-8. **Evidencia generada en Linux (Python 3.12.3)**, no en Windows 11 con Python 3.14 como las mediciones S9/S10. Debe repetirse en la máquina del equipo y en CI antes de entregar.
+8. **Entornos distintos.** Las pruebas y la demo se ejecutaron en Windows con Python 3.14.7 (66 pruebas en verde en la suite completa); las mutaciones se ejecutaron en Linux con Python 3.12.3 y no se repitieron en Windows. El resultado en CI (Python 3.12) queda citado en la [evidencia](evidencia-ejecucion.md).
 9. El prototipo no modifica `app/`, `data/verifacts.db`, `openapi.yaml` ni el frontend; `test_el_prototipo_esta_aislado_de_app` verifica que ningún archivo de `app/` lo importe.
