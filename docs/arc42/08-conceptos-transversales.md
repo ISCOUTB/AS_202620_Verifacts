@@ -60,6 +60,20 @@ eso la garantía fuerte no cuesta nada hoy; empezaría a costar si se añadieran
 los disparadores del [ADR-0011](../adr/0011-historial-registro-unico-sin-propietario.md) y
 [ADR-0012](../adr/0012-modelo-almacenamiento-sqlite-costo-reversion.md)).
 
+**Límites de lo demostrado.** Cuando la tabla dice «fuerte», se refiere al modelo concreto que el código y las
+pruebas sostienen: un único archivo SQLite, un solo proceso, `INSERT` + `commit` antes de responder y relectura
+en una segunda conexión. **No se afirma** linearizabilidad en sentido general: no hay réplicas, no se probó
+concurrencia real (hilos o procesos simultáneos) y las etiquetas de aislamiento (SERIALIZABLE) describen las
+transacciones individuales de SQLite, no un comportamiento global del sistema. Si cambia cualquiera de esos
+supuestos (réplicas, más procesos, caché), las garantías de la tabla deben revisarse (disparadores en el
+ADR-0011 y el ADR-0012).
+
+**Prototipo de mensajería: garantías aparte.** El prototipo aislado de `experiments/messaging/` tiene sus propias
+garantías (entrega al menos una vez con consumidor idempotente, en un broker en memoria simulado). No son
+garantías del producto ni se mezclan con esta tabla; su alcance y sus límites están en
+[docs/mensajeria/limites-del-experimento.md](../mensajeria/limites-del-experimento.md) y en el
+[ADR-0013](../adr/0013-no-incorporar-mensajeria-asincrona.md).
+
 ### Tabla: operación → garantía de consistencia
 
 La siguiente matriz es la referencia canónica. Cada fila corresponde a una operación real del sistema
@@ -68,8 +82,8 @@ en el código actual, y la prueba ejecutable que lo verifica.
 
 | Operación (endpoint) | Garantía requerida | Si el dato llega tarde… | Mecanismo de cumplimiento (código) | Nivel de aislamiento SQLite | Idempotente | Prueba ejecutable |
 |---|---|---|---|---|---|---|
-| **Crear análisis** `POST /analysis` (`routes.py:62`) | **Fuerte (linearizable)** | No llega tarde: `save_analysis()` hace `INSERT` + `commit` antes de responder. El riesgo es que se pierda la respuesta HTTP y el cliente reintente → duplicado (MF-05). | `save_analysis` abre conexión, ejecuta `INSERT INTO analyses …` y llama a `commit` (`repository.py:95-134`). La API relee el registro con `get_analysis(id)` en una **segunda** conexión antes de contestar (`routes.py:103`), confirmando que el dato ya es visible fuera de la transacción original. | SERIALIZABLE (por defecto en SQLite; un solo escritor con bloqueo de archivo). `busy_timeout` implícito de 5 s. | **No.** Cada invocación genera un nuevo `id` autoincremental, aunque el contenido sea idéntico. Diseño de idempotencia pendiente (MF-05). | `test_post_deja_el_registro_confirmado_y_legible_desde_otra_conexion`, `test_post_no_es_idempotente_pero_el_calculo_es_determinista` |
-| **Consultar análisis** `GET /analysis/{id}` (`routes.py:116`) | **Read-your-writes** (en la práctica fuerte, por un solo nodo) | «Mi análisis desapareció»: 404 justo después de crearlo. Imposible hoy: la lectura va al mismo archivo ya confirmado. | `get_analysis(id)` abre una conexión nueva y ejecuta `SELECT … WHERE id = ?` (`repository.py:139-166`). Los registros son de solo adición (inmutables): dos lecturas del mismo `id` siempre devuelven el mismo cuerpo. Sin caché ni réplica. | SERIALIZABLE (lectura; no compite con escrituras porque es solo `SELECT`). | **Sí** (segura y repetible, sin efectos laterales). | `test_get_por_id_es_repetible_y_no_modifica_el_estado`, `test_get_de_id_inexistente_responde_404_sin_crear_registros` |
+| **Crear análisis** `POST /analysis` (`routes.py:62`) | **Fuerte en el modelo de un nodo** (visibilidad tras `commit`; no se afirma linearizabilidad general) | No llega tarde: `save_analysis()` hace `INSERT` + `commit` antes de responder. El riesgo es que se pierda la respuesta HTTP y el cliente reintente → duplicado (MF-05). | `save_analysis` abre conexión, ejecuta `INSERT INTO analyses …` y llama a `commit` (`repository.py:95-134`). La API relee el registro con `get_analysis(id)` en una **segunda** conexión antes de contestar (`routes.py:103`), confirmando que el dato ya es visible fuera de la transacción original. | SERIALIZABLE (por defecto en SQLite; un solo escritor con bloqueo de archivo). `busy_timeout` implícito de 5 s. | **No.** Cada invocación genera un nuevo `id` autoincremental, aunque el contenido sea idéntico. Diseño de idempotencia pendiente (MF-05). | `test_post_deja_el_registro_confirmado_y_legible_desde_otra_conexion`, `test_post_no_es_idempotente_pero_el_calculo_es_determinista` |
+| **Consultar análisis** `GET /analysis/{id}` (`routes.py:116`) | **Read-your-writes** (en el modelo de un nodo SQLite) | «Mi análisis desapareció»: 404 justo después de crearlo. No ocurre en el modelo actual: la lectura va al mismo archivo ya confirmado, sin réplicas ni caché. | `get_analysis(id)` abre una conexión nueva y ejecuta `SELECT … WHERE id = ?` (`repository.py:139-166`). Los registros son de solo adición (inmutables): dos lecturas del mismo `id` siempre devuelven el mismo cuerpo. Sin caché ni réplica. | SERIALIZABLE (lectura; no compite con escrituras porque es solo `SELECT`). | **Sí** (segura y repetible, sin efectos laterales). | `test_get_por_id_es_repetible_y_no_modifica_el_estado`, `test_get_de_id_inexistente_responde_404_sin_crear_registros` |
 | **Listar historial** `GET /analysis` (`routes.py:129`) | **Eventual** (hasta la siguiente recarga de pantalla) | Un análisis nuevo aparece en la siguiente carga. Entre dos páginas puede repetirse un elemento y el total (`X-Total-Count`) no coincidir (DT-01). | `list_analyses` y `count_analyses` son **dos consultas separadas** en conexiones distintas (`repository.py:169` y `:197`), sin instantánea común. El frontend invalida por recarga explícita: `history.refresh()` tras cada `POST` exitoso. | Cada consulta individual es SERIALIZABLE, pero no hay transacción que las agrupe. | **Sí** (sin efectos laterales). | `test_listado_informa_el_total_almacenado_en_la_cabecera`; el límite está caracterizado en `test_limite_conocido_paginacion_por_offset_puede_repetir_un_elemento` |
 | **Métricas** `GET /metrics` (`routes.py` vía `observability.py`) | **Eventual y no durable** | Contadores atrasados o en cero tras reiniciar el proceso. | Contadores en memoria del proceso (`app/observability.py`), no persistidos. Ninguna decisión de negocio depende de ellos. | N/A (no toca SQLite). | **Sí** (sin efectos laterales). | `tests/test_observability.py` |
 
@@ -82,11 +96,12 @@ almacenamiento y su costo de reversión están formalizados en el [ADR-0012](../
 
 Dos de las operaciones (crear y consultar) están **verificadas con pruebas ejecutables**
 (`tests/test_consistencia.py`, 6 pruebas), no solo descritas. Cada prueba contrasta la garantía declarada
-en la tabla anterior contra el comportamiento real del código:
+en la tabla anterior contra el comportamiento real del código. Las pruebas son secuenciales (`TestClient`, una conexión tras otra, sin hilos
+concurrentes): demuestran visibilidad tras `commit` en un nodo, no linearizabilidad bajo concurrencia ni con réplicas.
 
 | Operación verificada | Garantía probada | Prueba(s) | Qué demuestra |
 |---|---|---|---|
-| **Crear** (`POST /analysis`) | Fuerte: el registro existe y es legible desde otra conexión inmediatamente después del `commit` | `test_post_deja_el_registro_confirmado_y_legible_desde_otra_conexion` | Llama a `POST`, luego invoca `get_analysis(id)` (que abre una conexión nueva) y verifica que todos los campos coinciden. Si la transacción no hubiera hecho `commit`, este `SELECT` devolvería `None`. |
+| **Crear** (`POST /analysis`) | Visibilidad tras `commit` (modelo de un nodo): el registro es legible desde otra conexión inmediatamente después | `test_post_deja_el_registro_confirmado_y_legible_desde_otra_conexion` | Llama a `POST`, luego invoca `get_analysis(id)` (que abre una conexión nueva) y verifica que todos los campos coinciden. Si la transacción no hubiera hecho `commit`, este `SELECT` devolvería `None`. |
 | **Crear** (`POST /analysis`) | No idempotente pero determinista | `test_post_no_es_idempotente_pero_el_calculo_es_determinista` | Envía el mismo texto dos veces: obtiene `id` distintos (no idempotente, MF-05), pero `score`, `classification` y `factors` idénticos (Q-05). |
 | **Consultar** (`GET /analysis/{id}`) | Read-your-writes: lectura repetible e inmutable | `test_get_por_id_es_repetible_y_no_modifica_el_estado` | Dos `GET` consecutivos al mismo `id` devuelven el mismo JSON; el conteo de registros no cambia. |
 | **Consultar** (`GET /analysis/{id}`) | 404 sin efectos laterales | `test_get_de_id_inexistente_responde_404_sin_crear_registros` | Un `GET` a un `id` inexistente devuelve 404 y no crea registros. |
