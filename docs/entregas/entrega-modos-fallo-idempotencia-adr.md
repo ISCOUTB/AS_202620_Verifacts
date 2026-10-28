@@ -56,14 +56,15 @@ S12; la versión completa con nivel de aislamiento y notas adicionales está en
 
 | Operación (endpoint) | Garantía | Mecanismo (código) | Idempotente | Prueba ejecutable |
 |---|---|---|---|---|
-| **Crear análisis** `POST /analysis` | **Fuerte (linearizable)** | `save_analysis`: `INSERT` + `commit` atómico en SQLite (`repository.py:95-134`); la API relee con `get_analysis(id)` en otra conexión (`routes.py:103`) | No (MF-05 pendiente) | `test_post_deja_el_registro_confirmado_y_legible_desde_otra_conexion`, `test_post_no_es_idempotente_pero_el_calculo_es_determinista` |
+| **Crear análisis** `POST /analysis` | **Fuerte en un nodo** (visibilidad tras `commit`; no se afirma linearizabilidad concurrente) | `save_analysis`: `INSERT` + `commit` atómico en SQLite (`repository.py:95-134`); la API relee con `get_analysis(id)` en otra conexión (`routes.py:103`) | No (MF-05 pendiente) | `test_post_deja_el_registro_confirmado_y_legible_desde_otra_conexion`, `test_post_no_es_idempotente_pero_el_calculo_es_determinista` |
 | **Consultar análisis** `GET /analysis/{id}` | **Read-your-writes** | `get_analysis(id)`: `SELECT` en conexión nueva sobre el archivo ya confirmado (`repository.py:139-166`) | Sí | `test_get_por_id_es_repetible_y_no_modifica_el_estado`, `test_get_de_id_inexistente_responde_404_sin_crear_registros` |
 | **Listar historial** `GET /analysis` | **Eventual** | Dos consultas separadas sin instantánea común (`repository.py:169` y `:197`); frontend invalida con `history.refresh()` | Sí | `test_listado_informa_el_total_almacenado_en_la_cabecera`, `test_limite_conocido_paginacion_por_offset_puede_repetir_un_elemento` |
 | **Métricas** `GET /metrics` | **Eventual y no durable** | Contadores en memoria (`observability.py`), no persistidos | Sí | `tests/test_observability.py` |
 
 **Verificación contra la implementación:** las operaciones Crear y Consultar están verificadas con
 6 pruebas ejecutables en `tests/test_consistencia.py`. Cada prueba contrasta la garantía declarada
-contra el comportamiento real del código. Ver el detalle en
+contra el comportamiento real del código (demostrando visibilidad tras commit en un único nodo y proceso,
+sin equiparar las pruebas secuenciales a una prueba de linearizabilidad o concurrencia masiva distribuida). Ver el detalle en
 [arc42 §8.6 — Verificación](../arc42/08-conceptos-transversales.md#verificación-contra-la-implementación).
 
 ---
