@@ -12,6 +12,7 @@ El análisis detallado de los modos MF-01 a MF-06 está en
 [`docs/entregas/entrega-modos-fallo-idempotencia-adr.md`](../entregas/entrega-modos-fallo-idempotencia-adr.md);
 la decisión de no extraer el módulo, en el [ADR-0009](../adr/0009-decision-extraccion-modulo-analisis.md);
 la decisión de datos más costosa de revertir, en el [ADR-0012](../adr/0012-modelo-almacenamiento-sqlite-costo-reversion.md).
+El modelado formal de amenazas (STRIDE/OWASP API) y los riesgos de privacidad (AM-01 a AM-08) están consolidados en [`docs/entregas/entrega-seguridad-amenazas-dependencias-privacidad.md`](../entregas/entrega-seguridad-amenazas-dependencias-privacidad.md).
 
 ## 11.1 Modos de fallo y riesgos
 

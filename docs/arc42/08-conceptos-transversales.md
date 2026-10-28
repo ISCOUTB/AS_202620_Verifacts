@@ -192,3 +192,24 @@ Se identifican tres contextos dentro del monolito modular: **Ingesta y Presentac
 ### 8.10.3 Regla transversal de propiedad de datos
 
 Cada tabla de la base de datos tiene un único módulo autorizado a escribir en ella. Los demás módulos que necesiten ese dato lo reciben como resultado de una llamada, nunca escribiendo directamente sobre la tabla ajena. El detalle de qué módulo escribe qué está en [`docs/propiedad-datos.md`](../propiedad-datos.md); las violaciones encontradas frente a esta regla y su plan de corrección están en [`docs/violaciones-modularidad.md`](../violaciones-modularidad.md).
+
+
+## 8.11 Privacidad y Protección de Datos Personales (S13)
+
+VeriFacts procesa contenido textual de noticias enviado por usuarios para detectar señales de desinformación. Desde la perspectiva arquitectónica, el sistema adopta los principios de **Privacidad desde el Diseño (*Privacy by Design*)** y cumplimiento de la normativa de Protección de Datos Personales (Ley Estatutaria 1581 de 2012 de Colombia, Habeas Data y directrices RGPD):
+
+1. **Minimización de datos (*Data Minimization*):**
+   - El sistema **no exige registro ni autenticación de usuarios** ([ADR-0011](../adr/0011-historial-registro-unico-sin-propietario.md)).
+   - Las consultas de análisis son completamente anónimas y no se asocian a identificadores personales, correos ni números de teléfono.
+2. **Limitación de la finalidad (*Purpose Limitation*):**
+   - El texto y las URLs enviadas se utilizan exclusivamente para computar heurísticas de desinformación en memoria.
+   - El sistema no alimenta modelos generativos comerciales externos ni elabora perfiles comerciales o políticos de usuarios ([ADR-0007](../adr/0007-no-incorporar-componente-generativo.md)).
+3. **Retención acotada y depuración:**
+   - La persistencia en SQLite (`data/verifacts.db`) opera bajo una política de retención máxima recomendada de 30 días, tras la cual los registros históricos pueden ser depurados mediante tareas periódicas de mantenimiento.
+4. **Protección en scraping e ingesta:**
+   - Se excluyen credenciales o parámetros privados en URLs (`http://user:pass@host`).
+   - El motor de scraping respeta un límite de descarga de 2 MB y truncamiento de texto para prevenir sobrecarga de datos.
+5. **Derecho a la supresión (*Right to Erasure*):**
+   - La arquitectura contempla la eliminación física de registros específicos del historial ante solicitudes de Habeas Data donde un texto ingresado contenga datos personales indebidamente expuestos.
+
+El detalle completo del inventario de datos, matriz de riesgos de privacidad (PR-01 a PR-03) y modelado de amenazas se encuentra formalizado en [`docs/entregas/entrega-seguridad-amenazas-dependencias-privacidad.md`](../entregas/entrega-seguridad-amenazas-dependencias-privacidad.md).

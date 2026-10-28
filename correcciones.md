@@ -44,3 +44,17 @@ Registro de las observaciones recibidas en la retroalimentación semanal y su es
 | Sigue pendiente desde S1: que el tercer integrante aparezca en el historial de commits. | 🔴 Pendiente | Sin resolver — acción exclusiva del equipo. |
 
 ---
+
+
+## Semana 11 · S11 (Modos de fallo, Idempotencia y Decisión de Extracción)
+
+| Observación del profesor | Estado | Corrección aplicada |
+|---|---|---|
+| **Correspondencia entre mitigaciones declaradas e implementadas:** La tabla habla de timeout estricto de 4 s, 504/422 y WAL en SQLite como hechos, pero en código no están configurados. Falta declarar honestamente qué está implementado y qué pendiente. | ✅ Corregido | Se incorporó la columna «Estado real en el código» en [`docs/entregas/entrega-modos-fallo-idempotencia-adr.md`](docs/entregas/entrega-modos-fallo-idempotencia-adr.md) y la columna «Estado» en [`docs/arc42/11-riesgos-y-deuda-tecnica.md`](docs/arc42/11-riesgos-y-deuda-tecnica.md), declarando honestamente MF-01, MF-03 y MF-05 como *Pendiente*, MF-02 y MF-04 como *Parcial*, y MF-06 como *Implementado*. |
+| **arc42 sección 11 con los modos de fallo:** El archivo 11 del repo contenía el glosario (`11-glosario.md`); no existía sección de riesgos que incorporara MF-01 a MF-06. | ✅ Corregido | El glosario fue trasladado a [`docs/arc42/12-glosario.md`](docs/arc42/12-glosario.md) y se creó [`docs/arc42/11-riesgos-y-deuda-tecnica.md`](docs/arc42/11-riesgos-y-deuda-tecnica.md) estructurando formalmente la matriz de modos de fallo, probabilidad, impacto, estado real y plan de cierre. |
+| **Filas de aspectos afectadas por la integración al día:** La tabla `docs/aspectos.md` solo llegaba hasta la Semana 10 (ADR-0008); faltaba incorporar ADR-0009 y la resiliencia S11. | ✅ Corregido | Se incorporó la fila **A-08** (*Resiliencia de la integración externa (URL) y modos de fallo*) en [`docs/aspectos.md`](docs/aspectos.md) con las 8 columnas completas, enlazando a [ADR-0009](docs/adr/0009-decision-extraccion-modulo-analisis.md) y `tests/test_url_ingestion.py`. |
+| **ADR aceptados no reescritos:** En `docs/adr/0003-integracion-sincrona.md` se añadió contenido al final sin adenda fechada formal. | ✅ Corregido | Se formalizó el encabezado `## Adenda (2026-09-23) — Implementación` en [`docs/adr/0003-integracion-sincrona.md`](docs/adr/0003-integracion-sincrona.md) (y en ADR-0001 a ADR-0004), preservando la decisión inmutable original. |
+| **Registro de IA al día para la semana:** `docs/ia.md` llegaba solo hasta S9; faltaba el registro del periodo S11. | ✅ Corregido | Se agregaron las interacciones semanales de S11 en [`docs/ia.md`](docs/ia.md) y la sección consolidada de propuestas Aceptadas, Corregidas y Rechazadas con motivo técnico. |
+| **Sin credenciales en repositorio ni historial:** El barrido histórico no pudo completarse en la evaluación remota. | ✅ Corregido | Se documentó el barrido exhaustivo en [`docs/evidencia/revision-secretos-s12.md`](docs/evidencia/revision-secretos-s12.md) sobre los 327 commits del árbol completo con expresiones regulares sin hallazgos de secretos. |
+
+---
