@@ -58,3 +58,17 @@ Registro de las observaciones recibidas en la retroalimentación semanal y su es
 | **Sin credenciales en repositorio ni historial:** El barrido histórico no pudo completarse en la evaluación remota. | ✅ Corregido | Se documentó el barrido exhaustivo en [`docs/evidencia/revision-secretos-s12.md`](docs/evidencia/revision-secretos-s12.md) sobre los 327 commits del árbol completo con expresiones regulares sin hallazgos de secretos. |
 
 ---
+
+
+## Semana 12 · S12 (Consistencia, Caché, Invalidación y Decisión de Datos más Costosa)
+
+| Observación del profesor | Estado | Corrección aplicada |
+|---|---|---|
+| **Tabla operación a garantía de consistencia con operaciones reales:** Solo había tabla de modos de fallo, sin matriz de consistencia por operación. | ✅ Corregido | Se incorporó en [`docs/arc42/08-conceptos-transversales.md`](docs/arc42/08-conceptos-transversales.md) (§8.6) la tabla canónica de 7 columnas (`Operación`, `Garantía requerida`, `Si el dato llega tarde...`, `Mecanismo de cumplimiento`, `Nivel de aislamiento SQLite`, `Idempotente`, `Prueba ejecutable`) mapeando `POST /analysis`, `GET /analysis/{id}`, `GET /analysis` y `GET /metrics`. |
+| **Dos operaciones verificadas contra la implementación:** Sin garantía por operación no se acreditaban dos verificaciones ejecutables. | ✅ Corregido | Se implementaron 6 pruebas unitarias automatizadas en [`tests/test_consistencia.py`](tests/test_consistencia.py), contrastando visibilidad tras commit en `POST /analysis` y garantía *read-your-writes* inmutable en `GET /analysis/{id}`. |
+| **Diseño de caché: qué, dónde y cuánto:** Respuesta en diseño de idempotencia no es política completa de caché; faltaba evaluar qué/dónde/duración o justificar no caché. | ✅ Corregido | Se redactó [`docs/arc42/08-conceptos-transversales.md`](docs/arc42/08-conceptos-transversales.md) (§8.7) con la matriz completa de las 3 dimensiones (qué, dónde, TTL/duración, invalidación y decisión) para 5 candidatos, justificando la no-caché en backend (P95 < 50 ms) e identificando la única caché activa en Nginx (`/assets/` con `expires 1y immutable`). |
+| **Política de invalidación tras escritura:** Falta definir refresco/invalidación del historial tras crear análisis. | ✅ Corregido | Se formalizó en [`docs/arc42/08-conceptos-transversales.md`](docs/arc42/08-conceptos-transversales.md) (§8.8) la política de invalidación por recarga explícita del frontend (`history.refresh()` en `App.tsx`) y el diseño de vaciado activo tras commit antes de responder para caché del listado. |
+| **ADR de la decisión de datos más costosa de revertir y su argumento/costo:** No extracción no equivale a la decisión de datos de mayor costo de reversión; falta comparar costo frente a otras decisiones. | ✅ Corregido | Se creó el [ADR-0012](docs/adr/0012-modelo-almacenamiento-sqlite-costo-reversion.md), comparando cuantitativamente las 5 decisiones de datos vigentes (horas-persona, migración, impacto en contrato) y demostrando por qué almacenar contenido completo sin propietario (decisiones 4+5) es la más costosa de revertir (40–80 h). |
+| **arc42 sección 8 con consistencia y caché:** La sección 8 no reunía la estrategia de consistencia ni caché de S12. | ✅ Corregido | [`docs/arc42/08-conceptos-transversales.md`](docs/arc42/08-conceptos-transversales.md) consolidó las subsecciones §8.6 (consistencia), §8.7 (caché), §8.8 (invalidación) y §8.9 (flujo por eventos). |
+
+---
