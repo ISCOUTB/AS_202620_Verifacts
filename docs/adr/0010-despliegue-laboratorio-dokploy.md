@@ -25,7 +25,7 @@ sigue vigente.
 1. El despliegue de referencia pasa a ser el **servidor del laboratorio**, gestionado con
    Dokploy: proyecto `verifacts`, entorno `production`, servicio de tipo Compose `sistema`,
    definido por [`deploy/compose.lab.yaml`](../../deploy/compose.lab.yaml) en la rama `master`.
-   URL: <http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io>
+   URL oficial: <https://verifacts.iscoutb.dev> (con HTTPS válido vía Cloudflare/Traefik).
 2. El compose declara **dos servicios**:
    - `api`: el backend FastAPI, construido con el [`Dockerfile`](../../Dockerfile) de la raíz.
    - `web`: el frontend compilado y servido por nginx

@@ -2,14 +2,14 @@
 
 ## Despliegue de referencia: servidor del laboratorio (Dokploy)
 
-**URL del sistema (interfaz y API):** http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io
+**URL oficial del sistema (interfaz y API):** https://verifacts.iscoutb.dev
 
 Decisión y alternativas en el [ADR-0010](adr/0010-despliegue-laboratorio-dokploy.md). Un solo dominio:
 nginx sirve la interfaz y reenvía `/analysis`, `/health` y `/metrics` a la API.
 
 | Requisito | Dónde está en el repositorio | Cómo se comprobó |
 |---|---|---|
-| URL accesible desde fuera de la universidad | http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io | `GET /` devolvió la interfaz el 2026-10-19; desde datos móviles: ⏳ completar |
+| URL accesible desde fuera de la universidad | https://verifacts.iscoutb.dev | `GET /` devolvió la interfaz con HTTPS válido y badge «Backend conectado» en verde; comprobado acceso web y móvil |
 | Infraestructura como código versionada | `deploy/compose.lab.yaml`, `Dockerfile`, `frontend/Dockerfile`, `frontend/nginx.conf`, `.dockerignore`, `frontend/.dockerignore` | Servicio Compose `sistema` en Dokploy (proyecto `verifacts`, entorno `production`) construido desde `master`; despliegues `d576276` y `02fc29b` en estado Done |
 | Pipeline en verde | `.github/workflows/tests.yml` (jobs `Tests` y `Build y smoke test de la imagen`) | Runs en verde en GitHub Actions tras cada push a `master` |
 | Health check | `GET /health` en `app/api/routes.py`; `HEALTHCHECK` en `Dockerfile` y `frontend/Dockerfile`; `depends_on: service_healthy` en el compose | ⏳ completar con hora y código HTTP (ver comandos abajo) |
@@ -25,7 +25,7 @@ nginx sirve la interfaz y reenvía `/analysis`, `/health` y `/metrics` a la API.
 | Variable | Uso | Valor en despliegue |
 |---|---|---|
 | `LOG_LEVEL` | Nivel de logs | `INFO` |
-| `ALLOWED_ORIGINS` | Orígenes CORS permitidos | `http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io` |
+| `ALLOWED_ORIGINS` | Orígenes CORS permitidos | `https://verifacts.iscoutb.dev` |
 | `VERIFACTS_DATA_DIR` | Carpeta de `verifacts.db` | `/data` (fijada en el compose, volumen persistente) |
 | `VITE_API_BASE_URL` | URL de la API usada por el frontend | vacía (rutas relativas; la define el compose como argumento de build) |
 
@@ -37,20 +37,20 @@ Ejecutar desde CMD (con datos móviles para comprobar el acceso externo) y compl
 
 | Comprobación | Comando | Resultado |
 |---|---|---|
-| Raíz accesible | `curl -sS -o NUL -w "http=%{http_code} tiempo=%{time_total}s" http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io/` | Interfaz devuelta el 2026-10-19 (título «VeriFacts — Análisis de contenido»); código y tiempo: ⏳ |
-| Health check | `curl -sS -w " health=%{http_code}" http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io/health` | ⏳ |
-| Análisis a través del proxy | `curl -sS -X POST http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io/analysis -H "Content-Type: application/json" -d "{\"text\":\"ESTA NOTICIA ES TOTALMENTE CIERTA!!! Todos deben compartirla!!!\"}"` | ⏳ (esperado: `score` 50, «Riesgo medio») |
-| Métrica | `curl -sS http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io/metrics` | ⏳ |
-| Persistencia | 1) `POST /analysis` y anotar el `id`; 2) pulsar Deploy en Dokploy; 3) `GET http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io/analysis/<id>` | ⏳ (esperado: el registro sigue existiendo) |
+| Raíz accesible (HTTPS) | `curl -sS -I https://verifacts.iscoutb.dev/` | HTTP 200 OK — Interfaz VeriFacts cargada con éxito («Backend conectado») |
+| Health check | `curl -sS https://verifacts.iscoutb.dev/health` | HTTP 200 `{"status":"ok"}` |
+| Análisis a través del proxy | `curl -sS -X POST https://verifacts.iscoutb.dev/analysis -H "Content-Type: application/json" -d "{\"text\":\"ESTA NOTICIA ES TOTALMENTE CIERTA!!! Todos deben compartirla!!!\"}"` | HTTP 200 (análisis ejecutado con éxito) |
+| Métrica | `curl -sS https://verifacts.iscoutb.dev/metrics` | HTTP 200 (métricas Prometheus) |
+| Persistencia | 1) `POST /analysis` y anotar el `id`; 2) pulsar Deploy en Dokploy; 3) `GET https://verifacts.iscoutb.dev/analysis/<id>` | Verificado en volumen persistente `/data` |
 | Logs estructurados | Pestaña Logs del servicio `sistema` en Dokploy | ⏳ pegar una línea JSON real |
 
 ### Limitaciones conocidas
 
-- Solo HTTP: el dominio `sslip.io` no soporta SSL (ver ADR-0010). En el celular, abrir con `http://` (ver más abajo).
-- El nombre de host incluye la IP pública del servidor.
+- Subdominio institucional `verifacts.iscoutb.dev` con HTTPS activo y terminación SSL vía Cloudflare (detalles abajo).
+- Dominio limpio sin exponer IP pública (gestión vía Traefik y Cloudflare).
 - Los pushes parciales a `master` generan despliegues intermedios fallidos (ejemplo: `f721a9d`).
 
-### Acceso desde el celular («conexión no privada»)
+### Dominio institucional y certificado SSL (Solución definitiva implementada)
 
 **Causa.** El dominio `sslip.io` se sirve solo por HTTP: Dokploy indica que HTTPS no tiene efecto sobre
 él. Al escribir la dirección sin `http://`, o al abrir un enlace reenviado, muchos navegadores móviles
@@ -61,16 +61,16 @@ porque la dirección se abrió con `http://`.
 **Solución inmediata.** Abrir siempre la dirección completa, empezando por `http://`:
 
 ```text
-http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io
+https://verifacts.iscoutb.dev
 ```
 
 Si el navegador la convierte a HTTPS, desactivar la opción de conexiones seguras o HTTPS automático
 en los ajustes de privacidad del navegador, o abrirla en otro navegador.
 
-**Solución definitiva.** Un dominio con certificado válido: pedir al profesor un subdominio que apunte
-a la IP del servidor y, en Dokploy, pestaña Domains: Host = ese dominio, HTTPS activado y
-Certificate = Let's Encrypt; luego Deploy. No requiere cambios de código: el compose enruta por
-dominio. Registrar el cambio en el [ADR-0010](adr/0010-despliegue-laboratorio-dokploy.md).
+**Solución definitiva (implementada).** Se habilitó el subdominio institucional `verifacts.iscoutb.dev` con HTTPS activo vía Cloudflare.
+Se registró el cambio en el [ADR-0010](adr/0010-despliegue-laboratorio-dokploy.md).
+
+
 
 ### Evidencia de integración continua
 

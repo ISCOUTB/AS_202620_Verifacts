@@ -2,7 +2,7 @@
 **Proyecto:** VeriFacts
 **Organización:** ISCOUTB
 **Repositorio:** https://github.com/ISCOUTB/AS_202620_Verifacts
-**Despliegue (referencia externa, solo HTTP):** http://verifacts-sistema-ju3vi7-444522-144-24-4-187.sslip.io/ (servidor del laboratorio sobre sslip.io, sin certificado válido; abrir con `http://`, ver [despliegue](docs/despliegue.md#acceso-desde-el-celular-conexión-no-privada)). **URL oficial bajo `iscoutb.dev`:** pendiente de publicar con certificado válido; cuando exista se documentará aquí la URL exacta, distinguiendo la interfaz web (`/`) de la API (`/docs`, `/health`).
+**Despliegue oficial en producción (ISCOUTB Lab - Dokploy):** [https://verifacts.iscoutb.dev](https://verifacts.iscoutb.dev) (certificado SSL válido vía Cloudflare/Traefik). Interfaz web en `/`, API y endpoints en `/health`, `/docs` y `/metrics`.
 
 [![Tests](https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/tests.yml/badge.svg)](https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/tests.yml)
 [![SonarCloud](https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/sonarcloud.yml/badge.svg)](https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/sonarcloud.yml)
@@ -660,7 +660,7 @@ Pendiente para próximos incrementos:
 - medición formal de usabilidad para Q-04, ahora que existe una interfaz sobre la cual ejecutarla;
 - mitigaciones de resiliencia aún no implementadas (timeout de 4 s, límite de tamaño, idempotencia, WAL), con su estado real en [arc42 §11](docs/arc42/11-riesgos-y-deuda-tecnica.md);
 - seguridad de la ingesta por URL (SSRF, MF-07) y exposición del historial sin propietario (MF-08, ver [ADR-0011](docs/adr/0011-historial-registro-unico-sin-propietario.md));
-- publicar la URL oficial exacta bajo `iscoutb.dev` con certificado válido (hoy solo HTTP sobre sslip.io), distinguiendo la interfaz web de la API.
+- ~~publicar la URL oficial exacta bajo `iscoutb.dev` con certificado válido~~ (Completado: `https://verifacts.iscoutb.dev` con HTTPS activo y backend conectado).
 
 ## Prototipo de mensajería asíncrona (taller, aislado del producto)
 
