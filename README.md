@@ -2,7 +2,12 @@
 **Proyecto:** VeriFacts
 **Organización:** ISCOUTB
 **Repositorio:** https://github.com/ISCOUTB/AS_202620_Verifacts
-**Despliegue oficial en producción (ISCOUTB Lab - Dokploy):** [https://verifacts.iscoutb.dev](https://verifacts.iscoutb.dev) (certificado SSL válido vía Cloudflare/Traefik). Interfaz web en `/`, API y endpoints en `/health`, `/docs` y `/metrics`.
+**Despliegue oficial en producción (ISCOUTB Lab - Dokploy):**
+- **Interfaz Web:** [https://verifacts.iscoutb.dev](https://verifacts.iscoutb.dev) (SSL válido vía Cloudflare)
+- **Healthcheck (Salud):** [https://verifacts.iscoutb.dev/health](https://verifacts.iscoutb.dev/health)
+- **Documentación Swagger:** [https://verifacts.iscoutb.dev/docs](https://verifacts.iscoutb.dev/docs)
+- **Métricas (Prometheus):** [https://verifacts.iscoutb.dev/metrics](https://verifacts.iscoutb.dev/metrics)
+- **Análisis (API POST):** `https://verifacts.iscoutb.dev/analysis`
 
 [![Tests](https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/tests.yml/badge.svg)](https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/tests.yml)
 [![SonarCloud](https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/sonarcloud.yml/badge.svg)](https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/sonarcloud.yml)
