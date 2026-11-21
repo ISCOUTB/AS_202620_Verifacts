@@ -1,0 +1,2531 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [8 0 R 10 0 R 12 0 R] /Count 3 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier /Encoding /WinAnsiEncoding >>
+endobj
+7 0 obj
+<< /Length 51863 >>
+stream
+BT /F2 12.40 Tf 0.060 0.090 0.160 rg 36.00 760.00 Td (VeriFacts \227 Entrega del Sistema Integrado y Respuesta al Desaf\355o Final) Tj ET
+BT /F2 8.10 Tf 0.200 0.250 0.330 rg 36.00 747.00 Td (Asignatura: Arquitectura de Software  |  Organizaci\363n: ISCOUTB  |  Etiqueta Oficial de Git: entrega-final) Tj ET
+BT /F1 8.10 Tf 0.200 0.250 0.330 rg 36.00 736.00 Td (Integrantes: Pedro Jose Castro Blanquicett  \267  Cristian David Cardeno Gulloso  \267  Julian Samuel Cabeza Pena) Tj ET
+0.120 0.230 0.540 RG
+1.40 w 36.00 730.00 m 576.00 730.00 l S
+0.945 0.961 0.976 rg
+0.796 0.835 0.882 RG
+0.60 w
+36.00 686.00 540.00 37.00 re B
+0.114 0.306 0.847 rg
+0.60 w
+36.00 686.00 3.50 37.00 re f
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 45.00 713.00 Td (1. Enlace al commit etiquetado final: ) Tj ET
+BT /F4 7.80 Tf 0.080 0.240 0.580 rg 194.88 713.00 Td (https://github.com/ISCOUTB/AS_202620_Verifacts/tree/entrega-final) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 45.00 702.00 Td (2. URL oficial del sistema en producci\363n \(Dokploy Lab UTB, SSL Cloudflare\): ) Tj ET
+BT /F4 7.80 Tf 0.080 0.240 0.580 rg 358.72 702.00 Td (https://verifacts.iscoutb.dev) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 45.00 691.00 Td (3. Endpoints en producci\363n: ) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 157.98 691.00 Td (Salud: ) Tj ET
+BT /F4 7.80 Tf 0.080 0.240 0.580 rg 183.72 691.00 Td (/health) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 216.48 691.00 Td (  |  Swagger: ) Tj ET
+BT /F4 7.80 Tf 0.080 0.240 0.580 rg 271.51 691.00 Td (/docs) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 294.91 691.00 Td (  |  M\351tricas: ) Tj ET
+BT /F4 7.80 Tf 0.080 0.240 0.580 rg 349.47 691.00 Td (/metrics) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 386.91 691.00 Td (  |  API: ) Tj ET
+BT /F4 7.80 Tf 0.080 0.240 0.580 rg 424.00 691.00 Td (POST /analysis) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 489.52 691.00 Td ( y ) Tj ET
+BT /F4 7.80 Tf 0.080 0.240 0.580 rg 501.81 691.00 Td (GET /analysis) Tj ET
+BT /F2 9.40 Tf 0.120 0.230 0.540 rg 36.00 675.00 Td (1. COMPORTAMIENTO ACTUAL DEL SISTEMA INTEGRADO \(C\323DIGO, PRUEBAS Y PRODUCCI\323N\)) Tj ET
+0.750 0.800 0.860 RG
+0.70 w 36.00 671.50 m 576.00 671.50 l S
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 36.00 663.00 Td (VeriFacts) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 74.51 663.00 Td (opera) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 97.86 663.00 Td (hoy) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 114.45 663.00 Td (como) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 137.36 663.00 Td (un) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 149.80 663.00 Td (monolito) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 186.34 663.00 Td (modular) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 220.19 663.00 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 232.63 663.00 Td (Python) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 261.19 663.00 Td (3.12) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 279.91 663.00 Td (/) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 288.21 663.00 Td (FastAPI) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 321.03 663.00 Td (con) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 337.62 663.00 Td (almacenamiento) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 398.61 663.00 Td (persistente) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 441.74 663.00 Td (en) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 454.19 663.00 Td (SQLite) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 484.60 663.00 Td (sobre) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 507.95 663.00 Td (volumen) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 541.28 663.00 Td (Docker) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 36.00 653.20 Td (dedicado) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 71.31 653.20 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 73.92 653.20 Td (/data/verifacts.db) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 159.24 653.20 Td (\),) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 168.13 653.20 Td (consumido) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 209.76 653.20 Td (por) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 224.81 653.20 Td (una) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 241.40 653.20 Td (interfaz) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 274.62 653.20 Td (web) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 294.65 653.20 Td (en) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 308.04 653.20 Td (React) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 334.26 653.20 Td (18) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 347.66 653.20 Td (/) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 356.58 653.20 Td (TypeScript) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 402.17 653.20 Td (servida) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 431.79 653.20 Td (por) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 446.84 653.20 Td (Nginx) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 472.28 653.20 Td (como) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 495.19 653.20 Td (proxy) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 518.53 653.20 Td (inverso) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 548.16 653.20 Td (bajo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 567.35 653.20 Td (un) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 36.00 643.40 Td (\372nico) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 58.87 643.40 Td (dominio) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 90.19 643.40 Td (institucional) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 137.12 643.40 Td (con) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 153.71 643.40 Td (certificado) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 194.83 643.40 Td (TLS) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 214.62 643.40 Td (v\341lido) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 239.62 643.40 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 252.07 643.40 Td (Cloudflare) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 291.64 643.40 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 299.94 643.40 Td (Traefik) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 329.09 643.40 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 331.70 643.40 Td (https://verifacts.iscoutb.dev) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 469.16 643.40 Td (\).) Tj ET
+BT /F2 7.90 Tf 0.120 0.230 0.540 rg 38.00 632.40 Td (-) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 46.00 632.40 Td (Tres) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 67.76 632.40 Td (cortes) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 95.77 632.40 Td (verticales) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 137.44 632.40 Td (completos) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 180.54 632.40 Td (y) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 189.46 632.40 Td (ejecutables:) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 240.06 632.40 Td (\(1\)) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 253.57 632.40 Td (POST) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 277.27 632.40 Td (/analysis) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 324.08 632.40 Td (acepta) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 351.57 632.40 Td (texto) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 373.38 632.40 Td (o) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 381.67 632.40 Td (URL) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 401.46 632.40 Td (\(mutuamente) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 450.95 632.40 Td (excluyentes,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 499.30 632.40 Td (validados) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 536.75 632.40 Td (con) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 553.34 632.40 Td (HTTP) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 622.60 Td (422\);) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 67.33 622.60 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 79.77 622.60 Td (URLs,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 105.84 622.60 Td (el) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 116.27 622.60 Td (m\363dulo) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 145.46 622.60 Td (Content) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 182.79 622.60 Td (descarga) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 218.58 622.60 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 226.87 622.60 Td (extrae) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 252.82 622.60 Td (el) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 263.25 622.60 Td (texto) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 285.05 622.60 Td (principal) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 318.94 622.60 Td (con) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 335.53 622.60 Td (trafilatura) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 391.82 622.60 Td (\(respondiendo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 444.79 622.60 Td (HTTP) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 469.80 622.60 Td (400) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 486.39 622.60 Td (controlado) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 526.91 622.60 Td (si) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 537.34 622.60 Td (falla) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 556.66 622.60 Td (la) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 612.80 Td (descarga) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 81.79 612.80 Td (o) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 90.08 612.80 Td (la) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 100.51 612.80 Td (extracci\363n) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 141.04 612.80 Td (es) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 153.48 612.80 Td (vac\355a\),) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 183.10 612.80 Td (lo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 193.53 612.80 Td (normaliza) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 231.61 612.80 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 239.91 612.80 Td (lo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 250.33 612.80 Td (pasa) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 271.07 612.80 Td (a) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 279.37 612.80 Td (Analysis) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 321.43 612.80 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 324.04 612.80 Td (RuleAnalyzer) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 385.07 612.80 Td (determinista) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 432.51 612.80 Td (con) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 449.10 612.80 Td (3) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 457.39 612.80 Td (reglas) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 482.87 612.80 Td (heur\355sticas:) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 529.68 612.80 Td (lenguaje) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 603.00 Td (sensacionalista,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 106.91 603.00 Td (exceso) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 135.94 603.00 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 148.38 603.00 Td (may\372sculas) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 194.16 603.00 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 202.46 603.00 Td (afirmaciones) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 251.44 603.00 Td (absolutas\),) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 294.10 603.00 Td (Scoring) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 331.43 603.00 Td (calcula) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 360.58 603.00 Td (el) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 371.01 603.00 Td (puntaje) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 401.11 603.00 Td (acotado) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 432.74 603.00 Td (\(0-100\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 462.84 603.00 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 471.14 603.00 Td (clasificaci\363n) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 519.61 603.00 Td (\(Confiable,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 593.20 Td (Riesgo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 74.08 593.20 Td (medio,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 101.26 593.20 Td (Riesgo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 129.34 593.20 Td (alto\),) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 151.27 593.20 Td (y) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 159.56 593.20 Td (Persistence) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 215.85 593.20 Td (ejecuta) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 245.95 593.20 Td (INSERT) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 279.13 593.20 Td (+) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 288.61 593.20 Td (commit) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 321.20 593.20 Td (at\363mico) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 352.99 593.20 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 365.44 593.20 Td (SQLite) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 394.11 593.20 Td (releyendo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 432.03 593.20 Td (el) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 442.46 593.20 Td (registro) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 473.15 593.20 Td (confirmado) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 515.85 593.20 Td (antes) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 539.20 593.20 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 583.40 Td (responder.) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 86.53 583.40 Td (\(2\)) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 100.04 583.40 Td (GET) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 119.00 583.40 Td (/analysis?limit=20&offset=0) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 251.12 583.40 Td (retorna) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 279.68 583.40 Td (el) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 290.11 583.40 Td (historial) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 322.46 583.40 Td (paginado) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 357.77 583.40 Td (con) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 374.36 583.40 Td (total) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 394.15 583.40 Td (f\355sico) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 419.63 583.40 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 432.07 583.40 Td (la) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 442.50 583.40 Td (cabecera) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 478.29 583.40 Td (X-Total-Count) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 544.06 583.40 Td (e) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 573.60 Td (invalidaci\363n) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 91.86 573.60 Td (activa) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 117.34 573.60 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 129.78 573.60 Td (React) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 154.19 573.60 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 156.80 573.60 Td (history.refresh\(\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 237.38 573.60 Td (\).) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 246.27 573.60 Td (\(3\)) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 259.77 573.60 Td (GET) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 278.73 573.60 Td (/analysis/{id}) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 349.24 573.60 Td (consulta) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 383.01 573.60 Td (un) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 395.46 573.60 Td (an\341lisis) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 426.74 573.60 Td (inmutable) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 464.82 573.60 Td (con) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 481.41 573.60 Td (garant\355a) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 563.80 Td (read-your-writes) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 110.50 563.80 Td (o) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 118.80 563.80 Td (retorna) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 147.36 563.80 Td (HTTP) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 172.36 563.80 Td (404) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 188.95 563.80 Td (sin) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 203.53 563.80 Td (efectos) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 233.63 563.80 Td (laterales.) Tj ET
+BT /F2 7.90 Tf 0.120 0.230 0.540 rg 38.00 552.80 Td (-) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 46.00 552.80 Td (Observabilidad) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 106.12 552.80 Td (y) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 115.05 552.80 Td (Contrato) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 151.43 552.80 Td (Ejecutable) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 196.26 552.80 Td (OpenAPI) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 233.07 552.80 Td (3.1:) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 251.20 552.80 Td (Cada) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 273.01 552.80 Td (petici\363n) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 304.76 552.80 Td (emite) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 328.27 552.80 Td (una) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 344.86 552.80 Td (l\355nea) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 367.73 552.80 Td (JSON) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 392.73 552.80 Td (estructurada) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 440.49 552.80 Td (con) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 457.08 552.80 Td (request_id) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 504.48 552.80 Td (,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 510.76 552.80 Td (m\351todo,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 542.55 552.80 Td (ruta,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 543.00 Td (estado) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 73.49 543.00 Td (HTTP) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 98.50 543.00 Td (y) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 106.79 543.00 Td (duration_ms) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 163.08 543.00 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 165.68 543.00 Td (app/observability.py) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 260.49 543.00 Td (\),) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 269.37 543.00 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 277.67 543.00 Td (actualiza) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 313.57 543.00 Td (los) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 328.15 543.00 Td (contadores) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 370.69 543.00 Td (Prometheus) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 416.47 543.00 Td (en) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 428.91 543.00 Td (GET) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 447.87 543.00 Td (/metrics) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 485.79 543.00 Td (.) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 492.07 543.00 Td (El) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 503.57 543.00 Td (contrato) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 536.27 543.00 Td (HTTP) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 561.28 543.00 Td (vive) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 533.20 Td (en) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 58.44 533.20 Td (docs/contracts/openapi.yaml) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 190.57 533.20 Td (\(v1.0.0\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 220.79 533.20 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 229.08 533.20 Td (se) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 241.53 533.20 Td (verifica) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 271.74 533.20 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 284.19 533.20 Td (cada) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 304.92 533.20 Td (commit.) Tj ET
+BT /F2 7.90 Tf 0.120 0.230 0.540 rg 38.00 522.20 Td (-) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 46.00 522.20 Td (Suite) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 70.13 522.20 Td (Automatizada) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 126.07 522.20 Td (\(66) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 142.30 522.20 Td (pruebas) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 176.39 522.20 Td (en) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 189.78 522.20 Td (verde\)) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 217.79 522.20 Td (y) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 226.71 522.20 Td (Aceptaci\363n) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 273.16 522.20 Td (Funcional:) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 317.05 522.20 Td (La) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 330.56 522.20 Td (ejecuci\363n) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 368.48 522.20 Td (de) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 380.92 522.20 Td (python) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 414.10 522.20 Td (-m) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 428.32 522.20 Td (pytest) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 461.50 522.20 Td (-q) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 475.13 522.20 Td (valida) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 500.13 522.20 Td (salud) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 523.00 522.20 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 46.00 512.40 Td (test_health.py) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 112.36 512.40 Td (\),) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 121.25 512.40 Td (flujo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 141.04 512.40 Td (completo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 176.98 512.40 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 179.59 512.40 Td (test_analysis.py) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 255.43 512.40 Td (\),) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 264.32 512.40 Td (historial) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 296.67 512.40 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 299.27 512.40 Td (test_analysis_history.py) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 413.03 512.40 Td (\),) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 421.92 512.40 Td (modificaci\363n) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 470.43 512.40 Td (localizada) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 510.01 512.40 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 522.45 512.40 Td (regla) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 543.78 512.40 Td (Q-03) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 565.58 512.40 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 46.00 502.60 Td (test_rule_modification.py) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 164.50 502.60 Td (\),) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 173.39 502.60 Td (contrato) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 206.09 502.60 Td (OpenAPI) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 240.46 502.60 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 243.07 502.60 Td (test_contract.py) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 318.91 502.60 Td (,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 325.19 502.60 Td (12) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 337.63 502.60 Td (tests\),) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 364.17 502.60 Td (fronteras) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 399.49 502.60 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 411.93 502.60 Td (m\363dulos) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 445.27 502.60 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 453.56 502.60 Td (l\355mites) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 483.34 502.60 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 495.79 502.60 Td (scoring) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 525.41 502.60 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 46.00 492.80 Td (test_boundaries.py) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 135.47 492.80 Td (y) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 143.76 492.80 Td (test_scoring_boundaries.py) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 267.00 492.80 Td (,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 273.28 492.80 Td (15) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 285.73 492.80 Td (tests\),) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 312.27 492.80 Td (fallos) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 335.73 492.80 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 348.17 492.80 Td (ingesta) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 377.80 492.80 Td (URL) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 397.59 492.80 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 400.20 492.80 Td (test_url_ingestion.py) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 499.74 492.80 Td (,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 506.02 492.80 Td (5) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 514.31 492.80 Td (tests\),) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 483.00 Td (consistencia) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 94.35 483.00 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 106.79 483.00 Td (datos) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 130.13 483.00 Td (S12) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 147.79 483.00 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 150.40 483.00 Td (test_consistencia.py) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 245.20 483.00 Td (,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 251.48 483.00 Td (6) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 259.77 483.00 Td (tests\),) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 286.32 483.00 Td (observabilidad) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 340.95 483.00 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 343.55 483.00 Td (test_observability.py) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 443.09 483.00 Td (\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 449.85 483.00 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 458.14 483.00 Td (prototipo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 492.98 483.00 Td (aislado) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 522.13 483.00 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 534.58 483.00 Td (mensajer\355a) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 473.20 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 48.61 473.20 Td (test_messaging.py) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 129.19 473.20 Td (,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 135.47 473.20 Td (16) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 147.91 473.20 Td (tests\).) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 174.45 473.20 Td (Adem\341s,) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 208.86 473.20 Td (aceptar.bat) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 265.15 473.20 Td (y) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 273.44 473.20 Td (evidencia-aceptacion.txt) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 391.35 473.20 Td (registran) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 426.19 473.20 Td (las) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 440.76 473.20 Td (8) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 449.06 473.20 Td (pruebas) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 480.70 473.20 Td (funcionales) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 524.90 473.20 Td (\(C1-C8\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 463.40 Td (contra) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 71.95 463.40 Td (el) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 82.38 463.40 Td (sistema) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 114.18 463.40 Td (desplegado.) Tj ET
+BT /F2 7.90 Tf 0.120 0.230 0.540 rg 38.00 452.40 Td (-) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 46.00 452.40 Td (Honestidad) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 92.45 452.40 Td (t\351cnica) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 124.45 452.40 Td (del) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 140.21 452.40 Td (alcance) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 173.82 452.40 Td (\(arc42) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 201.83 452.40 Td (Secci\363n) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 236.51 452.40 Td (11\):) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 255.11 452.40 Td (El) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 266.61 452.40 Td (sistema) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 298.40 452.40 Td (distingue) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 334.31 452.40 Td (con) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 350.90 452.40 Td (transparencia) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 402.33 452.40 Td (lo) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 412.76 452.40 Td ([Implementado) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 472.17 452.40 Td (/) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 481.09 452.40 Td (Mitigado]) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 520.16 452.40 Td (\(pruebas) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 554.40 452.40 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 442.60 Td (l\355mites) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 75.78 442.60 Td (bloqueantes) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 122.00 442.60 Td (MF-06,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 152.26 442.60 Td (HTTPS) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 182.47 442.60 Td (institucional) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 229.40 442.60 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 237.69 442.60 Td (fin) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 250.73 442.60 Td (del) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 265.30 442.60 Td (cold) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 284.03 442.60 Td (start) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 304.29 442.60 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 316.73 442.60 Td (Dokploy) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 348.96 442.60 Td (MF-09/RP-06,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 406.24 442.60 Td (SQL) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 426.03 442.60 Td (parametrizado) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 479.63 442.60 Td (AM-06,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 509.89 442.60 Td (cach\351) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 534.77 442.60 Td (est\341tica) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 432.80 Td (Nginx) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 69.94 432.80 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 82.38 432.80 Td (1) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 90.67 432.80 Td (a\361o) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 107.26 432.80 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 115.56 432.80 Td (SCA) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 135.35 432.80 Td (limpio) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 160.51 432.80 Td (AM-07\),) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 193.37 432.80 Td (lo) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 203.80 432.80 Td ([Parcial]) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 240.14 432.80 Td (\(error) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 263.01 432.80 Td (400) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 279.60 432.80 Td (controlado) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 320.13 432.80 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 332.57 432.80 Td (extracci\363n) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 373.10 432.80 Td (URL) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 392.89 432.80 Td (MF-02;) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 423.15 432.80 Td (SQLite) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 451.82 432.80 Td (con) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 468.41 432.80 Td (busy_timeout=5s) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 531.85 432.80 Td (sin) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 546.43 432.80 Td (WAL) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 423.00 Td (MF-04/RP-05\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 103.75 423.00 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 112.04 423.00 Td (lo) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 122.47 423.00 Td ([Pendiente) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 167.30 423.00 Td (como) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 191.79 423.00 Td (Dise\361o]) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 224.54 423.00 Td (\(timeout) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 257.40 423.00 Td (propio) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 282.88 423.00 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 295.32 423.00 Td (4) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 303.62 423.00 Td (s) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 311.91 423.00 Td (/) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 320.21 423.00 Td (HTTP) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 345.21 423.00 Td (504) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 361.80 423.00 Td (MF-01/RP-04,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 419.08 423.00 Td (l\355mite) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 444.71 423.00 Td (MAX_CONTENT_LENGTH) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 541.69 423.00 Td (/) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 549.98 423.00 Td (HTTP) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 413.20 Td (413) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 62.59 413.20 Td (MF-03/RP-03,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 119.86 413.20 Td (tabla) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 141.20 413.20 Td (idempotency_records) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 219.68 413.20 Td (MF-05,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 249.94 413.20 Td (filtro) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 270.32 413.20 Td (anti-SSRF) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 312.51 413.20 Td (MF-07/RP-01) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 367.65 413.20 Td (e) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 375.94 413.20 Td (historial) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 408.29 413.20 Td (global) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 433.30 413.20 Td (sin) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 447.87 413.20 Td (propietario) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 488.99 413.20 Td (MF-08/RP-02\).) Tj ET
+BT /F2 9.40 Tf 0.120 0.230 0.540 rg 36.00 400.20 Td (2. MAPA DE INTEGRACI\323N DE EVIDENCIAS \(S11-S14, TALLER Y REVISI\323N ENTRE PARES\)) Tj ET
+0.750 0.800 0.860 RG
+0.70 w 36.00 396.70 m 576.00 396.70 l S
+0.120 0.230 0.540 rg
+0.120 0.230 0.540 RG
+0.50 w
+36.00 371.00 540.00 23.20 re B
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 39.50 384.05 Td (Hito) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 57.30 384.05 Td (/) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 65.38 384.05 Td (Semana) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 125.90 384.05 Td (Qu\351) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 143.02 384.05 Td (se) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 155.14 384.05 Td (integr\363) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 182.64 384.05 Td (en) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 194.75 384.05 Td (la) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 204.98 384.05 Td (arquitectura) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 249.74 384.05 Td (del) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 125.90 375.45 Td (sistema) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 287.90 384.05 Td (Aspecto) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 325.70 384.05 Td (arc42) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 385.10 384.05 Td (ADR) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 439.10 384.05 Td (Artefacto) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 474.60 384.05 Td (y) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 482.68 384.05 Td (Evidencia) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 520.25 384.05 Td (Verificable) Tj ET
+1.000 1.000 1.000 rg
+0.796 0.835 0.882 RG
+0.45 w
+36.00 322.00 540.00 49.00 re B
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 361.35 Td (S11:) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 58.77 361.35 Td (Resiliencia,) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 352.75 Td (Modos) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 65.70 352.75 Td (de) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 77.82 352.75 Td (Fallo,) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 344.15 Td (Idempotencia) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 88.73 344.15 Td (y) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 335.55 Td (Extracci\363n) Tj ET
+0.45 w 122.40 322.00 m 122.40 371.00 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 361.35 Td (An\341lisis) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 155.18 361.35 Td (del) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 168.37 361.35 Td (flujo) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 186.28 361.35 Td (cr\355tico) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 211.70 361.35 Td (POST) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 233.15 361.35 Td (/analysis) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 271.76 361.35 Td (,) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 352.75 Td (matriz) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 149.53 352.75 Td (MF-01) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 174.98 352.75 Td (a) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 182.49 352.75 Td (MF-06) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 207.95 352.75 Td (con) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 222.96 352.75 Td (estado) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 247.84 352.75 Td (real) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 263.39 352.75 Td (en) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 344.15 Td (c\363digo,) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 152.28 344.15 Td (dise\361o) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 176.74 344.15 Td (de) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 188.00 344.15 Td (idempotencia) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 233.72 344.15 Td (\() Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 125.90 335.55 Td (Idempotency-Key) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 190.25 335.55 Td (\)) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 196.36 335.55 Td (y) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 203.87 335.55 Td (decisi\363n) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 234.01 335.55 Td (de) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 245.27 335.55 Td (no) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 256.53 335.55 Td (extraer) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 326.95 Td (An\341lisis.) Tj ET
+0.45 w 284.40 322.00 m 284.40 371.00 l S
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 287.90 361.35 Td (A-08) Tj ET
+0.45 w 322.20 322.00 m 322.20 371.00 l S
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 325.70 361.35 Td (Secc.) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 351.44 361.35 Td (11.1) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 372.89 361.35 Td (a) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 325.70 352.75 Td (11.3) Tj ET
+0.45 w 381.60 322.00 m 381.60 371.00 l S
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 385.10 361.35 Td (ADR-0009) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 385.10 352.75 Td (ADR-0003) Tj ET
+0.45 w 435.60 322.00 m 435.60 371.00 l S
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 361.35 Td (docs/entregas/) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 352.75 Td (entrega-modos-) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 344.15 Td (fallo-idempotencia-) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 335.55 Td (adr.md) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 468.59 335.55 Td (\267) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 476.10 335.55 Td (test_url_ingestion.py) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 439.10 326.95 Td (\(5) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 448.97 326.95 Td (passed\)) Tj ET
+0.973 0.980 0.988 rg
+0.796 0.835 0.882 RG
+0.45 w
+36.00 281.60 540.00 40.40 re B
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 312.35 Td (S12:) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 58.77 312.35 Td (Consistencia,) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 303.75 Td (Cach\351,) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 66.85 303.75 Td (Invalidaci\363n,) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 295.15 Td (Costo) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 63.24 295.15 Td (Datos) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 86.98 295.15 Td (y) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 95.06 295.15 Td (Lab) Tj ET
+0.45 w 122.40 281.60 m 122.40 322.00 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 312.35 Td (Matriz) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 149.53 312.35 Td (de) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 160.79 312.35 Td (7) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 168.30 312.35 Td (columnas) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 202.23 312.35 Td (operaci\363n->garant\355a,) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 303.75 Td (dise\361o) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 150.35 303.75 Td (de) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 161.61 303.75 Td (cach\351) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 184.14 303.75 Td (\(qu\351/d\363nde/cu\341nto\),) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 295.15 Td (invalidaci\363n) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 167.41 295.15 Td (tras) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 183.39 295.15 Td (escritura,) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 216.85 295.15 Td (decisi\363n) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 246.99 295.15 Td (de) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 258.25 295.15 Td (datos) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 286.55 Td (m\341s) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 142.88 286.55 Td (costosa) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 171.52 286.55 Td (y) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 179.02 286.55 Td (despliegue) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 216.67 286.55 Td (en) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 227.93 286.55 Td (Dokploy) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 257.10 286.55 Td (UTB.) Tj ET
+0.45 w 284.40 281.60 m 284.40 322.00 l S
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 287.90 312.35 Td (A-09) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 287.90 303.75 Td (A-10) Tj ET
+0.45 w 322.20 281.60 m 322.20 322.00 l S
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 325.70 312.35 Td (Secc.) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 351.44 312.35 Td (7) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 325.70 303.75 Td (Secc.) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 351.44 303.75 Td (8.6) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 368.60 303.75 Td (a) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 325.70 295.15 Td (8.9) Tj ET
+0.45 w 381.60 281.60 m 381.60 322.00 l S
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 385.10 312.35 Td (ADR-0010) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 385.10 303.75 Td (ADR-0011) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 385.10 295.15 Td (ADR-0012) Tj ET
+0.45 w 435.60 281.60 m 435.60 322.00 l S
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 312.35 Td (docs/entregas/) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 303.75 Td (entrega-consistencia-) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 295.15 Td (cache-costo-reversion.md) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 545.81 295.15 Td (\267) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 286.55 Td (test_consistencia.py) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 528.65 286.55 Td (\(6) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 538.52 286.55 Td (passed\)) Tj ET
+1.000 1.000 1.000 rg
+0.796 0.835 0.882 RG
+0.45 w
+36.00 232.60 540.00 49.00 re B
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 271.95 Td (Taller) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 63.49 271.95 Td (S13:) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 263.35 Td (Mensajer\355a) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 82.97 263.35 Td (As\355ncrona) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 254.75 Td (\(Prototipo) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 77.14 254.75 Td (Aislado\)) Tj ET
+0.45 w 122.40 232.60 m 122.40 281.60 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 271.95 Td (Contrato) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 156.47 271.95 Td (verifacts.analysis.requested) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 125.90 263.35 Td (v1) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 134.48 263.35 Td (,) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 140.16 263.35 Td (broker) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 163.65 263.35 Td (en) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 174.91 263.35 Td (memoria) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 205.66 263.35 Td (at-least-once,) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 254.75 Td (consumidor) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 165.94 254.75 Td (idempotente,) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 210.27 254.75 Td (backoff) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 237.51 254.75 Td (exponencial,) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 246.15 Td (DLQ) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 143.81 246.15 Td (y) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 151.32 246.15 Td (telemetr\355a) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 188.57 246.15 Td (por) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 202.19 246.15 Td (message_id) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 245.09 246.15 Td (,) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 250.77 246.15 Td (aislado) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 237.55 Td (de) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 137.16 237.55 Td (app/) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 154.32 237.55 Td (.) Tj ET
+0.45 w 284.40 232.60 m 284.40 281.60 l S
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 287.90 271.95 Td (A-11) Tj ET
+0.45 w 322.20 232.60 m 322.20 281.60 l S
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 325.70 271.95 Td (Secc.) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 351.44 271.95 Td (8.9) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 325.70 263.35 Td (Secc.) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 351.44 263.35 Td (9) Tj ET
+0.45 w 381.60 232.60 m 381.60 281.60 l S
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 385.10 271.95 Td (ADR-0013) Tj ET
+0.45 w 435.60 232.60 m 435.60 281.60 l S
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 271.95 Td (experiments/messaging/) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 537.23 271.95 Td (\267) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 263.35 Td (test_messaging.py) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 515.78 263.35 Td (\(16) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 529.40 263.35 Td (passed\)) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 558.04 263.35 Td (\267) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 254.75 Td (docs/mensajeria/) Tj ET
+0.973 0.980 0.988 rg
+0.796 0.835 0.882 RG
+0.45 w
+36.00 183.60 540.00 49.00 re B
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 222.95 Td (S13:) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 58.77 222.95 Td (Seguridad,) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 214.35 Td (Amenazas,) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 205.75 Td (Dependencias) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 91.09 205.75 Td (\(SCA\)) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 197.15 Td (y) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 47.58 197.15 Td (Privacidad) Tj ET
+0.45 w 122.40 183.60 m 122.40 232.60 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 222.95 Td (DFD) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 143.81 222.95 Td (con) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 158.83 222.95 Td (l\355mites) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 185.78 222.95 Td (de) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 197.04 222.95 Td (confianza,) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 233.29 222.95 Td (matriz) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 214.35 Td (STRIDE) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 155.18 214.35 Td (+) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 162.69 214.35 Td (OWASP) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 191.04 214.35 Td (API) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 206.16 214.35 Td (Top) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 222.14 214.35 Td (10) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 233.40 214.35 Td (\(AM-01) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 261.21 214.35 Td (a) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 205.75 Td (AM-08\),) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 155.64 205.75 Td (auditor\355a) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 188.57 205.75 Td (SCA) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 206.48 205.75 Td (backend/frontend,) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 197.15 Td (barrido) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 151.32 197.15 Td (de) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 162.58 197.15 Td (secretos) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 193.57 197.15 Td (\(327) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 210.95 197.15 Td (commits\)) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 244.05 197.15 Td (y) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 251.56 197.15 Td (pol\355tica) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 188.55 Td (Privacy) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 153.68 188.55 Td (by) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 164.94 188.55 Td (Design.) Tj ET
+0.45 w 284.40 183.60 m 284.40 232.60 l S
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 287.90 222.95 Td (A-12) Tj ET
+0.45 w 322.20 183.60 m 322.20 232.60 l S
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 325.70 222.95 Td (Secc.) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 351.44 222.95 Td (8.10) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 325.70 214.35 Td (Secc.) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 351.44 214.35 Td (8.11) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 325.70 205.75 Td (Secc.) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 351.44 205.75 Td (11.1) Tj ET
+0.45 w 381.60 183.60 m 381.60 232.60 l S
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 385.10 222.95 Td (ADR-0007) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 385.10 214.35 Td (ADR-0011) Tj ET
+0.45 w 435.60 183.60 m 435.60 232.60 l S
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 222.95 Td (docs/entregas/) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 214.35 Td (entrega-seguridad-) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 205.75 Td (amenazas-dependencias-) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 197.15 Td (privacidad.md) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 498.62 197.15 Td (\267) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 188.55 Td (revision-secretos-s12.md) Tj ET
+1.000 1.000 1.000 rg
+0.796 0.835 0.882 RG
+0.45 w
+36.00 134.60 540.00 49.00 re B
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 173.95 Td (S14:) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 58.77 173.95 Td (Medici\363n) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 93.30 173.95 Td (ATAM) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 165.35 Td (en) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 51.62 165.35 Td (Producci\363n) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 93.66 165.35 Td (y) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 156.75 Td (Revisi\363n) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 73.03 156.75 Td (entre) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 94.34 156.75 Td (Pares) Tj ET
+0.45 w 122.40 134.60 m 122.40 183.60 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 173.95 Td (Contraste) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 160.22 173.95 Td (cuantitativo) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 201.19 173.95 Td (de) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 212.45 173.95 Td (Q-01) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 232.18 173.95 Td (y) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 239.69 173.95 Td (Q-05) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 259.43 173.95 Td (en) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 165.35 Td (Local) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 147.56 165.35 Td (vs.) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 160.76 165.35 Td (Render) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 186.60 165.35 Td (vs.) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 199.80 165.35 Td (Dokploy) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 228.97 165.35 Td (UTB,) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 156.75 Td (descomposici\363n) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 180.53 156.75 Td (de) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 191.79 156.75 Td (latencia) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 220.53 156.75 Td (e) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 228.04 156.75 Td (incorporaci\363n) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 148.15 Td (formal) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 149.53 148.15 Td (de) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 160.79 148.15 Td (6) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 168.30 148.15 Td (hallazgos) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 202.19 148.15 Td (de) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 213.45 148.15 Td (pares) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 234.58 148.15 Td (\(RP-01) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 261.39 148.15 Td (a) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 125.90 139.55 Td (RP-06\).) Tj ET
+0.45 w 284.40 134.60 m 284.40 183.60 l S
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 287.90 173.95 Td (A-13) Tj ET
+0.45 w 322.20 134.60 m 322.20 183.60 l S
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 325.70 173.95 Td (Secc.) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 351.44 173.95 Td (10) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 325.70 165.35 Td (Secc.) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 351.44 165.35 Td (11.4) Tj ET
+0.45 w 381.60 134.60 m 381.60 183.60 l S
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 385.10 173.95 Td (ADR-0008) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 385.10 165.35 Td (ADR-0010) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 385.10 156.75 Td (ADR-0012) Tj ET
+0.45 w 435.60 134.60 m 435.60 183.60 l S
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 173.95 Td (docs/entregas/) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 165.35 Td (entrega-medicion-) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 156.75 Td (escenario-revision-) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 439.10 148.15 Td (pares.md) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 477.17 148.15 Td (\267) Tj ET
+BT /F4 7.15 Tf 0.080 0.240 0.580 rg 484.68 148.15 Td (medir_render.py) Tj ET
+0.820 0.850 0.900 RG
+0.50 w 36.00 31.00 m 576.00 31.00 l S
+BT /F1 7.20 Tf 0.400 0.450 0.530 rg 36.00 22.00 Td (VeriFacts \(ISCOUTB\) \227 Documento Gu\355a del Sistema Integrado y Respuesta al Desaf\355o Final \(Tag: entrega-final\)) Tj ET
+BT /F2 7.20 Tf 0.200 0.250 0.330 rg 524.05 22.00 Td (P\341gina 1 de 3) Tj ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 60722 >>
+stream
+BT /F2 9.40 Tf 0.120 0.230 0.540 rg 36.00 758.00 Td (3. JUSTIFICACI\323N DE LA EVOLUCI\323N ARQUITECT\323NICA Y DECISIONES CLAVE \(ADR-0001 A ADR-0013\)) Tj ET
+0.750 0.800 0.860 RG
+0.70 w 36.00 754.50 m 576.00 754.50 l S
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 36.00 746.00 Td (La) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 49.51 746.00 Td (evoluci\363n) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 86.95 746.00 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 99.40 746.00 Td (VeriFacts) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 137.91 746.00 Td (desde) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 162.80 746.00 Td (el) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 173.22 746.00 Td (Corte) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 196.09 746.00 Td (1) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 204.39 746.00 Td (hasta) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 227.73 746.00 Td (la) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 238.16 746.00 Td (Entrega) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 269.33 746.00 Td (Final) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 291.25 746.00 Td (estuvo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 318.74 746.00 Td (gobernada) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 358.68 746.00 Td (por) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 373.72 746.00 Td (la) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 384.15 746.00 Td (evidencia) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 424.60 746.00 Td (emp\355rica) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 462.92 746.00 Td (obtenida) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 496.69 746.00 Td (al) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 507.12 746.00 Td (medir) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 530.62 746.00 Td (los) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 36.00 736.20 Td (escenarios) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 78.07 736.20 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 90.51 736.20 Td (calidad) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 119.66 736.20 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 122.27 736.20 Td (Q-01) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 145.38 736.20 Td (a) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 153.67 736.20 Td (Q-05) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 172.63 736.20 Td (\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 179.39 736.20 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 187.68 736.20 Td (por) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 202.73 736.20 Td (el) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 213.16 736.20 Td (criterio) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 241.83 736.20 Td (de) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 254.28 736.20 Td (evitar) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 280.19 736.20 Td (complejidad) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 330.12 736.20 Td (accidental) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 373.09 736.20 Td (cuando) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 402.13 736.20 Td (una) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 418.72 736.20 Td (arquitectura) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 464.46 736.20 Td (simple,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 493.77 736.20 Td (determinista) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 541.21 736.20 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 549.50 736.20 Td (bien) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 36.00 726.40 Td (modularizada) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 86.52 726.40 Td (demostr\363) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 122.94 726.40 Td (cumplir) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 152.72 726.40 Td (los) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 167.30 726.40 Td (umbrales) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 203.24 726.40 Td (con) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 219.83 726.40 Td (amplio) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 247.01 726.40 Td (margen.) Tj ET
+BT /F2 8.30 Tf 0.060 0.090 0.160 rg 36.00 713.90 Td (3.1 Preservaci\363n del Monolito Modular y Decisi\363n de No Extraer el M\363dulo de An\341lisis \(ADR-0001, ADR-0002, ADR-0009\)) Tj ET
+BT /F2 7.90 Tf 0.120 0.230 0.540 rg 38.00 704.40 Td (-) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 46.00 704.40 Td (Por) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 63.30 704.40 Td (qu\351) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 81.16 704.40 Td (no) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 94.55 704.40 Td (se) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 107.94 704.40 Td (extrajo) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 138.79 704.40 Td (Analysis/Content) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 209.37 704.40 Td (a) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 218.30 704.40 Td (microservicios) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 277.90 704.40 Td (en) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 291.30 704.40 Td (S11) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 310.22 704.40 Td (\(ADR-0009\):) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 361.64 704.40 Td (Tras) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 381.91 704.40 Td (incorporar) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 420.89 704.40 Td (el) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 431.32 704.40 Td (cliente) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 458.93 704.40 Td (React) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 483.34 704.40 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 491.64 704.40 Td (la) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 502.07 704.40 Td (ingesta) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 531.69 704.40 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 544.13 704.40 Td (URLs,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 694.60 Td (se) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 58.44 694.60 Td (evalu\363) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 85.46 694.60 Td (separar) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 115.56 694.60 Td (los) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 130.13 694.60 Td (tres) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 147.79 694.60 Td (contextos) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 186.19 694.60 Td (delimitados) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 230.54 694.60 Td (\(Ingesta) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 262.78 694.60 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 271.07 694.60 Td (Presentaci\363n,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 323.09 694.60 Td (An\341lisis) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 355.44 694.60 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 367.89 694.60 Td (Contenido,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 409.00 694.60 Td (Historial) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 442.42 694.60 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 454.86 694.60 Td (An\341lisis\).) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 491.95 694.60 Td (Las) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 509.61 694.60 Td (mediciones) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 684.80 Td (demostraron) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 93.32 684.80 Td (que) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 109.91 684.80 Td (el) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 120.34 684.80 Td (motor) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 144.32 684.80 Td (RuleAnalyzer) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 205.94 684.80 Td (+) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 215.42 684.80 Td (Scoring) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 252.74 684.80 Td (procesa) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 284.38 684.80 Td (10.000) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 311.40 684.80 Td (caracteres) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 352.40 684.80 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 364.84 684.80 Td (memoria) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 398.81 684.80 Td (en) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 411.26 684.80 Td (<) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 420.18 684.80 Td (15) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 433.57 684.80 Td (ms) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 444.67 684.80 Td (.) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 450.95 684.80 Td (Extraerlo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 486.86 684.80 Td (a) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 495.15 684.80 Td (otro) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 512.81 684.80 Td (contenedor) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 675.00 Td (sustituir\355a) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 87.12 675.00 Td (llamadas) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 122.59 675.00 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 135.03 675.00 Td (memoria) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 169.00 675.00 Td (por) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 184.05 675.00 Td (serializaci\363n) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 232.52 675.00 Td (HTTP/JSON) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 282.53 675.00 Td (sobre) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 305.87 675.00 Td (red,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 323.05 675.00 Td (introduciendo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 374.01 675.00 Td (fallos) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 397.47 675.00 Td (parciales) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 433.38 675.00 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 441.67 675.00 Td (obligando) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 479.12 675.00 Td (a) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 487.41 675.00 Td (implementar) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 534.42 675.00 Td (una) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 551.01 675.00 Td (Saga) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 665.20 Td (distribuida) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 86.65 665.20 Td (sin) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 101.22 665.20 Td (ganancia) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 136.53 665.20 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 148.98 665.20 Td (escalabilidad) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 198.98 665.20 Td (para) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 218.18 665.20 Td (un) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 230.62 665.20 Td (equipo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 257.64 665.20 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 270.08 665.20 Td (3) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 278.38 665.20 Td (personas.) Tj ET
+BT /F2 7.90 Tf 0.120 0.230 0.540 rg 38.00 654.20 Td (-) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 46.00 654.20 Td (Vigilancia) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 87.79 654.20 Td (automatizada) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 142.66 654.20 Td (contra) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 170.66 654.20 Td (la) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 181.96 654.20 Td (erosi\363n) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 213.95 654.20 Td (arquitect\363nica:) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 274.23 654.20 Td (Las) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 291.89 654.20 Td (fronteras) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 327.20 654.20 Td (internas) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 359.43 654.20 Td (del) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 374.01 654.20 Td (monolito) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 407.94 654.20 Td (modular) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 439.74 654.20 Td (se) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 452.18 654.20 Td (protegen) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 486.42 654.20 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 498.87 654.20 Td (CI) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 510.36 654.20 Td (con) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 46.00 644.40 Td (tests/test_boundaries.py) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 163.91 644.40 Td (\(que) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 183.10 644.40 Td (proh\355be) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 214.74 644.40 Td (importar) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 247.61 644.40 Td (sqlite3) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 284.94 644.40 Td (fuera) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 306.74 644.40 Td (de) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 319.18 644.40 Td (repository.py) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 384.95 644.40 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 393.24 644.40 Td (exige) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 416.11 644.40 Td (que) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 432.70 644.40 Td (scoring) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 470.03 644.40 Td (solo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 488.76 644.40 Td (consuma) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 524.11 644.40 Td (la) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 534.54 644.40 Td (interfaz) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 634.60 Td (p\372blica) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 75.15 634.60 Td (analysis.service) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 150.99 634.60 Td (\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 157.75 634.60 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 166.04 634.60 Td (con) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 182.63 634.60 Td (tests/test_contract.py) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 291.06 634.60 Td (\(que) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 310.25 634.60 Td (bloquea) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 341.42 634.60 Td (cualquier) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 377.33 634.60 Td (desviaci\363n) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 418.92 634.60 Td (respecto) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 453.17 634.60 Td (a) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 461.46 634.60 Td (openapi.yaml) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 518.34 634.60 Td (\).) Tj ET
+BT /F2 8.30 Tf 0.060 0.090 0.160 rg 36.00 622.10 Td (3.2 Fronteras S\355ncronas vs. Prototipo Aislado de Mensajer\355a As\355ncrona \(ADR-0003, ADR-0013 y Taller S13\)) Tj ET
+BT /F2 7.90 Tf 0.120 0.230 0.540 rg 38.00 612.60 Td (-) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 46.00 612.60 Td (Aprendizaje) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 95.30 612.60 Td (del) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 111.06 612.60 Td (prototipo) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 148.74 612.60 Td (experimental) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 201.51 612.60 Td (\(Taller) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 230.86 612.60 Td (S13\):) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 254.99 612.60 Td (Para) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 275.26 612.60 Td (evaluar) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 304.88 612.60 Td (el) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 315.31 612.60 Td (desacoplamiento) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 378.27 612.60 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 390.72 612.60 Td (la) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 401.14 612.60 Td (\372nica) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 424.01 612.60 Td (operaci\363n) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 461.93 612.60 Td (con) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 478.52 612.60 Td (red) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 493.57 612.60 Td (externa) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 523.67 612.60 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 526.28 612.60 Td (POST) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 46.00 602.80 Td (/analysis) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 92.81 602.80 Td (con) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 109.40 602.80 Td (url) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 123.62 602.80 Td (\),) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 132.50 602.80 Td (se) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 144.95 602.80 Td (implement\363) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 189.35 602.80 Td (en) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 201.79 602.80 Td (experiments/messaging/) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 310.22 602.80 Td (un) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 322.66 602.80 Td (flujo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 342.45 602.80 Td (con) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 359.04 602.80 Td (contrato) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 391.74 602.80 Td (versionado) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 433.81 602.80 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 436.42 602.80 Td (verifacts.analysis.requested) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 46.00 593.00 Td (v1) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 55.48 593.00 Td (\),) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 64.37 593.00 Td (entrega) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 94.47 593.00 Td (at-least-once,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 149.57 593.00 Td (consumidor) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 193.81 593.00 Td (idempotente) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 240.66 593.00 Td (por) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 255.71 593.00 Td (message_id) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 303.11 593.00 Td (,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 309.39 593.00 Td (reintentos) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 348.37 593.00 Td (con) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 364.96 593.00 Td (exponential) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 409.16 593.00 Td (backoff) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 439.26 593.00 Td (ante) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 458.46 593.00 Td (fallos) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 481.92 593.00 Td (recuperables) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 530.74 593.00 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 46.00 583.20 Td (FetchTimeoutError) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 126.58 583.20 Td (,) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 132.86 583.20 Td (Upstream5xxError) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 208.70 583.20 Td (\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 215.46 583.20 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 223.75 583.20 Td (desv\355o) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 252.78 583.20 Td (a) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 261.08 583.20 Td (Dead) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 282.88 583.20 Td (Letter) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 308.36 583.20 Td (Queue) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 334.31 583.20 Td (\(DLQ\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 359.31 583.20 Td (ante) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 378.51 583.20 Td (fallos) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 401.97 583.20 Td (permanentes,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 452.97 583.20 Td (verificado) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 491.48 583.20 Td (con) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 508.07 583.20 Td (16) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 520.51 583.20 Td (pruebas) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 552.15 583.20 Td (en) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 46.00 573.40 Td (tests/test_messaging.py) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 155.02 573.40 Td (.) Tj ET
+BT /F2 7.90 Tf 0.120 0.230 0.540 rg 38.00 562.40 Td (-) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 46.00 562.40 Td (Por) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 63.30 562.40 Td (qu\351) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 81.16 562.40 Td (NO) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 96.68 562.40 Td (se) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 110.07 562.40 Td (incorpor\363) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 149.37 562.40 Td (al) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 160.67 562.40 Td (producto) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 197.60 562.40 Td (\(ADR-0013\):) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 249.03 562.40 Td (VeriFacts) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 287.54 562.40 Td (es) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 299.99 562.40 Td (una) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 316.57 562.40 Td (aplicaci\363n) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 356.15 562.40 Td (interactiva) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 397.27 562.40 Td (donde) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 422.16 562.40 Td (el) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 432.59 562.40 Td (usuario) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 462.21 562.40 Td (espera) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 489.70 562.40 Td (el) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 500.13 562.40 Td (veredicto) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 536.51 562.40 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 552.60 Td (pantalla) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 77.76 552.60 Td (inmediatamente.) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 139.34 552.60 Td (Introducir) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 176.31 552.60 Td (una) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 192.90 552.60 Td (cola) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 211.62 552.60 Td (\(HTTP) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 239.23 552.60 Td (202) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 255.82 552.60 Td (Accepted\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 295.28 552.60 Td (exigir\355a) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 327.04 552.60 Td (polling) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 354.18 552.60 Td (o) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 362.47 552.60 Td (WebSockets) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 409.79 552.60 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 422.24 552.60 Td (el) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 432.67 552.60 Td (frontend) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 465.37 552.60 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 473.67 552.60 Td (operar) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 499.62 552.60 Td (un) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 512.06 552.60 Td (broker) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 538.01 552.60 Td (externo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 542.80 Td (\(RabbitMQ/Redis\).) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 115.36 542.80 Td (Con) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 133.02 542.80 Td (un) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 145.46 542.80 Td (P95) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 163.12 542.80 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 175.56 542.80 Td (producci\363n) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 217.63 542.80 Td (de) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 230.07 542.80 Td (195,4) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 254.76 542.80 Td (ms) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 270.00 542.80 Td (\(15,3) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 291.33 542.80 Td (veces) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 316.22 542.80 Td (por) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 331.27 542.80 Td (debajo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 358.76 542.80 Td (del) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 373.34 542.80 Td (umbral) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 400.99 542.80 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 413.43 542.80 Td (3.000) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 436.30 542.80 Td (ms) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 450.91 542.80 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 463.36 542.80 Td (Q-01\),) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 489.90 542.80 Td (la) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 500.33 542.80 Td (v\355a) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 516.92 542.80 Td (s\355ncrona) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 552.71 542.80 Td (es) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 533.00 Td (\363ptima;) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 75.78 533.00 Td (el) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 86.21 533.00 Td (prototipo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 121.05 533.00 Td (se) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 133.49 533.00 Td (mantiene) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 169.44 533.00 Td (aislado) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 198.59 533.00 Td (de) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 211.03 533.00 Td (app/) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 234.14 533.00 Td (para) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 253.34 533.00 Td (no) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 265.78 533.00 Td (mezclar) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 297.58 533.00 Td (garant\355as) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 335.97 533.00 Td (simuladas) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 375.59 533.00 Td (con) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 392.18 533.00 Td (las) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 406.75 533.00 Td (del) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 421.33 533.00 Td (producto.) Tj ET
+BT /F2 8.30 Tf 0.060 0.090 0.160 rg 36.00 520.50 Td (3.3 Evoluci\363n de la Infraestructura de Despliegue y Resoluci\363n del Cold Start \(ADR-0004, ADR-0005, ADR-0008, ADR-0010\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 36.00 511.00 Td (La) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 49.51 511.00 Td (decisi\363n) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 82.81 511.00 Td (arquitect\363nica) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 136.37 511.00 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 148.81 511.00 Td (mayor) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 174.33 511.00 Td (impacto) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 206.13 511.00 Td (operativo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 242.51 511.00 Td (surgi\363) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 267.98 511.00 Td (al) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 278.41 511.00 Td (contrastar) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 317.87 511.00 Td (las) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 332.45 511.00 Td (mediciones) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 376.21 511.00 Td (reales) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 401.69 511.00 Td (del) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 416.27 511.00 Td (escenario) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 454.19 511.00 Td (Q-01) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 477.25 511.00 Td (\(P95) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 497.52 511.00 Td (<=) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 509.96 511.00 Td (3.000) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 532.83 511.00 Td (ms) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 547.45 511.00 Td (con) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 36.00 501.20 Td (payload) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 67.17 501.20 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 79.61 501.20 Td (10.000) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 106.63 501.20 Td (caracteres\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 150.23 501.20 Td (y) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 158.53 501.20 Td (Q-05) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 181.60 501.20 Td (\(100%) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 207.11 501.20 Td (repetibilidad\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 256.65 501.20 Td (a) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 264.94 501.20 Td (trav\351s) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 290.89 501.20 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 303.34 501.20 Td (los) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 317.91 501.20 Td (entornos) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 352.16 501.20 Td (evaluados) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 391.62 501.20 Td (entre) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 413.42 501.20 Td (S8) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 426.93 501.20 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 435.23 501.20 Td (S14:) Tj ET
+0.120 0.230 0.540 rg
+0.120 0.230 0.540 RG
+0.50 w
+36.00 473.00 540.00 23.20 re B
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 39.50 486.05 Td (Entorno) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 69.85 486.05 Td (Operativo) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 106.39 486.05 Td (Evaluado) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 158.30 486.05 Td (Muestra) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 201.50 486.05 Td (Mediana) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 250.10 486.05 Td (P95) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 267.22 486.05 Td (Medido) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 304.10 486.05 Td (Umbral) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 331.95 486.05 Td (Q-01) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 358.10 486.05 Td (Margen) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 401.30 486.05 Td (Q-01) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 422.46 486.05 Td (/) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 430.54 486.05 Td (Q-05) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 460.70 486.05 Td (Hallazgo) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 494.23 486.05 Td (Emp\355rico) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 530.16 486.05 Td (y) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 538.24 486.05 Td (Decisi\363n) Tj ET
+BT /F2 7.15 Tf 1.000 1.000 1.000 rg 460.70 477.45 Td (Tomada) Tj ET
+1.000 1.000 1.000 rg
+0.796 0.835 0.882 RG
+0.45 w
+36.00 441.20 540.00 31.80 re B
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 463.35 Td (1.) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 49.72 463.35 Td (Local) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 73.03 463.35 Td (\(S9\)) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 90.98 463.35 Td (\(uvicorn) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 120.15 463.35 Td (127.0.0.1,) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 39.50 454.75 Td (SQLite) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 65.45 454.75 Td (local\)) Tj ET
+0.45 w 154.80 441.20 m 154.80 473.00 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 158.30 463.35 Td (n) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 165.81 463.35 Td (=) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 173.31 463.35 Td (200) Tj ET
+0.45 w 198.00 441.20 m 198.00 473.00 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 201.50 463.35 Td (16,6) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 218.45 463.35 Td (ms) Tj ET
+0.45 w 246.60 441.20 m 246.60 473.00 l S
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 250.10 463.35 Td (46,9) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 268.40 463.35 Td (ms) Tj ET
+0.45 w 300.60 441.20 m 300.60 473.00 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 304.10 463.35 Td (<=) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 315.36 463.35 Td (3.000) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 336.06 463.35 Td (ms) Tj ET
+0.45 w 354.60 441.20 m 354.60 473.00 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 358.10 463.35 Td (63,9x) Tj ET
+0.45 w 397.80 441.20 m 397.80 473.00 l S
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 401.30 463.35 Td (CUMPLE) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 436.08 463.35 Td (/) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 401.30 454.75 Td (100%) Tj ET
+0.45 w 457.20 441.20 m 457.20 473.00 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 460.70 463.35 Td (Demostr\363) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 494.63 463.35 Td (que) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 509.64 463.35 Td (el) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 519.08 463.35 Td (c\363mputo) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 549.68 463.35 Td (\(<15) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 460.70 454.75 Td (ms\)) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 476.29 454.75 Td (y) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 483.79 454.75 Td (SQLite) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 509.75 454.75 Td (\(<5) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 523.37 454.75 Td (ms\)) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 538.96 454.75 Td (no) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 550.22 454.75 Td (son) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 460.70 446.15 Td (cuello) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 483.33 446.15 Td (de) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 494.59 446.15 Td (botella.) Tj ET
+0.973 0.980 0.988 rg
+0.796 0.835 0.882 RG
+0.45 w
+36.00 409.40 540.00 31.80 re B
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 431.55 Td (2.) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 49.72 431.55 Td (Prototipo) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 84.80 431.55 Td (Serverless) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 125.37 431.55 Td (AWS) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 422.95 Td (SAM) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 59.56 422.95 Td (\(S8\)) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 77.50 422.95 Td (\(en) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 91.12 422.95 Td (fr\355o\)) Tj ET
+0.45 w 154.80 409.40 m 154.80 441.20 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 158.30 431.55 Td (n) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 165.81 431.55 Td (=) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 173.31 431.55 Td (10) Tj ET
+0.45 w 198.00 409.40 m 198.00 441.20 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 201.50 431.55 Td (21,0) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 218.45 431.55 Td (ms) Tj ET
+0.45 w 246.60 409.40 m 246.60 441.20 l S
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 250.10 431.55 Td (634,6) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 272.44 431.55 Td (ms) Tj ET
+0.45 w 300.60 409.40 m 300.60 441.20 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 304.10 431.55 Td (<=) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 315.36 431.55 Td (3.000) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 336.06 431.55 Td (ms) Tj ET
+0.45 w 354.60 409.40 m 354.60 441.20 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 358.10 431.55 Td (4,7x) Tj ET
+0.45 w 397.80 409.40 m 397.80 441.20 l S
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 401.30 431.55 Td (CUMPLE) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 436.08 431.55 Td (/) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 401.30 422.95 Td (100%) Tj ET
+0.45 w 457.20 409.40 m 457.20 441.20 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 460.70 431.55 Td (Descartado) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 500.17 431.55 Td (\(ADR-0005\):) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 460.70 422.95 Td (incompatible) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 504.60 422.95 Td (con) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 519.62 422.95 Td (archivo) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 546.43 422.95 Td (SQLite) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 460.70 414.35 Td (local) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 479.58 414.35 Td (sin) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 492.77 414.35 Td (servicios) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 525.26 414.35 Td (externos.) Tj ET
+1.000 1.000 1.000 rg
+0.796 0.835 0.882 RG
+0.45 w
+36.00 377.60 540.00 31.80 re B
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 399.75 Td (3.) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 49.72 399.75 Td (Render) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 77.50 399.75 Td (Cloud) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 100.81 399.75 Td (\227) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 108.89 399.75 Td (Caliente) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 391.15 Td (\(S10\)) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 61.49 391.15 Td (\(contenedor) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 102.35 391.15 Td (activo\)) Tj ET
+0.45 w 154.80 377.60 m 154.80 409.40 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 158.30 399.75 Td (n) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 165.81 399.75 Td (=) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 173.31 399.75 Td (50) Tj ET
+0.45 w 198.00 377.60 m 198.00 409.40 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 201.50 399.75 Td (197,1) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 222.20 399.75 Td (ms) Tj ET
+0.45 w 246.60 377.60 m 246.60 409.40 l S
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 250.10 399.75 Td (211,3) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 272.44 399.75 Td (ms) Tj ET
+0.45 w 300.60 377.60 m 300.60 409.40 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 304.10 399.75 Td (<=) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 315.36 399.75 Td (3.000) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 336.06 399.75 Td (ms) Tj ET
+0.45 w 354.60 377.60 m 354.60 409.40 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 358.10 399.75 Td (14,2x) Tj ET
+0.45 w 397.80 377.60 m 397.80 409.40 l S
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 401.30 399.75 Td (CUMPLE) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 436.08 399.75 Td (/) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 401.30 391.15 Td (100%) Tj ET
+0.45 w 457.20 377.60 m 457.20 409.40 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 460.70 399.75 Td (Cumple) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 488.08 399.75 Td (en) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 499.35 399.75 Td (caliente,) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 530.02 399.75 Td (pero) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 547.39 399.75 Td (el) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 460.70 391.15 Td (disco) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 481.40 391.15 Td (ef\355mero) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 510.61 391.15 Td (perd\355a) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 535.49 391.15 Td (el) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 544.93 391.15 Td (historial) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 460.70 382.55 Td (en) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 471.96 382.55 Td (cada) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 490.73 382.55 Td (redeploy.) Tj ET
+0.973 0.980 0.988 rg
+0.796 0.835 0.882 RG
+0.45 w
+36.00 345.80 540.00 31.80 re B
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 367.95 Td (4.) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 49.72 367.95 Td (Render) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 77.50 367.95 Td (Cloud) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 100.81 367.95 Td (\227) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 108.89 367.95 Td (En) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 121.98 367.95 Td (Fr\355o) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 359.35 Td (\(S10\)) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 61.49 359.35 Td (\(tras) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 79.83 359.35 Td (20) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 91.09 359.35 Td (min) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 106.25 359.35 Td (inactivo\)) Tj ET
+0.45 w 154.80 345.80 m 154.80 377.60 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 158.30 367.95 Td (n) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 165.81 367.95 Td (=) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 173.31 367.95 Td (3) Tj ET
+0.45 w 198.00 345.80 m 198.00 377.60 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 201.50 367.95 Td (22.348) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 225.95 367.95 Td (ms) Tj ET
+0.45 w 246.60 345.80 m 246.60 377.60 l S
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 250.10 367.95 Td (22.450,0) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 282.67 367.95 Td (ms) Tj ET
+0.45 w 300.60 345.80 m 300.60 377.60 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 304.10 367.95 Td (<=) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 315.36 367.95 Td (3.000) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 336.06 367.95 Td (ms) Tj ET
+0.45 w 354.60 345.80 m 354.60 377.60 l S
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 358.10 367.95 Td (-7,5x) Tj ET
+0.45 w 397.80 345.80 m 397.80 377.60 l S
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 401.30 367.95 Td (NO) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 415.35 367.95 Td (CUMPLE) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 401.30 359.35 Td (/) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 408.81 359.35 Td (100%) Tj ET
+0.45 w 457.20 345.80 m 457.20 377.60 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 460.70 367.95 Td (Cuello) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 484.30 367.95 Td (de) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 495.56 367.95 Td (botella) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 520.55 367.95 Td (cr\355tico:) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 547.89 367.95 Td (el) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 460.70 359.35 Td (sleep) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 481.40 359.35 Td (del) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 494.59 359.35 Td (plan) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 511.54 359.35 Td (gratuito) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 539.31 359.35 Td (viol\363) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 460.70 350.75 Td (Q-01) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 480.43 350.75 Td (por) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 494.05 350.75 Td (>19) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 509.07 350.75 Td (s) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 516.58 350.75 Td (\(ADR-0008\).) Tj ET
+1.000 1.000 1.000 rg
+0.796 0.835 0.882 RG
+0.45 w
+36.00 305.40 540.00 40.40 re B
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 336.15 Td (5.) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 49.72 336.15 Td (Producci\363n) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 91.77 336.15 Td (Oficial) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 117.90 336.15 Td (Dokploy) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 39.50 327.55 Td (UTB) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 58.55 327.55 Td (\(S12-S14\)) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 39.50 318.95 Td (\(verifacts.iscoutb.dev\)) Tj ET
+0.45 w 154.80 305.40 m 154.80 345.80 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 158.30 336.15 Td (n) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 165.81 336.15 Td (=) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 173.31 336.15 Td (50) Tj ET
+0.45 w 198.00 305.40 m 198.00 345.80 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 201.50 336.15 Td (178,2) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 222.20 336.15 Td (ms) Tj ET
+0.45 w 246.60 305.40 m 246.60 345.80 l S
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 250.10 336.15 Td (195,4) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 272.44 336.15 Td (ms) Tj ET
+0.45 w 300.60 305.40 m 300.60 345.80 l S
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 304.10 336.15 Td (<=) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 315.36 336.15 Td (3.000) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 336.06 336.15 Td (ms) Tj ET
+0.45 w 354.60 305.40 m 354.60 345.80 l S
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 358.10 336.15 Td (15,3x) Tj ET
+0.45 w 397.80 305.40 m 397.80 345.80 l S
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 401.30 336.15 Td (CUMPLE) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 436.08 336.15 Td (/) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 401.30 327.55 Td (100%) Tj ET
+0.45 w 457.20 305.40 m 457.20 345.80 l S
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 460.70 336.15 Td (Soluci\363n) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 494.23 336.15 Td (definitiva) Tj ET
+BT /F2 7.15 Tf 0.120 0.160 0.230 rg 460.70 327.55 Td (\(ADR-0010\):) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 506.96 327.55 Td (contenedores) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 552.97 327.55 Td (24/7) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 460.70 318.95 Td (sin) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 473.89 318.95 Td (cold) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 490.84 318.95 Td (start,) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 511.11 318.95 Td (volumen) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 541.28 318.95 Td (/data) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 562.41 318.95 Td (y) Tj ET
+BT /F1 7.15 Tf 0.120 0.160 0.230 rg 460.70 310.35 Td (SSL.) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 36.00 296.90 Td (Perfilamiento) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 90.59 296.90 Td (de) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 103.98 296.90 Td (cuellos) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 135.50 296.90 Td (de) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 148.89 296.90 Td (botella) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 178.79 296.90 Td (en) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 192.18 296.90 Td (producci\363n) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 237.57 296.90 Td (\(195,4) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 265.10 296.90 Td (ms) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 280.66 296.90 Td (totales\):) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 316.25 296.90 Td (El) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 327.75 296.90 Td (an\341lisis) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 359.03 296.90 Td (diferencial) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 399.68 296.90 Td (ATAM) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 425.79 296.90 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 438.23 296.90 Td (la) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 448.66 296.90 Td (Semana) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 480.93 296.90 Td (14) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 493.37 296.90 Td (demostr\363) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 529.79 296.90 Td (que) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 546.38 296.90 Td (>80%) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 36.00 287.10 Td (\(~148) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 61.16 287.10 Td (ms\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 79.25 287.10 Td (corresponde) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 125.94 287.10 Td (a) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 134.24 287.10 Td (transporte) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 173.70 287.10 Td (WAN,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 196.73 287.10 Td (handshake) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 238.20 287.10 Td (TLS) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 257.99 287.10 Td (1.3) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 272.57 287.10 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 285.01 287.10 Td (Cloudflare) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 324.59 287.10 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 332.88 287.10 Td (salto) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 354.21 287.10 Td (por) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 369.26 287.10 Td (Traefik/Nginx;) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 424.48 287.10 Td (<10%) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 448.97 287.10 Td (\(~15) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 469.67 287.10 Td (ms\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 487.76 287.10 Td (al) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 498.19 287.10 Td (motor) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 522.17 287.10 Td (heur\355stico) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 562.69 287.10 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 36.00 277.30 Td (memoria;) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 72.10 277.30 Td (y) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 80.40 277.30 Td (<5%) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 100.42 277.30 Td (\(~5) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 116.66 277.30 Td (ms\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 134.75 277.30 Td (a) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 143.04 277.30 Td (la) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 153.47 277.30 Td (escritura) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 188.31 277.30 Td (s\355ncrona) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 224.10 277.30 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 236.54 277.30 Td (SQLite.) Tj ET
+BT /F2 8.10 Tf 0.060 0.090 0.160 rg 36.00 264.80 Td (3.4 Consistencia por Operaci\363n, Cach\351 y Decisi\363n de Datos m\341s Costosa de Revertir \(ADR-0006, 0007, 0011, 0012\)) Tj ET
+BT /F2 7.90 Tf 0.120 0.230 0.540 rg 38.00 255.30 Td (-) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 46.00 255.30 Td (Rechazo) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 82.77 255.30 Td (de) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 96.17 255.30 Td (componentes) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 150.28 255.30 Td (generativos) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 198.51 255.30 Td (\(ADR-0006,) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 247.09 255.30 Td (ADR-0007\):) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 295.68 255.30 Td (Se) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 309.19 255.30 Td (descart\363) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 343.44 255.30 Td (usar) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 362.63 255.30 Td (LLMs) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 387.68 255.30 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 400.12 255.30 Td (ejecuci\363n) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 438.04 255.30 Td (porque) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 465.53 255.30 Td (vulneran) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 499.30 255.30 Td (Q-01) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 521.11 255.30 Td (\(latencia) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 555.47 255.30 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 245.50 Td (red) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 61.05 245.50 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 73.49 245.50 Td (segundos\),) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 115.56 245.50 Td (rompen) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 145.22 245.50 Td (Q-05) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 167.03 245.50 Td (\(respuestas) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 212.18 245.50 Td (no) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 224.62 245.50 Td (deterministas) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 276.21 245.50 Td (<) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 284.50 245.50 Td (100%\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 310.02 245.50 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 318.31 245.50 Td (degradan) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 354.10 245.50 Td (Q-04) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 375.90 245.50 Td (\(cajas) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 401.86 245.50 Td (negras) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 429.35 245.50 Td (no) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 441.79 245.50 Td (auditables\).) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 486.58 245.50 Td (Los) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 504.24 245.50 Td (pesos) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 529.12 245.50 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 537.42 245.50 Td (umbrales) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 235.70 Td (son) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 62.59 235.70 Td (fijados) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 90.67 235.70 Td (por) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 105.72 235.70 Td (el) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 116.15 235.70 Td (equipo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 143.17 235.70 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 151.47 235.70 Td (resguardados) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 202.30 235.70 Td (por) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 217.35 235.70 Td (12) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 229.79 235.70 Td (pruebas) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 261.43 235.70 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 273.88 235.70 Td (mutaci\363n) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 309.82 235.70 Td (en) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 322.26 235.70 Td (tests/test_scoring_boundaries.py) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 473.94 235.70 Td (.) Tj ET
+BT /F2 7.90 Tf 0.120 0.230 0.540 rg 38.00 224.70 Td (-) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 46.00 224.70 Td (Garant\355as) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 88.46 224.70 Td (de) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 101.85 224.70 Td (consistencia) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 154.07 224.70 Td (y) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 163.00 224.70 Td (postura) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 195.47 224.70 Td (de) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 208.86 224.70 Td (No-Cach\351) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 251.16 224.70 Td (en) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 264.55 224.70 Td (backend) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 300.26 224.70 Td (\(arc42) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 328.27 224.70 Td (Secc.) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 354.02 224.70 Td (8.6-8.8\):) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 390.76 224.70 Td (Verificado) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 430.34 224.70 Td (con) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 446.93 224.70 Td (6) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 455.22 224.70 Td (pruebas) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 486.86 224.70 Td (en) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 46.00 214.90 Td (tests/test_consistencia.py) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 169.24 214.90 Td (:) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 175.52 214.90 Td (POST) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 199.22 214.90 Td (/analysis) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 246.03 214.90 Td (garantiza) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 282.41 214.90 Td (consistencia) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 330.76 214.90 Td (fuerte) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 355.17 214.90 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 367.61 214.90 Td (un) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 380.05 214.90 Td (nodo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 400.79 214.90 Td (tras) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 418.45 214.90 Td (commit;) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 450.40 214.90 Td (GET) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 469.36 214.90 Td (/analysis/{id}) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 539.87 214.90 Td (garantiza) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 205.10 Td (read-your-writes) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 110.50 205.10 Td (inmutable;) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 150.71 205.10 Td (y) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 159.01 205.10 Td (GET) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 177.97 205.10 Td (/analysis) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 224.78 205.10 Td (tiene) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 246.11 205.10 Td (consistencia) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 294.46 205.10 Td (eventual) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 328.23 205.10 Td (con) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 344.82 205.10 Td (invalidaci\363n) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 390.68 205.10 Td (expl\355cita) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 426.58 205.10 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 439.02 205.10 Td (cliente) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 466.64 205.10 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 469.24 205.10 Td (history.refresh\(\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 549.82 205.10 Td (\).) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 558.71 205.10 Td (Se) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 195.30 Td (justific\363) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 78.82 195.30 Td (no) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 91.27 195.30 Td (usar) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 110.46 195.30 Td (cach\351) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 135.35 195.30 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 147.79 195.30 Td (backend) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 180.97 195.30 Td (porque) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 208.46 195.30 Td (el) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 218.89 195.30 Td (c\341lculo) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 248.04 195.30 Td (toma) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 269.41 195.30 Td (<15) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 286.00 195.30 Td (ms;) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 302.75 195.30 Td (la) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 313.18 195.30 Td (\372nica) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 336.05 195.30 Td (cach\351) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 360.93 195.30 Td (activa) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 386.41 195.30 Td (es) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 398.85 195.30 Td (la) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 409.28 195.30 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 421.72 195.30 Td (activos) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 451.35 195.30 Td (est\341ticos) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 487.73 195.30 Td (en) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 500.17 195.30 Td (Nginx) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 524.11 195.30 Td (\() Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 526.71 195.30 Td (/assets/) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 185.50 Td (con) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 62.59 185.50 Td (expires) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 100.51 185.50 Td (1y;) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 119.47 185.50 Td (immutable) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 162.13 185.50 Td (\).) Tj ET
+BT /F2 7.90 Tf 0.120 0.230 0.540 rg 38.00 174.50 Td (-) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 46.00 174.50 Td (Decisi\363n) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 83.05 174.50 Td (de) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 96.44 174.50 Td (datos) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 121.60 174.50 Td (m\341s) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 141.63 174.50 Td (costosa) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 175.72 174.50 Td (de) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 189.11 174.50 Td (revertir) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 220.71 174.50 Td (\(ADR-0012\):) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 272.14 174.50 Td (Al) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 283.63 174.50 Td (comparar) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 320.05 174.50 Td (las) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 334.63 174.50 Td (5) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 342.92 174.50 Td (decisiones) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 384.51 174.50 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 396.96 174.50 Td (datos) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 420.30 174.50 Td (vigentes,) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 456.21 174.50 Td (almacenar) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 499.30 174.50 Td (el) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 510.60 174.50 Td (contenido) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 46.00 164.70 Td (completo) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 84.63 164.70 Td (sin) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 100.39 164.70 Td (propietario) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 144.91 164.70 Td (en) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 158.30 164.70 Td (un) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 171.69 164.70 Td (historial) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 206.80 164.70 Td (global) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 233.86 164.70 Td (\(ADR-0011\)) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 282.61 164.70 Td (es) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 295.05 164.70 Td (la) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 305.48 164.70 Td (m\341s) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 324.24 164.70 Td (costosa) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 355.88 164.70 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 368.32 164.70 Td (revertir) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 397.47 164.70 Td (\() Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 400.08 164.70 Td (40-80) Tj ET
+BT /F2 7.90 Tf 0.120 0.160 0.230 rg 426.86 164.70 Td (horas-persona) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 481.65 164.70 Td (,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 487.93 164.70 Td (frente) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 512.34 164.70 Td (a) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 520.63 164.70 Td (16-24) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 545.52 164.70 Td (h) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 553.81 164.70 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 154.90 Td (migrar) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 72.11 154.90 Td (SQLite) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 100.79 154.90 Td (a) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 109.08 154.90 Td (PostgreSQL) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 155.89 154.90 Td (o) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 164.18 154.90 Td (4-8) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 180.77 154.90 Td (h) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 189.07 154.90 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 201.51 154.90 Td (cambiar) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 233.31 154.90 Td (el) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 243.74 154.90 Td (formato) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 274.47 154.90 Td (de) Tj ET
+BT /F4 7.90 Tf 0.080 0.240 0.580 rg 286.91 154.90 Td (factors) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 320.09 154.90 Td (\),) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 328.98 154.90 Td (porque) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 356.47 154.90 Td (los) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 371.05 154.90 Td (textos) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 397.00 154.90 Td (an\363nimos) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 434.48 154.90 Td (acumulados) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 480.26 154.90 Td (son) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 496.85 154.90 Td (irreversibles) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 544.25 154.90 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 46.00 145.10 Td (atribuir) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 74.68 145.10 Td (retroactivamente) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 137.64 145.10 Td (a) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 145.94 145.10 Td (un) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 158.38 145.10 Td (autor) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 180.18 145.10 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 188.48 145.10 Td (exigen) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 215.49 145.10 Td (introducir) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 252.47 145.10 Td (autenticaci\363n,) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 305.55 145.10 Td (cambiar) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 337.35 145.10 Td (contratos) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 374.21 145.10 Td (OpenAPI) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 408.57 145.10 Td (y) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 416.87 145.10 Td (aplicar) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 444.48 145.10 Td (pol\355ticas) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 480.38 145.10 Td (de) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 492.82 145.10 Td (Habeas) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 522.92 145.10 Td (Data.) Tj ET
+0.820 0.850 0.900 RG
+0.50 w 36.00 31.00 m 576.00 31.00 l S
+BT /F1 7.20 Tf 0.400 0.450 0.530 rg 36.00 22.00 Td (VeriFacts \(ISCOUTB\) \227 Documento Gu\355a del Sistema Integrado y Respuesta al Desaf\355o Final \(Tag: entrega-final\)) Tj ET
+BT /F2 7.20 Tf 0.200 0.250 0.330 rg 524.05 22.00 Td (P\341gina 2 de 3) Tj ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> /Contents 9 0 R >>
+endobj
+11 0 obj
+<< /Length 50648 >>
+stream
+BT /F2 9.40 Tf 0.120 0.230 0.540 rg 36.00 758.00 Td (4. RESPUESTA AL DESAF\315O FINAL, REVISI\323N ENTRE PARES Y SEGURIDAD \(S13-S14\)) Tj ET
+0.750 0.800 0.860 RG
+0.70 w 36.00 754.50 m 576.00 754.50 l S
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 36.00 746.00 Td (La) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 49.34 746.00 Td (respuesta) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 87.25 746.00 Td (al) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 97.54 746.00 Td (desaf\355o) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 128.78 746.00 Td (final) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 147.85 746.00 Td (articula) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 177.69 746.00 Td (la) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 187.98 746.00 Td (evaluaci\363n) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 229.05 746.00 Td (ATAM,) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 256.94 746.00 Td (el) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 267.23 746.00 Td (modelado) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 304.24 746.00 Td (de) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 316.53 746.00 Td (amenazas) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 355.53 746.00 Td (STRIDE/OWASP) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 418.40 746.00 Td (\(S13\)) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 440.98 746.00 Td (y) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 449.17 746.00 Td (las) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 463.56 746.00 Td (observaciones) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 517.38 746.00 Td (de) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 529.66 746.00 Td (la) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 539.96 746.00 Td (revisi\363n) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 36.00 736.60 Td (entre) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 57.53 736.60 Td (pares) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 80.58 736.60 Td (\(S14\),) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 105.26 736.60 Td (demostrando) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 153.51 736.60 Td (c\363mo) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 176.13 736.60 Td (el) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 186.42 736.60 Td (sistema) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 217.82 736.60 Td (resuelve) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 251.16 736.60 Td (sus) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 267.54 736.60 Td (tensiones) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 304.98 736.60 Td (arquitect\363nicas) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 361.96 736.60 Td (y) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 370.15 736.60 Td (prioriza) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 399.99 736.60 Td (su) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 412.27 736.60 Td (evoluci\363n) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 449.24 736.60 Td (con) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 465.62 736.60 Td (total) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 485.16 736.60 Td (trazabilidad:) Tj ET
+BT /F2 8.30 Tf 0.060 0.090 0.160 rg 36.00 724.50 Td (4.1 Resoluci\363n de las Tres Tensiones Arquitect\363nicas Centrales del Sistema) Tj ET
+BT /F2 7.80 Tf 0.120 0.230 0.540 rg 38.00 715.00 Td (-) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 46.00 715.00 Td (Tensi\363n) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 80.24 715.00 Td (1) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 89.06 715.00 Td (\227) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 97.87 715.00 Td (Rendimiento) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 148.22 715.00 Td (\(Q-01,) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 176.45 715.00 Td (P95) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 195.14 715.00 Td (<=) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 208.36 715.00 Td (3.000) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 232.73 715.00 Td (ms\)) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 250.91 715.00 Td (vs.) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 266.47 715.00 Td (Explicabilidad) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 323.29 715.00 Td (y) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 332.10 715.00 Td (Repetibilidad) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 384.99 715.00 Td (\(Q-04,) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 413.22 715.00 Td (Q-05,) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 438.65 715.00 Td (100%\):) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 467.98 715.00 Td (Se) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 481.32 715.00 Td (resolvi\363) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 512.67 715.00 Td (mediante) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 548.16 715.00 Td (un) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 46.00 705.70 Td (motor) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 69.67 705.70 Td (heur\355stico) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 109.69 705.70 Td (determinista) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 156.53 705.70 Td (en) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 168.81 705.70 Td (memoria) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 202.35 705.70 Td (\() Tj ET
+BT /F4 7.80 Tf 0.080 0.240 0.580 rg 204.93 705.70 Td (RuleAnalyzer) Tj ET
+BT /F4 7.80 Tf 0.080 0.240 0.580 rg 265.77 705.70 Td (+) Tj ET
+BT /F4 7.80 Tf 0.080 0.240 0.580 rg 275.13 705.70 Td (Scoring) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 307.89 705.70 Td (\)) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 314.55 705.70 Td (con) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 330.93 705.70 Td (constantes) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 372.94 705.70 Td (gobernadas) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 416.46 705.70 Td (por) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 431.32 705.70 Td (el) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 441.62 705.70 Td (equipo) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 468.29 705.70 Td (\(ADR-0006\)) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 513.45 705.70 Td (y) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 521.64 705.70 Td (pruebas) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 552.88 705.70 Td (de) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 46.00 696.40 Td (mutaci\363n) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 81.49 696.40 Td (bloqueantes) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 127.12 696.40 Td (en) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 139.41 696.40 Td (CI) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 150.75 696.40 Td (\(MF-06\),) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 185.78 696.40 Td (rechazando) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 229.30 696.40 Td (LLMs) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 254.03 696.40 Td (en) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 266.31 696.40 Td (tiempo) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 293.61 696.40 Td (de) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 305.90 696.40 Td (ejecuci\363n) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 343.34 696.40 Td (\(ADR-0007\).) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 390.60 696.40 Td (Resultado) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 429.10 696.40 Td (medido) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 457.92 696.40 Td (en) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 470.20 696.40 Td (producci\363n) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 511.74 696.40 Td (Dokploy:) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 545.67 696.40 Td (P95) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 564.35 696.40 Td (=) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 46.00 687.10 Td (195,4) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 70.37 687.10 Td (ms) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 85.43 687.10 Td (y) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 93.62 687.10 Td (100%) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 117.80 687.10 Td (de) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 131.02 687.10 Td (repetibilidad) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 176.84 687.10 Td (.) Tj ET
+BT /F2 7.80 Tf 0.120 0.230 0.540 rg 38.00 676.60 Td (-) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 46.00 676.60 Td (Tensi\363n) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 80.24 676.60 Td (2) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 89.06 676.60 Td (\227) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 97.87 676.60 Td (Simplicidad) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 145.68 676.60 Td (Operativa) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 185.54 676.60 Td (del) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 201.10 676.60 Td (Monolito) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 237.18 676.60 Td (Modular) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 270.91 676.60 Td (\(Q-02,) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 299.15 676.60 Td (Q-03\)) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 325.04 676.60 Td (vs.) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 340.61 676.60 Td (Resiliencia) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 386.27 676.60 Td (en) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 399.50 676.60 Td (la) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 410.65 676.60 Td (Frontera) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 446.57 676.60 Td (Externa) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 479.68 676.60 Td (\(Ingesta) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 514.08 676.60 Td (URL\):) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 540.01 676.60 Td (Se) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 46.00 667.30 Td (mantuvo) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 79.38 667.30 Td (el) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 89.68 667.30 Td (monolito) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 123.18 667.30 Td (modular) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 154.58 667.30 Td (sin) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 168.97 667.30 Td (extraer) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 197.16 667.30 Td (microservicios) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 251.73 667.30 Td (\(ADR-0009\)) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 296.89 667.30 Td (ni) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 307.18 667.30 Td (agregar) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 336.90 667.30 Td (colas) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 359.48 667.30 Td (en) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 371.77 667.30 Td (producci\363n) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 413.30 667.30 Td (\(ADR-0013\),) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 460.57 667.30 Td (capturando) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 502.57 667.30 Td (errores) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 530.77 667.30 Td (de) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 46.00 658.00 Td (descarga/extracci\363n) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 121.35 658.00 Td (en) Tj ET
+BT /F4 7.80 Tf 0.080 0.240 0.580 rg 133.63 658.00 Td (app/modules/content/service.py) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 278.13 658.00 Td (con) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 294.51 658.00 Td (respuesta) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 332.42 658.00 Td (HTTP) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 357.10 658.00 Td (400) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 373.48 658.00 Td (controlada) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 413.50 658.00 Td (\() Tj ET
+BT /F4 7.80 Tf 0.080 0.240 0.580 rg 416.07 658.00 Td (test_url_ingestion.py) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 514.35 658.00 Td (\),) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 523.13 658.00 Td (y) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 531.32 658.00 Td (dejando) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 46.00 648.70 Td (especificados) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 97.83 648.70 Td (el) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 108.13 648.70 Td (timeout) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 138.00 648.70 Td (propio) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 163.16 648.70 Td (de) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 175.44 648.70 Td (4) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 183.63 648.70 Td (s) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 191.82 648.70 Td (\(MF-01\)) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 224.74 648.70 Td (y) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 232.93 648.70 Td (el) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 243.22 648.70 Td (prototipo) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 277.62 648.70 Td (aislado) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 306.40 648.70 Td (de) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 318.69 648.70 Td (mensajer\355a) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 362.84 648.70 Td (\() Tj ET
+BT /F4 7.80 Tf 0.080 0.240 0.580 rg 365.41 648.70 Td (experiments/messaging/) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 468.37 648.70 Td (\)) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 475.04 648.70 Td (para) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 493.99 648.70 Td (una) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 510.37 648.70 Td (eventual) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 543.72 648.70 Td (etapa) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 46.00 639.40 Td (con) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 62.38 639.40 Td (NLP) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 81.92 639.40 Td (pesado.) Tj ET
+BT /F2 7.80 Tf 0.120 0.230 0.540 rg 38.00 628.90 Td (-) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 46.00 628.90 Td (Tensi\363n) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 80.24 628.90 Td (3) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 89.06 628.90 Td (\227) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 97.87 628.90 Td (Trazabilidad) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 148.41 628.90 Td (Abierta) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 179.46 628.90 Td (del) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 195.02 628.90 Td (Historial) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 230.74 628.90 Td (\(R-DAT-01\)) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 280.23 628.90 Td (vs.) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 295.79 628.90 Td (Seguridad) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 337.25 628.90 Td (Perimetral) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 380.00 628.90 Td (y) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 388.81 628.90 Td (Privacidad) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 432.61 628.90 Td (\(S13) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 454.10 628.90 Td (+) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 462.91 628.90 Td (Revisi\363n) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 499.49 628.90 Td (de) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 512.71 628.90 Td (Pares) Tj ET
+BT /F2 7.80 Tf 0.120 0.160 0.230 rg 538.61 628.90 Td (S14\):) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 562.44 628.90 Td (En) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 46.00 619.60 Td (lugar) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 67.06 619.60 Td (de) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 79.34 619.60 Td (ocultar) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 107.07 619.60 Td (limitaciones) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 152.98 619.60 Td (o) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 161.17 619.60 Td (introducir) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 197.67 619.60 Td (cambios) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 230.59 619.60 Td (disruptivos) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 272.71 619.60 Td (de) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 284.99 619.60 Td (\372ltima) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 310.30 619.60 Td (hora) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 329.26 619.60 Td (sobre) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 352.31 619.60 Td (el) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 362.60 619.60 Td (contrato) Tj ET
+BT /F4 7.80 Tf 0.080 0.240 0.580 rg 394.89 619.60 Td (openapi.yaml) Tj ET
+BT /F4 7.80 Tf 0.080 0.240 0.580 rg 455.73 619.60 Td (v1.0.0) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 483.81 619.60 Td (,) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 490.02 619.60 Td (el) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 500.31 619.60 Td (equipo) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 526.99 619.60 Td (audit\363) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 552.14 619.60 Td (las) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 566.53 619.60 Td (8) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 46.00 610.30 Td (amenazas) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 85.00 610.30 Td (STRIDE/OWASP) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 147.87 610.30 Td (\(AM-01) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 178.21 610.30 Td (a) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 186.40 610.30 Td (AM-08\),) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 218.85 610.30 Td (integr\363) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 246.58 610.30 Td (los) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 260.97 610.30 Td (6) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 269.16 610.30 Td (hallazgos) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 306.13 610.30 Td (de) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 318.42 610.30 Td (pares) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 341.46 610.30 Td (\(RP-01) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 370.71 610.30 Td (a) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 378.90 610.30 Td (RP-06\)) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 408.15 610.30 Td (en) Tj ET
+BT /F4 7.80 Tf 0.080 0.240 0.580 rg 420.44 610.30 Td (arc42) Tj ET
+BT /F4 7.80 Tf 0.080 0.240 0.580 rg 448.52 610.30 Td (Secc.) Tj ET
+BT /F4 7.80 Tf 0.080 0.240 0.580 rg 476.60 610.30 Td (11.4) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 495.32 610.30 Td (,) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 501.52 610.30 Td (mitig\363) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 526.83 610.30 Td (en) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 46.00 601.00 Td (producci\363n) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 87.53 601.00 Td (el) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 97.83 601.00 Td (riesgo) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 122.99 601.00 Td (perimetral) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 161.63 601.00 Td (e) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 169.82 601.00 Td (infraestructural) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 226.34 601.00 Td (\(RP-06) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 255.59 601.00 Td (/) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 263.78 601.00 Td (MF-09\)) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 294.12 601.00 Td (y) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 302.31 601.00 Td (orden\363) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 329.45 601.00 Td (el) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 339.75 601.00 Td (plan) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 358.23 601.00 Td (de) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 370.52 601.00 Td (cierre) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 394.15 601.00 Td (por) Tj ET
+BT /F1 7.80 Tf 0.120 0.160 0.230 rg 409.01 601.00 Td (criticidad.) Tj ET
+BT /F2 8.30 Tf 0.060 0.090 0.160 rg 36.00 589.00 Td (4.2 Matriz Integrada de Hallazgos entre Pares \(RP-01 a RP-06\), Seguridad \(S13\) y Plan de Cierre \(arc42 Secc. 11\)) Tj ET
+0.120 0.230 0.540 rg
+0.120 0.230 0.540 RG
+0.50 w
+36.00 562.90 540.00 22.60 re B
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 39.50 575.45 Td (Prioridad) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 88.10 575.45 Td (C\363digos) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 119.05 575.45 Td (Cruzados) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 163.70 575.45 Td (Hallazgo) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 196.76 575.45 Td (Integrado) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 231.84 575.45 Td (\(Revisi\363n) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 267.44 575.45 Td (de) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 279.39 575.45 Td (Pares) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 302.80 575.45 Td (S14) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 319.68 575.45 Td (+) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 163.70 567.15 Td (Auditor\355a) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 199.73 567.15 Td (S11-S13\)) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 336.50 575.45 Td (Estado) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 363.89 575.45 Td (Real) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 395.90 575.45 Td (Evidencia) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 432.95 575.45 Td (Actual) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 458.47 575.45 Td (en) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 470.42 575.45 Td (C\363digo) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 497.38 575.45 Td (/) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 505.35 575.45 Td (Dise\361o) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 532.32 575.45 Td (T\351cnico) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 563.27 575.45 Td (de) Tj ET
+BT /F2 7.05 Tf 1.000 1.000 1.000 rg 395.90 567.15 Td (Cierre) Tj ET
+1.000 1.000 1.000 rg
+0.796 0.835 0.882 RG
+0.45 w
+36.00 532.00 540.00 30.90 re B
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 39.50 553.35 Td (Cerrado) Tj ET
+0.45 w 84.60 532.00 m 84.60 562.90 l S
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 88.10 553.35 Td (RP-06) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 113.48 553.35 Td (\267) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 121.94 553.35 Td (MF-09) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 88.10 545.05 Td (AM-05) Tj ET
+0.45 w 160.20 532.00 m 160.20 562.90 l S
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 553.35 Td (Cold) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 181.36 553.35 Td (start) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 199.44 553.35 Td (de) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 210.55 553.35 Td (22,4) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 227.26 553.35 Td (s) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 234.66 553.35 Td (en) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 245.76 553.35 Td (Render) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 271.25 553.35 Td (tras) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 287.00 553.35 Td (inactividad) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 324.65 553.35 Td (y) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 545.05 Td (tr\341fico) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 187.39 545.05 Td (HTTP) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 209.70 545.05 Td (sin) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 222.71 545.05 Td (cifrar) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 242.70 545.05 Td (\(sslip.io\)) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 273.47 545.05 Td (en) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 284.57 545.05 Td (el) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 293.88 545.05 Td (laboratorio.) Tj ET
+0.45 w 333.00 532.00 m 333.00 562.90 l S
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 336.50 553.35 Td (Mitigado) Tj ET
+0.45 w 392.40 532.00 m 392.40 562.90 l S
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 395.90 553.35 Td (Contenedor) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 434.82 553.35 Td (continuo) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 464.95 553.35 Td (en) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 476.06 553.35 Td (Dokploy) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 504.82 553.35 Td (UTB) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 522.48 553.35 Td (\() Tj ET
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 524.81 553.35 Td (P95) Tj ET
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 541.69 553.35 Td (=) Tj ET
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 549.66 553.35 Td (195,4) Tj ET
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 395.90 545.05 Td (ms) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 405.81 545.05 Td (\)) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 411.83 545.05 Td (bajo) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 428.96 545.05 Td (https://verifacts.iscoutb.dev) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 555.34 545.05 Td (con) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 395.90 536.75 Td (SSL) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 413.56 536.75 Td (Cloudflare) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 448.88 536.75 Td (\(ADR-0010\).) Tj ET
+0.973 0.980 0.988 rg
+0.796 0.835 0.882 RG
+0.45 w
+36.00 501.10 540.00 30.90 re B
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 39.50 522.45 Td (Cerrado) Tj ET
+0.45 w 84.60 501.10 m 84.60 532.00 l S
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 88.10 522.45 Td (MF-06) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 113.48 522.45 Td (\267) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 121.94 522.45 Td (AM-06) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 88.10 514.15 Td (AM-07) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 113.48 514.15 Td (\267) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 121.94 514.15 Td (AM-08) Tj ET
+0.45 w 160.20 501.10 m 160.20 532.00 l S
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 522.45 Td (Regresi\363n) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 198.49 522.45 Td (en) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 209.60 522.45 Td (reglas) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 232.33 522.45 Td (de) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 243.44 522.45 Td (scoring,) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 271.78 522.45 Td (riesgo) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 294.51 522.45 Td (de) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 514.15 Td (inyecci\363n) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 197.12 514.15 Td (SQL) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 214.78 514.15 Td (en) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 225.88 514.15 Td (persistencia) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 267.65 514.15 Td (y) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 275.05 514.15 Td (CVEs) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 296.42 514.15 Td (en) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 505.85 Td (dependencias.) Tj ET
+0.45 w 333.00 501.10 m 333.00 532.00 l S
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 336.50 522.45 Td (Implementado) Tj ET
+0.45 w 392.40 501.10 m 392.40 532.00 l S
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 395.90 522.45 Td (15) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 407.00 522.45 Td (pruebas) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 435.24 522.45 Td (de) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 446.34 522.45 Td (l\355mites) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 472.92 522.45 Td (en) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 484.02 522.45 Td (CI;) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 496.19 522.45 Td (SQL) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 513.85 522.45 Td (parametrizado) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 395.90 514.15 Td (con) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 410.70 514.15 Td (?) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 418.64 514.15 Td (en) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 429.74 514.15 Td (repository.py:108) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 501.65 514.15 Td (;) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 507.25 514.15 Td (SCA) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 524.91 514.15 Td (limpio) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 547.37 514.15 Td (\() Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 395.90 505.85 Td (pytest>=9.0.3) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 450.89 505.85 Td (\)) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 456.92 505.85 Td (y) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 464.32 505.85 Td (0) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 471.72 505.85 Td (secretos) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 502.28 505.85 Td (en) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 513.39 505.85 Td (327) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 528.19 505.85 Td (commits.) Tj ET
+1.000 1.000 1.000 rg
+0.796 0.835 0.882 RG
+0.45 w
+36.00 461.90 540.00 39.20 re B
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 39.50 491.55 Td (P1) Tj ET
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 39.50 483.25 Td (\(Cr\355tica\)) Tj ET
+0.45 w 84.60 461.90 m 84.60 501.10 l S
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 88.10 491.55 Td (RP-01) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 113.48 491.55 Td (\267) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 121.94 491.55 Td (MF-07) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 88.10 483.25 Td (AM-01) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 113.48 483.25 Td (\(SSRF\)) Tj ET
+0.45 w 160.20 461.90 m 160.20 501.10 l S
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 491.55 Td (Ingesta) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 190.14 491.55 Td (de) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 201.24 491.55 Td (URLs) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 222.60 491.55 Td (externas) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 253.16 491.55 Td (sin) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 266.17 491.55 Td (filtrar) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 286.69 491.55 Td (IPs) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 300.65 491.55 Td (privadas) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 483.25 Td (\(127.0.0.1,) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 199.55 483.25 Td (RFC) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 217.21 483.25 Td (1918,) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 237.62 483.25 Td (link-local\)) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 273.47 483.25 Td (ni) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 282.77 483.25 Td (esquemas) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 318.02 483.25 Td (no) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 474.95 Td (HTTP.) Tj ET
+0.45 w 333.00 461.90 m 333.00 501.10 l S
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 336.50 491.55 Td (Pendiente) Tj ET
+0.45 w 392.40 461.90 m 392.40 501.10 l S
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 395.90 491.55 Td (Dise\361o) Tj ET
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 422.87 491.55 Td (S13/S14:) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 458.75 491.55 Td (Validar) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 484.34 491.55 Td (esquema) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 515.89 491.55 Td (http/https,) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 395.90 483.25 Td (resolver) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 424.66 483.25 Td (DNS) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 442.32 483.25 Td (previo) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 465.06 483.25 Td (en) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 476.16 483.25 Td (extract_from_url) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 395.90 474.95 Td (rechazando) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 435.24 474.95 Td (IPs) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 449.20 474.95 Td (internas) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 477.96 474.95 Td (con) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 492.77 474.95 Td (HTTP) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 515.08 474.95 Td (422) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 529.89 474.95 Td (y) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 537.29 474.95 Td (limitar) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 395.90 466.65 Td (redirecciones.) Tj ET
+0.973 0.980 0.988 rg
+0.796 0.835 0.882 RG
+0.45 w
+36.00 431.00 540.00 30.90 re B
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 39.50 452.35 Td (P1) Tj ET
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 39.50 444.05 Td (\(Cr\355tica\)) Tj ET
+0.45 w 84.60 431.00 m 84.60 461.90 l S
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 88.10 452.35 Td (RP-02) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 113.48 452.35 Td (\267) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 121.94 452.35 Td (MF-08) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 88.10 444.05 Td (AM-04) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 113.48 444.05 Td (\(BOLA\)) Tj ET
+0.45 w 160.20 431.00 m 160.20 461.90 l S
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 452.35 Td (Historial) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 193.52 452.35 Td (global) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 215.83 452.35 Td (p\372blico) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 241.85 452.35 Td (sin) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 254.86 452.35 Td (autenticaci\363n) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 300.33 452.35 Td (y) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 307.73 452.35 Td (con) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 444.05 Td (IDs) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 177.66 444.05 Td (enteros) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 204.52 444.05 Td (secuenciales) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 249.04 444.05 Td (\(1,) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 260.67 444.05 Td (2,) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 269.98 444.05 Td (3...\),) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 287.32 444.05 Td (exponiendo) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 435.75 Td (textos) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 186.86 435.75 Td (de) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 197.96 435.75 Td (terceros.) Tj ET
+0.45 w 333.00 431.00 m 333.00 461.90 l S
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 336.50 452.35 Td (Pendiente) Tj ET
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 336.50 444.05 Td (\(Dise\361o\)) Tj ET
+0.45 w 392.40 431.00 m 392.40 461.90 l S
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 395.90 452.35 Td (Dise\361o) Tj ET
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 422.87 452.35 Td (S12/S13) Tj ET
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 456.64 452.35 Td (\(ADR-0012\):) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 502.53 452.35 Td (Omitir/truncar) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 395.90 444.05 Td (content) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 429.21 444.05 Td (en) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 440.31 444.05 Td (GET) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 457.24 444.05 Td (/analysis) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 495.31 444.05 Td (,) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 500.91 444.05 Td (migrar) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 524.21 444.05 Td (IDs) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 538.17 444.05 Td (a) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 545.57 444.05 Td (UUIDv4) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 395.90 435.75 Td (y) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 403.30 435.75 Td (retenci\363n) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 435.77 435.75 Td (m\341xima) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 463.76 435.75 Td (de) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 474.86 435.75 Td (30) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 485.96 435.75 Td (d\355as.) Tj ET
+1.000 1.000 1.000 rg
+0.796 0.835 0.882 RG
+0.45 w
+36.00 391.80 540.00 39.20 re B
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 39.50 421.45 Td (P2) Tj ET
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 52.40 421.45 Td (\(Alta\)) Tj ET
+0.45 w 84.60 391.80 m 84.60 431.00 l S
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 88.10 421.45 Td (RP-03) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 113.48 421.45 Td (\267) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 121.94 421.45 Td (MF-03) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 88.10 413.15 Td (AM-02) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 113.48 413.15 Td (\(DoS\)) Tj ET
+0.45 w 160.20 391.80 m 160.20 431.00 l S
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 421.45 Td (Falta) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 183.69 421.45 Td (de) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 194.79 421.45 Td (cuota) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 215.62 421.45 Td (de) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 226.73 421.45 Td (tama\361o) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 253.20 421.45 Td (en) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 264.30 421.45 Td (POST) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 285.45 421.45 Td (/analysis) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 413.15 Td (\(MAX_CONTENT_LENGTH\),) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 256.80 413.15 Td (permitiendo) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 296.80 413.15 Td (payloads) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 404.85 Td (masivos.) Tj ET
+0.45 w 333.00 391.80 m 333.00 431.00 l S
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 336.50 421.45 Td (Pendiente) Tj ET
+0.45 w 392.40 391.80 m 392.40 431.00 l S
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 395.90 421.45 Td (Dise\361o) Tj ET
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 422.87 421.45 Td (S11/S14:) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 458.75 421.45 Td (Incorporar) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 493.54 421.45 Td (Field\(...,) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 395.90 413.15 Td (max_length=50_000\)) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 475.74 413.15 Td (en) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 486.84 413.15 Td (Pydantic,) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 519.84 413.15 Td (tope) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 536.97 413.15 Td (de) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 548.07 413.15 Td (2) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 555.48 413.15 Td (MB) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 395.90 404.85 Td (en) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 407.00 404.85 Td (scraping) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 437.14 404.85 Td (y) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 444.55 404.85 Td (client_max_body_size) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 533.38 404.85 Td (1M) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 545.54 404.85 Td (en) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 395.90 396.55 Td (Nginx) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 417.26 396.55 Td (\(HTTP) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 441.90 396.55 Td (413\).) Tj ET
+0.973 0.980 0.988 rg
+0.796 0.835 0.882 RG
+0.45 w
+36.00 360.90 540.00 30.90 re B
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 39.50 382.25 Td (P2) Tj ET
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 52.40 382.25 Td (\(Alta\)) Tj ET
+0.45 w 84.60 360.90 m 84.60 391.80 l S
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 88.10 382.25 Td (RP-04) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 113.48 382.25 Td (\267) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 121.94 382.25 Td (MF-01) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 88.10 373.95 Td (MF-02) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 113.48 373.95 Td (\267) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 121.94 373.95 Td (AM-03) Tj ET
+0.45 w 160.20 360.90 m 160.20 391.80 l S
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 382.25 Td (Llamada) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 194.40 382.25 Td (s\355ncrona) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 226.34 382.25 Td (a) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 233.74 382.25 Td (trafilatura.fetch_url) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 373.95 Td (sin) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 176.71 373.95 Td (timeout) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 203.71 373.95 Td (propio;) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 228.35 373.95 Td (sitios) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 249.29 373.95 Td (colgados) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 280.80 373.95 Td (retienen) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 309.56 373.95 Td (el) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 365.65 Td (hilo) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 178.61 365.65 Td (del) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 191.62 365.65 Td (worker.) Tj ET
+0.45 w 333.00 360.90 m 333.00 391.80 l S
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 336.50 382.25 Td (Parcial) Tj ET
+0.45 w 392.40 360.90 m 392.40 391.80 l S
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 395.90 382.25 Td (MF-02) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 421.00 382.25 Td (ya) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 432.10 382.25 Td (retorna) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 457.59 382.25 Td (HTTP) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 479.90 382.25 Td (400) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 494.71 382.25 Td (controlado) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 530.87 382.25 Td (ante) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 548.00 382.25 Td (fallo) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 395.90 373.95 Td (de) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 407.00 373.95 Td (extracci\363n) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 443.17 373.95 Td (\() Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 445.50 373.95 Td (test_url_ingestion.py) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 534.33 373.95 Td (\).) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 542.26 373.95 Td (Plan) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 395.90 365.65 Td (MF-01:) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 422.90 365.65 Td (timeout) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 449.90 365.65 Td (propio) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 472.64 365.65 Td (de) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 483.74 365.65 Td (4) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 491.15 365.65 Td (s) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 498.55 365.65 Td (y) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 505.95 365.65 Td (HTTP) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 528.26 365.65 Td (504.) Tj ET
+1.000 1.000 1.000 rg
+0.796 0.835 0.882 RG
+0.45 w
+36.00 330.00 540.00 30.90 re B
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 39.50 351.35 Td (P3) Tj ET
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 52.40 351.35 Td (\(Media\)) Tj ET
+0.45 w 84.60 330.00 m 84.60 360.90 l S
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 88.10 351.35 Td (RP-05) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 113.48 351.35 Td (\267) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 121.94 351.35 Td (MF-04) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 88.10 343.05 Td (MF-05) Tj ET
+0.45 w 160.20 330.00 m 160.20 360.90 l S
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 351.35 Td (Contenci\363n) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 202.19 351.35 Td (de) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 213.30 351.35 Td (escrituras) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 248.09 351.35 Td (concurrentes) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 292.08 351.35 Td (en) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 303.18 351.35 Td (SQLite) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 163.70 343.05 Td (y) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 171.10 343.05 Td (registros) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 202.19 343.05 Td (duplicados) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 239.31 343.05 Td (ante) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 256.44 343.05 Td (reintentos) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 291.23 343.05 Td (de) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 302.34 343.05 Td (red) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 315.77 343.05 Td (en) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 163.70 334.75 Td (POST) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 184.85 334.75 Td (/analysis) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 222.92 334.75 Td (.) Tj ET
+0.45 w 333.00 330.00 m 333.00 360.90 l S
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 336.50 351.35 Td (Parcial) Tj ET
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 364.14 351.35 Td (/) Tj ET
+BT /F2 7.05 Tf 0.120 0.160 0.230 rg 336.50 343.05 Td (Pendiente) Tj ET
+0.45 w 392.40 330.00 m 392.40 360.90 l S
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 395.90 351.35 Td (SQLite) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 421.49 351.35 Td (espera) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 446.03 351.35 Td (5) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 453.43 351.35 Td (s) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 460.83 351.35 Td (por) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 474.26 351.35 Td (defecto) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 501.12 351.35 Td (\() Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 503.45 351.35 Td (busy_timeout) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 554.21 351.35 Td (\).) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 395.90 343.05 Td (Plan:) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 415.46 343.05 Td (activar) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 440.53 343.05 Td (PRAGMA) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 470.14 343.05 Td (journal_mode=WAL;) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 545.75 343.05 Td (y) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 553.15 343.05 Td (tabla) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 395.90 334.75 Td (idempotency_records) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 479.97 334.75 Td (con) Tj ET
+BT /F4 7.05 Tf 0.080 0.240 0.580 rg 494.78 334.75 Td (Idempotency-Key) Tj ET
+BT /F1 7.05 Tf 0.120 0.160 0.230 rg 558.23 334.75 Td (.) Tj ET
+BT /F2 9.40 Tf 0.120 0.230 0.540 rg 36.00 319.50 Td (5. GU\315A R\301PIDA DE VERIFICACI\323N PARA EL EVALUADOR \(REPRODUCCI\323N EN < 2 MINUTOS\)) Tj ET
+0.750 0.800 0.860 RG
+0.70 w 36.00 316.00 m 576.00 316.00 l S
+0.950 0.960 0.980 rg
+0.780 0.820 0.880 RG
+0.50 w
+36.00 239.30 540.00 74.20 re B
+BT /F4 6.95 Tf 0.080 0.120 0.220 rg 42.00 305.00 Td (# 1. Comprobaci\363n en vivo sobre la URL oficial en producci\363n \(Dokploy Lab UTB - HTTPS activo\):) Tj ET
+BT /F4 6.95 Tf 0.080 0.120 0.220 rg 42.00 296.60 Td (curl -sS https://verifacts.iscoutb.dev/health) Tj ET
+BT /F4 6.95 Tf 0.080 0.120 0.220 rg 42.00 288.20 Td (curl -sS -X POST https://verifacts.iscoutb.dev/analysis -H "Content-Type: application/json" -d "{\\"text\\":\\"NOTICIA CIERTA!!!\\"}") Tj ET
+BT /F4 6.95 Tf 0.080 0.120 0.220 rg 42.00 279.80 Td (curl -sS "https://verifacts.iscoutb.dev/analysis?limit=3&offset=0" && curl -sS https://verifacts.iscoutb.dev/metrics) Tj ET
+BT /F4 6.95 Tf 0.080 0.120 0.220 rg 42.00 271.40 Td () Tj ET
+BT /F4 6.95 Tf 0.080 0.120 0.220 rg 42.00 263.00 Td (# 2. Ejecuci\363n local de la suite completa \(66 passed\) y script de aceptaci\363n en el tag entrega-final:) Tj ET
+BT /F4 6.95 Tf 0.080 0.120 0.220 rg 42.00 254.60 Td (git clone https://github.com/ISCOUTB/AS_202620_Verifacts.git && cd AS_202620_Verifacts && git checkout entrega-final) Tj ET
+BT /F4 6.95 Tf 0.080 0.120 0.220 rg 42.00 246.20 Td (python -m pytest -q) Tj ET
+BT /F2 8.30 Tf 0.060 0.090 0.160 rg 36.00 229.80 Td (\315ndice Navegable de Documentaci\363n en el Commit Etiquetado \(entrega-final\)) Tj ET
+BT /F2 7.70 Tf 0.120 0.230 0.540 rg 38.00 220.30 Td (-) Tj ET
+BT /F2 7.70 Tf 0.120 0.160 0.230 rg 46.00 220.30 Td (Documentaci\363n) Tj ET
+BT /F2 7.70 Tf 0.120 0.160 0.230 rg 106.44 220.30 Td (Maestra:) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 142.52 220.30 Td (README.md) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 192.18 220.30 Td (\267) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 204.31 220.30 Td (docs/aspectos.md) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 282.27 220.30 Td (\(Filas) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 306.18 220.30 Td (A-00) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 327.43 220.30 Td (a) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 335.52 220.30 Td (A-13) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 356.77 220.30 Td (con) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 372.94 220.30 Td (8) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 381.03 220.30 Td (columnas\)) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 424.15 220.30 Td (\267) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 436.27 220.30 Td (docs/arc42/01) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 500.38 220.30 Td (a) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 508.46 220.30 Td (12) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 521.74 220.30 Td (\(destacando) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 46.00 211.20 Td (08-conceptos-transversales.md) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 184.02 211.20 Td (para) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 202.73 211.20 Td (consistencia,) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 251.94 211.20 Td (cach\351,) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 278.27 211.20 Td (seguridad) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 315.23 211.20 Td (y) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 323.32 211.20 Td (privacidad,) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 364.43 211.20 Td (y) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 372.52 211.20 Td (11-riesgos-y-deuda-tecnica.md) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 510.54 211.20 Td (para) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 529.25 211.20 Td (modos) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 555.62 211.20 Td (de) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 46.00 202.10 Td (fallo) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 64.83 202.10 Td (y) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 72.91 202.10 Td (revisi\363n) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 103.87 202.10 Td (de) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 115.99 202.10 Td (pares\)) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 145.33 202.10 Td (\267) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 157.46 202.10 Td (docs/c4/01) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 207.70 202.10 Td (a) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 215.78 202.10 Td (03) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 233.11 202.10 Td (\267) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 245.24 202.10 Td (docs/adr/0001) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 309.34 202.10 Td (a) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 317.42 202.10 Td (0013) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 335.90 202.10 Td (.) Tj ET
+BT /F2 7.70 Tf 0.120 0.230 0.540 rg 38.00 191.80 Td (-) Tj ET
+BT /F2 7.70 Tf 0.120 0.160 0.230 rg 46.00 191.80 Td (Entregas) Tj ET
+BT /F2 7.70 Tf 0.120 0.160 0.230 rg 83.04 191.80 Td (S11-S14) Tj ET
+BT /F2 7.70 Tf 0.120 0.160 0.230 rg 119.92 191.80 Td (y) Tj ET
+BT /F2 7.70 Tf 0.120 0.160 0.230 rg 128.62 191.80 Td (Taller:) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 156.76 191.80 Td (S11:) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 176.05 191.80 Td (docs/entregas/entrega-modos-fallo-idempotencia-adr.md) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 429.00 191.80 Td (\267) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 441.13 191.80 Td (S12:) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 46.00 182.70 Td (docs/entregas/entrega-consistencia-cache-costo-reversion.md) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 326.67 182.70 Td (\267) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 338.79 182.70 Td (Taller:) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 364.78 182.70 Td (docs/mensajeria/contrato-mensaje.md) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 526.48 182.70 Td (,) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 46.00 173.60 Td (evidencia-ejecucion.md) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 147.64 173.60 Td (,) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 153.76 173.60 Td (limites-del-experimento.md) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 281.97 173.60 Td (\267) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 294.09 173.60 Td (S13:) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 46.00 164.50 Td (docs/entregas/entrega-seguridad-amenazas-dependencias-privacidad.md) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 363.62 164.50 Td (\267) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 375.75 164.50 Td (S14:) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 46.00 155.40 Td (docs/entregas/entrega-medicion-escenario-revision-pares.md) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 313.96 155.40 Td (.) Tj ET
+BT /F2 7.70 Tf 0.120 0.230 0.540 rg 38.00 145.10 Td (-) Tj ET
+BT /F2 7.70 Tf 0.120 0.160 0.230 rg 46.00 145.10 Td (Bit\341cora) Tj ET
+BT /F2 7.70 Tf 0.120 0.160 0.230 rg 81.00 145.10 Td (de) Tj ET
+BT /F2 7.70 Tf 0.120 0.160 0.230 rg 94.05 145.10 Td (IA,) Tj ET
+BT /F2 7.70 Tf 0.120 0.160 0.230 rg 108.41 145.10 Td (Higiene) Tj ET
+BT /F2 7.70 Tf 0.120 0.160 0.230 rg 140.17 145.10 Td (y) Tj ET
+BT /F2 7.70 Tf 0.120 0.160 0.230 rg 148.87 145.10 Td (Aceptaci\363n:) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 196.46 145.10 Td (docs/ia.md) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 246.70 145.10 Td (\(bit\341cora) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 280.66 145.10 Td (S1-S14) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 311.03 145.10 Td (aceptado/corregido/rechazado\)) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 426.88 145.10 Td (\267) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 439.01 145.10 Td (correcciones.md) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 516.39 145.10 Td (\267) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 46.00 136.00 Td (docs/evidencia/revision-secretos-s12.md) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 234.26 136.00 Td (\267) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 246.39 136.00 Td (aceptar.bat) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 301.25 136.00 Td (y) Tj ET
+BT /F4 7.70 Tf 0.080 0.240 0.580 rg 309.34 136.00 Td (evidencia-aceptacion.txt) Tj ET
+BT /F1 7.70 Tf 0.120 0.160 0.230 rg 420.22 136.00 Td (.) Tj ET
+0.820 0.850 0.900 RG
+0.50 w 36.00 31.00 m 576.00 31.00 l S
+BT /F1 7.20 Tf 0.400 0.450 0.530 rg 36.00 22.00 Td (VeriFacts \(ISCOUTB\) \227 Documento Gu\355a del Sistema Integrado y Respuesta al Desaf\355o Final \(Tag: entrega-final\)) Tj ET
+BT /F2 7.20 Tf 0.200 0.250 0.330 rg 524.05 22.00 Td (P\341gina 3 de 3) Tj ET
+endstream
+endobj
+12 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> /Contents 11 0 R >>
+endobj
+xref
+0 13
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000135 00000 n 
+0000000232 00000 n 
+0000000334 00000 n 
+0000000439 00000 n 
+0000000534 00000 n 
+0000052450 00000 n 
+0000052606 00000 n 
+0000113381 00000 n 
+0000113538 00000 n 
+0000164240 00000 n 
+trailer
+<< /Size 13 /Root 1 0 R >>
+startxref
+164398
+%%EOF

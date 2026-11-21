@@ -176,9 +176,13 @@ monolito modular como estilo arquitectónico (ver [ADR-0001](docs/adr/0001-estil
 - [Aspectos arquitectónicos](docs/aspectos.md)
 - [Matriz comparativa de estilos](docs/matriz-estilos.md)
 - [Despliegue](docs/despliegue.md) · [Costos](docs/costos.md)
-- [Entrega S11: modos de fallo, idempotencia y extracción](docs/entregas/entrega-modos-fallo-idempotencia-adr.md)
+- [Entrega S11: modos de fallo, idempotencia y decisión de extracción](docs/entregas/entrega-modos-fallo-idempotencia-adr.md)
+- [Entrega S12: consistencia de datos, política de caché, invalidación y costo de reversión](docs/entregas/entrega-consistencia-cache-costo-reversion.md) · [revisión de secretos](docs/evidencia/revision-secretos-s12.md) · pruebas de consistencia: [tests/test_consistencia.py](tests/test_consistencia.py)
 - Evidencia S12: [revisión de secretos](docs/evidencia/revision-secretos-s12.md) · pruebas de consistencia: [tests/test_consistencia.py](tests/test_consistencia.py)
 - Taller de mensajería asíncrona (prototipo aislado, no forma parte del producto): [contrato del mensaje](docs/mensajeria/contrato-mensaje.md) · [evidencia de ejecución](docs/mensajeria/evidencia-ejecucion.md) · [límites del experimento](docs/mensajeria/limites-del-experimento.md) · pruebas: [tests/test_messaging.py](tests/test_messaging.py)
+- [Entrega S13: seguridad, modelado de amenazas STRIDE/OWASP, dependencias (SCA) y privacidad](docs/entregas/entrega-seguridad-amenazas-dependencias-privacidad.md)
+- [Entrega S14: evaluación de arquitectura, medición de escenarios Q-01/Q-05 en producción y revisión entre pares](docs/entregas/entrega-medicion-escenario-revision-pares.md)
+- **Entrega Final del Sistema Integrado:** [Documento guía de 3 páginas (Markdown)](docs/entregas/entrega-final-guia-sistema-integrado.md) · [Documento guía de 3 páginas (PDF)](docs/entregas/entrega-final-guia-sistema-integrado.pdf) · Evidencia de aceptación funcional: [aceptar.bat](aceptar.bat) y [evidencia-aceptacion.txt](evidencia-aceptacion.txt)
 
 ## Contrato de la API (S7)
 
@@ -310,7 +314,16 @@ AS_202620_Verifacts/
     │   ├── 08-conceptos-transversales.md
     │   ├── 09-decisiones-arquitectonicas.md
     │   ├── 10-requisitos-de-calidad.md
+    │   ├── 10-requisitos-de-calidad.md
+    │   ├── 11-riesgos-y-deuda-tecnica.md
     │   └── 12-glosario.md
+    ├── entregas/
+    │   ├── entrega-modos-fallo-idempotencia-adr.md
+    │   ├── entrega-consistencia-cache-costo-reversion.md
+    │   ├── entrega-seguridad-amenazas-dependencias-privacidad.md
+    │   ├── entrega-medicion-escenario-revision-pares.md
+    │   ├── entrega-final-guia-sistema-integrado.md
+    │   └── entrega-final-guia-sistema-integrado.pdf
     ├── c4/
     │   ├── 01-contexto.md
     │   ├── 02-contenedores.md
@@ -753,4 +766,4 @@ https://github.com/ISCOUTB/AS_202620_Verifacts
 **Proyecto:** VeriFacts
 **Equipo:** Pedro Jose Castro Blanquicett, Cristian David Cardeno Gulloso
 
-La aplicación incluye un endpoint técnico de comprobación:
+La aplicación incluye endpoints técnicos de comprobación y observabilidad en producción (`GET /health`, `GET /docs`, `GET /metrics`), así como un script de pruebas de aceptación funcional reproducible ([`aceptar.bat`](aceptar.bat) y [`evidencia-aceptacion.txt`](evidencia-aceptacion.txt)).

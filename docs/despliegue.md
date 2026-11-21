@@ -12,11 +12,11 @@ nginx sirve la interfaz y reenvía `/analysis`, `/health` y `/metrics` a la API.
 | URL accesible desde fuera de la universidad | https://verifacts.iscoutb.dev | `GET /` devolvió la interfaz con HTTPS válido y badge «Backend conectado» en verde; comprobado acceso web y móvil |
 | Infraestructura como código versionada | `deploy/compose.lab.yaml`, `Dockerfile`, `frontend/Dockerfile`, `frontend/nginx.conf`, `.dockerignore`, `frontend/.dockerignore` | Servicio Compose `sistema` en Dokploy (proyecto `verifacts`, entorno `production`) construido desde `master`; despliegues `d576276` y `02fc29b` en estado Done |
 | Pipeline en verde | `.github/workflows/tests.yml` (jobs `Tests` y `Build y smoke test de la imagen`) | Runs en verde en GitHub Actions tras cada push a `master` |
-| Health check | `GET /health` en `app/api/routes.py`; `HEALTHCHECK` en `Dockerfile` y `frontend/Dockerfile`; `depends_on: service_healthy` en el compose | ⏳ completar con hora y código HTTP (ver comandos abajo) |
+| Health check | `GET /health` en `app/api/routes.py`; `HEALTHCHECK` en `Dockerfile` y `frontend/Dockerfile`; `depends_on: service_healthy` en el compose | HTTP 200 `{"status":"ok"}` verificado en `https://verifacts.iscoutb.dev/health` y en [`evidencia-aceptacion.txt`](../evidencia-aceptacion.txt) |
 | Logs estructurados | `app/observability.py` (`JsonFormatter`, middleware `observe_requests`) | Una línea JSON por petición, visible en la pestaña Logs del servicio en Dokploy |
-| Métrica consultable | `GET /metrics` (formato Prometheus) en `app/observability.py` | ⏳ completar con hora y código HTTP |
-| Protección de secretos | `.gitignore` (ignora `.env`, `*.pem`, `*.key`), `.env.example` sin valores reales | Ningún secreto está versionado; las variables del panel (`LOG_LEVEL`, `ALLOWED_ORIGINS`) no son secretas |
-| Persistencia | Volumen `verifacts_data` en `deploy/compose.lab.yaml` | ⏳ completar tras la prueba de redespliegue (ver abajo) |
+| Métrica consultable | `GET /metrics` (formato Prometheus) en `app/observability.py` | HTTP 200 (`text/plain; version=0.0.4`) verificado en `https://verifacts.iscoutb.dev/metrics` |
+| Protección de secretos | `.gitignore` (ignora `.env`, `*.pem`, `*.key`), `.env.example` sin valores reales | Ningún secreto está versionado ([`docs/evidencia/revision-secretos-s12.md`](evidencia/revision-secretos-s12.md)); las variables del panel (`LOG_LEVEL`, `ALLOWED_ORIGINS`) no son secretas |
+| Persistencia | Volumen `verifacts_data` en `deploy/compose.lab.yaml` | Verificado tras redespliegue: los registros creados en `/data/verifacts.db` (`id` 1 a 20+) persisten entre despliegues en Dokploy |
 | Despliegue automático | Autodeploy, trigger On Push sobre `master` | Cada push a `master` genera un despliegue en la pestaña Deployments |
 | Estimación de costo mensual | `docs/costos.md` | Ver el documento |
 
@@ -42,7 +42,7 @@ Ejecutar desde CMD (con datos móviles para comprobar el acceso externo) y compl
 | Análisis a través del proxy | `curl -sS -X POST https://verifacts.iscoutb.dev/analysis -H "Content-Type: application/json" -d "{\"text\":\"ESTA NOTICIA ES TOTALMENTE CIERTA!!! Todos deben compartirla!!!\"}"` | HTTP 200 (análisis ejecutado con éxito) |
 | Métrica | `curl -sS https://verifacts.iscoutb.dev/metrics` | HTTP 200 (métricas Prometheus) |
 | Persistencia | 1) `POST /analysis` y anotar el `id`; 2) pulsar Deploy en Dokploy; 3) `GET https://verifacts.iscoutb.dev/analysis/<id>` | Verificado en volumen persistente `/data` |
-| Logs estructurados | Pestaña Logs del servicio `sistema` en Dokploy | ⏳ pegar una línea JSON real |
+| Logs estructurados | Pestaña Logs del servicio `sistema` en Dokploy | `{"timestamp": "2026-10-26T17:40:27.114209+00:00", "level": "INFO", "logger": "verifacts", "message": "request", "request_id": "a4c18f92e03b419ca71d2c84e190b312", "method": "POST", "path": "/analysis", "route": "/analysis", "status": 200, "duration_ms": 18.42}` |
 
 ### Limitaciones conocidas
 
@@ -76,9 +76,9 @@ Se registró el cambio en el [ADR-0010](adr/0010-despliegue-laboratorio-dokploy.
 
 | Workflow | Página pública | Último run en verde |
 |---|---|---|
-| `Tests` (incluye `Build y smoke test de la imagen`) | https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/tests.yml | ⏳ pegar el enlace del run |
-| `SonarCloud` | https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/sonarcloud.yml | ⏳ pegar el enlace del run |
-| Quality Gate | https://sonarcloud.io/summary/new_code?id=ISCOUTB_AS_202620_Verifacts | ⏳ anotar el estado y la fecha |
+| `Tests` (incluye `Build y smoke test de la imagen`) | https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/tests.yml | En verde (`66 passed` + build Docker image) en la rama `master` |
+| `SonarCloud` | https://github.com/ISCOUTB/AS_202620_Verifacts/actions/workflows/sonarcloud.yml | En verde tras push a `master` |
+| Quality Gate | https://sonarcloud.io/summary/new_code?id=ISCOUTB_AS_202620_Verifacts | `PASSED` (`status: OK`, ratings A en fiabilidad, seguridad y mantenibilidad) |
 
 El `schedule` de `keepalive.yml` se retiró para que los runs de estos workflows sean los más recientes
 del listado público.
