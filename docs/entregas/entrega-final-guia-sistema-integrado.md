@@ -2,7 +2,7 @@
 
 **Asignatura:** Arquitectura de Software · **Organización:** ISCOUTB  
 **Proyecto:** VeriFacts — Plataforma Modular de Detección de Indicadores de Desinformación  
-**Equipo:** Pedro Jose Castro Blanquicett, Cristian David Cardeno Gulloso, Julian Samuel Cabeza Pena  
+**Equipo:** Pedro Jose Castro Blanquicett, Cristian David Cardeno Gulloso  
 **Repositorio Oficial:** [https://github.com/ISCOUTB/AS_202620_Verifacts](https://github.com/ISCOUTB/AS_202620_Verifacts)  
 **Enlace al Commit Etiquetado Final (`entrega-final`):** [https://github.com/ISCOUTB/AS_202620_Verifacts/tree/entrega-final](https://github.com/ISCOUTB/AS_202620_Verifacts/tree/entrega-final)  
 **URL Oficial del Sistema en Producción (Dokploy Lab UTB):** [https://verifacts.iscoutb.dev](https://verifacts.iscoutb.dev)  

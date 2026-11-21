@@ -1,7 +1,7 @@
 # Entrega Semana 13: Seguridad, Modelado de Amenazas, Análisis de Dependencias y Privacidad
 
 **Proyecto:** VeriFacts — Sistema de Detección de Desinformación  
-**Equipo:** Pedro Jose Castro Blanquicett, Cristian David Cardeno, Julian Samuel Cabeza Pena  
+**Equipo:** Pedro Jose Castro Blanquicett, Cristian David Cardeno Gulloso  
 **Repositorio:** [https://github.com/ISCOUTB/AS_202620_Verifacts](https://github.com/ISCOUTB/AS_202620_Verifacts)  
 **Fecha:** 2026-10-27  
 **Estado:** Incremento local de Semana 13  

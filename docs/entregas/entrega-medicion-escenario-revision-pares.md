@@ -5,8 +5,7 @@
 **Organización:** ISCOUTB  
 **Equipo de Trabajo:**
 - Pedro Jose Castro Blanquicett
-- Cristian David Cardeno Gulloso
-- Julian Samuel Cabeza Pena  
+- Cristian David Cardeno Gulloso  
 **Repositorio:** [https://github.com/ISCOUTB/AS_202620_Verifacts](https://github.com/ISCOUTB/AS_202620_Verifacts)  
 **Despliegue Oficial en Producción:** [https://verifacts.iscoutb.dev](https://verifacts.iscoutb.dev)  
 **Fecha:** 2026-11-05  

@@ -1,7 +1,7 @@
 # Entrega Semana 12: Consistencia de Datos, Política de Caché, Invalidación y Decisión de Datos más Costosa de Revertir
 
 **Proyecto:** VeriFacts — Sistema de Detección de Desinformación  
-**Equipo:** Pedro Jose Castro Blanquicett, Cristian David Cardeno, Julian Samuel Cabeza Pena  
+**Equipo:** Pedro Jose Castro Blanquicett, Cristian David Cardeno Gulloso  
 **Repositorio:** [https://github.com/ISCOUTB/AS_202620_Verifacts](https://github.com/ISCOUTB/AS_202620_Verifacts)  
 **Fecha de formalización:** 2026-10-21 (Actualizado 2026-10-28)  
 **Correspondencia arquitectónica:** arc42 [§8.6](../arc42/08-conceptos-transversales.md#86-consistencia-de-datos), [§8.7](../arc42/08-conceptos-transversales.md#87-política-de-caché), [§8.8](../arc42/08-conceptos-transversales.md#88-política-de-invalidación-tras-una-escritura), [ADR-0011](../adr/0011-historial-registro-unico-sin-propietario.md), [ADR-0012](../adr/0012-modelo-almacenamiento-sqlite-costo-reversion.md), y [Aspecto A-09](../aspectos.md#matriz-de-trazabilidad).

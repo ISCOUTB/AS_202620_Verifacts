@@ -19,11 +19,11 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Courier /Encoding /WinAnsiEncoding >>
 endobj
 7 0 obj
-<< /Length 51863 >>
+<< /Length 51830 >>
 stream
 BT /F2 12.40 Tf 0.060 0.090 0.160 rg 36.00 760.00 Td (VeriFacts \227 Entrega del Sistema Integrado y Respuesta al Desaf\355o Final) Tj ET
 BT /F2 8.10 Tf 0.200 0.250 0.330 rg 36.00 747.00 Td (Asignatura: Arquitectura de Software  |  Organizaci\363n: ISCOUTB  |  Etiqueta Oficial de Git: entrega-final) Tj ET
-BT /F1 8.10 Tf 0.200 0.250 0.330 rg 36.00 736.00 Td (Integrantes: Pedro Jose Castro Blanquicett  \267  Cristian David Cardeno Gulloso  \267  Julian Samuel Cabeza Pena) Tj ET
+BT /F1 8.10 Tf 0.200 0.250 0.330 rg 36.00 736.00 Td (Integrantes: Pedro Jose Castro Blanquicett  \267  Cristian David Cardeno Gulloso) Tj ET
 0.120 0.230 0.540 RG
 1.40 w 36.00 730.00 m 576.00 730.00 l S
 0.945 0.961 0.976 rg
@@ -809,7 +809,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R /F4 6 0 R >> >> /Contents 7 0 R >>
 endobj
 9 0 obj
-<< /Length 60722 >>
+<< /Length 60725 >>
 stream
 BT /F2 9.40 Tf 0.120 0.230 0.540 rg 36.00 758.00 Td (3. JUSTIFICACI\323N DE LA EVOLUCI\323N ARQUITECT\323NICA Y DECISIONES CLAVE \(ADR-0001 A ADR-0013\)) Tj ET
 0.750 0.800 0.860 RG
@@ -956,8 +956,8 @@ BT /F1 7.90 Tf 0.120 0.160 0.230 rg 198.98 665.20 Td (para) Tj ET
 BT /F1 7.90 Tf 0.120 0.160 0.230 rg 218.18 665.20 Td (un) Tj ET
 BT /F1 7.90 Tf 0.120 0.160 0.230 rg 230.62 665.20 Td (equipo) Tj ET
 BT /F1 7.90 Tf 0.120 0.160 0.230 rg 257.64 665.20 Td (de) Tj ET
-BT /F1 7.90 Tf 0.120 0.160 0.230 rg 270.08 665.20 Td (3) Tj ET
-BT /F1 7.90 Tf 0.120 0.160 0.230 rg 278.38 665.20 Td (personas.) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 270.08 665.20 Td (2) Tj ET
+BT /F1 7.90 Tf 0.120 0.160 0.230 rg 278.38 665.20 Td (integrantes.) Tj ET
 BT /F2 7.90 Tf 0.120 0.230 0.540 rg 38.00 654.20 Td (-) Tj ET
 BT /F2 7.90 Tf 0.120 0.160 0.230 rg 46.00 654.20 Td (Vigilancia) Tj ET
 BT /F2 7.90 Tf 0.120 0.160 0.230 rg 87.79 654.20 Td (automatizada) Tj ET
@@ -2519,13 +2519,13 @@ xref
 0000000334 00000 n 
 0000000439 00000 n 
 0000000534 00000 n 
-0000052450 00000 n 
-0000052606 00000 n 
-0000113381 00000 n 
-0000113538 00000 n 
-0000164240 00000 n 
+0000052417 00000 n 
+0000052573 00000 n 
+0000113351 00000 n 
+0000113508 00000 n 
+0000164210 00000 n 
 trailer
 << /Size 13 /Root 1 0 R >>
 startxref
-164398
+164368
 %%EOF

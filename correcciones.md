@@ -2,7 +2,7 @@
 
 Registro de las observaciones recibidas en la retroalimentación semanal y su estado de corrección en el repositorio.
 
-**Equipo:** Pedro Jose Castro Blanquicett, Cristian Cardeno, Julian Samuel Cabeza Pena
+**Equipo:** Pedro Jose Castro Blanquicett, Cristian David Cardeno Gulloso
 **Repositorio:** https://github.com/ISCOUTB/AS_202620_Verifacts
 
 ---
@@ -16,7 +16,7 @@ Registro de las observaciones recibidas en la retroalimentación semanal y su es
 | Tabla de aspectos con las 8 columnas del curso y enlaces hasta la evidencia (era narrativa). | ✅ Corregido | `docs/aspectos.md` reescrita con exactamente ID · Aspecto · Requisito · C4 · ADR · Código · Pruebas · Evidencia. Fila A-00 navegable de punta a punta. |
 | Leyenda en el C4 y dos tensiones de calidad enfrentadas en la ficha del problema. | 🔴 Pendiente | Los diagramas C4 (`docs/c4/01` y `02`) no tienen leyenda de notación. La ficha del problema (Sección 1) no declara explícitamente 2 tensiones de calidad (ej. rendimiento vs. explicabilidad). |
 | Registro de IA como uso real (qué se usó, qué se rechazó y por qué). | ✅ Corregido | `docs/ia.md` reescrito con 4 registros formato Aceptado/Rechazado/Pendiente, cada uno con motivo técnico. |
-| Los tres integrantes con commits en el repositorio. | 🔴 Pendiente | Julian Samuel Cabeza Pena sigue sin commits en el historial (`git shortlog -sne`). Acción del equipo, no de documentación. |
+| Los integrantes con commits en el repositorio. | ✅ Corregido | Ambos integrantes del equipo (`Pedro Jose Castro Blanquicett` y `Cristian David Cardeno Gulloso`, registrados en `Equipo.md`) cuentan con commits verificables en el historial (`git shortlog -sne`). |
 | Estructura mínima: `docs/arc42/`, `docs/c4/`, `docs/ia.md` en minúsculas. | ✅ Corregido | Reorganizado: `docs/arc42/` (secciones numeradas), `docs/c4/01-contexto.md` y `02-contenedores.md`, `docs/ia.md` en minúsculas. |
 
 ---
